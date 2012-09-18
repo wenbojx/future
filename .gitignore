@@ -4,7 +4,7 @@
 .settings/
 assets/
 themes/classic/views/
-protected/runtime/
+protected/runtime/*.log
 protected/config/*.php
-
+upload/
 

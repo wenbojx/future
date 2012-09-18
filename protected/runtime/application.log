@@ -5152,3 +5152,28 @@ REQUEST_URI=/album/index.php/panos/thumb/pic/id/2/size/200x80.jpg
 in C:\mydatas\APMServ5.2.6\www\htdocs\album\protected\components\ImageContent.php (9)
 in C:\mydatas\APMServ5.2.6\www\htdocs\album\protected\components\ImageContent.php (24)
 in C:\mydatas\APMServ5.2.6\www\htdocs\album\protected\controllers\panos\ThumbController.php (17)
+2012/09/18 13:50:35 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection: SQLSTATE[28000] [1045] Access denied for user 'root'@'localhost' (using password: YES)' in C:\mydatas\APMServ5.2.6\www\htdocs\album\framework\db\CDbConnection.php:382
+Stack trace:
+#0 C:\mydatas\APMServ5.2.6\www\htdocs\album\framework\db\CDbConnection.php(331): CDbConnection->open()
+#1 C:\mydatas\APMServ5.2.6\www\htdocs\album\framework\db\CDbConnection.php(309): CDbConnection->setActive(true)
+#2 C:\mydatas\APMServ5.2.6\www\htdocs\album\framework\base\CModule.php(388): CDbConnection->init()
+#3 C:\mydatas\APMServ5.2.6\www\htdocs\album\framework\base\CApplication.php(431): CModule->getComponent('db')
+#4 C:\mydatas\APMServ5.2.6\www\htdocs\album\framework\db\ar\CActiveRecord.php(615): CApplication->getDb()
+#5 C:\mydatas\APMServ5.2.6\www\htdocs\album\framework\db\ar\CActiveRecord.php(2263): CActiveRecord->getDbConnection()
+#6 C:\mydatas\APMServ5.2.6\www\htdocs\album\framework\db\ar\CActiveRecord.php(379): CActiveRecordMetaData->__construct(Object(Member))
+#7 C:\mydatas\APMServ5.2.6\www\htdocs\album\protected\models\Member.php(21): CActiveRecord::model('Member')
+#8 C:\mydatas\APMServ5.2.6\www\htdocs\album\protected\components\UserIdentity.php(21): Member::model()
+#9 C:\mydatas\APMServ5.2.6\www\htdocs\album\protected\controllers\member\LoginController.php(28): UserIdentity->authenticate()
+#10 C:\mydatas\APMServ5.2.6\www\htdocs\album\protected\controllers\member\LoginController.php(21): LoginController->check_user(Array)
+#11 C:\mydatas\APMServ5.2.6\www\htdocs\album\framework\web\actions\CInlineAction.php(50): LoginController->actionCheckLogin()
+#12 C:\mydatas\APMServ5.2.6\www\htdocs\album\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#13 C:\mydatas\APMServ5.2.6\www\htdocs\album\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#14 C:\mydatas\APMServ5.2.6\www\htdocs\album\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 C:\mydatas\APMServ5.2.6\www\htdocs\album\framework\web\CWebApplication.php(276): CController->run('checkLogin')
+#16 C:\mydatas\APMServ5.2.6\www\htdocs\album\framework\web\CWebApplication.php(135): CWebApplication->runController('member/login/ch...')
+#17 C:\mydatas\APMServ5.2.6\www\htdocs\album\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#18 C:\mydatas\APMServ5.2.6\www\htdocs\album\index.php(16): CApplication->run()
+#19 {main}
+REQUEST_URI=/album/index.php/member/login/checkLogin
+HTTP_REFERER=http://localhost/album/index.php/member/login
+---

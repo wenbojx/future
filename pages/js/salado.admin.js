@@ -103,7 +103,7 @@ function save_project(url){
     }
     data.desc = $("#project_desc").val();
     save_datas(url, data, element_id, msg);
-    location.reload();
+    //location.reload();
 }
 function save_scene(url){
     var msg = {};
