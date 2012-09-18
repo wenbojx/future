@@ -2,3 +2,10 @@
 .git/
 .project
 .settings/
+assets/
+themes/classic/views/
+protected/runtime/
+protected/config/main.php
+
+
+
