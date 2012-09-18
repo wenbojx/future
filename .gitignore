@@ -6,6 +6,6 @@ assets/
 themes/classic/views/
 protected/runtime/
 protected/config/*.php
-
+upload/
 
 
