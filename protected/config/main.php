@@ -61,7 +61,7 @@ return array(
                 'connectionString' => 'mysql:host=localhost;dbname=album',
                 'emulatePrepare' => true,
                 'username' => 'root',
-                'password' => '',
+                //'password' => '',
                 'password' => '1026',
                 'charset' => 'utf8',
                 'tablePrefix' => 'al_',
