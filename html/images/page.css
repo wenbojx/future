@@ -1,0 +1,311 @@
+@CHARSET "UTF-8";
+html,
+body {
+    height:100%;
+    overflow:hidden;
+}
+
+/**/
+.container {
+    position:absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    overflow:hidden;
+    _width:100%;
+    _height:100%;
+}
+/**/
+
+/*住内容区域*/
+.col-main {
+    position:absolute;
+    top:0;
+    right:180px;
+    bottom:0;
+    left:0;
+    overflow:hidden;
+    _position:relative;
+    _right:0;
+    _margin-right:180px;
+    _height:100%;
+}
+.noside .col-main {
+    right:0;
+    margin:0;
+}
+/**/
+
+/*目录链接*/
+.directory-path {
+    position:relative;
+    z-index:11;
+    height:24px;
+    margin:0 10px;
+    border:1px solid #D1D1D1;
+    background:#F3F3F3;
+    cursor:default;
+}
+.path-contents {
+    position:relative;
+    float:left;
+    overflow:hidden;
+}
+.path-contents a,
+.path-contents em,
+.path-contents span {
+    float:left;
+    max-width:150px;
+    height:24px;
+    margin-left:-8px;
+    padding:0 18px;
+    line-height:25px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    color:#999;
+    background:url(./file_path.png) no-repeat 0 0;
+    _background-image:url(./file_path.gif);
+}
+.path-contents a:hover {
+    text-decoration:none;
+    color:#666;
+    background-color:#FFF;
+    background-position:0 -24px;
+}
+.path-contents i {
+    display:none;
+}
+.path-contents span {
+    position:relative;
+    padding-right:25px;
+}
+.path-contents .delete {
+    position:absolute;
+    top:7px;
+    right:10px;
+    width:11px;
+    height:11px;
+    margin:0;
+    padding:0;
+    line-height:10;
+    overflow:hidden;
+    background:url(./ico_delete.gif?v=2) no-repeat 0 0;
+}
+.path-contents .delete:hover {
+    background-color:transparent;
+    background-position:0 -11px;
+}
+/**/
+
+/*文件筛选*/
+.list-filter {
+    position:absolute;
+    top:0;
+    right:0;
+    height:17px;
+    padding:4px 10px 0;
+    line-height:16px;
+    color:#666;
+}
+.list-filter li {
+    float:left;
+    padding-left:15px;
+}
+.list-filter b {
+    float:left;
+    width:16px;
+    height:17px;
+    line-height:10;
+    overflow:hidden;
+    background-image:url(./ico_filter.png?v=2);
+    _background-image:url(./ico_filter.gif?v=2);
+    background-repeat:no-repeat;
+    cursor:pointer;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+}
+.lf-star { background-position:0 0; }
+.lf-document { background-position:-20px 0; }
+.lf-photo { background-position:-40px 0; }
+.lf-music { background-position:-60px 0; }
+.lf-video { background-position:-80px 0; }
+.lf-archive { background-position:-100px 0; }
+.lf-application { background-position:-120px 0; }
+.lf-share { background-position:-140px 0; }
+.focus .lf-star { background-position:0 -20px; }
+.focus .lf-document { background-position:-20px -20px; }
+.focus .lf-photo { background-position:-40px -20px; }
+.focus .lf-music { background-position:-60px -20px; }
+.focus .lf-video { background-position:-80px -20px; }
+.focus .lf-archive { background-position:-100px -20px; }
+.focus .lf-application { background-position:-120px -20px; }
+.focus .lf-share { background-position:-140px -20px; }
+/**/
+
+/*文件列表*/
+.page-list {
+    position:absolute;
+    top:34px;
+    right:10px;
+    bottom:40px;
+    left:10px;
+    overflow:auto;
+}
+/**/
+
+/*列表模式*/
+.page-list li {
+    position:relative;
+    height:40px;
+    padding:5px 0 5px 78px;
+    line-height:20px;
+    vertical-align:top;
+    border-bottom:1px solid #E7E7E7;
+    background:#FFF;
+    cursor:default;
+}
+.page-list li:hover,
+.page-list li.hover,
+.page-list li.focus { background:#FFD; }
+.page-list li input { display:none; }
+.page-list li .checkbox {
+    position:absolute;
+    top:15px;
+    left:7px;
+}
+.page-list li.focus .checkbox { background-position:-20px 0; }
+.page-list li .file-type {
+    position:absolute;
+    top:9px;
+    left:34px;
+}
+.page-list .file-name {
+    margin-right:195px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+.offline-list .file-name { margin-right:300px; }
+.page-list .file-name,
+.page-list .file-name a { color:#151515; }
+.page-list .file-name a:hover {
+    text-decoration:none;
+    color:#3A76C6;
+}
+.page-list .file-info {
+    height:20px;
+    overflow:hidden;
+    color:#BABABA;
+}
+.page-list .file-info em {
+    float:left;
+    margin-right:10px;
+}
+.page-list .task-run { color:#0772B7; }
+.page-list .task-pause { color:#F60; }
+.page-list .task-done { color:0772B7; }
+.page-list .task-fail { color:#F60; }
+.page-list .file-opt {
+    position:absolute;
+    top:17px;
+    right:20px;
+    height:16px;
+}
+
+/*页脚*/
+.page-footer {
+    position:absolute;
+    right:10px;
+    bottom:5px;
+    left:10px;
+    height:30px;
+    padding-top:3px;
+    border-top:1px solid #D1D1D1;
+    _position:relative;
+    _right:0;
+    _bottom:0;
+    _left:0;
+    _margin:0 10px;
+}
+/*分页导航*/
+.pagination {
+    text-align:right;
+    padding:5px;
+}
+.pagination a {
+    position:relative;
+    display:inline-block;
+    height:20px;
+    padding:0 7px;
+    line-height:20px;
+    vertical-align:top;
+    color:#666;
+    border:1px solid #FFF;
+}
+.pagination span {
+    display:inline-block;
+    vertical-align:top;
+    color:#999;
+    cursor:default;
+}
+.pagination a:hover {
+    text-decoration:none;
+    color:#227BC5;
+    border-color:#227BC5;
+}
+.pagination a.focus,
+.pagination a.focus:hover {
+    color:#FFF;
+    border-color:#227BC5;
+    background:#227BC5;
+    cursor:default;
+}
+.pagination .btn {
+    height:22px;
+    padding:0;
+    line-height:23px;
+    text-align:left;
+    overflow:hidden;
+    border:0 none;
+    background-image:url(./pages_btn.png);
+    background-repeat:no-repeat;
+    _background-image:url(./pages_btn.gif);
+}
+.pagination a.btn:hover { color:#555; }
+.pagination .btn-prev {
+    width:50px;
+    padding-left:30px;
+    background-position:0 0;
+}
+.pagination a.btn-prev:hover { background-position:0 -26px; }
+.pagination a.btn-prev:active { background-position:0 -52px; }
+.pagination .btn-next {
+    width:67px;
+    padding-left:13px;
+    background-position:-81px 0;
+}
+.pagination a.btn-next:hover { background-position:-81px -26px; }
+.pagination a.btn-next:active { background-position:-81px -52px; }
+.pagination span.btn-prev { background-position:0 -78px; }
+.pagination span.btn-next { background-position:-81px -78px; }
+/**/
+
+
+
+
+/*侧边*/
+.col-sub {
+    position:absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    width:180px;
+    background:#EEF2F7;
+    _height:100%;
+}
+.noside .col-side {
+    display:none;
+}
+/**/
