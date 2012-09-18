@@ -18,6 +18,7 @@ class ListController extends FController{
     		$criteria->addCondition('status=1');
     		$criteria->addCondition('display=2');
     		$total = $scene_db->count($criteria);
+    		$datas['list'] = array();
     		if($total>0){
     			$page = $request->getParam('page')?$request->getParam('page'):0;
     			$offset = $page*$this->page_size;
@@ -28,12 +29,11 @@ class ListController extends FController{
     			$criteria->offset = $offset;
     			$pages->applyLimit($criteria);
     			$datas['pages'] = $pages;
-    	
     			//获取场景信息
     			$datas['list'] = $scene_db->findAll($criteria);
-    	
     		}
     	//}
     	$this->render('/panos/List', array('datas'=>$datas));
     }
+
 }

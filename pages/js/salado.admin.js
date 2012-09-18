@@ -124,7 +124,6 @@ function save_scene(url){
     data.desc = $("#scene_desc").val();
     data.photo_time = $("#scene_photo_time").val();
     save_datas(url, data, element_id, msg);
-   location.reload();
 }
 function bind_scene_btn(){
     $('#scene_conf_positon').bind('click',function(){

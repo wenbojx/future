@@ -1,4 +1,7 @@
-<div style="width:800px;height:500px;margin:0 auto">
+<div style="width:900px;height:500px;margin:0 auto">
+<br>
+<h3><?=$datas['scene_datas']['name']?></h3>
+
 	<div id="scene_box" ></div>
 </div>
 <script>

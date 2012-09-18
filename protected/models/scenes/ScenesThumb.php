@@ -35,5 +35,17 @@ class ScenesThumb extends CActiveRecord
 	public function find_by_scene_id($scene_id){
 		return $this->findByPk($scene_id);
 	}
+	public function find_by_scene_ids($scene_ids){
+		if(!is_array($scene_ids) || !$scene_ids){
+			return false;
+		}
+		$scene_id_str = implode(',', $scene_ids);
+		if(!$scene_id_str){
+			return false;
+		}
+		$criteria=new CDbCriteria;
+		$criteria->addCondition("scene_id in ({$scene_id_str})");
+		return $this->findAll($criteria);
+	}
 	
 }

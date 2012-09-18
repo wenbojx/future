@@ -3,7 +3,7 @@ class PanoramDatas{
 	public $hotspots_info = array();  //热点信息
 	public $scenes_info = array(); //所有全景
 	public $self_hotspots = array(); // 自身的热点
-	public $pano_thumb_size = '200x80'; //全景图缩略图尺寸
+	public $pano_thumb_size = '120x60'; //全景图缩略图尺寸
 	public $hotspots_num = 5;
 	public $panoram_pre = 'pano_';
 	public $hotspot_pre = 'hotspot_';
@@ -214,7 +214,7 @@ class PanoramDatas{
 	 * 模块默认素材地址
 	 */
 	public function module_media_path($name){
-		$path['hotspot'] = Yii::app()->baseUrl.'/pages/salado/media/arrow_floor.png';
+		$path['hotspot'] = Yii::app()->baseUrl.'/pages/salado/media/hotspot.png';
 		$path['button_bar'] = Yii::app()->baseUrl.'/pages/salado/media/buttons_dark_30x30.png';
 		$path['menu_scroller_show_btn'] = Yii::app()->baseUrl.'/pages/salado/media/MenuScroller_show.png';
 		$path['menu_scroller_hide_btn'] = Yii::app()->baseUrl.'/pages/salado/media/MenuScroller_hide.png';
@@ -386,11 +386,12 @@ class PanoramDatas{
 		$menu['s_attribute']['path'] = $this->module_path('MenuScroller');
 		$menu['window']['s_attribute']['size'] = 'width:500,height:90';
 		$menu['window']['s_attribute']['open'] = 'false';
+		$menu['window']['s_attribute']['alpha'] = '0.3';
 		$menu['window']['s_attribute']['align'] = 'horizontal:left,vertical:bottom';
 		$menu['window']['s_attribute']['transition'] = 'type:slideLeft';
 		
 		$menu['scroller']['s_attribute']['scrollsVertical'] = 'false';
-		$menu['scroller']['s_attribute']['sizeLimit'] = '70';
+		$menu['scroller']['s_attribute']['sizeLimit'] = '60';
 		foreach($extend_panos as $k=>$v){
 			if ($v == $scene_id){
 				continue;

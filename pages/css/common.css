@@ -183,7 +183,13 @@ button i {
     left:151px;
 }
 
-
+.panolist{
+	width:800px;
+	margin:0 auto;
+}
+.panodetail{
+	width:240px; margin:10px 10px 0 0;float:left;text-align:center;
+}
 
 
 
