@@ -5207,3 +5207,18 @@ REQUEST_URI=/album/index.php/ajax/uploadFile
 in C:\mydatas\APMServ5.2.6\www\htdocs\album\protected\controllers\ajax\UploadFileController.php (159)
 in C:\mydatas\APMServ5.2.6\www\htdocs\album\protected\controllers\ajax\UploadFileController.php (13)
 in C:\mydatas\APMServ5.2.6\www\htdocs\album\index.php (16)
+2012/09/18 15:25:21 [error] [php] move_uploaded_file(upload/201209/18/d762fea077fc147767cf789f8f832f50/未标题-1.jpg) [<a href='function.move-uploaded-file'>function.move-uploaded-file</a>]: failed to open stream: Invalid argument (C:\mydatas\APMServ5.2.6\www\htdocs\album\framework\web\CUploadedFile.php:197)
+Stack trace:
+#0 C:\mydatas\APMServ5.2.6\www\htdocs\album\protected\controllers\ajax\UploadFileController.php(13): UploadFileController->upload()
+#1 C:\mydatas\APMServ5.2.6\www\htdocs\album\framework\web\actions\CInlineAction.php(50): UploadFileController->actionUploadFile()
+#2 C:\mydatas\APMServ5.2.6\www\htdocs\album\framework\web\CController.php(309): CInlineAction->runWithParams()
+#3 C:\mydatas\APMServ5.2.6\www\htdocs\album\framework\web\CController.php(287): UploadFileController->runAction()
+#4 C:\mydatas\APMServ5.2.6\www\htdocs\album\framework\web\CController.php(266): UploadFileController->runActionWithFilters()
+#5 C:\mydatas\APMServ5.2.6\www\htdocs\album\framework\web\CWebApplication.php(276): UploadFileController->run()
+#6 C:\mydatas\APMServ5.2.6\www\htdocs\album\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#7 C:\mydatas\APMServ5.2.6\www\htdocs\album\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#8 C:\mydatas\APMServ5.2.6\www\htdocs\album\index.php(16): CWebApplication->run()
+REQUEST_URI=/album/index.php/ajax/uploadFile
+in C:\mydatas\APMServ5.2.6\www\htdocs\album\protected\controllers\ajax\UploadFileController.php (159)
+in C:\mydatas\APMServ5.2.6\www\htdocs\album\protected\controllers\ajax\UploadFileController.php (13)
+in C:\mydatas\APMServ5.2.6\www\htdocs\album\index.php (16)

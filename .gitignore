@@ -7,5 +7,4 @@ themes/classic/views/
 protected/runtime/*.log
 protected/runtime/application.*
 protected/config/*.php
-upload/
 
