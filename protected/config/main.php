@@ -62,7 +62,7 @@ return array(
                 'emulatePrepare' => true,
                 'username' => 'root',
                 //'password' => '',
-                'password' => '1026',
+                'password' => 'wenbojx0513',
                 'charset' => 'utf8',
                 'tablePrefix' => 'al_',
         ),
