@@ -13,7 +13,7 @@ class SceneListController extends Controller{
             //获取场景列表
             $scene_db = new Scene();
             $criteria=new CDbCriteria;
-            $criteria->order = 'id DESC';
+            $criteria->order = 'id ASC';
             $criteria->addCondition("project_id={$project_id}");
             $criteria->addCondition('status=1');
             $total = $scene_db->count($criteria);

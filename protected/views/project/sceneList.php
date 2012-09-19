@@ -20,7 +20,7 @@
                                 <div style="position:absolute;top:0;left:0;width:34px;height:50px;"></div>
                                 <i class="file-type tp-folder"></i>
                                 <div class="file-name">
-                                   <?php echo CHtml::link($v['name'],array('project/SceneDetail/detail','id'=>$v['id']));?>
+                                   <?php echo $v['id'];?> : <?php echo CHtml::link($v['name'],array('project/SceneDetail/detail','id'=>$v['id']));?>
                                 </div>
                                 <div class="file-info"><em>2012-07-30</em> </div>
                                 <div class="file-opt">
