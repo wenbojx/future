@@ -23,29 +23,29 @@ class ScenesHotspot extends CActiveRecord
         $this->tilt = $datas['tilt'] ? $datas['tilt'] : 0;
         $this->fov = $datas['fov'] ? $datas['fov'] : 90;
         $this->type = $datas['type'] ? $datas['type'] : 2;
-        $this->content = $datas['content'] ? $datas['content'] : '';
+        $this->content = isset( $datas['content'] ) ? $datas['content'] : '0';
         $this->link_scene_id = $datas['link_scene_id'] ? $datas['link_scene_id'] : 0;
         $this->scene_id = $datas['scene_id'];
         unset($datas);
-        return $this->insert($insert);
+        return $this->insert();
     }
     public function find_by_scene_id($scene_id){
-    	return $this->findAllByAttributes(array('scene_id'=>$scene_id));
+        return $this->findAllByAttributes(array('scene_id'=>$scene_id));
     }
     public function find_by_scene_ids($scene_ids){
-    	if(!$scene_ids){
-    		return false;
-    	}
-    	$scene_ids_str = implode(',', $scene_ids);
-    	$criteria=new CDbCriteria;
-    	$criteria->addCondition("scene_id in ({$scene_ids_str})");
-    	return $this->findAll($criteria);
+        if(!$scene_ids){
+            return false;
+        }
+        $scene_ids_str = implode(',', $scene_ids);
+        $criteria=new CDbCriteria;
+        $criteria->addCondition("scene_id in ({$scene_ids_str})");
+        return $this->findAll($criteria);
     }
     public function edit_hotspot($id, $datas){
-    	if(!$id){
-    		return false;
-    	}
-    	return $this->updateByPk($id, $datas);
+        if(!$id){
+            return false;
+        }
+        return $this->updateByPk($id, $datas);
     }
 }
 

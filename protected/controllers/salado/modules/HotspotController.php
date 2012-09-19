@@ -7,7 +7,7 @@ class HotspotController extends Controller{
         $this->check_scene_own($scene_id);
         $datas['pan'] = $request->getParam('pan');
         $datas['tilt'] = $request->getParam('tilt');
-        //$datas['fov'] = $request->getParam('fov');
+        $datas['fov'] = $request->getParam('fov');
         $datas['type'] = $request->getParam('type');
         $datas['link_scene_id'] = $request->getParam('link_scene_id');
 
