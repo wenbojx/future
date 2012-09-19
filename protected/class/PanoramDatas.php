@@ -199,8 +199,8 @@ class PanoramDatas{
 		elseif ($datas['type'] == '2'){
 			$hotspot['s_attribute']['path'] = $this->module_path('Hotspot');
 			$hotspot['settings']['s_attribute']['path'] = $this->module_media_path('hotspot');
-			$hotspot['settings']['s_attribute']['beatUp'] = 'scale:0.8';
-			$hotspot['settings']['s_attribute']['mouseOver'] = 'scale:1.2';
+			$hotspot['settings']['s_attribute']['beatUp'] = 'scale:0.7';
+			$hotspot['settings']['s_attribute']['mouseOver'] = 'scale:1.1';
 		}
 		return $hotspot;
 	}
