@@ -22,7 +22,7 @@ class HotspotController extends Controller{
         $this->display_msg($msg);
     }
     private function add_hotspot($datas){
-    	$hotspot_db = new ScenesHotspot();
-    	return $hotspot_db->add_hotsopt($datas);
+        $hotspot_db = new ScenesHotspot();
+        return $hotspot_db->add_hotsopt($datas);
     }
 }

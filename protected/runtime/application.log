@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2012/09/16 05:50:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "project/3".' in C:\mydatas\APMServ5.2.6\www\htdocs\album\framework\web\CWebApplication.php:280
 Stack trace:
 #0 C:\mydatas\APMServ5.2.6\www\htdocs\album\framework\web\CWebApplication.php(135): CWebApplication->runController('project/3')
@@ -5222,3 +5223,103 @@ REQUEST_URI=/album/index.php/ajax/uploadFile
 in C:\mydatas\APMServ5.2.6\www\htdocs\album\protected\controllers\ajax\UploadFileController.php (159)
 in C:\mydatas\APMServ5.2.6\www\htdocs\album\protected\controllers\ajax\UploadFileController.php (13)
 in C:\mydatas\APMServ5.2.6\www\htdocs\album\index.php (16)
+=======
+2012/09/19 14:56:52 [error] [php] Undefined index: fov (/var/www/pano/album/protected/models/scenes/ScenesHotspot.php:24)
+Stack trace:
+#0 /var/www/pano/album/framework/web/actions/CInlineAction.php(50): HotspotController->actionSave()
+#1 /var/www/pano/album/framework/web/CController.php(309): CInlineAction->runWithParams()
+#2 /var/www/pano/album/framework/web/CController.php(287): HotspotController->runAction()
+#3 /var/www/pano/album/framework/web/CController.php(266): HotspotController->runActionWithFilters()
+#4 /var/www/pano/album/framework/web/CWebApplication.php(276): HotspotController->run()
+#5 /var/www/pano/album/framework/web/CWebApplication.php(135): CWebApplication->runController()
+#6 /var/www/pano/album/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#7 /var/www/pano/album/index.php(16): CWebApplication->run()
+REQUEST_URI=/album/index.php/salado/modules/hotspot/save/
+in /var/www/pano/album/protected/models/scenes/ScenesHotspot.php (24)
+in /var/www/pano/album/protected/controllers/salado/modules/HotspotController.php (26)
+in /var/www/pano/album/protected/controllers/salado/modules/HotspotController.php (16)
+2012/09/19 15:08:25 [error] [php] Undefined index: fov (/var/www/pano/album/protected/models/scenes/ScenesHotspot.php:24)
+Stack trace:
+#0 /var/www/pano/album/framework/web/actions/CInlineAction.php(50): HotspotController->actionSave()
+#1 /var/www/pano/album/framework/web/CController.php(309): CInlineAction->runWithParams()
+#2 /var/www/pano/album/framework/web/CController.php(287): HotspotController->runAction()
+#3 /var/www/pano/album/framework/web/CController.php(266): HotspotController->runActionWithFilters()
+#4 /var/www/pano/album/framework/web/CWebApplication.php(276): HotspotController->run()
+#5 /var/www/pano/album/framework/web/CWebApplication.php(135): CWebApplication->runController()
+#6 /var/www/pano/album/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#7 /var/www/pano/album/index.php(16): CWebApplication->run()
+REQUEST_URI=/album/index.php/salado/modules/hotspot/save/
+in /var/www/pano/album/protected/models/scenes/ScenesHotspot.php (24)
+in /var/www/pano/album/protected/controllers/salado/modules/HotspotController.php (26)
+in /var/www/pano/album/protected/controllers/salado/modules/HotspotController.php (16)
+2012/09/19 15:11:35 [error] [php] Undefined index: fov (/var/www/pano/album/protected/models/scenes/ScenesHotspot.php:24)
+Stack trace:
+#0 /var/www/pano/album/framework/web/actions/CInlineAction.php(50): HotspotController->actionSave()
+#1 /var/www/pano/album/framework/web/CController.php(309): CInlineAction->runWithParams()
+#2 /var/www/pano/album/framework/web/CController.php(287): HotspotController->runAction()
+#3 /var/www/pano/album/framework/web/CController.php(266): HotspotController->runActionWithFilters()
+#4 /var/www/pano/album/framework/web/CWebApplication.php(276): HotspotController->run()
+#5 /var/www/pano/album/framework/web/CWebApplication.php(135): CWebApplication->runController()
+#6 /var/www/pano/album/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#7 /var/www/pano/album/index.php(16): CWebApplication->run()
+REQUEST_URI=/album/index.php/salado/modules/hotspot/save/
+in /var/www/pano/album/protected/models/scenes/ScenesHotspot.php (24)
+in /var/www/pano/album/protected/controllers/salado/modules/HotspotController.php (26)
+in /var/www/pano/album/protected/controllers/salado/modules/HotspotController.php (16)
+2012/09/19 15:11:40 [error] [php] Undefined index: fov (/var/www/pano/album/protected/models/scenes/ScenesHotspot.php:24)
+Stack trace:
+#0 /var/www/pano/album/framework/web/actions/CInlineAction.php(50): HotspotController->actionSave()
+#1 /var/www/pano/album/framework/web/CController.php(309): CInlineAction->runWithParams()
+#2 /var/www/pano/album/framework/web/CController.php(287): HotspotController->runAction()
+#3 /var/www/pano/album/framework/web/CController.php(266): HotspotController->runActionWithFilters()
+#4 /var/www/pano/album/framework/web/CWebApplication.php(276): HotspotController->run()
+#5 /var/www/pano/album/framework/web/CWebApplication.php(135): CWebApplication->runController()
+#6 /var/www/pano/album/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#7 /var/www/pano/album/index.php(16): CWebApplication->run()
+REQUEST_URI=/album/index.php/salado/modules/hotspot/save/
+in /var/www/pano/album/protected/models/scenes/ScenesHotspot.php (24)
+in /var/www/pano/album/protected/controllers/salado/modules/HotspotController.php (26)
+in /var/www/pano/album/protected/controllers/salado/modules/HotspotController.php (16)
+2012/09/19 15:13:04 [error] [php] Undefined index: content (/var/www/pano/album/protected/models/scenes/ScenesHotspot.php:26)
+Stack trace:
+#0 /var/www/pano/album/framework/web/actions/CInlineAction.php(50): HotspotController->actionSave()
+#1 /var/www/pano/album/framework/web/CController.php(309): CInlineAction->runWithParams()
+#2 /var/www/pano/album/framework/web/CController.php(287): HotspotController->runAction()
+#3 /var/www/pano/album/framework/web/CController.php(266): HotspotController->runActionWithFilters()
+#4 /var/www/pano/album/framework/web/CWebApplication.php(276): HotspotController->run()
+#5 /var/www/pano/album/framework/web/CWebApplication.php(135): CWebApplication->runController()
+#6 /var/www/pano/album/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#7 /var/www/pano/album/index.php(16): CWebApplication->run()
+REQUEST_URI=/album/index.php/salado/modules/hotspot/save/
+in /var/www/pano/album/protected/models/scenes/ScenesHotspot.php (26)
+in /var/www/pano/album/protected/controllers/salado/modules/HotspotController.php (26)
+in /var/www/pano/album/protected/controllers/salado/modules/HotspotController.php (16)
+2012/09/19 15:13:35 [error] [php] Undefined variable: insert (/var/www/pano/album/protected/models/scenes/ScenesHotspot.php:30)
+Stack trace:
+#0 /var/www/pano/album/framework/web/actions/CInlineAction.php(50): HotspotController->actionSave()
+#1 /var/www/pano/album/framework/web/CController.php(309): CInlineAction->runWithParams()
+#2 /var/www/pano/album/framework/web/CController.php(287): HotspotController->runAction()
+#3 /var/www/pano/album/framework/web/CController.php(266): HotspotController->runActionWithFilters()
+#4 /var/www/pano/album/framework/web/CWebApplication.php(276): HotspotController->run()
+#5 /var/www/pano/album/framework/web/CWebApplication.php(135): CWebApplication->runController()
+#6 /var/www/pano/album/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#7 /var/www/pano/album/index.php(16): CWebApplication->run()
+REQUEST_URI=/album/index.php/salado/modules/hotspot/save/
+in /var/www/pano/album/protected/models/scenes/ScenesHotspot.php (30)
+in /var/www/pano/album/protected/controllers/salado/modules/HotspotController.php (26)
+in /var/www/pano/album/protected/controllers/salado/modules/HotspotController.php (16)
+2012/09/19 15:13:55 [error] [php] Undefined variable: insert (/var/www/pano/album/protected/models/scenes/ScenesHotspot.php:30)
+Stack trace:
+#0 /var/www/pano/album/framework/web/actions/CInlineAction.php(50): HotspotController->actionSave()
+#1 /var/www/pano/album/framework/web/CController.php(309): CInlineAction->runWithParams()
+#2 /var/www/pano/album/framework/web/CController.php(287): HotspotController->runAction()
+#3 /var/www/pano/album/framework/web/CController.php(266): HotspotController->runActionWithFilters()
+#4 /var/www/pano/album/framework/web/CWebApplication.php(276): HotspotController->run()
+#5 /var/www/pano/album/framework/web/CWebApplication.php(135): CWebApplication->runController()
+#6 /var/www/pano/album/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#7 /var/www/pano/album/index.php(16): CWebApplication->run()
+REQUEST_URI=/album/index.php/salado/modules/hotspot/save/
+in /var/www/pano/album/protected/models/scenes/ScenesHotspot.php (30)
+in /var/www/pano/album/protected/controllers/salado/modules/HotspotController.php (26)
+in /var/www/pano/album/protected/controllers/salado/modules/HotspotController.php (16)
+>>>>>>> 0cc7eb50b0bc233de39e5c617a527330f068d1ad

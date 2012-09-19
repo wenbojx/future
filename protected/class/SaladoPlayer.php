@@ -43,7 +43,7 @@ class SaladoPlayer{
 
     private function config_start(){
         $player_info = '<SaladoPlayer>';
-        return $xml_info.$player_info;
+        return $player_info;
     }
     private function config_end(){
         $player_info = '</SaladoPlayer>';
@@ -51,16 +51,16 @@ class SaladoPlayer{
     }
 
     public function get_config_content($id, $admin){
-    	$panodatas_obj = new PanoramDatas();
-    	$panodatas = $panodatas_obj->get_panoram_datas($id, $admin);
-    	$this->admin = $admin;
-    	$content = $this->config_start();
-    	$content .= $this->config_global($panodatas['global']);
-    	$content .= $this->config_panoramas($panodatas['panorams']);
-    	$content .= $this->config_modules($panodatas['modules']);
-    	$content .= $this->config_actions($panodatas['actions']);
-    	$content .= $this->config_end();
-    	return $content;
+        $panodatas_obj = new PanoramDatas();
+        $panodatas = $panodatas_obj->get_panoram_datas($id, $admin);
+        $this->admin = $admin;
+        $content = $this->config_start();
+        $content .= $this->config_global($panodatas['global']);
+        $content .= $this->config_panoramas($panodatas['panorams']);
+        $content .= $this->config_modules($panodatas['modules']);
+        $content .= $this->config_actions($panodatas['actions']);
+        $content .= $this->config_end();
+        return $content;
     }
     private function config_global($global){
         $global_str = '';
