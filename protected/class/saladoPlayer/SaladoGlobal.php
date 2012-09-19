@@ -14,7 +14,7 @@ class SaladoGlobal extends SaladoPlayer{
             $global_str .= $this->get_branding($global['branding']);
         }
         if(isset($global['control'])){
-            $global_str .= $this->get_branding($global['control']);
+            $global_str .= $this->get_control($global['control']);
         }
         if(isset($global['panoramas'])){
         	$global_str .= $this->get_panoramas($global['panoramas']);
@@ -37,7 +37,7 @@ class SaladoGlobal extends SaladoPlayer{
     private function get_control($control){
         $control_str = '<control';
         $control_str .= $this->build_attribute($control['s_attribute']);
-        $control_str .= '</branding>';
+        $control_str .= '</control>';
         return $control_str;
     }
 }

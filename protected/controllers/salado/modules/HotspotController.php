@@ -5,12 +5,11 @@ class HotspotController extends Controller{
         $scene_id = $request->getParam('scene_id');
         $datas['scene_id'] = $scene_id;
         $this->check_scene_own($scene_id);
-        $datas['pan'] = $request->getParam('pan');
-        $datas['tilt'] = $request->getParam('tilt');
-        $datas['fov'] = $request->getParam('fov');
+        $datas['pan'] = (int)$request->getParam('pan');
+        $datas['tilt'] = (int)$request->getParam('tilt');
+        $datas['fov'] = (int)$request->getParam('fov');
         $datas['type'] = $request->getParam('type');
         $datas['link_scene_id'] = $request->getParam('link_scene_id');
-
         $msg['flag'] = 1;
         $msg['msg'] = '操作成功';
         $id = $this->add_hotspot($datas);

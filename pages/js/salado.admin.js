@@ -276,8 +276,8 @@ function save_hotspot_detail(scene_id){
         done_error(element_id, msg.error);
     }
     var data = {};
-    data.pan = parseFloat ($("#hotspot_info_d_pan").html());
-    data.tilt = parseFloat ($("#hotspot_info_d_tilt").html());
+    data.pan = parseInt ($("#hotspot_info_d_pan").html());
+    data.tilt = parseInt ($("#hotspot_info_d_tilt").html());
     data.fov = parseInt ($("#hotspot_info_d_fov").html());
     data.type = $("#hotspot_info_d_type").val();
     data.link_scene_id = $("#hotspot_info_d_link_scene_id").val();
