@@ -3,7 +3,7 @@ class PanoramDatas{
 	public $hotspots_info = array(); //热点信息
 	public $scenes_info = array(); //当前场景包含的所有全景
 	public $self_hotspots = array(); // 当前场景的热点
-	public $pano_thumb_size = '200x80'; //全景图缩略图尺寸
+	public $pano_thumb_size = '240x120'; //全景图缩略图尺寸
 	public $hotspots_num = 5;
 	public $panoram_pre = 'pano_';
 	public $hotspot_pre = 'hotspot_';
@@ -199,6 +199,8 @@ class PanoramDatas{
 		elseif ($datas['type'] == '2'){
 			$hotspot['s_attribute']['path'] = $this->module_path('Hotspot');
 			$hotspot['settings']['s_attribute']['path'] = $this->module_media_path('hotspot');
+			$hotspot['settings']['s_attribute']['beatUp'] = 'scale:0.8';
+			$hotspot['settings']['s_attribute']['mouseOver'] = 'scale:1.2';
 		}
 		return $hotspot;
 	}
@@ -391,8 +393,9 @@ class PanoramDatas{
 		}
 		//print_r($extend_panos);
 		$menu['s_attribute']['path'] = $this->module_path('MenuScroller');
-		$menu['window']['s_attribute']['size'] = 'width:500,height:90';
+		$menu['window']['s_attribute']['size'] = 'width:600,height:90';
 		$menu['window']['s_attribute']['open'] = 'false';
+		$menu['window']['s_attribute']['alpha'] = '0.3';
 		$menu['window']['s_attribute']['align'] = 'horizontal:left,vertical:bottom';
 		$menu['window']['s_attribute']['transition'] = 'type:slideLeft';
 

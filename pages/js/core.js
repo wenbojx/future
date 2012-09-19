@@ -37,6 +37,7 @@ function save_datas(url, data, element_id, msg, type, dataType){
 }
 function done_error(element_id, msg){
     $("#"+element_id).html(msg);
+    //setTimeout( clean_msg_box(element_id), 50000);
 }
 function done_success(element_id, msg, datas){
     if(datas.flag == '0'){
@@ -44,6 +45,10 @@ function done_success(element_id, msg, datas){
         done_error(element_id, msg);
     }
     $("#"+element_id).html(msg);
+    //setTimeout( clean_msg_box(element_id), 50000);
+}
+function clean_msg_box(element_id){
+	$("#"+element_id).html('');
 }
 
 
