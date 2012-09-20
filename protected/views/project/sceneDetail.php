@@ -47,7 +47,7 @@
     </div>
     <div class="col-sub">
         <div style="text-align:center; margin:10px 0 0 0;">
-            <a onclick="loadModalWin('showmodel','<?=$this->createUrl('/project/scene/uploadPhoto/show/', array('scene_id'=>$datas['id']))?>', '上传', 605, 450)" style="" class="button btn-orange" href="javascript:;">上传</a>
+            <a onclick="loadModalWin('showmodel','<?=$this->createUrl('/project/scene/uploadPhoto/show/', array('scene_id'=>$datas['id']))?>', '上传全景图', 605, 450)" style="" class="button btn-orange" href="javascript:;">上传全景图</a>
         </div>
         <div style="width:120px; text-align:center; margin:10px auto">
             <a id="scene_conf_positon" style="" title="定位" class="button btn-gray" href="javascript:;">位</a>
