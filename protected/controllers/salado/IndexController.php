@@ -60,7 +60,7 @@ class IndexController extends FController{
         if( $id && $position){
             $scene_file_db = new MpSceneFile();
             $scene_file_datas = $scene_file_db->get_file_by_scene_position($id, $position);
-            if(!$file_id = $scene_file_datas->file_id){
+            if (!$scene_file_datas || !$file_id = $scene_file_datas['file_id']){
                 $flag = false;
             }
             $size = $this->img_size.'x'.$this->img_size.'.jpg';

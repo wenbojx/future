@@ -9,11 +9,15 @@
 <div class="box_open">
     <div class="input-box">
         <li>
-            <a style="" id="thumb_box_upload" class="button" href="javascript:;">上传缩略图</a>
+            <a style="" id="thumb_box_upload" class="button" href="javascript:;">上传缩略图</a>480x240
             
         </li>
         <li style="clear:both">
-        	<div id="thumb_img"></div>
+        	<div id="thumb_img">
+        	<?php if (isset($datas['thumb'])){?>
+        		<img alt="" src="<?=$datas['thumb']?>">
+        	<?php }?>
+        	</div>
         </li>
     </div>
 </div>
