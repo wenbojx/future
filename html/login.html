@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="images/style.css" type="text/css" rel="stylesheet" />
+<script src='images/jquery172.min.js' charset='utf-8'></script>
+<title>login page</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="col_left">
+            <h1 class="logo">
+                <a href="">115，改变分享</a>
+            </h1>
+            <div class="left_menu">
+                <div class="left-menu-side">
+                    <ul id="left_tab_list">
+                        <li class="focus">
+                            <a href="javascript:;">
+                                <i class="ico-dm dm-cloud"></i>
+                                <span>网盘</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="javascript:;">
+                                <i class="ico-dm dm-notebook"></i>
+                                <span>记事本</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="javascript:;">
+                                <i class="ico-dm dm-circle"></i>
+                                <span>圈子</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="javascript:;">
+                                <i	class="ico-dm dm-message"></i>
+                                <span>消息</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col_right">
+            <div class="right-sub-header">客户端下载</div>
+            <div class="client-link">
+                <ul>
+                    <li><a href=""><i class="ico-client ic-windows"></i>Windows 版</a></li>
+                    <li><a href=""><i class="ico-client ic-mac"></i>Mac 版</a></li>
+                    <li><a href=""><i class="ico-client ic-android"></i>Android 版</a></li>
+                    <li><a href=""><i class="ico-client ic-iphone"></i>iPhone 版</a></li>
+                    <li><a href=""><i class="ico-client ic-ipad"></i>iPad 版</a></li>
+                    <li><a href=""><i class="ico-client ic-wphone"></i>Windows Phone 版</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col_center">
+            <div id="js_content_list" class="feature-show">
+            </div>
+            <div class="login-box">
+                <form method="post" action="" id="js_login_form">
+                    <input type="hidden" value="https://passport.115.com/?ct=register" name="goto">
+                    <input type="hidden" value="" name="client">
+                    <input type="hidden" value="" name="callback">
+                    <ul>
+                        <li>
+                            <!-- <label for="account">请输入手机/邮箱/帐号</label> -->
+                            <input type="text"  tabindex="1" value="" class="text" id="account" name="login[account]">
+                        </li>
+                        <li>
+                            <!-- <label for="passwd">请输入您的密码</label> -->
+                            <input type="password"  tabindex="2" class="text"  id="passwd" name="login[passwd]">
+                        </li>
+                        <li class="s">
+                            <button class="btn-login" type="submit"><i>登录</i></button>
+                        </li>
+                        <li class="status-save">
+                            <input type="checkbox" tabindex="4" name="login[time]" id="autologin">
+                            <label for="autologin">保持我的登录状态</label>
+                        </li>
+                        <li>
+                            <em><a href="">找回密码？</a></em>
+                            <em><a href="">找回帐号？</a></em>
+                        </li>
+                        <li class="s">
+                            <a href="">注册新帐号</a>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div class="footer">
+                <p>&copy; 2012 yiluhao.com 沪ICP备********号  <a target="_blank" href="">增值电信业务经营许可证沪B2-20120370</a></p>
+                <p>
+                    <a rel="nofollow" target="_blank" href="http://www.sh.gov.cn/">上海</a> •
+                    <a rel="nofollow" target="_blank" href="http://www.sh.gov.cn/">东莞</a> •
+                    <a rel="nofollow" target="_blank" href="">陆家嘴</a>&#12288;&#12288;
+                    <a rel="nofollow" target="_blank" href="">**</a> •
+                    <a rel="nofollow" target="_blank" href="">**</a>&#12288;&#12288;
+                    <a href="" target="_blank" rel="nofollow">关于一路好</a> •
+                    <a href="" target="_blank" rel="nofollow">诚征英才</a>
+               </p>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
