@@ -2,7 +2,7 @@
 class ListController extends FController{
     public $defaultAction = 'list';
     public $layout = 'panoList';
-    private $page_size = 10;
+    private $page_size = 30;
 
     public function actionList(){
     	$request = Yii::app()->request;
