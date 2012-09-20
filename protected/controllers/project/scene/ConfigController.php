@@ -35,7 +35,7 @@ class ConfigController extends Controller{
         }
         $project_id = $scene_data->project_id;
         $criteria=new CDbCriteria;
-        $criteria->order = 'id DESC';
+        $criteria->order = 'id ASC';
         $criteria->addCondition("project_id={$project_id}");
         $criteria->addCondition("id!={$scene_id}");
         $criteria->addCondition('status=1');

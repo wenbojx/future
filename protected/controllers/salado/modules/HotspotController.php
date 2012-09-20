@@ -10,14 +10,17 @@ class HotspotController extends Controller{
         $datas['fov'] = (int)$request->getParam('fov');
         $datas['type'] = $request->getParam('type');
         $datas['link_scene_id'] = $request->getParam('link_scene_id');
-        $msg['flag'] = 1;
-        $msg['msg'] = '操作成功';
-        $id = $this->add_hotspot($datas);
-        if(!$id){
-            $msg['flag'] = 0;
-            $msg['msg'] = '操作失败';
+        $msg['flag'] = 0;
+        $msg['msg'] = '操作失败';
+        if($datas['link_scene_id'] == '0' || $datas['link_scene_id'] == ''){
             $this->display_msg($msg);
         }
+        $id = $this->add_hotspot($datas);
+        if(!$id){
+            $this->display_msg($msg);
+        }
+        $msg['flag'] = 1;
+        $msg['msg'] = '操作成功';
         $this->display_msg($msg);
     }
     private function add_hotspot($datas){

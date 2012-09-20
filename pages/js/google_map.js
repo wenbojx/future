@@ -10,11 +10,9 @@ config.ditu_search1 = "http:\/\/www.google.com\/uds\/api?file=uds.js&v=1.0&key=&
 config.ditu_search2 = "http:\/\/www.google.com\/uds\/solutions\/localsearch\/gmlocalsearch.js";
 config.mapbar_delta = {"lat":-0.00226,"lng":0.004406};
 config.big_china = {"latFrom":4,"latTo":53,"lngFrom":73,"lngTo":135};
-config.gmap_city = {"11":{"lng":121.4759159,"lat":31.2243531,"zoom":14},"12":{"lng":113.341527,"lat":23.1270407,"zoom":14}};
+config.gmap_city = {"11":{"lng":121.4759159,"lat":31.2243531,"zoom":16},"12":{"lng":113.341527,"lat":23.1270407,"zoom":16}};
 
 var city_id = "11";
-var back_url = 'http://one.wbli.dev.aifang.com/sh/aifang/admin/trip/transSpot/';
-var ajax_url = 'http://one.wbli.dev.aifang.com/sh/aifang/admin/trip/ajax/';
 var latlng = {"lat":"39.988695016047","lng":"116.32822036743"};
 var googlemap = null;
 var spot_id = '420';
@@ -48,6 +46,7 @@ jQuery.extend( {
             search_options = {
                     onSearchCompleteCallback: search_complete
             };
+            map.setMapType(G_SATELLITE_MAP);
 
             map.addControl(new GLargeMapControl());
             map.addControl(new GOverviewMapControl());
@@ -123,44 +122,5 @@ jQuery.extend( {
             init: init,
             cancel: cancel
         };
-    },
-    save_map_value: function (method) {
-        var name = $('#name').val();
-        var zoom = parseInt($('#span_zoom').html());
-        var lat = parseFloat ($('#span_lat').html());
-        var lng = parseFloat ($('#span_lng').html());
-
-        if(name == ''){
-            alert('请输入配套名称');
-            return false;
-        }else if(name.length > 12){
-            alert('配套名称不应超出12个字');
-            return false;
-        }
-
-        var type = parseInt($('input[name=type]:checked').val());
-        //保存地图资料
-        $.post(
-                ajax_url,{
-                    action: method,
-                    job: method + '_trans_spot_record',
-                    data: JSON.stringify({
-                        city_id:city_id,
-                        type:type,
-                        name:name,
-                        glat:lat,
-                        glng:lng
-                    }),
-                    id:spot_id
-                },
-                function (data) {
-                    if (data === '1') {
-                        alert('数据保存成功');
-                        window.location.href = back_url;
-                    } else {
-                        alert('数据保存失败,请检查网络状况');
-                    }
-                }
-        );
     }
 });

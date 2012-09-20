@@ -1,21 +1,8 @@
 <div id="js_cantain_box" class="col-main">
         <div style="z-index:9998;" class="directory-path">
                 <div rel="page_local" class="path-contents">
-                    <a title="网盘" onClick="" href="javascript:;">test</a>
+                    <a title="项目" href="javascript:;">项目</a>
                     <i>»</i><em>&nbsp;</em>
-                </div>
-                <div id="js_fileter_box" class="list-filter">
-                    <ul>
-                        <!-- <li title="已分享"><b class="lf-share">分享</b></li>
-                        <li title="星标文件"><b class="lf-star">星标</b></li>
-                        <li title="文档"><b class="lf-document">文档</b></li>
-                        <li title="图片"><b class="lf-photo">图片</b></li>
-                        <li title="音乐"><b class="lf-music">音乐</b></li>
-                        <li title="视频"><b class="lf-video">视频</b></li>
-                        <li title="压缩包"><b class="lf-archive">压缩包</b></li>
-                        <li title="应用程序"><b class="lf-application">应用程序</b></li>
-                        -->
-                    </ul>
                 </div>
         </div>
                 <div id="js_data_list_outer" class="page-list">
@@ -31,10 +18,10 @@
                                    <?php echo CHtml::link($v['name'],array('project/SceneList/list','id'=>$v['id']));?>
                                 </div>
                                 <div class="file-info"><em>2012-07-30</em> </div>
-                                <div class="file-opt">
+                                <!-- <div class="file-opt">
                                     <a title="分享"  class="i-share" href="javascript:;">分享</a>
                                     <a title="更多" menu="more_btn" class="i-more" href="javascript:;">更多</a>
-                                </div>
+                                </div> -->
                             </li>
                         <?php }}?>
                         </ul>

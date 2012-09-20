@@ -1,6 +1,6 @@
 function thumb_box_upload(){
-	var post_datas = {'scene_id':scene_id,'from':'thumb_pic','SESSION_ID':session_id};
-	$("#thumb_box_upload").uploadify({
+    var post_datas = {'scene_id':scene_id,'from':'thumb_pic','SESSION_ID':session_id};
+    $("#thumb_box_upload").uploadify({
         'swf': flash_url,
         'uploader': thumb_upload_url,
         'formData': post_datas,
@@ -21,7 +21,7 @@ function thumb_box_upload(){
         'onUploadError':function(file){
         },
         'onUploadSuccess':function(file, data, response){
-        	var dataObj = eval("("+data+")");
+            var dataObj = eval("("+data+")");
             if(dataObj.status == '0'){
                 alert(dataObj.msg);
             }
@@ -98,8 +98,8 @@ function save_project(url){
     var data = {};
     data.name = $("#project_name").val();
     if(!data.name){
-    	done_error(element_id, '请输入项目名称')
-    	return false;
+        done_error(element_id, '请输入项目名称')
+        return false;
     }
     data.desc = $("#project_desc").val();
     save_datas(url, data, element_id, msg);
@@ -114,12 +114,12 @@ function save_scene(url){
     data.name = $("#scene_name").val();
     data.project_id = $("#project_id").val();
     if(!data.name){
-    	done_error(element_id, '请输入场景名称')
-    	return false;
+        done_error(element_id, '请输入场景名称')
+        return false;
     }
     if(!data.project_id){
-    	done_error(element_id, '参数错误')
-    	return false;
+        done_error(element_id, '参数错误')
+        return false;
     }
     data.desc = $("#scene_desc").val();
     data.photo_time = $("#scene_photo_time").val();
@@ -178,16 +178,16 @@ function bind_scene_btn(){
 }
 
 function onViewChange(pan, tilt, fov, direction){
-	if(!$("#detail-hotspot").is(":hidden")){
-	    $("#hotspot_info_pan").html(pan);
-	    $("#hotspot_info_tilt").html(tilt);
-	    $("#hotspot_info_fov").html(fov);
-	    if($("#hotspot_info_d_pan")){
-		    $("#hotspot_info_d_pan").html(pan);
-		    $("#hotspot_info_d_tilt").html(tilt);
-		    $("#hotspot_info_d_fov").html(fov);
-	    }
-	}
+    if(!$("#detail-hotspot").is(":hidden")){
+        $("#hotspot_info_pan").html(pan);
+        $("#hotspot_info_tilt").html(tilt);
+        $("#hotspot_info_fov").html(fov);
+        if($("#hotspot_info_d_pan")){
+            $("#hotspot_info_d_pan").html(pan);
+            $("#hotspot_info_d_tilt").html(tilt);
+            $("#hotspot_info_d_fov").html(fov);
+        }
+    }
 
     $("#camera-info-pan").html(pan);
     $("#camera-info-tilt").html(tilt);
@@ -286,11 +286,11 @@ function save_hotspot_detail(scene_id){
     save_datas(url, data, element_id, msg);
 }
 function publish_scene(scene_id, display){
-	var msg = {};
+    var msg = {};
     msg.error = '操作失败';
     msg.success = '操作成功';
-	var element_id = 'publish_scene_msg';
-	if(!scene_id){
+    var element_id = 'publish_scene_msg';
+    if(!scene_id){
         done_error(element_id, msg.error);
     }
     var data = {};
@@ -299,6 +299,13 @@ function publish_scene(scene_id, display){
     var url = scene_publish_url;
     save_datas(url, data, element_id, msg);
 }
+
+
+
+
+
+
+
 
 
 

@@ -77,7 +77,7 @@ class Scene extends CActiveRecord
         $this->created = $datas['created'];
         return $this->save();
     }
-    
+
     public function get_by_admin_scene($member_id, $scene_id){
         return $this->findByPk($scene_id, 'member_id=:member_id', array(':member_id'=>$member_id));
     }

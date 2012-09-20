@@ -1,8 +1,10 @@
 <div id="js_cantain_box" class="col-main">
         <div style="z-index:9998;" class="directory-path">
                 <div rel="page_local" class="path-contents">
-                    <a title="网盘" onClick="" href="javascript:;">test</a>
-                    <i>»</i><em>&nbsp;</em>
+                    <?php echo CHtml::link('项目',array('project/projectList'));?>
+                    <i>»</i>
+                    <a title="场景" href="javascript:;">场景</a>
+                    <em>&nbsp;</em>
                 </div>
                 <div id="js_fileter_box" class="list-filter">
                     <ul>

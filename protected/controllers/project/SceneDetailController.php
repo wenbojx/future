@@ -5,26 +5,18 @@ class SceneDetailController extends Controller{
 
     public function actionDetail(){
         $request = Yii::app()->request;
-        $datas = array();
         $scene_id = $request->getParam('id');
-        $datas['scene_id'] = $scene_id;
+        if(!$scene_id){
+            exit('参数错误');
+        }
+        $datas = $this->get_scenes($scene_id);
         $this->render('/project/sceneDetail', array('datas'=>$datas));
     }
     /**
-     * 获取场景列表
+     * 获取场景信息
      */
-    private function get_scenes_by_mp($project_list){
-        $datas = array();
-        $scene_ids = array();
-        if(!is_array($project_list) || count($project_list)<=0){
-            return $datas;
-        }
-        foreach ($project_list as $v){
-            $scene_ids[] = $v['scene_id'];
-        }
-        $scene_db = Scene::model();
-        $datas = $scene_db->findAllByPk($scene_ids, array('order'=>'id desc'));
-        //print_r($datas);
-        return $datas;
+    private function get_scenes($scene_id){
+        $scene_db = new Scene();
+        return  $scene_db->get_by_scene_id($scene_id);
     }
 }

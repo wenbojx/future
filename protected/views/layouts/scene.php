@@ -31,8 +31,8 @@ var scene_publish_url = '<?=$this->createUrl('/project/sceneEdit/publish')?>';
 <?php echo $content;?>
 </div>
 <div id="showmodel" style="display:none;"></div>
-<script type="text/javascript" src="http://ditu.google.cn/maps?file=api&v=2.95&key=ABQIAAAAfwFdKWLZ-ANjVLHMCYc-ixQsysuSD33PErIJfG1O0LtxWLn80RSoDLhV-HsfsmACq6w-1UfEFbAePQ&sensor=false"></script>
-<script type="text/javascript" src="http://www.google.com/uds/api?file=uds.js&v=1.0&key=ABQIAAAAfwFdKWLZ-ANjVLHMCYc-ixQsysuSD33PErIJfG1O0LtxWLn80RSoDLhV-HsfsmACq6w-1UfEFbAePQ"></script>
+<script type="text/javascript" src="http://ditu.google.cn/maps?file=api&v=2.95&sensor=false&key=AIzaSyA3mk-l_QvAtBu2UKATn3KiLWhcvFRnWCw"></script>
+<script type="text/javascript" src="http://www.google.com/uds/api?file=uds.js&v=1.0&key=AIzaSyA3mk-l_QvAtBu2UKATn3KiLWhcvFRnWCw"></script>
 <script type="text/javascript" src="http://www.google.com/uds/solutions/localsearch/gmlocalsearch.js"></script>
 </body>
 </html>
