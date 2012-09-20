@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
     'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-    'name'=>'Application',
+    'name'=>'test',
     'defaultController' => 'panos/list',
     'charset'=>'utf-8',
     // preloading 'log' component

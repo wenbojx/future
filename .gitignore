@@ -3,7 +3,6 @@
 .project
 .settings/
 assets/
-protected/config/main.php
 protected/config/*.php
 protected/runtime/*.*
 upload/
