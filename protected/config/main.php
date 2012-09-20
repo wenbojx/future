@@ -91,5 +91,6 @@ return array(
     // using Yii::app()->params['paramName']
     'params'=>array(
         'file_pic_folder'=>'upload',
+        'google_map_key'=>'AIzaSyBpQCTa3SlJY2jR_dAGCjzVEQ4UAvBEYMQ',
     ),
 );
