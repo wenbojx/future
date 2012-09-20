@@ -48,7 +48,7 @@ function done_success(element_id, msg, datas){
     //setTimeout( clean_msg_box(element_id), 50000);
 }
 function clean_msg_box(element_id){
-	$("#"+element_id).html('');
+    $("#"+element_id).html('');
 }
 
 

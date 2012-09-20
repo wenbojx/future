@@ -3,12 +3,8 @@
 .project
 .settings/
 assets/
-themes/classic/views/
-protected/runtime/*.log
-protected/runtime/application.*
+protected/config/main.php
 protected/config/*.php
-protected/runtime/
 protected/runtime/*.*
-protected/config/*.php
 upload/
 

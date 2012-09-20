@@ -248,7 +248,10 @@ function save_position_detail(scene_id){
     data.scene_id = scene_id;
 
     var url = save_module_datas_url+'/position/save/';
-    save_datas(url, data, element_id, msg);
+    save_datas(url, data, element_id, msg, add_info);
+    function add_info(){
+        alert(1);
+    }
 }
 function save_camera_detail(scene_id){
     var msg = {};
