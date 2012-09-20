@@ -57,6 +57,7 @@ class IndexController extends FController{
     }
     private function actionImage($id, $position){
         $flag = true;
+        $pic_datas = array();
         if( $id && $position){
             $scene_file_db = new MpSceneFile();
             $scene_file_datas = $scene_file_db->get_file_by_scene_position($id, $position);
@@ -69,11 +70,13 @@ class IndexController extends FController{
             $flag = false;
         }
         $img_class = new ImageContent();
-        $pic_datas = $img_class->get_img_content_by_id($file_id, $size);
+        if($flag){
+        	$pic_datas = $img_class->get_img_content_by_id($file_id, $size);
+        }
         if(!$pic_datas){
-            //获取默认图片
-            $default_img = 'pages/salado/default.jpg';
-            $pic_datas = $img_class->get_default_img($default_img, 'jpg');
+        	//获取默认图片
+        	$default_img = 'pages/salado/default.jpg';
+        	$pic_datas = $img_class->get_default_img($default_img, 'jpg');
         }
     }
 
