@@ -1,5 +1,5 @@
 <?php
-class DetailController extends Controller{
+class DetailController extends FController{
     public $defaultAction = 'a';
     public $layout = 'home';
 

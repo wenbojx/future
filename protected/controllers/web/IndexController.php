@@ -1,5 +1,5 @@
 <?php
-class IndexController extends Controller{
+class IndexController extends FController{
     public $defaultAction = 'a';
     public $layout = 'home';
 

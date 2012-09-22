@@ -1,5 +1,5 @@
 <?php
-class ListController extends Controller{
+class ListController extends FController{
     public $defaultAction = 'a';
     public $layout = 'home';
 

@@ -1,5 +1,5 @@
 <?php
-class ViewController extends Controller{
+class ViewController extends FController{
     public $defaultAction = 'a';
     public $layout = 'home';
 
