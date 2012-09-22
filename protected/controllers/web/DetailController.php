@@ -15,8 +15,6 @@ class DetailController extends FController{
     		}
     		
     		$datas['extend'] = $this->get_extend_datas($datas['scene_id'], $datas['project']['id']);
-    		print_r(111);
-    		exit();
     	}
         $this->render('/web/detail', array('datas'=>$datas));
     }

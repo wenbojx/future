@@ -124,9 +124,6 @@ class Scene extends CActiveRecord
     }
     public function find_extend_scene_project($scene_id, $limit, $project_id=0){
     	$scene_ids = $scene_id;
-    	if(is_array($not_in)){
-    		$scene_ids = implode(',', $not_in);
-    	}
     	$criteria=new CDbCriteria;
     	$criteria->order = 'RAND()';
     	$criteria->limit = $limit;
