@@ -30,7 +30,7 @@
 	<?php echo $content;?>
 	<hr class="soften">
 	<div id="footer">
-	制作：  <a href="#" target="_blank">李文博</a> | 电子邮箱：  <a href="#">faashi@gmail.com</a> | QQ：  24329121<br>
+	制作：<a href="#" target="_blank">李文博</a> | 电子邮箱：<a href="#">faashi@gmail.com</a> | QQ：24329121<br>
 	
 	</div>
 </div>
