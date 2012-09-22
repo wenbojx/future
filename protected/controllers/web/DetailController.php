@@ -9,11 +9,12 @@ class DetailController extends FController{
     	$datas['scene_id'] = $request->getParam('id');
     	if($datas['scene_id']){
     		$datas['scene'] = $this->get_scene_datas($datas['scene_id']);
-    		print_r(111);
-    		exit();
+    		
     		if($datas['scene']){
     			$datas['project'] = $this->get_project_datas($datas['scene']['project_id']);
     		}
+    		print_r(111);
+    		exit();
     		$datas['extend'] = $this->get_extend_datas($datas['scene_id'], $datas['project']['id']);
     	}
         $this->render('/web/detail', array('datas'=>$datas));
