@@ -7,7 +7,7 @@
 	<div class="row about">
 		<div class="span6">
 		<?php if($datas['project']){?>
-			<h3><?=$datas['project']['name']?>：</h3>
+			<h3><?=$datas['project']['name']?></h3>
 			<p>
 				<?=$datas['project']['desc']?>
 			</p>
