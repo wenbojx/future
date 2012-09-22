@@ -1,6 +1,6 @@
 <?php $this->pageTitle=$datas['project']['name'].'---足不出户，行遍中国';?>
 <div class="detail">
-	<div class="hero-unit margin-top40">
+	<div class="hero-unit margin-top55">
 		<h2>足不出户，游遍中国</h2>
 	</div>
 	<div class="row-fluid">
