@@ -15,15 +15,11 @@
 			<div class="container">
 				<a href="<?=$this->createUrl('/');?>" class="brand">一路好</a>
 				<div id="main-menu" class="nav-collapse">
-					<ul id="main-menu-left" class="nav">
+					<!-- <ul id="main-menu-left" class="nav">
 						<li><a href="<?=$this->createUrl('/web/list/a');?>">全部景点</a></li>
-					</ul>
+					</ul>-->
 					<ul id="main-menu-right" class="nav pull-right">
-						<li>
-							<!-- <a href="#" target="_blank" rel="tooltip">
-								联系我们 <i class="icon-share-alt"></i>
-							</a> -->
-						</li>
+						<li><a href="<?=$this->createUrl('/web/list/a');?>">全部景点</a></li>
 					</ul>
 				</div>
 				<!--/.nav-collapse -->
