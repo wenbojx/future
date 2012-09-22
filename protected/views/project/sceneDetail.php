@@ -82,7 +82,7 @@
 var player_url = baseUrl+'/pages/salado/Player.swf';
 var scene_xml_url = '<?=$this->createUrl('/salado/index/a/', array('id'=>$datas['id'], 'from'=>'admin'))?>';
 var id = 'scene_box';
-load_scene(id, scene_xml_url);
+load_scene(id, scene_xml_url, player_url);
 var position_url = '<?=$this->createUrl('/project/scene/config/v/', array('t'=>'position', 'scene_id'=>$datas['id']))?>';
 var basic_url = '<?=$this->createUrl('/project/scene/config/v/', array('t'=>'basic', 'scene_id'=>$datas['id']))?>';
 var preview_url = '<?=$this->createUrl('/project/scene/config/v/', array('t'=>'preview', 'scene_id'=>$datas['id']))?>';

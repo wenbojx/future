@@ -1,6 +1,6 @@
 <?php $this->pageTitle='足不出户，行遍中国';?>
 <div class="hero-unit">
-	<h1>足不出户，游遍中国</h1>
+	<h1>足不出户，畅游中国</h1>
 	<p>用心记录每一步</p>
 </div>
 

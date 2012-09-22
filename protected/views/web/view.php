@@ -1,7 +1,7 @@
 <?php $this->pageTitle=$datas['project']['name'].'---足不出户，行遍中国';?>
 <div class="view">
 	<div class="hero-unit margin-top55">
-		<h2>足不出户，游遍中国</h2>
+		<h2>足不出户，畅游中国</h2>
 	</div>
 	
 	<div class="row about">
@@ -14,7 +14,7 @@
 		<?php }?>
 	 	</div>
 	 	<div class="span6">
-			<h3>评论</h3>
+			<h3>攻略</h3>
 			<ol>
 				
 			</ol>
