@@ -4,6 +4,7 @@ class DetailController extends FController{
     public $layout = 'home';
 
     public function actionA(){
+    	print_r(111);
         $request = Yii::app()->request;
     	$datas['scene_id'] = $request->getParam('id');
     	if($datas['scene_id']){
