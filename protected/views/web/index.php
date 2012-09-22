@@ -6,8 +6,8 @@
 
 <div class="row about">
 	<div class="span6">
-		<h3>留下足迹</h3>
-		<p>走遍世界各地，记录精彩瞬间</p>
+		<h3>奇妙旅程</h3>
+		<p>360度全景体验，宅在家里也可以畅游世界</p>
  	</div>
 	<div class="span6">
 		<h3><a href="<?=$this->createUrl('/web/list/a');?>">全部景点</a></h3>
