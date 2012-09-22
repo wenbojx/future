@@ -243,7 +243,7 @@ class PanoramDatas{
      * 全景图显示地址
      */
     public function get_pano_address($id){
-        return Yii::app()->createUrl('/panos/pano/show/', array('id'=>$id));
+        return Yii::app()->createUrl('/web/detail/a/', array('id'=>$id));
     }
     /**
      * 获取modules信息
@@ -393,9 +393,9 @@ class PanoramDatas{
         }
         //print_r($extend_panos);
         $menu['s_attribute']['path'] = $this->module_path('MenuScroller');
-        $menu['window']['s_attribute']['size'] = 'width:600,height:90';
+        $menu['window']['s_attribute']['size'] = 'width:440,height:90';
         $menu['window']['s_attribute']['open'] = 'false';
-        $menu['window']['s_attribute']['alpha'] = '0.3';
+        $menu['window']['s_attribute']['alpha'] = '0.5';
         $menu['window']['s_attribute']['align'] = 'horizontal:left,vertical:bottom';
         $menu['window']['s_attribute']['transition'] = 'type:slideLeft';
 

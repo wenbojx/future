@@ -87,7 +87,27 @@ class Scene extends CActiveRecord
     public function update_scene_dispaly($scene_id, $display){
         return $this->updateByPk($scene_id, array('display'=>$display));
     }
-    public function find_extend_scene($scene_id, $not_in, $limit){
+    public function find_scene_by_project_id($project_id, $limit=12, $order=''){
+    	$datas = array();
+    	if(!$project_id){
+    		return $datas;
+    	}
+    	$scene_db = new Scene();
+    	$criteria=new CDbCriteria;
+    	$criteria->order = 'id DESC';
+    	if($order){
+    		$criteria->order = $order;
+    	}
+    	if($limit){
+    		$criteria->limit = $limit;
+    	}
+    	$criteria->addCondition('status=1');
+    	$criteria->addCondition('display=2');
+    	$criteria->addCondition("project_id={$project_id}");
+    	$scene_datas = $scene_db->findAll($criteria);
+    	return $scene_datas;
+    }
+    public function find_extend_scene($scene_id, $not_in, $limit, $project_id=0){
         $scene_ids = $scene_id;
         if(is_array($not_in)){
             $scene_ids = implode(',', $not_in);
@@ -101,5 +121,20 @@ class Scene extends CActiveRecord
         }
         $criteria->addCondition('display=2');
         return $this->findAll($criteria);
+    }
+    public function find_extend_scene_project($scene_id, $limit, $project_id=0){
+    	$scene_ids = $scene_id;
+    	if(is_array($not_in)){
+    		$scene_ids = implode(',', $not_in);
+    	}
+    	$criteria=new CDbCriteria;
+    	$criteria->order = 'RAND()';
+    	$criteria->limit = $limit;
+    	if($project_id){
+    		$criteria->addCondition("project_id={$project_id}");
+    	}
+    	$criteria->addCondition("id!={$scene_id}");
+    	$criteria->addCondition('display=2');
+    	return $this->findAll($criteria);
     }
 }

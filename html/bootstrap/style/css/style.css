@@ -1,0 +1,74 @@
+@CHARSET "UTF-8";
+.hero-unit{
+	margin-bottom:10px;
+	margin-top:60px;
+}
+.span4 {
+    width: 370px;
+}
+  
+/* Faded out hr */
+hr.soften {
+  height: 1px;
+  margin: 20px 0;
+  background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.1), rgba(0,0,0,0));
+  background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.1), rgba(0,0,0,0));
+  background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.1), rgba(0,0,0,0));
+  background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.1), rgba(0,0,0,0));
+  border: 0;
+}
+.case h1{
+	text-align:center;
+}
+.case .case-byline{
+	height:20px;
+}
+.case .thumbnail {
+	text-align:center; margin-top:10px;
+}
+.case .thumbnail a{
+	display:block;margin:4px 0;
+}
+.hero-unit p{
+	margin:20px 0 10px 0; float:right;
+}
+.list .hero-unit{
+	padding:30px;
+}
+.project .thumbnail{
+	margin:5px 0;text-align:center; 
+}
+.project .thumbnail a{
+	display:block;margin:4px 0;
+}
+.project hr{
+	margin:10px 0;
+}
+.view .hero-unit{
+	padding:30px;
+}
+.view .line3{
+	margin:10px 0 ;
+}
+.detail .hero-unit{
+	padding:30px;
+}
+.margin-top10{
+	margin:10px 0 0 0;
+}
+.margin-top5{
+	margin:7px 0 0 0;
+}
+.margin-tb5{
+	margin:5px 0;
+}
+.align-center{
+	text-align:center;
+}
+.pano-detail{
+	width:680px; margin:0 auto;
+}
+
+
+
+

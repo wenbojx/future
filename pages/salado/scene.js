@@ -1,4 +1,4 @@
-function load_scene(box_id, scene_xml ){
+function load_scene(box_id, scene_xml, player_url ){
 	var flashvars = {};
     flashvars.xml = scene_xml;
     var params = {};
