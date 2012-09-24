@@ -317,7 +317,7 @@ class SaladoModules extends SaladoPlayer{
                 }
                 $string .= '<link';
                 if(!isset($v['s_attribute']['target'])){
-                    $v['s_attribute']['target'] = '_blank';
+                    $v['s_attribute']['target'] = '_self';
                 }
                 $string .= $this->build_attribute($v['s_attribute']);
                 $string .= '</link>';
