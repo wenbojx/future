@@ -60,9 +60,23 @@ class FilePath extends CActiveRecord
             'folder' => 'folder',
             'name' => 'name',
             'size' => 'size',
-	        'type' => 'type',
-	        'created' => 'created',
+            'type' => 'type',
+            'created' => 'created',
         );
+    }
+    public function get_by_file_id($id){
+        if(!$id){
+            return false;
+        }
+        return $this->findByPk($id);
+    }
+    public function get_file_by_no($no){
+        if(!$no){
+            return false;
+        }
+        $criteria=new CDbCriteria;
+        $criteria->addCondition("md5value={$no}");
+        return $this->findAll($criteria);
     }
 
 }

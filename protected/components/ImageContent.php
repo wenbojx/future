@@ -1,16 +1,16 @@
 <?php
 Yii::import('application.extensions.image.Image');
 class ImageContent {
-	private function show_pics($pic_datas){
-		if(!$pic_datas || !$pic_datas['path'] || !$pic_datas['draw']){
-			return false;
-		}
-		$img = @$pic_datas['create']($pic_datas['path']);
-		header('Content-Type: '.$pic_datas['contentType']);
-		$pic_datas['draw']($img);
-		imagedestroy($img);
-		exit();
-	}
+    private function show_pics($pic_datas){
+        if(!$pic_datas || !$pic_datas['path'] || !$pic_datas['draw']){
+            return false;
+        }
+        $img = @$pic_datas['create']($pic_datas['path']);
+        header('Content-Type: '.$pic_datas['contentType']);
+        $pic_datas['draw']($img);
+        imagedestroy($img);
+        exit();
+    }
     public function get_default_img($path, $type='gif'){
         $pic_datas = array( 'type'=>$type, 'pic_content'=>'' );
         if(!is_file($path)){
@@ -111,18 +111,22 @@ class ImageContent {
         return $path.$datas->name;
     }
     private function get_file_info_by_md5file($no){
-        $file_path_db = new FilePath();
-        $datas = $file_path_db->find('md5value=:md5value', array(':md5value'=>$no));
-        if(!$datas){
-            return false;
+        $memcache_obj = new Ymemcache();
+        $key = $memcache_obj->get_img_no_key($no);
+        if(!$datas = $memcache_obj->get_mem_data($key)){
+            $file_path_db = new FilePath();
+            $datas = $file_path_db->get_file_by_no($no);
+            $memcache_obj->set_mem_data($key, $datas, 0);
         }
         return $datas;
     }
     private function get_file_info_by_id($id){
-        $file_path_db = new FilePath();
-        $datas = $file_path_db->findByPk($id);
-        if(!$datas){
-            return false;
+        $memcache_obj = new Ymemcache();
+        $key = $memcache_obj->get_img_id_key($id);
+        if(!$datas = $memcache_obj->get_mem_data($key)){
+            $file_path_db = new FilePath();
+            $datas = $file_path_db->get_by_file_id($id);
+            $memcache_obj->set_mem_data($key, $datas, 0);
         }
         return $datas;
     }
