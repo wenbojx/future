@@ -136,23 +136,23 @@ class SaladoModules extends SaladoPlayer{
             if (isset($buttonBar['buttons']['button'])){
                 $button = $buttonBar['buttons']['button'];
                 if(is_array($buttonBar['buttons']['button'])){
-	                foreach ($button as $k=>$v){
-	                	$string .= '<button';
-	                    $string .= $this->build_attribute($v['s_attribute']);
-	                    $string .= '</button>';
-	                }
+                    foreach ($button as $k=>$v){
+                        $string .= '<button';
+                        $string .= $this->build_attribute($v['s_attribute']);
+                        $string .= '</button>';
+                    }
                 }
-                
+
             }
             //print_r($buttonBar['buttons']['extraButton']);
             if (isset($buttonBar['buttons']['extraButton'])){
                 $extraButton = $buttonBar['buttons']['extraButton'];
                 foreach ($extraButton as $k=>$v){
-                	$string .= '<extraButton';
+                    $string .= '<extraButton';
                     $string .= $this->build_attribute($v['s_attribute']);
                     $string .= '</extraButton>';
                 }
-                
+
             }
             $string .= '</buttons>';
         }
@@ -231,9 +231,9 @@ class SaladoModules extends SaladoPlayer{
         return $string;
     }
     private function get_MenuScroller($menuScroller){
-    	if(!$menuScroller){
-    		return '';
-    	}
+        if(!$menuScroller){
+            return '';
+        }
         $string = '<MenuScroller';
         $string .= $this->build_attribute($menuScroller['s_attribute']);
         if (isset($menuScroller['window'])){
@@ -301,25 +301,28 @@ class SaladoModules extends SaladoPlayer{
         return $string;
     }
     private function get_LinkOpener($linkOpener){
-    	$exit_link = array();
-    	//print_r($linkOpener);
+        $exit_link = array();
+        //print_r($linkOpener);
         $string = '<LinkOpener';
         $string .= $this->build_attribute($linkOpener['s_attribute']);
         if (isset($linkOpener['links'])){
             $string .= '<links>';
             foreach ($linkOpener['links'] as $k=>$v){
-            	$attr = false;
-            	if (isset ($v['s_attribute']) && $v['s_attribute']['id']){
-            		if (in_array($v['s_attribute']['id'], $exit_link)){
-            			continue;
-            		}
-            		$attr = true;
-            	}
+                $attr = false;
+                if (isset ($v['s_attribute']) && $v['s_attribute']['id']){
+                    if (in_array($v['s_attribute']['id'], $exit_link)){
+                        continue;
+                    }
+                    $attr = true;
+                }
                 $string .= '<link';
+                if(!isset($v['s_attribute']['target'])){
+                    $v['s_attribute']['target'] = '_blank';
+                }
                 $string .= $this->build_attribute($v['s_attribute']);
                 $string .= '</link>';
                 if($attr){
-                	$exit_link[] = $v['s_attribute']['id'];
+                    $exit_link[] = $v['s_attribute']['id'];
                 }
             }
             $string .= '</links>';
