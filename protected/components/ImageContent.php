@@ -21,6 +21,9 @@ class ImageContent {
 
         $this->show_pics($pic_datas);
     }
+    /**
+     * 根据file_id获取文件信息
+     */
     public function get_img_content_by_id($id, $size){
         if(!$id){
             return false;

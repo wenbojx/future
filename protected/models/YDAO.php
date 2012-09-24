@@ -1,7 +1,11 @@
 <?php
 class YDAO extends CActiveRecord{
+    private $mem_obj = null;
+    const TALBLE_KEY_PREFIX = 'db_table_';
+    public $cache_expire_time = 600;
+    public $cache_expire_time_pk = 900;
 
-    public function __construct(){
+    public function __construct($scenario='insert'){
         parent::__construct($scenario);
     }
     public function tableName(){
@@ -26,7 +30,12 @@ class YDAO extends CActiveRecord{
         return parent::findAll($condition, $params);
     }
     public function findByPk($pk,$condition='',$params=array()){
-        return parent::findByPk($pk,$condition,$params);
+        $key = $this->get_table_pk_key($pk);
+        if(!$datas = $this->get_mem_obj()->get_mem_data($key)){
+            $datas = parent::findByPk($pk,$condition,$params);
+            $this->get_mem_obj()->set_mem_data($key, $datas, $this->cache_expire_time_pk);
+        }
+        return $datas;
     }
     public function findAllByPk($pk,$condition='',$params=array()){
         return parent::findAllByPk($pk,$condition,$params);
@@ -53,7 +62,12 @@ class YDAO extends CActiveRecord{
         return parent::countBySql($sql, $params);
     }
     public function updateByPk($pk,$attributes,$condition='',$params=array()){
-        return parent::updateByPk($pk,$attributes,$condition,$params);
+        $key = $this->get_table_pk_key($pk);
+        if ($datas = parent::updateByPk($pk,$attributes,$condition,$params)){
+            $this->get_mem_obj()->rm_mem_datas($key);
+            return $datas;
+        }
+        return false;
     }
     public function updateAll($attributes,$condition='',$params=array()){
         return parent::updateAll($attributes,$condition,$params);
@@ -66,6 +80,18 @@ class YDAO extends CActiveRecord{
     }
     public function deleteAllByAttributes($attributes,$condition='',$params=array()){
         return parent::deleteAllByAttributes($attributes,$condition,$params);
+    }
+    public function get_table_pk_key($pk){
+        return self::TALBLE_KEY_PREFIX.$this->tableName().'_pk_'.$pk;
+    }
+    /**
+     * @return Ymemcache
+     */
+    private function get_mem_obj(){
+        if(!$this->mem_obj){
+            $this->mem_obj = new Ymemcache();
+        }
+        return $this->mem_obj;
     }
 }
 
