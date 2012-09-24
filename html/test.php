@@ -1,6 +1,6 @@
 <?php
 
-$mem = new Memcache;
+$mem = new Memcached;
 $mem->connect("127.0.0.1", 11211);
 
 //保存数据
