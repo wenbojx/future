@@ -51,15 +51,23 @@ class SaladoPlayer{
     }
 
     public function get_config_content($id, $admin){
-        $panodatas_obj = new PanoramDatas();
-        $panodatas = $panodatas_obj->get_panoram_datas($id, $admin);
-        $this->admin = $admin;
-        $content = $this->config_start();
-        $content .= $this->config_global($panodatas['global']);
-        $content .= $this->config_panoramas($panodatas['panorams']);
-        $content .= $this->config_modules($panodatas['modules']);
-        $content .= $this->config_actions($panodatas['actions']);
-        $content .= $this->config_end();
+        $memcache_obj = new Ymemcache();
+        $key = $memcache_obj->get_pano_xml_key($id);
+        if($content = $memcache_obj->get_mem_data($key)){
+            return $content;
+        }
+        else{
+            $panodatas_obj = new PanoramDatas();
+            $panodatas = $panodatas_obj->get_panoram_datas($id, $admin);
+            $this->admin = $admin;
+            $content = $this->config_start();
+            $content .= $this->config_global($panodatas['global']);
+            $content .= $this->config_panoramas($panodatas['panorams']);
+            $content .= $this->config_modules($panodatas['modules']);
+            $content .= $this->config_actions($panodatas['actions']);
+            $content .= $this->config_end();
+            $memcache_obj->set_mem_data($key, $content, 0);
+        }
         return $content;
     }
     private function config_global($global){
