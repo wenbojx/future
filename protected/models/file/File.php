@@ -63,5 +63,18 @@ class File extends CActiveRecord
             'status' => 'Status',
         );
     }
+    public function save_file($member_id, $md5file){
+    	$this->member_id = $member_id;
+    	$this->folder_id = 0;
+    	$this->md5file = $md5file;
+    	$this->created = time();
+    	if( !$this->save() ){
+    		return false;
+    	}
+    	return $this->attributes['id'];
+    }
 
 }
+
+
+

@@ -4,6 +4,8 @@ class IndexController extends FController{
     public $defaultAction = 'a';
     //public $layout = 'scene';
     public $img_size = 1024;
+    public $tile_size = 512;
+    public $request = null;
 
     public function actionA(){
         $request = Yii::app()->request;
@@ -15,29 +17,69 @@ class IndexController extends FController{
         $this->actionXmla($id, $from);
     }
     public function actionB(){
-        $request = Yii::app()->request;
-        $id = $request->getParam('id');
-        if($request->getParam('s_f')){
-            $this->actionImage($id, 'front');
+        $this->request = Yii::app()->request;
+        $id = $this->request->getParam('id');
+        $file = '512x512.jpg';
+        if($this->request->getParam('s_f')){
+        	$suffix = $this->request->getParam('s_f');
+        	if($suffix == '10'){
+        		$file = $this->get_tilt_folder();
+        	}
+            $this->actionImage($id, 'front', $suffix, $file);
         }
-        elseif($request->getParam('s_r')){
-            $this->actionImage($id, 'right');
+        elseif($this->request->getParam('s_r')){
+        	$suffix = $this->request->getParam('s_r');
+        	if($suffix == '10'){
+        		$file = $this->get_tilt_folder();
+        	}
+            $this->actionImage($id, 'right', $suffix, $file);
         }
-        elseif($request->getParam('s_b')){
-            $this->actionImage($id, 'back');
+        elseif($this->request->getParam('s_b')){
+        	$suffix = $this->request->getParam('s_b');
+        	if($suffix == '10'){
+        		$file = $this->get_tilt_folder();
+        	}
+            $this->actionImage($id, 'back', $suffix, $file);
         }
-        elseif($request->getParam('s_l')){
-            $this->actionImage($id, 'left');
+        elseif($this->request->getParam('s_l')){
+        	$suffix = $this->request->getParam('s_l');
+        	if($suffix == '10'){
+        		$file = $this->get_tilt_folder();
+        	}
+            $this->actionImage($id, 'left', $suffix, $file);
         }
-        elseif($request->getParam('s_u')){
-            $this->actionImage($id, 'up');
+        elseif($this->request->getParam('s_u')){
+        	$suffix = $this->request->getParam('s_u');
+        	if($suffix == '10'){
+        		$file = $this->get_tilt_folder();
+        	}
+            $this->actionImage($id, 'up', $suffix, $file);
         }
-        elseif($request->getParam('s_d')){
-            $this->actionImage($id, 'down');
+        elseif($this->request->getParam('s_d')){
+        	$suffix = $this->request->getParam('s_d');
+        	if($suffix == '10'){
+        		$file = $this->get_tilt_folder();
+        	}
+            $this->actionImage($id, 'down', $suffix, $file);
         }
         else{
             $this->actionXmlb($id);
         }
+    }
+    private function get_tilt_folder(){
+    	$file = array('0x0.jpg', '0x1.jpg', '1x0.jpg', '1x1.jpg');
+    	if($this->request->getParam('0_0.jpg') !== NULL){
+    		return $file[0];
+    	}
+    	if($this->request->getParam('0_1.jpg') !== NULL){
+    		return $file[2];
+    	}
+    	if($this->request->getParam('1_0.jpg') !== NULL){
+    		return $file[1];
+    	}
+    	if($this->request->getParam('1_1.jpg') !== NULL){
+    		return $file[3];
+    	}
     }
     private function actionXmla($id, $from){
         //获取全景信息
@@ -53,9 +95,10 @@ class IndexController extends FController{
     private function actionXmlb($id){
         $datas['scene_id'] = $id;
         $datas['imgSize'] = $this->img_size;
+        $datas['tileSize'] = $this->tile_size;
         $this->render('/salado/xmlb', array('datas'=>$datas));
     }
-    private function actionImage($id, $position){
+    private function actionImage($id, $position, $suffix='', $file = ''){
         $flag = true;
         $pic_datas = array();
         if( $id && $position){
@@ -64,14 +107,14 @@ class IndexController extends FController{
             if (!$scene_file_datas || !$file_id = $scene_file_datas['file_id']){
                 $flag = false;
             }
-            $size = $this->img_size.'x'.$this->img_size.'.jpg';
+            $size = $file;
         }
         else{
             $flag = false;
         }
         $img_class = new ImageContent();
         if($flag){
-        	$pic_datas = $img_class->get_img_content_by_id($file_id, $size);
+        	$pic_datas = $img_class->get_img_content_by_id($file_id, $size, $suffix, true);
         }
         if(!$pic_datas){
         	//获取默认图片

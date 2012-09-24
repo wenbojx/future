@@ -24,12 +24,12 @@ class ImageContent {
     /**
      * 根据file_id获取文件信息
      */
-    public function get_img_content_by_id($id, $size){
+    public function get_img_content_by_id($id, $size, $suffix='', $file = ''){
         if(!$id){
             return false;
         }
         $datas = $this->get_file_info_by_id($id);
-        $pic_datas = $this->get_img_info($datas, $size);
+        $pic_datas = $this->get_img_info($datas, $size, $suffix, $file);
         $this->show_pics($pic_datas);
     }
     /**
@@ -38,12 +38,16 @@ class ImageContent {
      * @param unknown_type $size
      * @return boolean
      */
-    public function get_img_content_by_md5file($no, $size){
+    public function get_img_content_by_md5file($no, $size, $suffix=''){
         if(!$no){
             return false;
         }
         $datas = $this->get_file_info_by_md5file($no);
-        $pic_datas = $this->get_img_info($datas, $size);
+        if(!$datas || !$datas[0]){
+        	return false;
+        }
+        $pic_datas = $this->get_img_info($datas[0], $size, $suffix);
+        
         $this->show_pics($pic_datas);
     }
 
@@ -51,27 +55,34 @@ class ImageContent {
      * $id =file_id
      * $size like 200x200.jpg
      */
-    public function get_img_info($datas, $size){
+    public function get_img_info($datas, $size, $suffix='', $add_suffix = false){
         $pic_datas = array();
         if(!$datas){
             return false;
         }
         $pic_type = $datas->type;
-        $path = $this->analyze_path($datas);
-        if(!is_file($path)){
-            return false;
+        $path = $this->get_file_path($datas);
+        if($suffix){
+        	$path_original = $path.$suffix.'/';
         }
-        if($size_info = $size){
-            $path_new = $this->folder.$size_info;
+        //$path .= $datas['name'];
+        if($add_suffix){
+        	$path = $path_original;
+        }
+        $path_new = $path.$size;
             if(!is_file($path_new)){
-                $explode_1 = explode('.', $size_info);
+                $explode_1 = explode('.', $size);
                 $explode_2 = explode('x', $explode_1[0]);
-                $this->resize($path, $path_new, (int)$explode_2[0], (int)$explode_2[1]);
+                $path_original .= $datas['name'];
+                if(!is_file($path_original)){
+                	return false;
+                }
+                $this->resize($path_original, $path_new, (int)$explode_2[0], (int)$explode_2[1]);
             }
             $path = $path_new;
-        }
         $pic_datas = $this->get_image_type($pic_type);
         $pic_datas['path'] = $path;
+        
         return $pic_datas;
     }
     /**
@@ -103,15 +114,15 @@ class ImageContent {
      */
     private function resize($input, $output, $width, $height){
         $image = new Image($input);
-        $image->resize($width, $height);
+        $image->resize($width, $height)->quality(90)->sharpen(10);
         return $image->save($output);
     }
-    private function analyze_path($datas){
-        $year_month = substr($datas->folder, 0, 6);
-        $day = substr($datas->folder, -2);
-        $path = Yii::app()->params['file_pic_folder'].'/'.$year_month.'/'.$day.'/'.$datas->md5value.'/';
-        $this->folder = $path;
-        return $path.$datas->name;
+
+    private function get_file_path($datas){
+    	$year_month = substr($datas->folder, 0, 6);
+    	$day = substr($datas['folder'], -2);
+    	$path = Yii::app()->params['file_pic_folder'].'/'.$year_month.'/'.$day.'/'.$datas['md5value'].'/';
+    	return $path;
     }
     private function get_file_info_by_md5file($no){
         $memcache_obj = new Ymemcache();

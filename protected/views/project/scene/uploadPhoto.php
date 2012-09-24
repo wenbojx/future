@@ -21,7 +21,7 @@
 </div>
 
 <script type="text/javascript">
-var script_url='<?=$this->createUrl('/ajax/uploadFile/')?>';
+var script_url='<?=$this->createUrl('/project/uploadPano/')?>';
 var scene_id = '<?=$datas['scene_id']?>';
 var width = 120;
 var height = 120;

@@ -64,6 +64,15 @@ class FilePath extends CActiveRecord
             'created' => 'created',
         );
     }
+    public function save_file_path($file_info){
+    	$this->md5value = $file_info['md5value'];
+    	$this->folder = $file_info['folder'];
+    	$this->name = $file_info['name'];
+    	$this->size = $file_info['size'];
+    	$this->type = $file_info['type'];
+    	$this->created = time();
+    	return $this->save();
+    }
     public function get_by_file_id($id){
         if(!$id){
             return false;
@@ -75,7 +84,7 @@ class FilePath extends CActiveRecord
             return false;
         }
         $criteria=new CDbCriteria;
-        $criteria->addCondition("md5value={$no}");
+        $criteria->addCondition("md5value='{$no}'");
         return $this->findAll($criteria);
     }
 
