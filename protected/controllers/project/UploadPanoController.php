@@ -151,7 +151,7 @@ class UploadPanoController extends Controller{
         $file_info['size'] = $file->getSize();//获取文件大小
         $file_info['type'] = strtolower($file->getExtensionName());//获取文件类型
         //$file_info['name']=iconv("utf-8", "gb2312", $file_info['name']);//这里是处理中文的问题，非中文不需要
-        $uploadfile = $folder.$file_info['name'];
+        $uploadfile = $folder.$file_info['md5value'].'.'.$file_info['type'];
         $flag = $file->saveAs($uploadfile,true);//上传操作
         if(!$from_box_pic){
         	return $file_info;
@@ -228,7 +228,7 @@ class UploadPanoController extends Controller{
                 //imagejpeg($iOut,"images/".$i."_".$j.".jpg"); //输出成0_0.jpg,0_1.jpg这样的格式
                 $file_path = $folder.'10/'.$i.'x'.$j.'.'.$file_type;
                 //echo $file_path.'<br>';
-                $quality = 90;
+                $quality = 85;
                 switch($type) {
                     case IMAGETYPE_JPEG :
                         imagejpeg($iOut, $file_path,$quality); // 存储图像
@@ -239,8 +239,11 @@ class UploadPanoController extends Controller{
                     case IMAGETYPE_GIF :
                         imagegif($iOut,$file_path,$quality);
                     break;
-                    }
-                }
+            	}
+            	//$image = Yii::app()->image->load($file_path);
+            	//$image->quality(85);
+            	//$image->save($file_path);
+        	}
         }
     }
 }

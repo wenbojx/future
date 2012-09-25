@@ -16,7 +16,7 @@ class ThumbController extends FController{
                 $pic_datas = $img_class->get_default_img($default_img, 'jpg');
             }
             else {
-                $pic_datas = $img_class->get_img_content_by_id($thumb_datas['file_id'], $size);
+                $pic_datas = $img_class->get_img_content_by_id($thumb_datas['file_id'], $size, 'original');
             }
         }
     }
