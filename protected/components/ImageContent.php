@@ -62,6 +62,7 @@ class ImageContent {
         }
         $pic_type = $datas->type;
         $path = $this->get_file_path($datas);
+        $path_original = $path;
         if($suffix){
         	$path_original = $path.$suffix.'/';
         }

@@ -34,8 +34,8 @@
 
         <li class="input-box-save">
             <a style="" class="button" href="javascript:;" onclick="save_hotspot_detail(<?=$datas['scene_id']?>)">保  存</a>
+        	<span id="hotspot_save_msg"></span>
         </li>
-        <li><span id="hotspot_save_msg"></span></li>
     </div>
 </div>
 <script>

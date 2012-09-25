@@ -11,6 +11,7 @@
 <input type="hidden" name="scene_id" value="1">
 <input type="hidden" name="position" value="left">
 <input type="hidden" name="from" value="box_pic">
+
 <br />
 <input type="submit" name="submit" value="Submit" />
 </form>

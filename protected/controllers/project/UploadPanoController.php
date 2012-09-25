@@ -26,7 +26,7 @@ class UploadPanoController extends Controller{
                     if($request->getParam('from') && $request->getParam('position')!='' &&
                             $request->getParam('from')=='box_pic' && $scene_id>0){
                         if(!$this->check_admin_scene($request->getParam('scene_id'), $this->member_id)){
-                            $flag = false;
+                        	$flag = false;
                         }
                         else{
                             $flag_scene = $this->save_scene_file($file_id, $scene_id, $request->getParam('position'));
