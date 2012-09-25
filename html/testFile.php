@@ -8,12 +8,23 @@
 <form action="/project/uploadPano/" method="post" enctype="multipart/form-data">
 <label for="file">Filename:</label>
 <input type="file" name="Filedata" id="file" />
-<input type="hidden" name="scene_id" value="1">
+<input type="hidden" name="scene_id" value="2">
 <input type="hidden" name="position" value="left">
 <input type="hidden" name="from" value="box_pic">
 
 <br />
 <input type="submit" name="submit" value="Submit" />
 </form>
+
+<form action="/album/index.php/project/uploadPano/" method="post" enctype="multipart/form-data">
+<label for="file">Filename:</label>
+<input type="file" name="Filedata" id="file" />
+<input type="hidden" name="scene_id" value="2">
+<input type="hidden" name="from" value="thumb_pic">
+
+<br />
+<input type="submit" name="submit" value="Submit" />
+</form>
+
 </body>
 </html>

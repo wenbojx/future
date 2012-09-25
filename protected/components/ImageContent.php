@@ -47,7 +47,6 @@ class ImageContent {
         	return false;
         }
         $pic_datas = $this->get_img_info($datas[0], $size, $suffix);
-        
         $this->show_pics($pic_datas);
     }
 

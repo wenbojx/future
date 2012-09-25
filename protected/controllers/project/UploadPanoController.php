@@ -12,7 +12,17 @@ class UploadPanoController extends Controller{
 
     public function actionUploadFile(){
         $request = Yii::app()->request;
-        $file_info = $this->upload();
+        $from_box_pic = false;
+        $from_thumb_pic = false;
+        $scene_id = $request->getParam('scene_id');
+        if($request->getParam('position')!='' && $request->getParam('from')=='box_pic' && $scene_id>0){
+        	$from_box_pic = true;
+        }
+        if($request->getParam('from')=='thumb_pic' && $scene_id>0){
+        	$from_thumb_pic = true;
+        }
+        
+        $file_info = $this->upload($from_box_pic);
         $response = array();
         $flag = true;
         $flag_scene = false;
@@ -21,10 +31,8 @@ class UploadPanoController extends Controller{
             if($path_id){
                 $file_id = $this->save_file($this->member_id, $file_info['md5value']);
                 if($file_id){
-                    $scene_id = $request->getParam('scene_id');
                     //场景图
-                    if($request->getParam('from') && $request->getParam('position')!='' &&
-                            $request->getParam('from')=='box_pic' && $scene_id>0){
+                    if($from_box_pic){
                         if(!$this->check_admin_scene($request->getParam('scene_id'), $this->member_id)){
                         	$flag = false;
                         }
@@ -33,7 +41,7 @@ class UploadPanoController extends Controller{
                         }
                     }
                     //场景缩略图
-                    if($request->getParam('from')=='thumb_pic' && $scene_id>0){
+                    if($from_thumb_pic){
                         if(!$this->check_admin_scene($scene_id, $this->member_id)){
                             $flag = false;
                         }
@@ -111,10 +119,11 @@ class UploadPanoController extends Controller{
     /**
      * 上传文件
      */
-    private function upload(){
+    private function upload($from_box_pic = false){
         if(!$_FILES['Filedata']){
             return false;
         }
+
         $pre = Yii::app()->params['file_pic_folder'].'/';
         $file_info['folder'] = date('Y',time()).date('m',time());
         $folder_pic = $pre.$file_info['folder'].'/';
@@ -141,9 +150,12 @@ class UploadPanoController extends Controller{
         $file_info['name'] = $file->getName();//获取文件名
         $file_info['size'] = $file->getSize();//获取文件大小
         $file_info['type'] = strtolower($file->getExtensionName());//获取文件类型
-        //$filename1=iconv("utf-8", "gb2312", $filename);//这里是处理中文的问题，非中文不需要
+        //$file_info['name']=iconv("utf-8", "gb2312", $file_info['name']);//这里是处理中文的问题，非中文不需要
         $uploadfile = $folder.$file_info['name'];
         $flag = $file->saveAs($uploadfile,true);//上传操作
+        if(!$from_box_pic){
+        	return $file_info;
+        }
         //将文件处理成1024大小
         $this->resize_pano($uploadfile, $folder_pic, $file_info['type']);
         if(!$flag){

@@ -23,7 +23,7 @@
 </div>
 
 <script type="text/javascript">
-var thumb_upload_url='<?=$this->createUrl('/ajax/uploadFile/')?>';
+var thumb_upload_url='<?=$this->createUrl('/project/uploadPano/')?>';
 var scene_id = '<?=$datas['scene_id']?>';
 var thumb_button_img = "<?=Yii::app()->baseUrl?>/pages/images/upload_thumb.gif";
 thumb_box_upload();
