@@ -84,16 +84,16 @@ class MpSceneFile extends CActiveRecord
     	}
     	$file_data = $this->get_file_by_scene_position($scene_id, $position);
     	if($file_data){
-    		$mp_file_id = $file_data->id;
+    		$mp_file_id = $file_data['id'];
     		$flag = $this->updateByPk($mp_file_id, array('file_id'=>$file_id));
     	}
     	else{
     		$position = $this->map_position_num($position);
-    		$scene_file_db->scene_id = $scene_id;
-    		$scene_file_db->file_id = $file_id;
-    		$scene_file_db->position = $position;
-    		$scene_file_db->level = 1;
-    		$scene_file_db->created = time();
+    		$this->scene_id = $scene_id;
+    		$this->file_id = $file_id;
+    		$this->position = $position;
+    		$this->level = 1;
+    		$this->created = time();
     		$flag = $this->save();
     	}
     	return $flag;
