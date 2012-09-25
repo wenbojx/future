@@ -174,18 +174,23 @@ class UploadPanoController extends Controller{
         //切割图片
         $this->split_img($file_path, $folder,$file_type);
     }
+    public function get_exif_imagetype($file_path){
+        if ( ( list($width, $height, $type, $attr) = getimagesize( $file_path ) ) !== false ) {
+            return $type;
+        }
+        return false;
+    }
     /**
      * 切割图片
      */
     public function split_img($src_file, $folder,$file_type){
         $maxW = $maxH = $this->tile_info[10]/2;
-        if(function_exists('exif_imagetype')){
-            echo 111;
+        if ( !function_exists( 'exif_imagetype' ) ) {
+            $type = $this->get_exif_imagetype($src_file);
         }
         else{
-            echo 222;
+            $type = exif_imagetype($src_file);
         }
-        $type = exif_imagetype($src_file);
 
         $support_type=array(IMAGETYPE_JPEG , IMAGETYPE_PNG , IMAGETYPE_GIF);
         //Load image
