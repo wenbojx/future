@@ -20,46 +20,46 @@ class UploadPanoController extends Controller{
             if($path_id){
                 $file_id = $this->save_file($this->member_id, $file_info['md5value']);
                 if($file_id){
-                	$scene_id = $request->getParam('scene_id');
-                	//场景图
+                    $scene_id = $request->getParam('scene_id');
+                    //场景图
                     if($request->getParam('from') && $request->getParam('position')!='' &&
-                    		$request->getParam('from')=='box_pic' && $scene_id>0){
-                    	if(!$this->check_admin_scene($request->getParam('scene_id'), $this->member_id)){
-                    		$flag = false;
-                    	}
+                            $request->getParam('from')=='box_pic' && $scene_id>0){
+                        if(!$this->check_admin_scene($request->getParam('scene_id'), $this->member_id)){
+                            $flag = false;
+                        }
                         else{
-                        	$flag_scene = $this->save_scene_file($file_id, $scene_id, $request->getParam('position'));
+                            $flag_scene = $this->save_scene_file($file_id, $scene_id, $request->getParam('position'));
                         }
                     }
                     //场景缩略图
                     if($request->getParam('from')=='thumb_pic' && $scene_id>0){
-                    	if(!$this->check_admin_scene($scene_id, $this->member_id)){
-                    		$flag = false;
-                    	}
-                    	else{
-                    		$flag_scene =$this->save_scene_thumb($file_id,$scene_id);
-                    	}
+                        if(!$this->check_admin_scene($scene_id, $this->member_id)){
+                            $flag = false;
+                        }
+                        else{
+                            $flag_scene =$this->save_scene_thumb($file_id,$scene_id);
+                        }
                     }
                     if(!$flag_scene){
-                    	$flag = false;
+                        $flag = false;
                     }
                 }
-	            else{
-	            	$flag = false;
-	            }
+                else{
+                    $flag = false;
+                }
             }
             else{
-            	$flag = false;
+                $flag = false;
             }
         }
         else{
-        	$flag = false;
+            $flag = false;
         }
         if(!$flag){
-        	$response = array('status'=>0,'msg'=>'文件上传出错');
+            $response = array('status'=>0,'msg'=>'文件上传出错');
         }
         else{
-        	$response = array('status'=>1,'msg'=>'', 'file'=>$file_info['md5value']);
+            $response = array('status'=>1,'msg'=>'', 'file'=>$file_info['md5value']);
         }
 //print_r($response);
         $str = json_encode($response);
@@ -69,22 +69,22 @@ class UploadPanoController extends Controller{
 
     }
     private function check_admin_scene($scene_id, $member_id){
-    	if(!$scene_id || !$member_id){
-    		return false;
-    	}
-    	$scene_db = new Scene();
-    	$datas = $scene_db->get_by_admin_scene($member_id, $scene_id);
-    	return $datas;
+        if(!$scene_id || !$member_id){
+            return false;
+        }
+        $scene_db = new Scene();
+        $datas = $scene_db->get_by_admin_scene($member_id, $scene_id);
+        return $datas;
     }
-    
+
     private function save_file_path($file_info){
         $file_path_db = new FilePath();
         return $file_path_db->save_file_path($file_info);
     }
     private function save_file($member_id, $md5file){
-    	if(!$member_id || !$md5file){
-    		return false;
-    	}
+        if(!$member_id || !$md5file){
+            return false;
+        }
         $file_db = new File();
         return $file_db->save_file($member_id, $md5file);
     }
@@ -92,19 +92,19 @@ class UploadPanoController extends Controller{
      * 保存缩略图
      */
     private function save_scene_thumb($file_id,$scene_id){
-    	$scene_thumb_db = new ScenesThumb();
-    	$datas = $scene_thumb_db->save_pano_thumb($scene_id, $file_id);
-    	return $datas;
+        $scene_thumb_db = new ScenesThumb();
+        $datas = $scene_thumb_db->save_pano_thumb($scene_id, $file_id);
+        return $datas;
     }
     /*
      * 保存场景全景图关系
      */
     private function save_scene_file($file_id, $scene_id, $position){
-    	if(!$file_id || !$scene_id){
-    		return false;
-    	}
-    	$scene_file_db = new MpSceneFile();
-    	return $scene_file_db->save_scene_file($file_id, $scene_id, $position);
+        if(!$file_id || !$scene_id){
+            return false;
+        }
+        $scene_file_db = new MpSceneFile();
+        return $scene_file_db->save_scene_file($file_id, $scene_id, $position);
     }
 
     /**
@@ -131,7 +131,7 @@ class UploadPanoController extends Controller{
         $file_info['md5value'] = md5_file($md5file);
         $folder_pic .= $file_info['md5value'].'/';
         if(!is_dir($folder_pic)){
-        	mkdir($folder_pic);
+            mkdir($folder_pic);
         }
         $folder = $folder_pic.'original/';
         if(!is_dir($folder)){
@@ -154,69 +154,70 @@ class UploadPanoController extends Controller{
      * 将文件处理成1024大小
      */
     public function resize_pano($file_path, $folder, $file_type){
-    	$folder_pano = $folder.'9/';
-    	if(!is_dir($folder_pano)){
-    		mkdir($folder_pano);
-    	}
-    	$folder_10 = $folder.'10/';
-    	if(!is_dir($folder_10)){
-    		mkdir($folder_10);
-    	}
-    	$image = Yii::app()->image->load($file_path);
-    	$width = $this->tile_info[9];
-    	$image->resize($width, $width)->quality(8);
-    	$file_path = $folder_pano.$width.'x'.$width.'.'.$file_type;
-    	$image->save($file_path);
-    	$width = $this->tile_info[10];
-    	$image->resize($width, $width)->quality(70)->sharpen(5);
-    	$file_path = $folder_10.$width.'x'.$width.'.'.$file_type;
-    	$image->save($file_path);
-    	//切割图片
-    	$this->split_img($file_path, $folder,$file_type);
+        $folder_pano = $folder.'9/';
+        if(!is_dir($folder_pano)){
+            mkdir($folder_pano);
+        }
+        $folder_10 = $folder.'10/';
+        if(!is_dir($folder_10)){
+            mkdir($folder_10);
+        }
+        $image = Yii::app()->image->load($file_path);
+        $width = $this->tile_info[9];
+        $image->resize($width, $width)->quality(8);
+        $file_path = $folder_pano.$width.'x'.$width.'.'.$file_type;
+        $image->save($file_path);
+        $width = $this->tile_info[10];
+        $image->resize($width, $width)->quality(70)->sharpen(5);
+        $file_path = $folder_10.$width.'x'.$width.'.'.$file_type;
+        $image->save($file_path);
+        //切割图片
+        $this->split_img($file_path, $folder,$file_type);
     }
     /**
      * 切割图片
      */
     public function split_img($src_file, $folder,$file_type){
-    	$maxW = $maxH = $this->tile_info[10]/2;
-    	$type = exif_imagetype($src_file);
-		$support_type=array(IMAGETYPE_JPEG , IMAGETYPE_PNG , IMAGETYPE_GIF);
-		//Load image
-		switch($type) {
-			case IMAGETYPE_JPEG :
-				$src_img = imagecreatefromjpeg($src_file);
-			break;
-			case IMAGETYPE_PNG :
-				$src_img = imagecreatefrompng($src_file);
-			break;
-			case IMAGETYPE_GIF :
-				$src_img = imagecreatefromgif($src_file);
-			break;
-		}
-    	list($width, $height, $type, $attr) = getimagesize($src_file);
-    	$widthnum=ceil($width/$maxW);
-    	$heightnum=ceil($height/$maxH);
-    	$iOut = imagecreatetruecolor ($maxW,$maxH);
-    	for ($i=0;$i < $heightnum;$i++) {
-    		for ($j=0;$j < $widthnum;$j++) {
-    			imagecopy($iOut,$src_img,0,0,($j*$maxW),($i*$maxH),$maxW,$maxH);//复制图片的一部分
-    			//imagejpeg($iOut,"images/".$i."_".$j.".jpg"); //输出成0_0.jpg,0_1.jpg这样的格式
-    			$file_path = $folder.'10/'.$i.'x'.$j.'.'.$file_type;
-    			//echo $file_path.'<br>';
-    			$quality = 90;
-	    		switch($type) {
-					case IMAGETYPE_JPEG :
-						imagejpeg($iOut, $file_path,$quality); // 存储图像
-					break;
-					case IMAGETYPE_PNG :
-						imagepng($iOut,$file_path,$quality);
-					break;
-					case IMAGETYPE_GIF :
-						imagegif($iOut,$file_path,$quality);
-					break;
-					}
-	    		}
-    	}
+        $maxW = $maxH = $this->tile_info[10]/2;
+        $type = exif_imagetype($src_file);
+
+        $support_type=array(IMAGETYPE_JPEG , IMAGETYPE_PNG , IMAGETYPE_GIF);
+        //Load image
+        switch($type) {
+            case IMAGETYPE_JPEG :
+                $src_img = imagecreatefromjpeg($src_file);
+            break;
+            case IMAGETYPE_PNG :
+                $src_img = imagecreatefrompng($src_file);
+            break;
+            case IMAGETYPE_GIF :
+                $src_img = imagecreatefromgif($src_file);
+            break;
+        }
+        list($width, $height, $type, $attr) = getimagesize($src_file);
+        $widthnum=ceil($width/$maxW);
+        $heightnum=ceil($height/$maxH);
+        $iOut = imagecreatetruecolor ($maxW,$maxH);
+        for ($i=0;$i < $heightnum;$i++) {
+            for ($j=0;$j < $widthnum;$j++) {
+                imagecopy($iOut,$src_img,0,0,($j*$maxW),($i*$maxH),$maxW,$maxH);//复制图片的一部分
+                //imagejpeg($iOut,"images/".$i."_".$j.".jpg"); //输出成0_0.jpg,0_1.jpg这样的格式
+                $file_path = $folder.'10/'.$i.'x'.$j.'.'.$file_type;
+                //echo $file_path.'<br>';
+                $quality = 90;
+                switch($type) {
+                    case IMAGETYPE_JPEG :
+                        imagejpeg($iOut, $file_path,$quality); // 存储图像
+                    break;
+                    case IMAGETYPE_PNG :
+                        imagepng($iOut,$file_path,$quality);
+                    break;
+                    case IMAGETYPE_GIF :
+                        imagegif($iOut,$file_path,$quality);
+                    break;
+                    }
+                }
+        }
     }
 }
 
