@@ -15,6 +15,7 @@ class UploadPanoController extends Controller{
         $file_info = $this->upload();
         $response = array();
         $flag = true;
+        $flag_scene = false;
         if($file_info){
             $path_id = $this->save_file_path($file_info);
             if($path_id){

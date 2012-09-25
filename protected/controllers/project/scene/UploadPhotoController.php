@@ -19,9 +19,8 @@ class UploadPhotoController extends Controller{
     	$file_url = array();
     	$pic_name = '150x150.jpg';
     	$default_scene = array('left', 'right', 'down', 'up', 'front', 'back');
-    	
     	foreach ($default_scene as $v){
-    		$file_url[$v] = $scene_files[$v] ? $this->createUrl('/home/pictrue/index/', array('id'=>$scene_files[$v], 'size'=>$pic_name)) : $this->get_default_url($v);
+    		$file_url[$v] = isset($scene_files[$v]) && $scene_files[$v] ? $this->createUrl('/home/pictrue/index/', array('id'=>$scene_files[$v], 'size'=>$pic_name)) : $this->get_default_url($v);
     	}
     	unset($scene_files);
     	return $file_url;
