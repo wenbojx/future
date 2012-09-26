@@ -59,6 +59,7 @@ for ($i = $start; $i<=$end; $i++ ){
     $truename = $result['content']['truename'];
     $email = $result['content']['email'];
     $mobile = $result['content']['mobile'];
+    $u_id = $result['content']['uid'];
     //print_r($result);
     //unset($data);
     //$data = json_encode($result);
@@ -83,7 +84,7 @@ for ($i = $start; $i<=$end; $i++ ){
     //sleep(1);
 }
 //file_put_contents('a.txt', $str);
-file_put_contents('num.txt', $end);
+file_put_contents('num.txt', $u_id);
 
 exit();
 
