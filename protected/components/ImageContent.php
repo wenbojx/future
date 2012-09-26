@@ -56,7 +56,6 @@ class ImageContent {
      */
     public function get_img_info($datas, $size, $suffix='', $add_suffix = false){
         $pic_datas = array();
-        print_r($datas);
         if(!$datas){
             return false;
         }
@@ -71,12 +70,10 @@ class ImageContent {
         	$path = $path_original;
         }
         $path_new = $path.$size;
-        echo $path_new;
             if(!is_file($path_new)){
                 $explode_1 = explode('.', $size);
                 $explode_2 = explode('x', $explode_1[0]);
                 $path_original .= $datas['md5value'].'.'.$datas['type'];
-                echo $path_original;
                 if(!is_file($path_original)){
                 	return false;
                 }
