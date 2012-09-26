@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PanoSalado>                   
+    <layer id="Meter" url="plugins/PanoSaladoLoadMeter.swf" depth="1"/> 
+    <layer id="PanoSalado" url="PanoSalado.swf" depth="0" >        
+        <spaces onStart="loadSpace:space1" >    
+            <space id="space1">
+                <sphere id="dark_blue_room_pano">                    
+                    <file>images/dark_blue/dark_blue_prev.jpg</file>
+                </sphere>                
+            </space>                    
+        </spaces>    
+    </layer>
+</PanoSalado>

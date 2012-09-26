@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+	<PanoSalado>					
+		<layer id="Meter" url="plugins/PanoSaladoLoadMeter.swf" depth="4" />
+		<layer id="LoadSpacePlus" url="plugins/LoadSpacePlus.swf" depth="3" />  
+		<layer id="AS3Interface" url="plugins/AS3Interface.swf" depth="2"			
+			comboBoxVisible="true"
+			useUniversalMap = "true"
+			useLoadSpacePlus = "true"			
+		/>
+		<layer id="UniversalMap" url="plugins/UniversalMap.swf" depth="1"	
+			mapWindowWidth="400"
+			mapWindowHeight="300"		
+			mapAlpha="0.7"		
+			initailVisibility="true"
+			verticalAlign="top"
+			horizontalAlign="right"	
+			margin="10,10,0,0"	
+			iconVisible="false"	
+			useLoadSpacePlus="true"
+		>
+			<map label ="Red floor" url="graphics/universalmap/small_map.jpg"		
+				color="#ffff00"
+				type="Cam_border_short"
+				size="80"				
+			> 
+				<point x = "130" y = "190" target ="light_red_room" 
+					panShift="180" 								
+				/>	
+				<point x = "280" y = "190"  target ="dark_red_room" 
+					panShift="180" 								
+				/>	
+			</map>	  
+			<map label ="Blue floor" url="graphics/universalmap/big_map.jpg"
+				allowZoom="true"				
+			> 		
+				<point x= "440" y  = "200"  target ="dark_blue_room" 
+					panShift="90" 				
+					type="Cam_border" 			  
+					size="110"				
+				/>				
+				<point x = "230" y = "200" target ="turquoise_room" 				
+					panShift="90" 
+					type="Cam_camera"				
+					size="120"
+				/>		
+				<point x= "230" y  = "400" target ="light_blue_room" 
+					panShift="90" 				
+					type="Cam_orb" 			  
+					size="120"				
+				/>						
+			</map>	
+	</layer> 
+	<layer id="PanoSalado" url="PanoSalado.swf" depth="0" >		
+		<spaces
+			onStart="loadSpace:dark_blue_room.preview"			
+			cameraRetainsLastValues="true" 
+			cameraZoom="10"
+			cameraFocus="100"
+			cameraZoomIncrement="0.2"
+			cameraKeyIncrement="120"
+			cameraSensitivity="20"
+			cameraFriction="0.125"
+			cameraRestThreshold="0.0001"
+			cameraMinimumZoom="5"
+			cameraMaximumZoom="15"			
+			autorotator="true"
+			autorotatorDelay="15000"
+			autorotatorRestartDelay="15000"
+			autorotatorIncrement="0.25"
+			dynamicQualityAdjustment="false"
+			stageQuality="high"								
+		>	
+<!--  ######################################################################################-->				
+			<space id="light_red_room.preview"   
+			    label="Light red room"
+				interactive="false"				
+				transition="tween:currentSpace.viewport.alpha from 0 over 1.5 seconds using Expo.easeInOut than do onTransitionEnd" 				
+				onTransitionEnd="loadSpace:light_red_room;removeLastSpace"				
+			>
+				<sphere id="light_red_room_pano_preview" rotationY="213" segments="22">					
+					<file>images/light_red/light_red_prev.jpg</file>
+				</sphere>				
+			</space>						
+<!--  ######################################################################################-->
+			<space id="light_red_room" 
+			    label="Light red room"
+				interactive="true"				
+				transition="tween:currentSpace.viewport.alpha from 0 over 1.5 seconds using Expo.easeIn than do onTransitionEnd" 				
+				onTransitionEnd="removeLastSpace"				
+			>
+				<cube id="light_red_room_pano"	width="750" segments="16">
+					<file face="front">images/light_red/window.jpg</file>
+					<file face="right">images/light_red/wall.jpg</file>
+					<file face="back">images/light_red/door.jpg</file>					
+					<file face="left">images/light_red/window.jpg</file>
+					<file face="top">images/light_red/ceiling.jpg</file>
+					<file face="bottom">images/light_red/floor.jpg</file>					
+				</cube>				
+				<hotspot id="lr_goto_dark_red" 
+					useHandCursor="true"
+					pan="180" 
+					tilt="5.3" 					
+					smooth="true"
+					useOwnContainer="true"
+					onClick="dispatchBroadcast:LoadSpacePlus,space=dark_red_room"
+				>
+					<file>graphics/universalmap/walk.png</file>
+				</hotspot>				
+			</space>			
+<!--  ######################################################################################-->		
+			<space id="dark_red_room.preview" 
+			    label="Dark red room"
+				interactive="false"
+				transition="tween:currentSpace.viewport.alpha from 0 over 1.5 seconds using Expo.easeInOut than do onTransitionEnd" 				
+				onTransitionEnd="loadSpace:dark_red_room;removeLastSpace"				
+			>
+				<sphere id="dark_red_room_pano_preview" rotationY="213" segments="22">					
+					<file>images/dark_red/dark_red_prev.jpg</file>
+				</sphere>				
+			</space>			
+<!--  ######################################################################################-->
+			<space id="dark_red_room" 
+			    label="Dark red room"
+				interactive="true"				
+				transition="tween:currentSpace.viewport.alpha from 0 over 1.5 seconds using Expo.easeIn than do onTransitionEnd" 				
+				onTransitionEnd="removeLastSpace"				
+			>
+				<cube id="dark_red_room_pano" width="750" segments="16">
+					<file face="front">images/dark_red/door.jpg</file>
+					<file face="right">images/dark_red/elevator.jpg</file>
+					<file face="back">images/dark_red/wall.jpg</file>					
+					<file face="left">images/dark_red/window.jpg</file>
+					<file face="top">images/dark_red/ceiling.jpg</file>
+					<file face="bottom">images/dark_red/floor.jpg</file>					
+				</cube>				
+				<hotspot id="dr_goto_light_red" 
+					useHandCursor="true"
+					pan="0" 
+					tilt="5.3" 		
+					smooth="true"
+					useOwnContainer="true"
+					onClick="dispatchBroadcast:LoadSpacePlus,space=light_red_room"
+				>
+					<file>graphics/universalmap/walk.png</file>
+				</hotspot>							
+				<hotspot id="dr_goto_dark_blue" 
+					useHandCursor="true"
+					pan="90" 
+					tilt="5.3" 				
+					smooth="true"
+					useOwnContainer="true"
+					onClick="dispatchBroadcast:LoadSpacePlus,space=dark_blue_room"					
+				>
+					<file>graphics/universalmap/down.png</file>
+				</hotspot>				
+			</space>	
+<!--  ######################################################################################-->		
+			<space id="dark_blue_room.preview" 
+			    label="Dark blue room"
+				interactive="false"				
+				transition="tween:currentSpace.viewport.alpha from 0 over 1.5 seconds using Expo.easeInOut than do onTransitionEnd" 				
+				onTransitionEnd="loadSpace:dark_blue_room;removeLastSpace"				
+			>
+				<sphere id="dark_blue_room_pano_preview" rotationY="213" segments="22">					
+					<file>images/dark_blue/dark_blue_prev.jpg</file>
+				</sphere>					
+			</space>			
+<!--  ######################################################################################-->
+			<space id="dark_blue_room" 
+			    label="Dark blue room"
+				interactive="true"				
+				transition="tween:currentSpace.viewport.alpha from 0 over 1.5 seconds using Expo.easeIn than do onTransitionEnd" 				
+				onTransitionEnd="removeLastSpace"				
+			>
+				<cube id="dark_blue_room_pano" width="750" segments="16">
+					<file face="front">images/dark_blue/wall.jpg</file>
+					<file face="right">images/dark_blue/door.jpg</file>
+					<file face="back">images/dark_blue/wall.jpg</file>					
+					<file face="left">images/dark_blue/elevator.jpg</file>
+					<file face="top">images/dark_blue/ceiling.jpg</file>
+					<file face="bottom">images/dark_blue/floor.jpg</file>					
+				</cube>				
+				<hotspot id="db_goto_turquoise" 
+					useHandCursor="true"
+					pan="90" 
+					tilt="5.3" 									
+					smooth="true"
+					useOwnContainer="true"					
+					onClick="dispatchBroadcast:LoadSpacePlus,space=turquoise_room"					
+				>
+					<file>graphics/universalmap/walk.png</file>
+				</hotspot>							
+				<hotspot id="db_goto_dark_red" 
+					useHandCursor="true"
+					pan="-90" 
+					tilt="5.3" 									
+					smooth="true"
+					useOwnContainer="true"
+					onClick="dispatchBroadcast:LoadSpacePlus,space=dark_red_room"										
+				>
+					<file>graphics/universalmap/up.png</file>
+				</hotspot>							
+			</space>			
+<!--  ######################################################################################-->		
+			<space id="turquoise_room.preview" 
+			    label="Turquoise room"
+				interactive="false"				
+				transition="tween:currentSpace.viewport.alpha from 0 over 1.5 seconds using Expo.easeInOut than do onTransitionEnd" 				
+				onTransitionEnd="loadSpace:turquoise_room;removeLastSpace"				
+			>
+				<sphere id="turquoise_room_pano_preview" rotationY="213" segments="22">					
+					<file>images/turquoise/turquoise_prev.jpg</file>
+				</sphere>			
+			</space>						
+<!--  ######################################################################################-->			
+			<space id="turquoise_room" 
+			    label="Turquoise room"
+				interactive="true"				
+				transition="tween:currentSpace.viewport.alpha from 0 over 1.5 seconds using Expo.easeIn than do onTransitionEnd" 				
+				onTransitionEnd="removeLastSpace"				
+			>
+				<cube id="turquoise_room_pano" width="750" segments="16">
+					<file face="front">images/turquoise/door.jpg</file>
+					<file face="right">images/turquoise/window.jpg</file>					
+					<file face="back">images/turquoise/window.jpg</file>					
+					<file face="left">images/turquoise/door.jpg</file>
+					<file face="top">images/turquoise/ceiling.jpg</file>
+					<file face="bottom">images/turquoise/floor.jpg</file>					
+				</cube>				
+				<hotspot id="t_goto_dark_blue" 
+					useHandCursor="true"
+					pan="-90" 
+					tilt="5.3" 					
+					smooth="true"
+					useOwnContainer="true"					
+					onClick="dispatchBroadcast:LoadSpacePlus,space=dark_blue_room"
+				>
+					<file>graphics/universalmap/walk.png</file>
+				</hotspot>							
+				<hotspot id="t_goto_light_blue" 
+					useHandCursor="true"
+					pan="0" 
+					tilt="5.3" 					
+					smooth="true"
+					useOwnContainer="true"
+					onClick="dispatchBroadcast:LoadSpacePlus,space=light_blue_room"					
+				>
+					<file>graphics/universalmap/walk.png</file>
+				</hotspot>				
+			</space>			
+<!--  ######################################################################################-->		
+			<space id="light_blue_room.preview" 
+			    label="Light blue room"
+				interactive="false"				
+				transition="tween:currentSpace.viewport.alpha from 0 over 1.5 seconds using Expo.easeInOut than do onTransitionEnd" 				
+				onTransitionEnd="loadSpace:light_blue_room;removeLastSpace"				
+			>
+				<sphere id="light_blue_room_pano_preview" rotationY="213" segments="22">					
+					<file>images/light_blue/light_blue_prev.jpg</file>
+				</sphere>			
+			</space>				
+<!--  ######################################################################################-->
+			<space id="light_blue_room" 
+			    label="Light blue room"
+				interactive="true"				
+				transition="tween:currentSpace.viewport.alpha from 0 over 1.5 seconds using Expo.easeIn than do onTransitionEnd" 				
+				onTransitionEnd="removeLastSpace"				
+			>
+				<cube id="light_blue_room_pano_preview" width="750" segments="16">
+					<file face="front">images/light_blue/wall.jpg</file>
+					<file face="right">images/light_blue/window.jpg</file>
+					<file face="back">images/light_blue/door.jpg</file>					
+					<file face="left">images/light_blue/wall2.jpg</file>
+					<file face="top">images/light_blue/ceiling.jpg</file>
+					<file face="bottom">images/light_blue/floor.jpg</file>					
+				</cube>				
+				<hotspot id="lb_goto_turquoise" 
+					useHandCursor="true"
+					pan="180" 
+					tilt="5.3" 					
+					smooth="true"
+					useOwnContainer="true"					
+					onClick="dispatchBroadcast:LoadSpacePlus,space=turquoise_room"
+				>
+					<file>graphics/universalmap/walk.png</file>
+				</hotspot>				
+			</space>					
+<!--  ######################################################################################-->		
+		</spaces>	
+	</layer>
+</PanoSalado>

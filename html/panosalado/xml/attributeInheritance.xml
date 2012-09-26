@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PanoSalado>                   
+    <layer id="Meter" url="plugins/PanoSaladoLoadMeter.swf" depth="1"/> 
+    <layer id="PanoSalado" url="PanoSalado.swf" depth="0" >        
+        <spaces onStart="loadSpace:space1"         
+            attribute1="toggleFullscreen"
+            attribute2="toggleFullscreen"
+            attribute3="toggleFullscreen"			
+        >    
+            <space id="space1"            
+                attribute2="toggleAutorotator"
+                attribute3="toggleAutorotator"                
+            >
+                <sphere id="dark_blue_room_pano">                    
+                    <file>images/dark_blue/dark_blue_prev.jpg</file>
+                </sphere>
+                <hotspot id="hotspot1" 
+                    useOwnContainer="true" 
+                    useHandCursor="true" 
+                    pan="90"
+                    tilt="0"                                        
+                    attribute3="tween:hotspot1.rotationX to 360 over 1.5 seconds using Expo.easeIn"
+                    
+                    onClick="attribute1"                    
+                    onOver="attribute2"
+                    onOut ="hotspot1.attribute3"                    
+                >
+                    <file>graphics/hotspot.png</file>
+                </hotspot>            
+            </space>                    
+        </spaces>    
+    </layer>
+</PanoSalado>
