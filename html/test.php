@@ -76,7 +76,7 @@ for ($i = $start; $i<=$end; $i++ ){
     $sql = "INSERT INTO `member` (`id` ,`content` ,`truename` ,`email` ,`mobile`)
             VALUES (NULL , '{$data}', '{$truename}', '{$email}', '{$mobile}');";
 
-    echo $sql."\n\n";                       //退出程序并打印 SQL 语句，用于调试
+   // echo $sql."\n\n";                       //退出程序并打印 SQL 语句，用于调试
     if(!mysql_query($sql,$conn)){
         $str .= "--X--:".$i."\n";
     } else {
