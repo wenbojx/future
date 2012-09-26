@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PanoSalado>                    
+    <layer id="Meter" url="plugins/PanoSaladoLoadMeter.swf" depth="2" />    
+    <layer id="Interface" url="plugins/layout_7.swf" depth="1">
+        <style url="plugins/css_minimini_BR_styl.swf"/>
+    </layer>
+    <layer id="PanoSalado" url="PanoSalado.swf" depth="0" >        
+        <spaces
+            onStart="loadSpace:light_red.preview"                        
+            
+            cameraRetainsLastValues="true" 
+            cameraZoom="10"
+            cameraFocus="100"
+            cameraZoomIncrement="0.2"
+            cameraKeyIncrement="120"
+            cameraSensitivity="20"
+            cameraFriction="0.125"
+            cameraRestThreshold="0.0001"
+            cameraMinimumZoom="5"
+            cameraMaximumZoom="15"            
+            
+            autorotator="true"
+            autorotatorDelay="15000"
+            autorotatorRestartDelay="15000"
+            autorotatorIncrement="0.25"
+            
+            dynamicQualityAdjustment="false"
+            stageQuality="high"                                
+        >    
+<!--  #########################################################-->        
+            <space id="light_red.preview"   
+                label="Light red room"
+                interactive="false"                
+                transition="tweenXML:default_tween"                 
+                onTransitionEnd="loadSpace:light_red;removeLastSpace"                
+            >
+                <sphere id="light_red_pano_preview" rotationY="213" segments="22">                    
+                    <file>images/light_red/light_red_prev.jpg</file>
+                </sphere>                
+            </space>                        
+<!--  #########################################################-->
+            <space id="light_red" 
+                label="Light red room"
+                interactive="true"                
+                transition="tweenXML:default_tween"                 
+                onTransitionEnd="removeLastSpace"                
+            >
+                <cube id="light_red_pano" segments="16">
+                    <file face="front">images/light_red/window.jpg</file>
+                    <file face="back">images/light_red/door.jpg</file>
+                    <file face="right">images/light_red/wall.jpg</file>
+                    <file face="left">images/light_red/window.jpg</file>
+                    <file face="top">images/light_red/ceiling.jpg</file>
+                    <file face="bottom">images/light_red/floor.jpg</file>                    
+                </cube>                
+                <hotspot id="light_red_hotspot" 
+                    useOwnContainer="true"
+                    useHandCursor="true"
+                    pan="180" 
+                    tilt="5.3"                     
+                    smooth="true"                    
+                    onClick="loadSpace:dark_blue.preview"
+                >
+                    <file>graphics/hotspot.png</file>
+                </hotspot>                
+            </space>            
+<!--  #########################################################-->
+            <space id="dark_blue.preview" 
+                label="Dark blue room"
+                interactive="false"                
+                transition="tweenXML:default_tween"                 
+                onTransitionEnd="loadSpace:dark_blue;removeLastSpace"                
+            >
+                <sphere id="dark_blue_pano_preview" rotationY="213" segments="22">                    
+                    <file>images/dark_blue/dark_blue_prev.jpg</file>
+                </sphere>                    
+            </space>            
+<!--  #########################################################-->
+            <space id="dark_blue" 
+                label="Dark blue room"
+                interactive="true"                
+                transition="tweenXML:default_tween"                 
+                onTransitionEnd="removeLastSpace"                
+            >
+                <cube id="dark_blue_pano" segments="16">
+                    <file face="front">images/dark_blue/wall.jpg</file>
+                    <file face="back">images/dark_blue/wall.jpg</file>
+                    <file face="right">images/dark_blue/door.jpg</file>
+                    <file face="left">images/dark_blue/elevator.jpg</file>
+                    <file face="top">images/dark_blue/ceiling.jpg</file>
+                    <file face="bottom">images/dark_blue/floor.jpg</file>                    
+                </cube>                
+                <hotspot id="dark_blue_hotspot" 
+                    useHandCursor="true"
+                    pan="90" 
+                    tilt="5.3"                                     
+                    smooth="true"
+                    useOwnContainer="true"                    
+                    onClick="tweenXML:dark_blue_hotspot_tween"
+                    finish="loadSpace:light_red.preview"                    
+                >
+                    <file>graphics/hotspot.png</file>
+                </hotspot>                                            
+            </space>            
+<!--  #########################################################-->            
+        </spaces>    
+        <tweens>
+            <tween id="default_tween"
+                target="currentSpace.viewport"
+                property="alpha"
+                direction="from"
+                endValue="0"
+                time="1.5"
+                easeClass="Expo"
+                easeFunction="easeInOut"
+                onComplete="onTransitionEnd"            
+            />
+            <tween id="dark_blue_hotspot_tween"
+                target="dark_blue_hotspot"
+                property="rotationX"
+                direction="to"
+                endValue="90"
+                time="1.5"
+                easeClass="Expo"
+                easeFunction="easeInOut"
+                onComplete="dark_blue_hotspot.finish"            
+            />
+        </tweens>
+    </layer>
+</PanoSalado>

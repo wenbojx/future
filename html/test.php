@@ -1,14 +1,21 @@
 <?php
-$start = 5000200;
-$end = 5127410;
-$end = 5057410;
+$file = '/var/www/album/html/num.txt';
+$start = file_get_contents($file);
+$start = $start+1;
+$end = $start+100;
 $str = '';
 //for ($i = 5127410; $i>0; $i-- ){
 for ($i = $start; $i<=$end; $i++ ){
+
+    if($end >=5127410){
+        continue;
+    }
     $prefix = substr($i, -2);
     if($prefix == '0'){
-        sleep(2);
+        sleep(1);
     }
+    //$prefix = substr($i, -2);
+
     $secret = md5('YOKA.COM.USER'.(string)date('l-F'));
 
     $http_method = "get";
@@ -45,9 +52,14 @@ for ($i = $start; $i<=$end; $i++ ){
     //$data = addslashes($data);
 
     $result = json_decode($data, true);
-    if(!$result){
+    if(!$result || !$result['content']){
+        $str .= "--XX--:".$i."\n";
         continue;
     }
+    $truename = $result['content']['truename'];
+    $email = $result['content']['email'];
+    $mobile = $result['content']['mobile'];
+    $u_id = $result['content']['uid'];
     //print_r($result);
     //unset($data);
     //$data = json_encode($result);
@@ -60,8 +72,11 @@ for ($i = $start; $i<=$end; $i++ ){
     mysql_select_db("members", $conn);
     mysql_query("set names 'utf8'");	//PHP 文件为 utf-8 格式时使用
 
-    $sql = "INSERT INTO member(id, content)VALUES(null, '{$data}')";
-    //exit($sql);	                        //退出程序并打印 SQL 语句，用于调试
+    //$sql = "INSERT INTO member(id, content, 'truename', 'email', 'mobile')VALUES(null, '{$data}', '{$truename}', '{$email}', '{$mobile}')";
+    $sql = "INSERT INTO `member` (`id` ,`content` ,`truename` ,`email` ,`mobile`)
+            VALUES (NULL , '{$data}', '{$truename}', '{$email}', '{$mobile}');";
+
+   // echo $sql."\n\n";                       //退出程序并打印 SQL 语句，用于调试
     if(!mysql_query($sql,$conn)){
         $str .= "--X--:".$i."\n";
     } else {
@@ -71,8 +86,8 @@ for ($i = $start; $i<=$end; $i++ ){
 
     //sleep(1);
 }
-file_put_contents('a.txt', $str);
-
+//file_put_contents('a.txt', $str);
+file_put_contents($file, $u_id);
 
 exit();
 
