@@ -23,7 +23,7 @@ class PanoramDatas{
     public $global_datas = array(); //全局数据
     public $panoram_datas = array(); //图片数据
     public $admin = false;
-    public function get_panoram_datas($id = 0, $admin){
+    public function get_panoram_datas($id = 0, $admin=0){
         $datas = array();
         if(!(int)$id){
             return $datas;

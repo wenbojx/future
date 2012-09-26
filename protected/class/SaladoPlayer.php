@@ -50,9 +50,9 @@ class SaladoPlayer{
         return $player_info;
     }
 
-    public function get_config_content($id, $admin){
+    public function get_config_content($id, $admin=0){
         $memcache_obj = new Ymemcache();
-        $key = $memcache_obj->get_pano_xml_key($id);
+        $key = $memcache_obj->get_pano_xml_key($id, $admin);
         if($content = $memcache_obj->get_mem_data($key)){
             return $content;
         }

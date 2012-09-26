@@ -9,8 +9,8 @@ class Ymemcache extends CMemCache{
     /**
      *
      */
-    public function get_pano_xml_key($scene_id){
-        return $this->pano_xml_prefix.$scene_id;
+    public function get_pano_xml_key($scene_id, $admin=0){
+        return $this->pano_xml_prefix.$scene_id.$admin;
     }
     public function get_img_no_key($no){
         if(!$no){
