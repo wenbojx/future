@@ -6,6 +6,10 @@ $end = $start+100;
 $str = '';
 //for ($i = 5127410; $i>0; $i-- ){
 for ($i = $start; $i<=$end; $i++ ){
+
+    if($end >=5127410){
+        continue;
+    }
     $prefix = substr($i, -2);
     if($prefix == '0'){
         sleep(1);
