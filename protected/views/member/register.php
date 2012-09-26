@@ -1,41 +1,56 @@
-<div class="register-title">
-                <h2>注册新帐号</h2>
-                <h3>完全免费</h3>
-            </div>
-<div class="register-box">
-                <div class="reg-mobile-title">有邮箱就有一路</div>
-                <form autocomplete="off" method="post" action="" id="js_signMobileForm">
-                    <input type="hidden" value="" name="reg[goto]">
-                    <input type="hidden" value="mobile" name="reg[type]">
-                    <dl>
-                            <dt>邮箱：</dt>
-                            <dd>
-                                <label for="reg_mobile">请输入您的邮箱</label>
-                                <input type="text" class="text " value="" id="reg_email" name="reg[email]" maxlength="11">
-                            </dd>
-                            <dt>密码：</dt>
-                            <dd>
-                                <label for="reg_passwd">请输入您的密码</label>
-                                <input type="password" class="text " id="reg_passwd" name="reg[passwd]">
-                            </dd>
-                            <dt>重复密码：</dt>
-                            <dd>
-                                <label for="reg_repasswd">请重复输入您的密码</label>
-                                <input type="password" class="text " id="reg_repasswd" name="reg[repasswd]">
-                            </dd>
-                            <dt>验证码：</dt>
-                            <dd class="v-code">
-                                <input type="text" class="text code " id="reg_mvcode" name="reg[code]" maxlength="6">
-                                <a class="button" id="js_getmvcode" href="javascript:;">免费获取验证码</a>
-                            </dd>
-                            <dd class="agreement-box">
-                                <input type="checkbox" checked="checked" id="js_agreement_input">
-                                我已同意<a target="_blank" href="">《用户服务协议》</a>
-                            </dd>
-                            <dd>
-                                    <button type="submit"><i>立即注册</i></button>
-                                    <div class="login-link"><a href="">已有帐号登录</a></div>
-                            </dd>
-                    </dl>
-                </form>
-            </div>
+<?php $this->pageTitle=$datas['page']['title'].'---足不出户，畅游中国';?>
+<div class="detail">
+	<div class="hero-unit margin-top55">
+		<h2>拥有梦想</h2>
+	</div>
+	<div class="mini-layout">
+	    <div class="row-fluid show-grid">
+	    <div class="span12">
+	    		<div class="span7 offset1">
+	    		<br>
+	    		<form method="post" class="form-horizontal" id="member_reg" action="<?=$this->createUrl('/member/register/reg');?>">
+				    <fieldset>
+					    <legend>免费注册</legend>
+						<div class="control-group">
+							<label class="control-label" for="reg_email">邮箱</label>
+						    <div class="controls">
+						    	<input type="text" class="input-xlarge" id="reg_email" name="reg[email]" maxlength="20">
+						    	
+						    	<p class="help-block">请输入有效的邮箱</p>
+						    </div>
+						</div>
+						<div class="control-group">
+						    <label class="control-label" for="reg_passwd">密码</label>
+						    <div class="controls">
+						    	<input type="password" class="input-xlarge" value="" id="reg_passwd" name="reg[passwd]">
+						    	<p class="help-block">字母，数字，汉字皆可</p>
+						    </div>
+					    </div>
+					    <div class="control-group">
+						    <label class="control-label" for="reg_repasswd">重复密码</label>
+						    <div class="controls">
+						    	<input type="password" class="input-xlarge" value="" id="reg_repasswd" name="reg[repasswd]">
+						    	<p class="help-block">字母，数字，汉字皆可</p>
+						    </div>
+					    </div>
+					    <div class="control-group">
+						    <label class="control-label" for="reg_code">邀请码</label>
+						    <div class="controls">
+						    	<input type="text" class="input-xlarge" value="" id="reg_code" name="reg[code]" maxlength="6">
+						    	<p class="help-block">输入六位邀请码</p>
+						    </div>
+					    </div>
+					    <div class="form-actions">
+				            <button class="btn btn-primary" type="button" onclick="member.check_reg()">免费注册</button>
+				        </div>
+				    </fieldset>
+				    </form>
+	    			
+	    		<br>
+	    		</div>
+	    </div>
+	    </div>
+    </div>
+</div>
+<script type="text/javascript" src="<?=Yii::app()->baseUrl.'/style/js/member.js'?>"></script>
+

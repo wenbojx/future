@@ -1,29 +1,39 @@
-<!-- <div id="js_content_list" class="feature-show"></div> -->
-            <div class="login-box">
-                <form method="post" action="<?=$this->createUrl('member/login/checkLogin')?>" id="js_login_form">
-                    <ul>
-                        <li>
-                            <!-- <label for="account">请输入手机/邮箱/帐号</label> -->
-                            <input type="text"  tabindex="1" value="" class="text" id="email" name="login[email]">
-                        </li>
-                        <li>
-                            <!-- <label for="passwd">请输入您的密码</label> -->
-                            <input type="password"  tabindex="2" class="text"  id="passwd" name="login[passwd]">
-                        </li>
-                        <li class="s">
-                            <button class="btn-login" type="submit"><i>登录</i></button>
-                        </li>
-                        <li class="status-save">
-                            <input type="checkbox" tabindex="4" name="login[time]" id="autologin">
-                            <label for="autologin">保持我的登录状态</label>
-                        </li>
-                        <li>
-                            <em><a href="">找回密码？</a></em>
-                            <em><a href="">找回帐号？</a></em>
-                        </li>
-                        <li class="s">
-                            <a href="">注册新帐号</a>
-                        </li>
-                    </ul>
-                </form>
-            </div>
+<?php $this->pageTitle=$datas['page']['title'].'---足不出户，畅游中国';?>
+<div class="detail">
+	<div class="hero-unit margin-top55">
+		<h2>拥有梦想</h2>
+	</div>
+	<div class="mini-layout">
+	    <div class="row">
+	    <div class="span12">
+	    		<div class="span7 offset2">
+	    		<br>
+	    		<form method="post" class="form-horizontal" id="member_reg" action="<?=$this->createUrl('/member/register/reg');?>">
+				    <fieldset>
+					    <legend>用户登陆</legend>
+						<div class="control-group">
+							<label class="control-label" for="login_email">邮箱</label>
+						    <div class="controls">
+						    	<input type="text"  tabindex="1" value="" class="input-xlarge" id="login_email" name="login[email]">
+						    	<p class="help-block">请输入有效的邮箱</p>
+						    </div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="login_passwd">密码</label>
+						    <div class="controls">
+						    	<input type="password"  tabindex="2" class="input-xlarge"  id="login_passwd" name="login[passwd]">
+						    	<p class="help-block">忘记密码？</p>
+						    </div>
+						</div>
+						<div class="form-actions">
+				            <button class="btn btn-primary" type="button" onclick="member.login()">登陆</button>
+				        </div>
+					</fieldset>
+				</form>
+				<br>
+	    		</div>
+	    </div>
+	    </div>
+    </div>
+</div>
+<script type="text/javascript" src="<?=Yii::app()->baseUrl.'/style/js/member.js'?>"></script>

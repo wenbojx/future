@@ -2,11 +2,12 @@
 
 class LoginController extends NoLoginController{
 
-    public $defaultAction = 'login';
-    public $layout = 'member';
+    public $defaultAction = 'a';
+    public $layout = 'home';
 
-    public function actionLogin(){
-        $this->render('/member/login');
+    public function actionA(){
+    	$datas['page']['title'] = '用户登陆';
+        $this->render('/member/login', array('datas'=>$datas));
     }
     public function actionCheckLogin(){
         $request = Yii::app()->request;

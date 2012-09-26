@@ -13,13 +13,15 @@
 <div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				<a href="<?=$this->createUrl('/');?>" class="brand">一路好</a>
+				<a href="/" class="brand">一路好</a>
 				<div id="main-menu" class="nav-collapse">
 					<!-- <ul id="main-menu-left" class="nav">
 						<li><a href="<?=$this->createUrl('/web/list/a');?>">全部景点</a></li>
 					</ul>-->
-					<ul id="main-menu-right" class="nav pull-right">
+					<ul id="main-menu-right" class="nav pull-right bold font-size14">
 						<li><a href="<?=$this->createUrl('/web/list/a');?>">全部景点</a></li>
+						<li><a href="<?=$this->createUrl('/member/register/a');?>">注册</a></li>
+						<li><a href="<?=$this->createUrl('/member/login/a');?>">登陆</a></li>
 					</ul>
 				</div>
 				<!--/.nav-collapse -->
@@ -30,7 +32,7 @@
 	<?php echo $content;?>
 	<hr class="soften">
 	<div id="footer">
-	制作：<a href="#" target="_blank">李文博</a> | 电子邮箱：<a href="#">faashi@gmail.com</a> | QQ：24329121<br>
+	制作：<a href="#" target="">李文博</a> | <a target="_blank" href="http://weibo.com/yiluhao">新浪微博</a> | 电子邮箱：<a href="#">faashi@gmail.com</a> | QQ：24329121<br>
 	
 	</div>
 </div>

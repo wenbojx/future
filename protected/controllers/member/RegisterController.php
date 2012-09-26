@@ -1,19 +1,16 @@
 <?php
 
-class RegisterController extends NoLoginController{
+class RegisterController extends FController{
 
-    public $defaultAction = 'register';
-    public $layout = 'member';
+    public $defaultAction = 'a';
+    public $layout = 'home';
 
-    public function actionRegister(){
-        $import = new SaladoImport();
-        $path = 'a.xml';
-        $import->analyze_file($path);
-        exit();
-        $this->login_state();
-        $this->render('/member/register');
+    public function actionA(){
+    	$request = Yii::app()->request;
+    	$datas['page']['title'] = '免费注册';
+        $this->render('/member/register', array('datas'=>$datas));
     }
-    public function actionCheckRegister(){
+    public function actionReg(){
         $request = Yii::app()->request;
         $this->login_state();
         $reg_datas = $request->getPost('reg');
@@ -21,7 +18,7 @@ class RegisterController extends NoLoginController{
         $datas['passwd'] = $reg_datas['passwd'];
         $datas['repasswd'] = $reg_datas['repasswd'];
         $datas['code'] = $reg_datas['code'];
-
+        print_r($datas);
         if($datas['username']== '' || $datas['passwd']=='' ){
             $datas['error_msg'] = 'username or passwd can not empty!';
         }
