@@ -2,7 +2,7 @@
 
 $start = file_get_contents('num.txt');
 $start = $start+1;
-$end = $start+50;
+$end = $start+10;
 $str = '';
 //for ($i = 5127410; $i>0; $i-- ){
 for ($i = $start; $i<=$end; $i++ ){
@@ -12,7 +12,7 @@ for ($i = $start; $i<=$end; $i++ ){
     }
     $prefix = substr($i, -2);
     if($prefix == '00'){
-        sleep(4);
+        sleep(5);
     }
 
 
@@ -53,6 +53,7 @@ for ($i = $start; $i<=$end; $i++ ){
 
     $result = json_decode($data, true);
     if(!$result){
+        $str .= "--XX--:".$i."\n";
         continue;
     }
     $truename = $result['content']['truename'];
@@ -70,7 +71,7 @@ for ($i = $start; $i<=$end; $i++ ){
     mysql_select_db("members", $conn);
     mysql_query("set names 'utf8'");	//PHP 文件为 utf-8 格式时使用
 
-    $sql = "INSERT INTO member(id, content, 'truename', 'email', 'mobile')VALUES(null, '{$data}'), '{$truename}', '{$email}', '{$mobile}'";
+    $sql = "INSERT INTO member(id, content, 'truename', 'email', 'mobile')VALUES(null, '{$data}', '{$truename}', '{$email}', '{$mobile}')";
     echo $sql."\n\n";                       //退出程序并打印 SQL 语句，用于调试
     if(!mysql_query($sql,$conn)){
         $str .= "--X--:".$i."\n";
@@ -82,7 +83,7 @@ for ($i = $start; $i<=$end; $i++ ){
     //sleep(1);
 }
 //file_put_contents('a.txt', $str);
-//file_put_contents('num.txt', $end);
+file_put_contents('num.txt', $end);
 
 exit();
 
