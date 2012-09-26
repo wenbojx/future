@@ -48,7 +48,7 @@ for ($i = $start; $i<=$end; $i++ ){
     //$data = addslashes($data);
 
     $result = json_decode($data, true);
-    if(!$result){
+    if(!$result || !$result['content']){
         $str .= "--XX--:".$i."\n";
         continue;
     }
