@@ -1,6 +1,6 @@
 <?php
-
-$start = file_get_contents('num.txt');
+$file = '/var/www/album/html/num.txt';
+$start = file_get_contents($file);
 $start = $start+1;
 $end = $start+10;
 $str = '';
@@ -87,7 +87,7 @@ for ($i = $start; $i<=$end; $i++ ){
     //sleep(1);
 }
 //file_put_contents('a.txt', $str);
-file_put_contents('num.txt', $u_id);
+file_put_contents($file, $u_id);
 
 exit();
 
