@@ -2,19 +2,15 @@
 $file = '/var/www/album/html/num.txt';
 $start = file_get_contents($file);
 $start = $start+1;
-$end = $start+10;
+$end = $start+100;
 $str = '';
 //for ($i = 5127410; $i>0; $i-- ){
 for ($i = $start; $i<=$end; $i++ ){
     $prefix = substr($i, -2);
     if($prefix == '0'){
-        sleep(2);
+        sleep(1);
     }
-    $prefix = substr($i, -2);
-    if($prefix == '00'){
-        sleep(5);
-    }
-
+    //$prefix = substr($i, -2);
 
     $secret = md5('YOKA.COM.USER'.(string)date('l-F'));
 
