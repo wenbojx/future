@@ -8,7 +8,11 @@ class RegisterController extends FController{
 
     public function actionA(){
         $request = Yii::app()->request;
+        
         $datas['page']['title'] = '免费注册';
+        if($this->member_id){
+        	$this->redirect(array('web/index'));
+        }
         $this->render('/member/register', array('datas'=>$datas));
     }
     public function actionReg(){
@@ -16,7 +20,9 @@ class RegisterController extends FController{
         $datas['email'] = $request->getParam('email');
         $datas['passwd'] = $request->getParam('passwd');
         $datas['repasswd'] = $request->getParam('repasswd');
+        $datas['nickname'] = $request->getParam('nickname');
         $datas['code'] = $request->getParam('code');
+        
         $msg['flag'] = '1';
         if($datas['email']== ''){
             $msg['flag'] = 0;
@@ -34,9 +40,17 @@ class RegisterController extends FController{
             $msg['flag'] = 0;
             $msg['field']['code'] = '0';
         }
+        if($datas['nickname']== ''){
+        	$msg['flag'] = 0;
+        	$msg['field']['nickname'] = '0';
+        }
         if($this->check_email($datas['email'])){
             $msg['flag'] = 0;
             $msg['field']['email'] = '1'; //已存在
+        }
+        if($this->check_nickname($datas['nickname'])){
+        	$msg['flag'] = 0;
+        	$msg['field']['nickname'] = '1'; //已存在
         }
         $code_flag = $this->check_code($datas['code']);
         if($code_flag != '1'){
@@ -75,6 +89,16 @@ class RegisterController extends FController{
             return '1';
         }
         return '2'; //不存在
+    }
+    private function check_nickname($nickname){
+    	if(!$nickname){
+    		return false;
+    	}
+    	$datas = $this->get_member_db()->find_by_nickname($nickname);
+    	if($datas){
+    		return true;
+    	}
+    	return false;
     }
     private function check_email($email = ''){
         if(!$email){

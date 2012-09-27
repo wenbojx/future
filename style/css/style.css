@@ -1,4 +1,7 @@
 @CHARSET "UTF-8";
+.container, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
+    /* width: 921px; */
+}
 .hero-unit{
 	margin-bottom:10px;
 	margin-top:60px;
@@ -87,6 +90,9 @@ hr.soften {
 	border: 1px solid #DDDDDD;
     border-radius: 6px 6px 6px 6px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.075);
+}
+.color_red{
+	color:red;
 }
 
 

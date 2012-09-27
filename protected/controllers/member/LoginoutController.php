@@ -2,19 +2,21 @@
 
 class LoginoutController extends NoLoginController{
 
-    public $defaultAction = 'loginout';
+    public $defaultAction = 'a';
     //public $layout = 'default';
 
-    public function actionLoginout(){
+    public function actionA(){
         Yii::app()->session['userinfo'] = '';
         $this->login_state();
     }
 
     private function login_state(){
-        if(Yii::app()->session['userinfo']){
-            $this->redirect(array('home/index'));
+    	$this->redirect(array('web/index'));
+    	return false;
+        /* if(Yii::app()->session['userinfo']){
+            $this->redirect(array('web/index'));
         }
         $this->redirect(array('member/login'));
-        return false;
+        return false; */
     }
 }

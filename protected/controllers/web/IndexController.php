@@ -4,14 +4,14 @@ class IndexController extends FController{
     public $layout = 'home';
 
     public function actionA(){
-        $datas = $this->get_last_pano(8);
+        $datas = $this->get_last_pano(16);
         $this->render('/web/index', array('datas'=>$datas));
     }
 
     /**
      * 获取最新的8个全景
      */
-    private function get_last_pano($num=8){
+    private function get_last_pano($num=12){
     	$scene_db = new Scene();
     	$criteria=new CDbCriteria;
     	$criteria->order = 'id DESC';

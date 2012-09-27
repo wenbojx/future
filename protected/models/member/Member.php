@@ -39,13 +39,33 @@ class Member extends CActiveRecord
         if(!$data){
             return false;
         }
-        return $data[0];
+        return $data;
+    }
+    public function find_by_nickname($nickname=''){
+    	if(!$nickname){
+    		return false;
+    	}
+    	$criteria=new CDbCriteria;
+    	$criteria->addCondition("nickname='{$nickname}'");
+    	$data = $this->find($criteria);
+    	if(!$data){
+    		return false;
+    	}
+    	return $data;
     }
     public function check_login($datas){
         if(!$datas['email'] || !$datas['passwd']){
             return false;
         }
-
+        $user_datas = $this->find_by_email($datas['email']);
+        if(!$user_datas){
+        	return false;
+        }
+        if($user_datas['passwd'] != $this->encrypt($datas['passwd'])){
+        	return false;
+        }
+        unset($user_datas['passwd']);
+        return $user_datas;
     }
     public function add_user($datas){
         if(!$datas['email'] || !$datas['passwd']){
@@ -53,6 +73,7 @@ class Member extends CActiveRecord
         }
         $this->email = $datas['email'];
         $this->passwd = $this->encrypt($datas['passwd']);
+        $this->nickname = $datas['nickname'];
         $this->created = time();
         return $this->save();
     }

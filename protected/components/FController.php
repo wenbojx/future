@@ -14,6 +14,10 @@ class FController extends CController
      * @var array context menu items. This property will be assigned to {@link CMenu::items}.
      */
     public $menu=array();
+    public $member_id = '';
+    public $user_name = '';
+    public $nick_name = '';
+    
 
     /**
      * @var array the breadcrumbs of the current page. The value of this property will
@@ -22,6 +26,12 @@ class FController extends CController
      */
     public $breadcrumbs=array();
     public function __construct(){
+    	
+    	if ($login_info = Yii::app()->session['userinfo']){
+    		$this->member_id = $login_info['id'];
+    		$this->user_name = $login_info['email'];
+    		$this->nick_name = $login_info['nickname'];
+    	}
         return true;
     }
     public function display_msg($msg){

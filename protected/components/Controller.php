@@ -29,8 +29,8 @@ class Controller extends CController
         }
 
         $login_info = Yii::app()->session['userinfo'];
-        $this->member_id = $login_info['member_id'];
-        $this->user_name = $login_info['username'];
+        $this->member_id = $login_info['id'];
+        $this->user_name = $login_info['email'];
 
         return true;
     }

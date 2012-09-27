@@ -1,7 +1,7 @@
 <?php $this->pageTitle=$datas['page']['title'].'---足不出户，畅游中国';?>
 <div class="detail">
     <div class="hero-unit margin-top55">
-        <h2>拥有梦想</h2>
+        <h2>足不出户 畅游中国</h2>
     </div>
     <div class="mini-layout">
         <div class="row-fluid show-grid">
@@ -15,28 +15,35 @@
                             <label class="control-label" for="reg_email">邮箱</label>
                             <div class="controls">
                                 <input type="text" class="input-xlarge" id="reg_email" name="reg[email]" maxlength="20">
-                                <p class="help-block">请输入有效的邮箱 <span id="reg_tip_email" style="color_red"></span></p>
+                                <p class="help-block">请输入有效的邮箱 <span id="reg_tip_email" class="color_red"></span></p>
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" for="reg_passwd">密码</label>
                             <div class="controls">
                                 <input type="password" class="input-xlarge" value="" id="reg_passwd" name="reg[passwd]">
-                                <p class="help-block">字母，数字，汉字皆可 <span id="reg_tip_passwd" style="color_red"></span></p>
+                                <p class="help-block">字母，数字皆可 <span id="reg_tip_passwd" class="color_red"></span></p>
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" for="reg_repasswd">重复密码</label>
                             <div class="controls">
                                 <input type="password" class="input-xlarge" value="" id="reg_repasswd" name="reg[repasswd]">
-                                <p class="help-block">字母，数字，汉字皆可 <span id="reg_tip_repasswd" style="color_red"></span></p>
+                                <p class="help-block">字母，数字皆可 <span id="reg_tip_repasswd" class="color_red"></span></p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="reg_nickname">昵称</label>
+                            <div class="controls">
+                                <input type="text" class="input-xlarge" value="" id="reg_nickname" name="reg[nickname]">
+                                <p class="help-block">字母，数字，汉字皆可 <span id="reg_tip_nickname" class="color_red"></span></p>
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" for="reg_code">邀请码</label>
                             <div class="controls">
                                 <input type="text" class="input-xlarge" value="" id="reg_code" name="reg[code]" maxlength="6">
-                                <p class="help-block">输入六位邀请码 <span id="reg_tip_code" style="color_red"></span></p>
+                                <p class="help-block">输入六位邀请码 <span id="reg_tip_code" class="color_red"></span></p>
                             </div>
                         </div>
                         <div class="form-actions">

@@ -1,7 +1,7 @@
 <?php $this->pageTitle='足不出户，畅游中国';?>
 <div class="list">
 	<div class="hero-unit margin-top55">
-		<h2>足不出户，畅游中国</h2>
+		<h2>足不出户 畅游中国</h2>
 	</div>
 	
 	<div class="row project">
