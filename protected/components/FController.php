@@ -24,4 +24,8 @@ class FController extends CController
     public function __construct(){
         return true;
     }
+    public function display_msg($msg){
+        $str = json_encode($msg);
+        exit($str);
+    }
 }

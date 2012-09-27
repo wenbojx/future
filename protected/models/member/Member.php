@@ -29,48 +29,35 @@ class Member extends CActiveRecord
         return '{{member}}';
     }
 
-    /**
-     * @return array validation rules for model attributes.
-     */
-    public function rules()
-    {
-        // NOTE: you should only define rules for those attributes that
-        // will receive user inputs.
-        return array(
-            array('email, passwd', 'required'),
-            array('status', 'integerOnly'=>true),
-            array('email', 'length', 'max'=>50),
-            array('passwd', 'length', 'max'=>32),
-            // The following rule is used by search().
-            // Please remove those attributes that should not be searched.
-            array('id, email, status', 'safe', 'on'=>'search'),
-        );
+    public function find_by_email($email=''){
+        if(!$email){
+            return false;
+        }
+        $criteria=new CDbCriteria;
+        $criteria->addCondition("email='{$email}'");
+        $data = $this->find($criteria);
+        if(!$data){
+            return false;
+        }
+        return $data[0];
     }
+    public function check_login($datas){
+        if(!$datas['email'] || !$datas['passwd']){
+            return false;
+        }
 
-    /**
-     * @return array relational rules.
-     */
-    public function relations()
-    {
-        // NOTE: you may need to adjust the relation name and the related
-        // class name for the relations automatically generated below.
-        return array(
-        );
     }
-
-    /**
-     * @return array customized attribute labels (name=>label)
-     */
-    public function attributeLabels()
-    {
-        return array(
-            'id' => 'ID',
-            'email' => 'Email',
-            'passwd' => 'Passwd',
-            'nickname' => 'Nickname',
-            'truename' => 'Truename',
-            'status' => 'Status',
-        );
+    public function add_user($datas){
+        if(!$datas['email'] || !$datas['passwd']){
+            return false;
+        }
+        $this->email = $datas['email'];
+        $this->passwd = $this->encrypt($datas['passwd']);
+        $this->created = time();
+        return $this->save();
     }
-
+    public function encrypt($passwd){
+        $passwd .= Yii::app()->params['encrypt_prefix'];
+        return md5($passwd);
+    }
 }

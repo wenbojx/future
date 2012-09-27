@@ -24,8 +24,17 @@ class ModRegCode extends YDAO
         }
         $criteria=new CDbCriteria;
         $criteria->addCondition("code='{$code}'");
-        $criteria->addCondition("state=1");
+        //$criteria->addCondition("state=1");
         return $this->findAll($criteria);
+    }
+    public function overdue_code($code){
+        if(!$code){
+            return false;
+        }
+        $update['state'] = 2;
+        $criteria=new CDbCriteria;
+        $criteria->addCondition("code='{$code}'");
+        return $this->updateAll($update, $criteria);
     }
 
 }

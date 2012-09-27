@@ -4,43 +4,99 @@ class RegisterController extends FController{
 
     public $defaultAction = 'a';
     public $layout = 'home';
+    private $member_db = null;
 
     public function actionA(){
-    	$request = Yii::app()->request;
-    	$datas['page']['title'] = '免费注册';
+        $request = Yii::app()->request;
+        $datas['page']['title'] = '免费注册';
         $this->render('/member/register', array('datas'=>$datas));
     }
     public function actionReg(){
         $request = Yii::app()->request;
-        $this->login_state();
-        $reg_datas = $request->getPost('reg');
-        $datas['email'] = $reg_datas['username'];
-        $datas['passwd'] = $reg_datas['passwd'];
-        $datas['repasswd'] = $reg_datas['repasswd'];
-        $datas['code'] = $reg_datas['code'];
-        print_r($datas);
-        if($datas['username']== '' || $datas['passwd']=='' ){
-            $datas['error_msg'] = 'username or passwd can not empty!';
+        $datas['email'] = $request->getParam('email');
+        $datas['passwd'] = $request->getParam('passwd');
+        $datas['repasswd'] = $request->getParam('repasswd');
+        $datas['code'] = $request->getParam('code');
+        $msg['flag'] = '1';
+        if($datas['email']== ''){
+            $msg['flag'] = 0;
+            $msg['field']['email'] = '0';
         }
-        elseif($this->check_user($datas)){
-            $this->redirect(array('home/index'));
+        if($datas['passwd']== ''){
+            $msg['flag'] = 0;
+            $msg['field']['passwd'] = '0';
         }
-        $this->render('/member/login', array('datas'=>$datas));
+        if($datas['repasswd'] != $datas['passwd']){
+            $msg['flag'] = 0;
+            $msg['field']['repasswd'] = '0';
+        }
+        if($datas['code']== ''){
+            $msg['flag'] = 0;
+            $msg['field']['code'] = '0';
+        }
+        if($this->check_email($datas['email'])){
+            $msg['flag'] = 0;
+            $msg['field']['email'] = '1'; //已存在
+        }
+        $code_flag = $this->check_code($datas['code']);
+        if($code_flag != '1'){
+            $msg['flag'] = 0;
+            $msg['field']['code'] = $code_flag; //错误
+        }
+        if($msg['flag']){
+            $flag = $this->add_user($datas);
+            if($flag){
+                $msg['flag'] = 1;
+                $msg['url'] = $this->createUrl('/member/login');
+                $this->overdue_code($datas['code']);
+            }
+            else{
+                $msg['flag'] = 0;
+                $msg['msg'] = 0;
+            }
+        }
+        $this->display_msg($msg);
+
     }
-    private function check_user($datas){
-        $identity=new UserIdentity($datas['username'], $datas['passwd']);
-        if(!$identity->authenticate()){
+    private function overdue_code($code){
+        $code_db = new ModRegCode();
+        return $code_db->overdue_code($code);
+    }
+    private function check_code($code=''){
+        if(!$code){
+            return 2;
+        }
+        $code_db = new ModRegCode();
+        $datas = $code_db->check_code($code);
+        if($datas){
+            if($datas[0]['state'] ==2){
+                return '3';
+            }
+            return '1';
+        }
+        return '2'; //不存在
+    }
+    private function check_email($email = ''){
+        if(!$email){
             return false;
         }
-        unset($datas['passwd']);
-        Yii::app()->user->login($identity);
-        Yii::app()->session['userinfo'] = $datas;
-        return true;
+        $datas = $this->get_member_db()->find_by_email($email);
+        if($datas){
+            return true;
+        }
+        return false;
     }
-    private function logout(){
-        Yii::app()->session['userinfo'] = '';
-        $this->login_state();
+    private function add_user($datas){
+        return $this->get_member_db()->add_user($datas);
     }
-
+    /**
+     * @return Member
+     */
+    private function get_member_db(){
+        if(!$this->member_db){
+            $this->member_db = new Member();
+        }
+        return $this->member_db;
+    }
 
 }
