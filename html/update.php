@@ -18,6 +18,6 @@ while( $row = mysql_fetch_array($results) ){
     $email = $row['email'] ? $row['email'] : $result['content']['email'];
     $mobile = $row['mobile'] ? $row['mobile'] : $result['content']['mobile'];
     $sql = "UPDATE `member` SET `uid` = '{$uid}' `truename` = '{$truename}', `email`='{$email}',`mobile`='{$mobile}' WHERE `id` ={$id} LIMIT 1;";
-    echo $sql;
+    echo $sql."\n";
     $s = mysql_query($sql);
 }
