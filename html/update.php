@@ -19,5 +19,5 @@ while( $row = mysql_fetch_array($result) ){
     $mobile = $row['mobile'] ? $row['mobile'] : $result['content']['mobile'];
     $sql = "UPDATE `member` SET `uid` = '{$uid}' `truename` = '{$truename}', `email`='{$email}',`mobile`='{$mobile}' WHERE `id` ={$id} LIMIT 1;";
     echo $sql;
-    $result = mysql_query($sql);
+    $s = mysql_query($sql);
 }
