@@ -1,5 +1,5 @@
 <?php
-$file = '/var/www/album/html/num.txt';
+$file = '/var/www/num.txt';
 $start = file_get_contents($file);
 $start = $start+1;
 $end = $start+100;
