@@ -6,7 +6,7 @@ if (!$conn){
 
 mysql_select_db("members", $conn);
 mysql_query("set names 'utf8'");	//PHP 文件为 utf-8 格式时使用
-$sql = "select * from member where id>0 and id<10000";
+$sql = "select * from member where id>=10000 and id<20000";
 $results = mysql_query($sql);                //得到查询结果数据集
 
 //循环从数据集取出数据
