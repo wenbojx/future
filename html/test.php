@@ -56,6 +56,7 @@ for ($i = $start; $i<=$end; $i++ ){
         $str .= "--XX--:".$i."\n";
         continue;
     }
+    $uid = $result['content']['uid'];
     $truename = $result['content']['truename'];
     $email = $result['content']['email'];
     $mobile = $result['content']['mobile'];
@@ -73,8 +74,8 @@ for ($i = $start; $i<=$end; $i++ ){
     mysql_query("set names 'utf8'");	//PHP 文件为 utf-8 格式时使用
 
     //$sql = "INSERT INTO member(id, content, 'truename', 'email', 'mobile')VALUES(null, '{$data}', '{$truename}', '{$email}', '{$mobile}')";
-    $sql = "INSERT INTO `member` (`id` ,`content` ,`truename` ,`email` ,`mobile`)
-            VALUES (NULL , '{$data}', '{$truename}', '{$email}', '{$mobile}');";
+    $sql = "INSERT INTO `member` (`id`, `uid` ,`content` ,`truename` ,`email` ,`mobile`)
+            VALUES (NULL ,'{$uid}', '{$data}', '{$truename}', '{$email}', '{$mobile}');";
 
    // echo $sql."\n\n";                       //退出程序并打印 SQL 语句，用于调试
     if(!mysql_query($sql,$conn)){
