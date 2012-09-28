@@ -1,4 +1,36 @@
 <?php
+$secret = md5('YOKA.COM.USER'.(string)date('l-F'));
+
+$http_method = "get";
+$params = array();
+$params['method'] = 'GetUserDataByUid';
+$params['format'] = "json"; // 这里是返回数据的类型：php(是序列化数据)，json,xml
+//$params['uid'] = 5127410;
+$params['uid'] = 5038799;
+$params['sign'] = 1;
+
+$request_url = "http://space.yoka.com/services/user/uc_user.php";
+
+if ($params && is_array($params))
+{
+    ksort($params);
+    $secret_code = $secret;
+    foreach ($params as $key => $value)
+    {
+        if ($key != 'sign')
+        {
+            $secret_code .= $key.$value;
+        }
+    }
+    $params['sign'] = strtoupper(md5($secret_code));
+}
+
+$request_url .= "?". http_build_query($params);
+echo $request_url."\n\n";
+
+exit();
+
+
 $conn = @mysql_connect("localhost","root","wenbojx0513");
 if (!$conn){
     die("连接数据库失败：" . mysql_error());
