@@ -177,11 +177,11 @@ class UploadPanoController extends Controller{
         }
         $image = Yii::app()->image->load($file_path);
         $width = $this->tile_info[9];
-        $image->resize($width, $width)->quality(50);
+        $image->resize($width/2, $width/2)->quality(40);
         $file_path = $folder_pano.$width.'x'.$width.'.'.$file_type;
         $image->save($file_path);
         $width = $this->tile_info[10];
-        $image->resize($width, $width)->quality(80)->sharpen(5);
+        $image->resize($width, $width)->quality(90);
         $file_path = $folder_10.$width.'x'.$width.'.'.$file_type;
         $image->save($file_path);
         //切割图片

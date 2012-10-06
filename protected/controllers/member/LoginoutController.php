@@ -6,7 +6,7 @@ class LoginoutController extends NoLoginController{
     //public $layout = 'default';
 
     public function actionA(){
-        Yii::app()->session['userinfo'] = '';
+        unset(Yii::app()->session['userinfo']);
         $this->login_state();
     }
 

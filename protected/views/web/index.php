@@ -1,5 +1,5 @@
 <?php $this->pageTitle='足不出户，畅游中国';?>
-<div class="hero-unit">
+<div class="hero-unit padding40">
 	<h1>足不出户 畅游中国</h1>
 	<p><a target="_blank" href="http://weibo.com/yiluhao">关注微博</a></p>
 </div>

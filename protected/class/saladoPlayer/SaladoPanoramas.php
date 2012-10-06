@@ -46,9 +46,11 @@ class SaladoPanoramas extends SaladoPlayer{
         return $panorams_str;
     }
     private function get_panoram($panoram){
-    	//print_r($panoram);
+    	//print_r($panoram['s_attribute']);
         $panoram_str = '<panorama';
         if( isset($panoram['s_attribute'])){
+        	$camera = !isset($panoram['s_attribute']['camera']) ? '' : $panoram['s_attribute']['camera'];
+        	$panoram['s_attribute']['camera'] = $this->pano_attribute_camera($camera);
             $panoram_str .= $this->build_attribute($panoram['s_attribute']);
         }
         if( isset($panoram['hotspots'])){
@@ -56,6 +58,16 @@ class SaladoPanoramas extends SaladoPlayer{
         }
         $panoram_str .= '</panorama>';
         return $panoram_str;
+    }
+    private function pano_attribute_camera($camera){
+    	$default_fov = 90;
+    	if(!$camera){
+    		$camera = 'fov:'.$default_fov;
+    	}
+    	if(!strstr($camera, 'fov')){
+    		$camera .= ','.'fov:'.$default_fov;
+    	}
+    	return $camera;
     }
     private function get_hotspot($hotspots){
         $hotspots_str = '';

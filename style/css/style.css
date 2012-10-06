@@ -1,6 +1,7 @@
 @CHARSET "UTF-8";
 .container, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
     /* width: 921px; */
+    /* width: 1024px; */
 }
 .hero-unit{
 	margin-bottom:10px;
@@ -8,6 +9,12 @@
 }
 .span4 {
     width: 370px;
+}
+.padding40{
+	padding:40px 0 40px 40px;
+}
+.container h1{
+	font-size:45px;
 }
   
 /* Faded out hr */
@@ -39,7 +46,7 @@ hr.soften {
 	display:block;margin:4px 0;
 }
 .hero-unit p{
-	margin:20px 0 10px 0; float:right;
+	margin:5px 15px 10px 0; float:right;
 }
 .list .hero-unit{
 	padding:20px;

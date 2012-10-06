@@ -107,6 +107,9 @@ class Scene extends CActiveRecord
     	$scene_datas = $scene_db->findAll($criteria);
     	return $scene_datas;
     }
+    /**
+     * 获取该场景后的场景信息
+	*/
     public function find_extend_scene($scene_id, $not_in, $limit, $project_id=0){
         $scene_ids = $scene_id;
         if(is_array($not_in)){
@@ -120,7 +123,29 @@ class Scene extends CActiveRecord
             $criteria->addCondition("id not in ({$scene_ids})");
         }
         $criteria->addCondition('display=2');
-        return $this->findAll($criteria);
+        $datas = $this->findAll($criteria);
+        if($datas){
+        	return $datas;
+        }
+        return $this->find_extend_scene_front($scene_id, $not_in, $limit, $project_id);
+    }
+    /**
+     * 获取该场景后的场景信息
+     */
+    public function find_extend_scene_front($scene_id, $not_in, $limit, $project_id=0){
+    	$scene_ids = $scene_id;
+    	if(is_array($not_in)){
+    		$scene_ids = implode(',', $not_in);
+    	}
+    	$criteria=new CDbCriteria;
+    	$criteria->order = 'id DESC';
+    	$criteria->limit = $limit;
+    	$criteria->addCondition("id<{$scene_id}");
+    	if($scene_ids){
+    		$criteria->addCondition("id not in ({$scene_ids})");
+    	}
+    	$criteria->addCondition('display=2');
+    	return $this->findAll($criteria);
     }
     public function find_extend_scene_project($scene_id, $limit, $project_id=0){
     	$scene_ids = $scene_id;
