@@ -50,5 +50,10 @@ var check_login_url = '<?=$this->createUrl('/member/login/check');?>';
     </div>
 </div>
 <script type="text/javascript" src="<?=Yii::app()->baseUrl . "/style/js/google.analytics.js"?>"></script>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F9805da3aa6c6c7c215ccf3f709789543' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
 </body>
 </html>
