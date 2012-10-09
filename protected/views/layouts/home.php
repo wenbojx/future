@@ -25,16 +25,16 @@ var check_login_url = '<?=$this->createUrl('/member/login/check');?>';
                     <ul id="main-menu-right" class="nav pull-right">
                         <!-- <li><a href="<?=$this->createUrl('/web/list/a');?>">全部景点</a></li> -->
                         <li id="m_register" style="display:none">
-                        	<a href="<?=$this->createUrl('/member/register/a');?>">注册</a>
+                            <a href="<?=$this->createUrl('/member/register/a');?>">注册</a>
                         </li>
                         <li id="m_login" style="display:none">
-                        	<a href="<?=$this->createUrl('/member/login/a');?>">登陆</a>
+                            <a href="<?=$this->createUrl('/member/login/a');?>">登陆</a>
                         </li>
                         <li id="m_welcome" style="display:none">
-                        	<a href="" id="m_nickname"></a>
+                            <a href="" id="m_nickname"></a>
                         </li>
                         <li id="m_loginout" style="display:none">
-                        	<a href="<?=$this->createUrl('/member/loginout/a');?>" id="m_nickname">[退出]</a>
+                            <a href="<?=$this->createUrl('/member/loginout/a');?>" id="m_nickname">[退出]</a>
                         </li>
                     </ul>
                 </div>
