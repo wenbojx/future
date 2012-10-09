@@ -55,7 +55,6 @@ class SaladoPlayer{
         $key = $memcache_obj->get_pano_xml_key($id, $admin);
         //$memcache_obj->rm_mem_datas($key);
         if($content = $memcache_obj->get_mem_data($key)){
-            echo 111;
             return $content;
         }
         else{
