@@ -78,7 +78,6 @@
             <br><span id="publish_scene_msg"></span>
     </div>
 <script type="text/javascript">
-
 var player_url = baseUrl+'/pages/salado/Player.swf';
 var scene_xml_url = '<?=$this->createUrl('/salado/index/a/', array('id'=>$datas['id'], 'from'=>'admin'))?>';
 var id = 'scene_box';

@@ -9,8 +9,11 @@ var check_login_url = '<?=$this->createUrl('/member/login/check');?>';
 </script>
 <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . "/style/js/jquery.min.js");?>
 <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . "/style/js/bootstrap.min.js");?>
-
 <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . "/style/js/core.js");?>
+<?php if (isset ($this->editPano) && $this->editPano){?>
+<?php Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . "/style/css/salado.edit.css"); ?>
+<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . "/style/js/salado.admin.js");?>
+<?php }?>
 <title><?=$this->pageTitle?></title>
 </head>
 <body>

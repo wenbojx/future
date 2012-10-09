@@ -4,20 +4,25 @@
         <h2>足不出户  畅游中国</h2>
     </div>
     <div class="row-fluid">
-        <div class="span9">
+        <div class="span11">
             <div class="thumbnail">
                 <div class="pano-detail">
                     <div id="scene_box"></div>
                 </div>
             </div>
         </div>
-        <div class="span3">
+        <div class="span1">
             <div class="thumbnail">
-                <h3>返回景点 </h3>
-                <h3><a href="<?=$this->createUrl('/web/view/a/', array('id'=>$datas['project']['id']));?>">
-                <?php if($datas['project']){echo $datas['project']['name'];}?>
-                </a></h3>
+                <button class="btn btn-success">返回</button>
+                <button class="btn">地图</button>
+                <button class="btn">链接</button>
+                <button class="btn">足迹</button>
+                <button class="btn">游记</button>
+                <button class="btn">攻略</button>
+                <button class="btn">评论</button>
+                
             </div>
+            <!-- 
             <div class="thumbnail margin-top15">
             <?php if($datas['extend']){ foreach ($datas['extend'] as $v){?>
                 <div class="align-center margin-tb10">
@@ -27,6 +32,7 @@
                 </div>
             <?php }}?>
             </div>
+            -->
         </div>
     </div>
 </div>

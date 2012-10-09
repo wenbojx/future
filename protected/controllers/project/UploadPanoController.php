@@ -176,12 +176,12 @@ class UploadPanoController extends Controller{
             mkdir($folder_10);
         }
         $image = Yii::app()->image->load($file_path);
-        $width = $this->tile_info[9];
-        $image->resize($width/2, $width/2)->quality(40);
+        $width = $this->tile_info[9]/2;
+        $image->resize($width, $width)->quality(30);
         $file_path = $folder_pano.$width.'x'.$width.'.'.$file_type;
         $image->save($file_path);
         $width = $this->tile_info[10];
-        $image->resize($width, $width)->quality(90);
+        $image->resize($width, $width);
         $file_path = $folder_10.$width.'x'.$width.'.'.$file_type;
         $image->save($file_path);
         //切割图片
@@ -228,7 +228,7 @@ class UploadPanoController extends Controller{
                 //imagejpeg($iOut,"images/".$i."_".$j.".jpg"); //输出成0_0.jpg,0_1.jpg这样的格式
                 $file_path = $folder.'10/'.$i.'x'.$j.'.'.$file_type;
                 //echo $file_path.'<br>';
-                $quality = 85;
+                $quality = 70;
                 switch($type) {
                     case IMAGETYPE_JPEG :
                         imagejpeg($iOut, $file_path,$quality); // 存储图像
