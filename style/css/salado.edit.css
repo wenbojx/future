@@ -1,1 +1,16 @@
 @CHARSET "UTF-8";
+.edit_box{
+   height:300px;
+}
+.edit_relative{
+    position:relative; width:50px;
+}
+.edit_box .edit_buttons{
+    position:absolute; right:0px ;top:0px;
+}
+.edit_panel{
+    position:absolute; right:0px; top:0px; width:750px;
+}
+.panel_box{
+    text-align:center;
+}

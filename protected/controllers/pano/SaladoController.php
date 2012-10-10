@@ -11,7 +11,7 @@ class SaladoController extends Controller{
         if(!$scene_id){
             exit('参数错误');
         }
-        
+
         $datas['pano'] = $this->get_scenes($scene_id);
         $datas['page_title'] = '编辑全景图';
         $this->render('/pano/panoEdit', array('datas'=>$datas));

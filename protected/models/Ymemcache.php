@@ -3,14 +3,16 @@ class Ymemcache extends CMemCache{
     private $pano_xml_prefix = 'pano_xml_';
     private $img_no_prefix = 'img_no_';
     private $img_id_prefix = 'img_id_';
+    private $mmcache = true;
     public function __construct(){
+        $this->mmcache = Yii::app()->params['mmcache'];
         return parent::init();
     }
     /**
      *
      */
     public function get_pano_xml_key($scene_id, $admin=false){
-    	$prefix = $admin?'1':'2';
+        $prefix = $admin?'1':'2';
         return $this->pano_xml_prefix.$scene_id.'_'.$prefix;
     }
     public function get_img_no_key($no){
@@ -26,6 +28,9 @@ class Ymemcache extends CMemCache{
         return $this->img_id_prefix.$id;
     }
     public function get_mem_data($key){
+        if(!$this->mmcache){
+            return false;
+        }
         return parent::getValue($key);
     }
     public function set_mem_data($key, $value, $expire){
