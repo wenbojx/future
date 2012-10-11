@@ -248,6 +248,7 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 					// Adjust the styles of the movie
 					$('#' + swfuploadify.movieName).css({
 						'position' : 'absolute',
+						'left':0,
 						'z-index'  : 1
 					});
 

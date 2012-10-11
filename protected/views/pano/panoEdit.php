@@ -8,6 +8,7 @@
             <div class="thumbnail">
                     <div class="pano-detail" id="pano-detail">
                         <div id="scene_box"></div>
+                        <div id="hotspot_icon" class="hotspot_icon"></div>
                     </div>
             </div>
         </div>
@@ -27,14 +28,9 @@
                             <button class="btn">导航</button> -->
                             <button class="btn btn-warning">发布</button>
                         </div>
-                        <div class="edit_panel">
-                            <div class="row-fluid">
-                                <div class="span11">
-                                    <div id="panel_box" class="panel_box">
-
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="edit_panel" id="edit_panel">
+	                        <div id="panel_box" class="panel_box">
+	                        </div>
                         </div>
                     </div>
                 </div>
@@ -52,6 +48,7 @@ var google_map_tip_url = baseUrl+'/style/img/dot-s-nomarl_16x24.png';
 var save_module_datas_url = '<?=$this->createUrl('/salado/modules/')?>';
 var scene_publish_url = '<?=$this->createUrl('/project/sceneEdit/publish')?>';
 </script>
+
 <script type="text/javascript" src="http://ditu.google.cn/maps?file=api&v=2.95&sensor=false&key=<?=Yii::app()->params['google_map_key']?>"></script>
 <script type="text/javascript" src="http://www.google.com/uds/api?file=uds.js&v=1.0&key=<?=Yii::app()->params['google_map_key']?>"></script>
 <script type="text/javascript" src="http://www.google.com/uds/solutions/localsearch/gmlocalsearch.js"></script>
@@ -60,11 +57,11 @@ var scene_publish_url = '<?=$this->createUrl('/project/sceneEdit/publish')?>';
 <script type="text/javascript" src="<?=Yii::app()->baseUrl . "/pages/salado/scene.js"?>"></script>
 <script type="text/javascript" src="<?=Yii::app()->baseUrl . "/style/js/google.map.js"?>"></script>
 <script>
-var player_url = '<?=Yii::app()->baseUrl?>/pages/salado/Player.swf';
+var player_url = '<?=Yii::app()->baseUrl?>/plugins/salado/Player.swf';
 var scene_xml_url = '<?=$this->createUrl('/salado/index/a/', array('id'=>$datas['pano']['id'],'from'=>'admin'))?>';
 load_scene('scene_box', scene_xml_url, player_url, 'transparent');
 
-var upload_pano_url = '<?=$this->createUrl('/pano/uploadPhoto/show/', array('scene_id'=>$datas['pano']['id']))?>';
+var upload_pano_url = '<?=$this->createUrl('/pano/uploadPanel/show/', array('scene_id'=>$datas['pano']['id']))?>';
 var position_url = '<?=$this->createUrl('/pano/config/v/', array('t'=>'position', 'scene_id'=>$datas['pano']['id']))?>';
 //var preview_url = '<?=$this->createUrl('/pano/config/v/', array('t'=>'preview', 'scene_id'=>$datas['pano']['id']))?>';
 var thumb_url = '<?=$this->createUrl('/pano/config/v/', array('t'=>'thumb', 'scene_id'=>$datas['pano']['id']))?>';

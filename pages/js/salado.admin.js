@@ -192,7 +192,6 @@ function onViewChange(pan, tilt, fov, direction){
     $("#camera-info-pan").html(pan);
     $("#camera-info-tilt").html(tilt);
     $("#camera-info-fov").html(fov);
-
 }
 
 function hotspot_click(){

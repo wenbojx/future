@@ -6,7 +6,7 @@ class ConfigController extends Controller{
             'button', 'map', 'navigat', 'radar',
             'html', 'rightkey', 'link', 'flare','action','thumb'
             );
-    private $pano_thumb_size = '480x240';
+    private $pano_thumb_size = '240x120';
 
     public function actionV(){
         $request = Yii::app()->request;
@@ -26,7 +26,7 @@ class ConfigController extends Controller{
         if(!in_array($type, $this->defaultType)){
             exit();
         }
-        $this->render('/project/scene/'.$type, array('datas'=>$datas));
+        $this->render('/pano/panel/'.$type, array('datas'=>$datas));
     }
     /**
      * 获取场景缩略图

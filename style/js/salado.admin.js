@@ -13,17 +13,24 @@ function bind_pano_btn(){
     });
     $('#btn_hotspot').bind('click',function(){
         load_page(hotspot_url);
+        hotspot_click();
     });
 }
 function load_page(url){
     var ajax = {url: url, type: 'GET', dataType: 'html', cache: false, success: function(html) {
                 $("#panel_box").html(html);
+                show_edit_panel();
                 return true;
             }
         };
     $.ajax(ajax);
 }
-
+function hide_edit_panel(){
+	$('#edit_panel').hide();
+}
+function show_edit_panel(){
+	$('#edit_panel').show();
+}
 
 function thumb_box_upload(){
     var post_datas = {'scene_id':scene_id,'from':'thumb_pic','SESSION_ID':session_id};
@@ -34,8 +41,8 @@ function thumb_box_upload(){
         //'uploadLimit':1,
         'buttonText':'上传全景图',
         'debug':false,
-        'width':107,
-        'height':34,
+        'width':42,
+        'height':19,
         'fileSizeLimit':'5242880KB',
         'fileTypeDesc' : 'jpg,png,gif格式',
         'fileTypeExts':'*.jpg;*.png;*.gif;',
@@ -63,8 +70,8 @@ function thumb_box_upload(){
 function init_box_upload( position){
     //var img_w = 800;
     //var img_h = 800;
-    var img_btn_w = 150;
-    var img_btn_h = 150;
+    var img_btn_w = 120;
+    var img_btn_h = 120;
     var button_img = $("#box_"+position).attr('src');
     var post_datas = {'position':position,'scene_id':scene_id,'from':'box_pic','SESSION_ID':session_id};
     $("#box_"+position).uploadify({
@@ -114,3 +121,29 @@ function init_box_upload( position){
         $("#box_"+position).css('z-index', cap2);
     }
 }
+function hotspot_click(){
+        var img_width = $("#hotspot_icon").css("width");
+        var img_height = $("#hotspot_icon").css("height");
+        var box_width = $("#pano-detail").css("width");
+        var box_height = $("#pano-detail").css("height");
+        var top = (parseInt(box_height)-parseInt(img_height) )/2;
+        var left = (parseInt(box_width)-parseInt(img_width) )/2;
+        $("#hotspot_icon").css("top",top+"px");
+        $("#hotspot_icon").css("left",left+"px");
+        $("#hotspot_icon").show();
+}
+function hide_hotspot_icon(){
+	$("#hotspot_icon").hide();
+}
+
+function onViewChange(pan, tilt, fov, direction){
+    if(!$("#hotspot_icon").is(":hidden")){
+        $("#hotspot_info_pan").html(pan);
+        $("#hotspot_info_tilt").html(tilt);
+        $("#hotspot_info_fov").html(fov);
+    }
+    /*$("#camera-info-pan").html(pan);
+    $("#camera-info-tilt").html(tilt);
+    $("#camera-info-fov").html(fov);*/
+}
+

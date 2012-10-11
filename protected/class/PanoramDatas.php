@@ -53,7 +53,7 @@ class PanoramDatas{
         if(!isset($this->global_datas['s_attribute']['debug'])){
             $this->global_datas['s_attribute']['debug'] = 'false';
             if($this->admin){
-                $this->global_datas['s_attribute']['debug'] = 'true';
+                //$this->global_datas['s_attribute']['debug'] = 'true';
             }
         }
         if($this->admin){
