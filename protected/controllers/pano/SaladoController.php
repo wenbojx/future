@@ -17,6 +17,7 @@ class SaladoController extends Controller{
             exit();
         }
         $datas['pano'] = $this->get_scenes($scene_id);
+        $datas['position'] = $this->get_position($scene_id);
         //print_r($datas);
         $datas['page_title'] = '编辑全景图';
         $this->render('/pano/panoEdit', array('datas'=>$datas));
@@ -29,6 +30,18 @@ class SaladoController extends Controller{
         $key = $memcache_obj->get_pano_xml_key($scene_id, true);
         $memcache_obj->rm_mem_datas($key);
         $this->redirect(array('pano/salado/edit/','id'=>$scene_id));
+    }
+    /**
+     * 获取场景地理位置
+     */
+    private function get_position($scene_id){
+    	$position = array('glng'=>0, 'glat'=>0, 'gzoom'=>12);
+    	$position_db = new ScenesPosition();
+    	$datas = $position_db->findByPk($scene_id);
+    	if(!$datas){
+    		$position;
+    	}
+    	return $datas;
     }
     /**
      * 获取场景信息

@@ -157,4 +157,92 @@ function onViewChange(pan, tilt, fov, direction){
         $("#camera-info-fov").html(fov);
     }
 }
+function save_position_detail(scene_id){
+    var msg = {};
+    msg.error = '操作失败';
+    msg.success = '操作成功';
+    var element_id = 'position_save_msg';
+    if(!scene_id){
+        done_error(element_id, msg.error);
+    }
+    var data = {};
+    data.glng = parseFloat ($("#span_lng").html());
+    data.glat = parseFloat ($("#span_lat").html());
+    data.zoom = parseInt ($("#span_zoom").html());
+    data.scene_id = scene_id;
+
+    var url = save_module_datas_url+'/position/save/';
+    save_datas(url, data, '', '', call_back);
+    function call_back(datas){
+        alert(datas.msg);
+    }
+}
+function save_camera_detail(scene_id){
+    var msg = {};
+    msg.error = '操作失败';
+    msg.success = '操作成功';
+    var element_id = 'camera_save_msg';
+    if(!scene_id){
+        done_error(element_id, msg.error);
+    }
+    var data = {};
+    data.pan = parseInt ($("#camera-info-pan").html());
+    data.tilt = parseInt ($("#camera-info-tilt").html());
+    data.fov = parseInt ($("#camera-info-fov").html());
+    data.scene_id = scene_id;
+
+    var url = save_module_datas_url+'/global/camera/';
+    save_datas(url, data, '', '', call_back);
+    function call_back(datas){
+        alert(datas.msg);
+    }
+}
+
+function save_hotspot_detail(scene_id){
+    var msg = {};
+    msg.error = '操作失败';
+    msg.success = '操作成功';
+    var element_id = 'hotspot_save_msg';
+    if(!scene_id){
+        done_error(element_id, msg.error);
+    }
+    var data = {};
+    data.pan = parseInt ($("#hotspot_info_pan").html());
+    data.tilt = parseInt ($("#hotspot_info_tilt").html());
+    data.fov = parseInt ($("#hotspot_info_fov").html());
+    data.type = $("#hotspot_info_d_type").val();
+    data.link_scene_id = $("#hotspot_info_d_link_scene_id").val();
+    data.scene_id = scene_id;
+    var url = save_module_datas_url+'/hotspot/save/';
+    save_datas(url, data, '', '', call_back);
+    function call_back(datas){
+        alert(datas.msg);
+    }
+}
+function publish_scene(scene_id, display){
+    var msg = {};
+    msg.error = '操作失败';
+    msg.success = '操作成功';
+    var element_id = 'publish_scene_msg';
+    if(!scene_id){
+        done_error(element_id, msg.error);
+    }
+    var data = {};
+    data.scene_id = scene_id;
+    data.display = display;
+    var url = scene_publish_url;
+    save_datas(url, data, '', '', call_back);
+    function call_back(datas){
+        alert(datas.msg);
+        if(display == '2' && datas.flag){
+        	$("#offline_pano").show();
+        	$("#online_pano").hide();
+        }
+        if(display == '1' && datas.flag){
+        	$("#online_pano").show();
+        	$("#offline_pano").hide();
+        }
+    }
+}
+
 

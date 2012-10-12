@@ -7,9 +7,9 @@
     </div>
     <div class="panle_content" style="height:80px;width:180px;">
             <p style="text-align: left">
-                    pan: <span id="camera-info-pan"></span>
-                    tilt: <span id="camera-info-tilt"></span>
-                    fov: <span id="camera-info-fov"></span>
+                    pan: <span id="camera-info-pan"><?=$datas['camera']['pan']?></span>
+                    tilt: <span id="camera-info-tilt"><?=$datas['camera']['tilt']?></span>
+                    fov: <span id="camera-info-fov"><?=$datas['camera']['fov']?></span>
             </p>
             <p style="text-align: left">调整摄像机初始位置及焦距</p>
         <div>

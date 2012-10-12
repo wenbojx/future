@@ -3,6 +3,11 @@
     <div class="hero-unit margin-top55">
         <h2>足不出户  畅游中国</h2>
     </div>
+    <ul class="breadcrumb">
+        <li><a href="#">首页</a> <span class="divider">/</span></li>
+        <li><a href="#">类库</a> <span class="divider">/</span></li>
+        <li class="active">数据</li>
+    </ul>
     <div class="row-fluid">
         <div class="span11">
             <div class="thumbnail">
@@ -26,7 +31,8 @@
                             <button class="btn" id="btn_hotspot">热点</button>
                             <!-- <button class="btn">按钮</button>
                             <button class="btn">导航</button> -->
-                            <button class="btn btn-warning">发布</button>
+                            <button id="online_pano" class="btn btn-warning" style="<?=$datas['pano']['display'] == '1'?'':'display:none' ?>" onclick="publish_scene(<?=$datas['pano']['id']?>,2)">发布</button>
+                            <button id="offline_pano" class="btn btn-warning" style="<?=$datas['pano']['display'] == '2'?'':'display:none' ?>" onclick="publish_scene(<?=$datas['pano']['id']?>,1)">下线</button>
                         </div>
                         <div class="edit_panel" id="edit_panel">
                             <div id="panel_box" class="panel_box">
@@ -48,7 +54,12 @@ var session_id = '<?=session_id()?>';
 var pic_url = '<?=$this->createUrl('/panos/imgOut/index/')?>';
 var google_map_tip_url = baseUrl+'/style/img/dot-s-nomarl_16x24.png';
 var save_module_datas_url = '<?=$this->createUrl('/salado/modules/')?>';
-var scene_publish_url = '<?=$this->createUrl('/project/sceneEdit/publish')?>';
+
+var glng = '<?=$datas['position']['glng']?>';
+var glat = '<?=$datas['position']['glat']?>';
+var gzoom = '<?=$datas['position']['gzoom']?>';
+
+var scene_publish_url = '<?=$this->createUrl('/pano/scene/publish')?>';
 </script>
 
 <script type="text/javascript" src="http://ditu.google.cn/maps?file=api&v=2.95&sensor=false&key=<?=Yii::app()->params['google_map_key']?>"></script>
@@ -56,7 +67,7 @@ var scene_publish_url = '<?=$this->createUrl('/project/sceneEdit/publish')?>';
 <script type="text/javascript" src="http://www.google.com/uds/solutions/localsearch/gmlocalsearch.js"></script>
 
 <script type="text/javascript" src="<?=Yii::app()->baseUrl . "/style/js/common.js"?>"></script>
-<script type="text/javascript" src="<?=Yii::app()->baseUrl . "/pages/salado/scene.js"?>"></script>
+<script type="text/javascript" src="<?=Yii::app()->baseUrl . "/plugins/salado/scene.js"?>"></script>
 <script type="text/javascript" src="<?=Yii::app()->baseUrl . "/style/js/google.map.js"?>"></script>
 <script>
 var player_url = '<?=Yii::app()->baseUrl?>/plugins/salado/Player.swf';

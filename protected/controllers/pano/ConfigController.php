@@ -27,12 +27,22 @@ class ConfigController extends Controller{
             $scene_files = $this->get_scene_pic($scene_id);
             $datas['scene_files'] = $this->get_file_url($scene_files);
         }
+        elseif ($type == 'camera'){
+        	$datas['camera'] = $this->get_camera_info($scene_id);
+        	//print_r($datas['camera']);
+        }
         if(!in_array($type, $this->defaultType)){
             exit();
         }
         $this->render('/pano/panel/'.$type, array('datas'=>$datas));
     }
-
+    /**
+     * 获取摄像机信息
+     */
+    private function get_camera_info($scene_id){
+    	$panoram_db = new ScenesPanoram();
+    	return $panoram_db->get_camera_info($scene_id);
+    }
     /**
      * 获取图片地址
      */

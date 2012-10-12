@@ -1,6 +1,6 @@
 <?php
 ini_set('memory_limit', '100M');
-class UploadPanoController extends Controller{
+class UploadController extends Controller{
     public $defaultAction = 'uploadFile';
     //public $layout = 'page';
     public $position = array('left'=>1,'right'=>2,'down'=>3,'up'=>4,'front'=>5,'back'=>6);

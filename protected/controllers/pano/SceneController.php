@@ -35,4 +35,21 @@ class SceneController extends Controller{
         }
         $this->render('/project/sceneList', array('datas'=>$datas, 'project_id'=>$project_id));
     }
+    public function actionPublish(){
+    	$request = Yii::app()->request;
+    	$scene_id = $request->getParam('scene_id');
+    	$this->check_scene_own($scene_id);
+    	$msg['flag'] = 1;
+    	$msg['msg'] = '操作成功';
+    	$display = $request->getParam('display');
+    	$scene_db = new Scene();
+    	$datas = $scene_db->update_scene_dispaly($scene_id, $display);
+    	if(!$datas){
+    		$msg['flag'] = 0;
+    		$msg['msg'] = '操作失败';
+    	}
+    	$this->display_msg($msg);
+    }
 }
+
+

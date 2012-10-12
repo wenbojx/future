@@ -25,7 +25,7 @@ function jump_to(){
 }
 
 
-function save_datas(url, data, element_id, msg, type, dataType){
+function save_datas(url, data, type, dataType, done){
     if (!url){
         done_error(element_id, msg.error);
     }
@@ -38,10 +38,10 @@ function save_datas(url, data, element_id, msg, type, dataType){
         dataType: dataType,
         //timeout: 1000,
         error: function(){
-            done_error(element_id, msg.error);
+        	done(datas);
         },
         success: function(datas){
-            done_success(element_id, msg.success, datas);
+            done(datas);
         }
     });
 }

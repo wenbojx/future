@@ -54,6 +54,32 @@ class ScenesPanoram extends CActiveRecord
 			return $this->updateByPk($scene_id, $attributes);
 		}
 	}
-	
+	/**
+	 * 获取摄像机信息
+	 */
+	public function get_camera_info($scene_id){
+		if(!$scene_id){
+			return false;
+		}
+		$panoram = $this->find_by_scene_id($scene_id);
+		if(!$panoram){
+			return false;
+		}
+		$panoram_array = json_decode($panoram['content'],true);
+		$camera = $panoram_array['s_attribute']['camera'];
+		if(!$camera){
+			return false;
+		}
+		$camera_info = array();
+		$explode = explode(',', $camera);
+		if(is_array($explode)){
+			foreach ($explode as $v){
+				$explode_1 = explode(':', $v);
+				$key = $explode_1[0];
+				$camera_info[$key] = $explode_1[1];
+			}
+		}
+		return $camera_info;
+	}
 	
 }
