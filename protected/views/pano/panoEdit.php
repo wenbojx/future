@@ -17,20 +17,20 @@
                 <div class="edit_box">
                     <div class="edit_relative">
                         <div class="edit_buttons">
-                            <button class="btn btn-success">预览</button>
+                            <button class="btn btn-success" id="btn_review">预览</button>
                             <button class="btn" id="btn_upload">上传</button>
                             <button class="btn" id="btn_position">位置</button>
                             <button class="btn" id="btn_thumb">缩略</button>
-                            <button class="btn">摄像</button>
-                            <button class="btn">视角</button>
+                            <button class="btn" id="btn_camera">摄像</button>
+                            <!-- <button class="btn">视角</button> -->
                             <button class="btn" id="btn_hotspot">热点</button>
                             <!-- <button class="btn">按钮</button>
                             <button class="btn">导航</button> -->
                             <button class="btn btn-warning">发布</button>
                         </div>
                         <div class="edit_panel" id="edit_panel">
-	                        <div id="panel_box" class="panel_box">
-	                        </div>
+                            <div id="panel_box" class="panel_box">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -40,7 +40,9 @@
 </div>
 <div class="clear"></div>
 <script>
+var scene_id = '<?=$datas['pano']['id']?>';
 var baseUrl = '<?=Yii::app()->baseUrl?>';
+var clean_url = '<?=$this->createUrl('/pano/salado/edit/', array('id'=>$datas['pano']['id'], 'clean'=>1))?>';
 var flash_url = baseUrl+'/pages/uploadify/uploadify.swf';
 var session_id = '<?=session_id()?>';
 var pic_url = '<?=$this->createUrl('/panos/imgOut/index/')?>';
@@ -61,10 +63,11 @@ var player_url = '<?=Yii::app()->baseUrl?>/plugins/salado/Player.swf';
 var scene_xml_url = '<?=$this->createUrl('/salado/index/a/', array('id'=>$datas['pano']['id'],'from'=>'admin'))?>';
 load_scene('scene_box', scene_xml_url, player_url, 'transparent');
 
-var upload_pano_url = '<?=$this->createUrl('/pano/uploadPanel/show/', array('scene_id'=>$datas['pano']['id']))?>';
+var upload_pano_url = '<?=$this->createUrl('/pano/config/v/', array('t'=>'face', 'scene_id'=>$datas['pano']['id']))?>';
 var position_url = '<?=$this->createUrl('/pano/config/v/', array('t'=>'position', 'scene_id'=>$datas['pano']['id']))?>';
 //var preview_url = '<?=$this->createUrl('/pano/config/v/', array('t'=>'preview', 'scene_id'=>$datas['pano']['id']))?>';
 var thumb_url = '<?=$this->createUrl('/pano/config/v/', array('t'=>'thumb', 'scene_id'=>$datas['pano']['id']))?>';
+var camera_url = '<?=$this->createUrl('/pano/config/v/', array('t'=>'camera', 'scene_id'=>$datas['pano']['id']))?>';
 var hotspot_url = '<?=$this->createUrl('/pano/config/v/', array('t'=>'hotspot', 'scene_id'=>$datas['pano']['id']))?>';
 bind_pano_btn();
 </script>

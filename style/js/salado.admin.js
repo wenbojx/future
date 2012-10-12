@@ -2,6 +2,9 @@ $(document).ready(function() {
     bind_pano_btn();
 })
 function bind_pano_btn(){
+    $('#btn_review').bind('click',function(){
+        clean_pano_cache();
+    });
     $('#btn_upload').bind('click',function(){
         load_page(upload_pano_url);
     });
@@ -11,10 +14,16 @@ function bind_pano_btn(){
     $('#btn_thumb').bind('click',function(){
         load_page(thumb_url);
     });
+    $('#btn_camera').bind('click',function(){
+        load_page(camera_url);
+    });
     $('#btn_hotspot').bind('click',function(){
         load_page(hotspot_url);
         hotspot_click();
     });
+}
+function clean_pano_cache(){
+     window.location.href= clean_url;
 }
 function load_page(url){
     var ajax = {url: url, type: 'GET', dataType: 'html', cache: false, success: function(html) {
@@ -26,10 +35,10 @@ function load_page(url){
     $.ajax(ajax);
 }
 function hide_edit_panel(){
-	$('#edit_panel').hide();
+    $('#edit_panel').hide();
 }
 function show_edit_panel(){
-	$('#edit_panel').show();
+    $('#edit_panel').show();
 }
 
 function thumb_box_upload(){
@@ -60,8 +69,8 @@ function thumb_box_upload(){
                 alert(dataObj.msg);
             }
             else if(response>0){
-                var url = pic_url+'/id/'+dataObj.file+'/size/480x240.jpg';
-                var img_str = '<img width="480" height="240" src="'+url+'"/>';
+                var url = pic_url+'/id/'+dataObj.file+'/size/240x120.jpg';
+                var img_str = '<img width="240" height="120" src="'+url+'"/>';
                 $("#thumb_img").html(img_str);
             }
         }
@@ -133,17 +142,19 @@ function hotspot_click(){
         $("#hotspot_icon").show();
 }
 function hide_hotspot_icon(){
-	$("#hotspot_icon").hide();
+    $("#hotspot_icon").hide();
 }
 
 function onViewChange(pan, tilt, fov, direction){
-    if(!$("#hotspot_icon").is(":hidden")){
+    if($("#hotspot_icon") && !$("#hotspot_icon").is(":hidden")){
         $("#hotspot_info_pan").html(pan);
         $("#hotspot_info_tilt").html(tilt);
         $("#hotspot_info_fov").html(fov);
     }
-    /*$("#camera-info-pan").html(pan);
-    $("#camera-info-tilt").html(tilt);
-    $("#camera-info-fov").html(fov);*/
+    if($("#camera-info-pan")){
+        $("#camera-info-pan").html(pan);
+        $("#camera-info-tilt").html(tilt);
+        $("#camera-info-fov").html(fov);
+    }
 }
 

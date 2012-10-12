@@ -10,13 +10,14 @@ var check_login_url = '<?=$this->createUrl('/member/login/check');?>';
 <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . "/style/js/jquery.min.js");?>
 <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . "/style/js/bootstrap.min.js");?>
 <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . "/style/js/core.js");?>
+
 <?php if (isset ($this->editPano) && $this->editPano){?>
 <?php Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . "/style/css/salado.edit.css"); ?>
 <?php Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . "/plugins/uploadify/uploadify.css"); ?>
-
 <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . "/style/js/salado.admin.js");?>
 <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . "/plugins/uploadify/jquery.uploadify-3.1.js");?>
 <?php }?>
+
 <title><?=$this->pageTitle?></title>
 </head>
 <body>
@@ -55,7 +56,7 @@ var check_login_url = '<?=$this->createUrl('/member/login/check');?>';
     Copyright © 2012 www.yiluhao.com All Rights Reserved | yiluhao@gmail.com
     </div>
 </div>
-<!-- 
+<!--
 <script type="text/javascript" src="<?=Yii::app()->baseUrl . "/style/js/google.analytics.js"?>"></script>
  -->
 </body>
