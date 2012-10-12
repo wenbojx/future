@@ -17,11 +17,19 @@ function check_login(){
     $.post(check_login_url, {}, login_state, 'json');
 }
 var jump_url = '';
-function jump_to(){
+function jump_to(jump_url, target){
     if(!jump_url){
         return false;
     }
-    window.location.href = jump_url;
+    if(!target){
+    	target = 'self';
+    }
+    if(target == 'blank'){
+    	window.open(jump_url);
+    }
+    else{
+    	window.location.href = jump_url;
+    }
 }
 
 

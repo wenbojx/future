@@ -21,6 +21,9 @@ function bind_pano_btn(){
         load_page(hotspot_url);
         hotspot_click();
     });
+    $('#btn_preview').bind('click',function(){
+        jump_to(preview_url, 'blank');
+    });
 }
 function clean_pano_cache(){
      window.location.href= clean_url;

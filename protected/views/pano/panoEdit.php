@@ -22,7 +22,7 @@
                 <div class="edit_box">
                     <div class="edit_relative">
                         <div class="edit_buttons">
-                            <button class="btn btn-success" id="btn_review">预览</button>
+                            <button class="btn btn-success" id="btn_review">载入</button>
                             <button class="btn" id="btn_upload">上传</button>
                             <button class="btn" id="btn_position">位置</button>
                             <button class="btn" id="btn_thumb">缩略</button>
@@ -33,6 +33,7 @@
                             <button class="btn">导航</button> -->
                             <button id="online_pano" class="btn btn-warning" style="<?=$datas['pano']['display'] == '1'?'':'display:none' ?>" onclick="publish_scene(<?=$datas['pano']['id']?>,2)">发布</button>
                             <button id="offline_pano" class="btn btn-warning" style="<?=$datas['pano']['display'] == '2'?'':'display:none' ?>" onclick="publish_scene(<?=$datas['pano']['id']?>,1)">下线</button>
+                        	<button class="btn btn-primary" id="btn_preview">预览</button>
                         </div>
                         <div class="edit_panel" id="edit_panel">
                             <div id="panel_box" class="panel_box">
@@ -54,6 +55,7 @@ var session_id = '<?=session_id()?>';
 var pic_url = '<?=$this->createUrl('/panos/imgOut/index/')?>';
 var google_map_tip_url = baseUrl+'/style/img/dot-s-nomarl_16x24.png';
 var save_module_datas_url = '<?=$this->createUrl('/salado/modules/')?>';
+var preview_url = '<?=$this->createUrl('/web/detail/a/', array('id'=>$datas['pano']['id']))?>';
 
 var glng = '<?=$datas['position']['glng']?>';
 var glat = '<?=$datas['position']['glat']?>';
@@ -80,6 +82,6 @@ var position_url = '<?=$this->createUrl('/pano/config/v/', array('t'=>'position'
 var thumb_url = '<?=$this->createUrl('/pano/config/v/', array('t'=>'thumb', 'scene_id'=>$datas['pano']['id']))?>';
 var camera_url = '<?=$this->createUrl('/pano/config/v/', array('t'=>'camera', 'scene_id'=>$datas['pano']['id']))?>';
 var hotspot_url = '<?=$this->createUrl('/pano/config/v/', array('t'=>'hotspot', 'scene_id'=>$datas['pano']['id']))?>';
-bind_pano_btn();
+
 </script>
 

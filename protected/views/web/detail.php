@@ -14,11 +14,11 @@
         <div class="span1">
             <div class="thumbnail">
                 <button class="btn btn-success">返回</button>
+                <button class="btn">相关</button>
                 <button class="btn">地图</button>
-                <button class="btn">链接</button>
                 <button class="btn">足迹</button>
                 <button class="btn">游记</button>
-                <button class="btn">攻略</button>
+                <!-- <button class="btn">攻略</button> -->
                 <button class="btn">评论</button>
                 
             </div>
