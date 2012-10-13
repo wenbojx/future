@@ -51,7 +51,7 @@ class PanoramDatas{
             $this->global_datas = @json_decode($datas['content'], true);
         }
         if(!isset($this->global_datas['s_attribute']['debug'])){
-            $this->global_datas['s_attribute']['debug'] = 'false';
+            $this->global_datas['s_attribute']['debug'] = 'true';
             if($this->admin){
                 //$this->global_datas['s_attribute']['debug'] = 'true';
             }
@@ -71,7 +71,6 @@ class PanoramDatas{
      */
     public function get_actions_info(){
         //$actions_datas = array();
-
         return $this->action_datas;
     }
     /**
@@ -86,7 +85,6 @@ class PanoramDatas{
      * 场景xml文件地址
      */
     public function panoram_xml_path($id){
-        //return Yii::app()->createUrl('/salado/index/b/', array('id'=>$id)).'/s_f.xml';
         return Yii::app()->params['img_domain'].'salado/index/b/id/'.$id.'/s_f.xml';
     }
     /**
@@ -282,15 +280,15 @@ class PanoramDatas{
                 }
             }
         }
-        $this->add_menuscroller_extend();
+        //$this->add_menuscroller_extend();
         if($no_menuscroller){
-            $this->get_default_menu_scroller($scene_id);
+            //$this->get_default_menu_scroller($scene_id);
         }
 
-        if($this->admin){
+        //if($this->admin){
             //添加js模块
             $this->get_js_gateway_module();
-        }
+        //}
         if($no_button_bar){
             //获取默认button_bar
             $this->get_default_button_bar();
