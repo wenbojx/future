@@ -62,17 +62,7 @@
                 <button class="btn">评论</button>
                 
             </div>
-            <!-- 
-            <div class="thumbnail margin-top15">
-            <?php if($datas['extend']){ foreach ($datas['extend'] as $v){?>
-                <div class="align-center margin-tb10">
-                    <a href="<?=$this->createUrl('/web/detail/a/', array('id'=>$v['id']));?>">
-                        <img src="<?=$this->createUrl('/panos/thumb/pic/', array('id'=>$v['id'], 'size'=>'200x100.jpg'));?>"/>
-                    </a>
-                </div>
-            <?php }}?>
-            </div>
-            -->
+            
         </div>
     </div>
 </div>
