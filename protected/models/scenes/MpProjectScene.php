@@ -9,7 +9,7 @@
  * @property string $passwd
  * @property integer $status
  */
-class MpProjectScene extends CActiveRecord
+class MpProjectScene extends Ydao
 {
     /**
      * Returns the static model of the specified AR class.

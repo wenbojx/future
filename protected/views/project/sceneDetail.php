@@ -3,7 +3,7 @@
                 <div rel="page_local" class="path-contents">
                     <?php echo CHtml::link('项目',array('project/projectList'));?>
                     <i>»</i>
-                    <?php echo CHtml::link('场景',array('project/SceneList/list/', 'id'=>$datas['project_id']));?>
+                    <?php echo CHtml::link('场景',array('project/SceneList/list/', 'id'=>$datas['pano']['project_id']));?>
                     <i>»</i>
                     <a title="<?=$datas['name']?>" href="javascript:;"><?=$datas['name']?></a>
                     <em>&nbsp;</em>

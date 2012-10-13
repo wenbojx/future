@@ -19,6 +19,11 @@ var check_login_url = '<?=$this->createUrl('/member/login/check');?>';
 <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . "/plugins/uploadify/jquery.uploadify-3.1.js");?>
 <?php }?>
 
+<?php if (isset ($this->madmin) && $this->madmin){?>
+<?php Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . "/style/css/admin.css"); ?>
+<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . "/style/js/admin.js");?>
+<?php }?>
+
 <title><?=$this->pageTitle?></title>
 </head>
 <body>
@@ -39,7 +44,7 @@ var check_login_url = '<?=$this->createUrl('/member/login/check');?>';
                             <a href="<?=$this->createUrl('/member/login/a');?>">登陆</a>
                         </li>
                         <li id="m_welcome" style="display:none">
-                            <a href="" id="m_nickname"></a>
+                            <a href="<?=$this->createUrl('/pano/project/list');?>" id="m_nickname"></a>
                         </li>
                         <li id="m_loginout" style="display:none">
                             <a href="<?=$this->createUrl('/member/loginout/a');?>" id="m_nickname">[退出]</a>

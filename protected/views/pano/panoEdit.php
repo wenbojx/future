@@ -4,9 +4,9 @@
         <h2>足不出户  畅游中国</h2>
     </div>
     <ul class="breadcrumb">
-        <li><a href="#">首页</a> <span class="divider">/</span></li>
-        <li><a href="#">类库</a> <span class="divider">/</span></li>
-        <li class="active">数据</li>
+        <li><?php echo CHtml::link('项目',array('pano/project/list'));?> <span class="divider">/</span></li>
+        <li><?php echo CHtml::link('场景',array('pano/scene/list', 'id'=>$datas['pano']['project_id']));?><span class="divider">/</span></li>
+        <li class="active"><?=$datas['pano']['name']?></li>
     </ul>
     <div class="row-fluid">
         <div class="span11">

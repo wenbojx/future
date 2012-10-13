@@ -1,5 +1,5 @@
 <?php
-class ScenesThumb extends YDAO
+class ScenesThumb extends Ydao
 {
     /**
      * Returns the static model of the specified AR class.

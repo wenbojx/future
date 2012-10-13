@@ -10,7 +10,7 @@
 		</div>
 		<div class="panel_close" onclick="hide_edit_panel();hide_hotspot_icon()">X</div>
 	</div>
-	<div class="panle_content" style="height:100px;width:250px;">
+	<div class="panle_content" style="height:220px;width:250px;">
 	<div class="panel_form">
 	<form method="post" class="form-horizontal" id="member_login" action="<?=$this->createUrl('/member/login/checkLogin');?>">
 		<div class="control-group">
@@ -32,14 +32,15 @@
 	                <option value="<?=$v['id']?>"><?=$v['name']?></option>
 	                <?php }}?>
 	            </select>
-	            <img src="" id="hotspot_pano_thumb" width="240" height="120">
+	            
             </div>
           </div>
+          
           <div class="hotspot_save_btn">
           	<button type="button" onclick="save_hotspot_detail(<?=$datas['scene_id']?>)" class="btn btn-primary">新增热点</button>
           	<span id="save_hotspot_tip_flag"></span>
           </div>
-	    	
+	    <img src="" id="hotspot_pano_thumb" width="240" height="120">
 		</form>
 		</div>
 	</div>

@@ -5,7 +5,7 @@
  *
  * The followings are the available columns in table '{{fields}}':
  */
-class FilePath extends CActiveRecord
+class FilePath extends Ydao
 {
     /**
      * Returns the static model of the specified AR class.

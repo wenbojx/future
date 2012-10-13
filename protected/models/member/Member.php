@@ -9,7 +9,7 @@
  * @property string $passwd
  * @property integer $status
  */
-class Member extends CActiveRecord
+class Member extends Ydao
 {
     /**
      * Returns the static model of the specified AR class.

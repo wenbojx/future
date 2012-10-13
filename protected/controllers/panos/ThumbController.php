@@ -12,7 +12,7 @@ class ThumbController extends FController{
             $img_class = new ImageContent();
             $size = $request->getParam('size') ? $request->getParam('size') : '';
             if(!$thumb_datas['file_id']){
-                $default_img = 'pages/images/thumb_default.jpg';
+                $default_img = 'style/img/thumb_default.jpg';
                 $pic_datas = $img_class->get_default_img($default_img, 'jpg');
             }
             else {

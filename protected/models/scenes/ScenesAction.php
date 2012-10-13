@@ -1,5 +1,5 @@
 <?php
-class ScenesAction extends CActiveRecord
+class ScenesAction extends Ydao
 {
 	/**
 	 * Returns the static model of the specified AR class.

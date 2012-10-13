@@ -2,7 +2,7 @@
 	<div class="input-box">
 		<li><span>场景名称：</span></li>
 		<li>
-			<input name="project_id" type="hidden" value="<?=$datas['project_id']?>" id="project_id">
+			<input name="project_id" type="hidden" value="<?=$project_id?>" id="project_id">
     		<input name="name" type="text" tabindex="1" id="scene_name">
     	</li>
     	<li><span>场景简介：</span></li>

@@ -1,5 +1,5 @@
 <?php
-class ScenesGlobal extends CActiveRecord
+class ScenesGlobal extends Ydao
 {
 	/**
 	 * Returns the static model of the specified AR class.
