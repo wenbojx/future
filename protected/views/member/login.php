@@ -38,3 +38,6 @@
     </div>
 </div>
 <script type="text/javascript" src="<?=Yii::app()->baseUrl.'/style/js/member.js'?>"></script>
+<script>
+var login_jump_url = '/';
+</script>

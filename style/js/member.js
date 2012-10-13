@@ -141,8 +141,7 @@ member.login = function(){
     function do_after(datas){
     	if(datas.flag =='1'){
             $("#login_tip_flag").html('登陆成功');
-            jump_url = datas.url;
-            setTimeout("jump_to()",3000);
+            jump_to(login_jump_url);
         }
         else{
             if(datas.field){
