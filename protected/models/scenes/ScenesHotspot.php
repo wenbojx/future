@@ -23,6 +23,7 @@ class ScenesHotspot extends Ydao
         $this->tilt = $datas['tilt'] ? $datas['tilt'] : 0;
         $this->fov = $datas['fov'] ? $datas['fov'] : 90;
         $this->type = $datas['type'] ? $datas['type'] : 2;
+        $this->transform = $datas['transform'] ? $datas['transform'] : 10;
         $this->content = isset( $datas['content'] ) ? $datas['content'] : '0';
         $this->link_scene_id = $datas['link_scene_id'] ? $datas['link_scene_id'] : 0;
         $this->scene_id = $datas['scene_id'];

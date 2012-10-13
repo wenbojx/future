@@ -13,7 +13,9 @@
             <div class="thumbnail">
                     <div class="pano-detail" id="pano-detail">
                         <div id="scene_box"></div>
-                        <div id="hotspot_icon" class="hotspot_icon"></div>
+                        <div id="hotspot_icon" class="hotspot_icon">
+                        	<img id="hotspot_icon_img" src="<?=Yii::app()->baseUrl . '/style/img/hotspot/hotspot-10.png'?>"/>
+                        </div>
                     </div>
             </div>
         </div>

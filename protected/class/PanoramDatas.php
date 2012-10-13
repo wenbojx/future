@@ -193,11 +193,11 @@ class PanoramDatas{
         }
         //热点类型；
         if ($datas['type'] == '1'){
-            $hotspot['s_attribute']['path'] = $this->module_media_path('hotspot');
+            $hotspot['s_attribute']['path'] = $this->module_hotspot_path($datas['transform']);
         }
         elseif ($datas['type'] == '2'){
             $hotspot['s_attribute']['path'] = $this->module_path('Hotspot');
-            $hotspot['settings']['s_attribute']['path'] = $this->module_media_path('hotspot');
+            $hotspot['settings']['s_attribute']['path'] = $this->module_hotspot_path($datas['transform']);
             $hotspot['settings']['s_attribute']['beatUp'] = 'scale:0.7';
             $hotspot['settings']['s_attribute']['mouseOver'] = 'scale:1.1';
         }
@@ -222,7 +222,6 @@ class PanoramDatas{
      * 模块默认素材地址
      */
     public function module_media_path($name){
-        $path['hotspot'] = Yii::app()->baseUrl.'/pages/salado/media/hotspot.png';
         $path['button_bar'] = Yii::app()->baseUrl.'/pages/salado/media/buttons_dark_30x30.png';
         $path['menu_scroller_show_btn'] = Yii::app()->baseUrl.'/pages/salado/media/MenuScroller_show.png';
         $path['menu_scroller_hide_btn'] = Yii::app()->baseUrl.'/pages/salado/media/MenuScroller_hide.png';
@@ -230,6 +229,13 @@ class PanoramDatas{
             return '';
         }
         return $path[$name];
+    }
+    /**
+     * 热点素材地址
+     */
+    public function module_hotspot_path($num=10){
+    	$path = Yii::app()->baseUrl.'/style/img/hotspot/hotspot-'.$num.'.png';
+    	return $path;
     }
     /**
      * 全景图缩略图地址

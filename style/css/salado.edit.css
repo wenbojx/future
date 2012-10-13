@@ -71,15 +71,14 @@
 	margin-bottom:10px;
 }
 .hotspot_save_btn{
-	margin:0 0 0 70px;
+	margin:0 0 0 10px;
 	text-align:left;
 }
 .hotspot_icon {
 	display:none;
     position:absolute; 
-    width:30px;
-    height:30px;
-    background:url(../img/hotspot.png) no-repeat 0 0;
+    width:20px;
+    height:20px;
 }
 
 .scene_detail_save{
@@ -121,4 +120,8 @@
     top:242px;
     left:121px;
 }
+.hotspot_save_btn select{
+	width:80px;
+}
+
 

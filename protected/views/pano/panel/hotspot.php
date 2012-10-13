@@ -12,7 +12,7 @@
 	</div>
 	<div class="panle_content" style="height:220px;width:250px;">
 	<div class="panel_form">
-	<form method="post" class="form-horizontal" id="member_login" action="<?=$this->createUrl('/member/login/checkLogin');?>">
+	<form method="post" class="form-horizontal" id="save_hotspot" action="<?=$this->createUrl('/salado/modules/hotspot/save/')?>">
 		<div class="control-group">
             <label for="hotspot_info_d_type" class="control-label">热点类型</label>
             <div class="controls" >
@@ -24,7 +24,7 @@
             </div>
           </div>
           <div class="control-group">
-            <label for="hotspot_info_d_link_scene_id" class="control-label">热点类型</label>
+            <label for="hotspot_info_d_link_scene_id" class="control-label">场景列表</label>
             <div class="controls">
               	<select name="link_scene_id" id="hotspot_info_d_link_scene_id" onchange="change_hotspot_select()">
 	            	<option value="0">选择场景</option>
@@ -35,22 +35,38 @@
 	            
             </div>
           </div>
-          
           <div class="hotspot_save_btn">
-          	<button type="button" onclick="save_hotspot_detail(<?=$datas['scene_id']?>)" class="btn btn-primary">新增热点</button>
-          	<span id="save_hotspot_tip_flag"></span>
+	        <table width="220">
+		        <tr>
+		        <td>
+				<select onclick="change_hotspot_angle()" id="hotspot_angle_select" class="hotspot_angle_select">
+                <option value="10">正上方</option>
+                <option value="11">右上方</option>
+                <option value="12">正右方</option>
+                <option value="13">右下方</option>
+                <option value="14">正下方</option>
+                <option value="15">左下方</option>
+                <option value="16">正左方</option>
+                <option value="17">左上方</option>
+              </select>
+				&nbsp;
+				<img id="hotspot_angle" src="<?=Yii::app()->baseUrl . '/style/img/hotspot/hotspot-10.png'?>"/>	    
+	          	</td>
+	          	<td align="right">
+		          	<button type="button" onclick="save_hotspot_detail(<?=$datas['scene_id']?>)" class="btn btn-primary">新增热点</button>
+		          	<span id="save_hotspot_tip_flag"></span>
+			      </td>
+			      </tr>
+		      </table>
           </div>
-	    <img src="" id="hotspot_pano_thumb" width="240" height="120">
+	    <img src="" id="hotspot_pano_thumb" width="200" height="100">
 		</form>
 		</div>
 	</div>
 </div>
 <script>
-function change_hotspot_select(){
-    var id = $('#hotspot_info_d_link_scene_id').val();
-    var url = '<?php echo Yii::app()->createUrl('/panos/thumb/pic/', array('size'=>'240x120.jpg', 'id'=>''));?>/'+id;
-    $('#hotspot_pano_thumb').attr('src', url);
-}
+var hotspot_img_pre = '<?=Yii::app()->baseUrl . '/style/img/hotspot/'?>';
+var panos_thumb_url = '<?php echo Yii::app()->createUrl('/panos/thumb/pic/', array('id'=>$datas['scene_id'], 'size'=>'200x100.jpg'));?>';
 </script>
 
 

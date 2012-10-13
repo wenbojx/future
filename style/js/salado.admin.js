@@ -214,9 +214,14 @@ function save_hotspot_detail(scene_id){
     data.tilt = parseInt ($("#hotspot_info_tilt").html());
     data.fov = parseInt ($("#hotspot_info_fov").html());
     data.type = $("#hotspot_info_d_type").val();
+    data.transform = $("#hotspot_angle_select").val();
     data.link_scene_id = $("#hotspot_info_d_link_scene_id").val();
     data.scene_id = scene_id;
-    var url = save_module_datas_url+'/hotspot/save/';
+    if(data.link_scene_id == '0'){
+    	alert('请选择目标场景');
+    	return false;
+    }
+    var url = $("#save_hotspot").attr('action');
     save_datas(url, data, '', '', call_back);
     function call_back(datas){
         alert(datas.msg);
@@ -246,6 +251,17 @@ function publish_scene(scene_id, display){
         	$("#offline_pano").hide();
         }
     }
+}
+function change_hotspot_select(){
+    var id = $('#hotspot_info_d_link_scene_id').val();
+    var url = panos_thumb_url;
+    $('#hotspot_pano_thumb').attr('src', url);
+}
+function change_hotspot_angle(){
+	var num = $("#hotspot_angle_select").val();
+	var src = hotspot_img_pre+'hotspot-'+num+'.png';
+	$("#hotspot_angle").attr("src", src);
+	$("#hotspot_icon_img").attr("src", src);
 }
 
 

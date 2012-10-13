@@ -9,6 +9,7 @@ class HotspotController extends Controller{
         $datas['tilt'] = (int)$request->getParam('tilt');
         $datas['fov'] = (int)$request->getParam('fov');
         $datas['type'] = $request->getParam('type');
+        $datas['transform'] = $request->getParam('transform');
         $datas['link_scene_id'] = $request->getParam('link_scene_id');
         $msg['flag'] = 0;
         $msg['msg'] = '操作失败';
