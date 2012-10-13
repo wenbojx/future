@@ -39,7 +39,15 @@ class DetailController extends FController{
     	$num = $this->default_scroller_num - count($extend_datas['hotspot']);
         $scene_db = new Scene();
         $extend_datas['extend'] = $scene_db->find_extend_scene_project($scene_id, $num, $project_id);
-
+        if($extend_datas['extend']){
+        	$num_extend = $num-count($extend_datas['extend']);
+        	if($num_extend >0){
+        		$extend_1 = $scene_db->find_extend_scene_project($scene_id, $num_extend);
+        		if($extend_1 & is_array($extend_1)){
+        			$extend_datas['extend'] = array_merge($extend_datas['extend'], $extend_1);
+        		}
+        	}
+        }
         return $extend_datas;
     }
     private function get_scene_datas($scene_id){
