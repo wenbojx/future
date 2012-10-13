@@ -38,7 +38,7 @@ class ProjectController extends Controller{
 		$request = Yii::app()->request;
 		$datas = array();
 		$datas['page_title'] = '新增项目';
-		$this->render('pano/projectEdit', $datas);
+		$this->render('pano/projectEdit', array('datas'=>$datas));
 	}
 	public function actionDoAdd(){
 		$request = Yii::app()->request;
