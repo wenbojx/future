@@ -31,12 +31,13 @@ class ProjectController extends Controller{
                 $datas['list'] = $project_db->findAll($criteria);
             }
         }
-
+        $datas['page_title'] = '项目列表';
         $this->render('/pano/projectList', array('datas'=>$datas));
     }
 	public function actionAdd(){
 		$request = Yii::app()->request;
 		$datas = array();
+		$datas['page_title'] = '新增项目';
 		$this->render('pano/projectEdit', $datas);
 	}
 	public function actionDoAdd(){

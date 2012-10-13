@@ -33,6 +33,7 @@ class SceneController extends Controller{
 
             }
         }
+        $datas['page_title'] = '场景列表';
         $this->render('/pano/sceneList', array('datas'=>$datas, 'project_id'=>$project_id));
     }
     public function actionPublish(){
@@ -54,6 +55,7 @@ class SceneController extends Controller{
     public function actionAdd(){
     	$request = Yii::app()->request;
     	$project_id = $request->getParam('id');
+    	$datas['page_title'] = '添加场景';
     	$this->render('pano/sceneEdit', array('datas'=>$datas, 'project_id'=>$project_id));
     }
     public function actionDoAdd(){
