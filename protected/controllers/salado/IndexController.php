@@ -19,7 +19,7 @@ class IndexController extends FController{
     public function actionB(){
         $this->request = Yii::app()->request;
         $id = $this->request->getParam('id');
-        $file = '256x256.jpg';
+        $file = '512x512.jpg';
         if($this->request->getParam('s_f')){
         	$suffix = $this->request->getParam('s_f');
         	if($suffix == '10'){

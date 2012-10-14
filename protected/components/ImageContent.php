@@ -6,7 +6,15 @@ class ImageContent {
             return false;
         }
         $img = @$pic_datas['create']($pic_datas['path']);
+        //
+        $cache_time = '31104000';
         header('Content-Type: '.$pic_datas['contentType']);
+        header('Cache-Control: max-age='.$cache_time);
+        header('Pragma: cache');
+        HttpCache::lastModified($pic_datas['created']);
+        $etag = $pic_datas['md5value'].'-yiluhao';
+        HttpCache::etag($etag);
+        HttpCache::expires($cache_time); //默认缓存一年
         $pic_datas['draw']($img);
         imagedestroy($img);
         exit();
@@ -82,7 +90,8 @@ class ImageContent {
             $path = $path_new;
         $pic_datas = $this->get_image_type($pic_type);
         $pic_datas['path'] = $path;
-        
+        $pic_datas['created'] = $datas['created'];
+        $pic_datas['md5value'] = $datas['md5value'];
         return $pic_datas;
     }
     /**

@@ -176,7 +176,7 @@ class UploadController extends Controller{
             mkdir($folder_10);
         }
         $image = Yii::app()->image->load($file_path);
-        $width = $this->tile_info[9]/2;
+        $width = $this->tile_info[9];
         $image->resize($width, $width)->quality(30);
         $file_path = $folder_pano.$width.'x'.$width.'.'.$file_type;
         $image->save($file_path);

@@ -57,10 +57,10 @@ class PanoramDatas{
             }
         }
         if($this->admin){
-            $this->global_datas['control']['s_attribute']['autorotation'] = 'enabled:false';
+           // $this->global_datas['control']['s_attribute']['autorotation'] = 'enabled:false';
         }
         else{
-            $this->global_datas['control']['s_attribute']['autorotation'] = 'enabled:true,delay:10';
+           // $this->global_datas['control']['s_attribute']['autorotation'] = 'enabled:false,delay:10';
         }
         $this->global_datas['branding']['s_attribute']['visible'] = 'false';
         $this->global_datas['panoramas']['s_attribute']['firstPanorama'] = $this->panoram_pre.$this->scene_id;
@@ -459,13 +459,14 @@ class PanoramDatas{
         $this->modules_datas[$type]['s_attribute']['path'] = $this->module_path('ButtonBar');
         $this->modules_datas[$type]['window']['s_attribute']['align'] = 'horizontal:right,vertical:bottom';
         $this->modules_datas[$type]['buttons']['s_attribute']['path'] = $this->module_media_path('button_bar');
-        $this->modules_datas[$type]['buttons']['button']['1']['s_attribute']['name'] = 'left';
-        $this->modules_datas[$type]['buttons']['button']['2']['s_attribute']['name'] = 'right';
-        $this->modules_datas[$type]['buttons']['button']['3']['s_attribute']['name'] = 'down';
-        $this->modules_datas[$type]['buttons']['button']['4']['s_attribute']['name'] = 'up';
-        $this->modules_datas[$type]['buttons']['button']['5']['s_attribute']['name'] = 'out';
-        $this->modules_datas[$type]['buttons']['button']['6']['s_attribute']['name'] = 'in';
-        $this->modules_datas[$type]['buttons']['button']['7']['s_attribute']['name'] = 'fullscreen';
+        $this->modules_datas[$type]['buttons']['button']['1']['s_attribute']['name'] = 'autorotation';
+        $this->modules_datas[$type]['buttons']['button']['2']['s_attribute']['name'] = 'left';
+        $this->modules_datas[$type]['buttons']['button']['3']['s_attribute']['name'] = 'right';
+        $this->modules_datas[$type]['buttons']['button']['4']['s_attribute']['name'] = 'down';
+        $this->modules_datas[$type]['buttons']['button']['5']['s_attribute']['name'] = 'up';
+        $this->modules_datas[$type]['buttons']['button']['6']['s_attribute']['name'] = 'out';
+        $this->modules_datas[$type]['buttons']['button']['7']['s_attribute']['name'] = 'in';
+        $this->modules_datas[$type]['buttons']['button']['8']['s_attribute']['name'] = 'fullscreen';
         return $this->modules_datas[$type];
     }
     protected $extra_button_id_num = 1; //
