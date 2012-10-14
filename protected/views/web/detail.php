@@ -18,7 +18,7 @@
                 	<div id="scroll_pano_detail" class="scroll_pano_detail">
                 	<div class="scroll_pano_container scroll_pano">
                 		<div class="pano_prev">
-                			<i class="icon-chevron-up"></i>
+                			<i class="icon-chevron-up vertical"></i>
                 		</div>
                 		<div class="jCarouselLite">
 					        <ul>
@@ -44,7 +44,7 @@
 					        </ul>
 					    </div>
 					    <div class="pano_next">
-					    <i class="icon-chevron-down"></i>
+					    <i class="icon-chevron-down vertical"></i>
 					    </div>
                 	</div>
                 	</div>

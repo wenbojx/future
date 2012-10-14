@@ -184,5 +184,7 @@ hr.soften {
 	display:none;
 	cursor:pointer;
 }
-
+.pano-detail .vertical{
+	vertical-align:text-bottom;
+}
 
