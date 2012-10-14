@@ -53,7 +53,7 @@
         </div>
         <div class="span1">
             <div class="thumbnail">
-                <button class="btn btn-success" onclick="jump_to('<?=$this->createUrl('/web/view/a/', array('id'=>$datas['pano']['id']))?>')">返回</button>
+                <button class="btn btn-success" onclick="jump_to('<?=$this->createUrl('/web/view/a/', array('id'=>$datas['scene']['project_id']))?>')">返回</button>
                 <button class="btn" id="menu_scroller">相关</button>
                 <button class="btn">地图</button>
                 <button class="btn">足迹</button>
@@ -71,7 +71,7 @@
 <script>
 var scene_box = 'scene_box';
 var player_url = '<?=Yii::app()->baseUrl?>/pages/salado/Player.swf';
-var scene_xml_url = '<?=$this->createUrl('/salado/index/a/', array('id'=>$datas['scene']['project_id']))?>';
+var scene_xml_url = '<?=$this->createUrl('/salado/index/a/', array('id'=>$datas['scene_id']))?>';
 load_scene(scene_box, scene_xml_url, player_url, 'transparent');
 </script>
 
