@@ -5,6 +5,8 @@ class ImageContent {
         if(!$pic_datas || !$pic_datas['path'] || !$pic_datas['draw']){
             return false;
         }
+        print_r($pic_datas);
+        exit();
         $img = @$pic_datas['create']($pic_datas['path']);
         //
         $cache_time = '31104000';
