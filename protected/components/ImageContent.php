@@ -7,17 +7,20 @@ class ImageContent {
         }
         $img = @$pic_datas['create']($pic_datas['path']);
         //
+        print_r($pic_datas);
         $cache_time = '31104000';
         header('Content-Type: '.$pic_datas['contentType']);
         header('Cache-Control: max-age='.$cache_time);
         header('Pragma: cache');
+        echo 111;
         HttpCache::lastModified($pic_datas['created']);
         $pic_datas['md5value'] = isset($pic_datas['md5value']) ? $pic_datas['md5value'] : $pic_datas['path'];
         $pic_datas['size'] = isset($pic_datas['size']) ? $pic_datas['size'] : '';
         $etag = md5($pic_datas['md5value'].'-yiluhao'.$pic_datas['size']);
         HttpCache::etag($etag);
         HttpCache::expires($cache_time); //默认缓存一年
-        echo 111;
+        echo 222;
+        exit();
         $pic_datas['draw']($img);
         imagedestroy($img);
         exit();
