@@ -5,15 +5,17 @@ class ImageContent {
         if(!$pic_datas || !$pic_datas['path'] || !$pic_datas['draw']){
             return false;
         }
-        $img = @$pic_datas['create']($pic_datas['path']);
+        
+        $img = $pic_datas['create']($pic_datas['path']);
+        echo 111;
+        exit();
         //
         print_r($pic_datas);
         $cache_time = '31104000';
         header('Content-Type: '.$pic_datas['contentType']);
         header('Cache-Control: max-age='.$cache_time);
         header('Pragma: cache');
-        echo 111;
-        exit();
+        
         HttpCache::lastModified($pic_datas['created']);
         $pic_datas['md5value'] = isset($pic_datas['md5value']) ? $pic_datas['md5value'] : $pic_datas['path'];
         $pic_datas['size'] = isset($pic_datas['size']) ? $pic_datas['size'] : '';
