@@ -35,6 +35,7 @@ class ImageContent {
      * 根据file_id获取文件信息
      */
     public function get_img_content_by_id($id, $size, $suffix='', $file = ''){
+   		echo 11;
         if(!$id){
             return false;
         }
