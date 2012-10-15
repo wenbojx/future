@@ -35,14 +35,11 @@ class ImageContent {
      * 根据file_id获取文件信息
      */
     public function get_img_content_by_id($id, $size, $suffix='', $file = ''){
-   		echo 11;
         if(!$id){
             return false;
         }
         $datas = $this->get_file_info_by_id($id);
         $pic_datas = $this->get_img_info($datas, $size, $suffix, $file);
-        print_r($pic_datas);
-        exit();
         $this->show_pics($pic_datas);
     }
     /**
