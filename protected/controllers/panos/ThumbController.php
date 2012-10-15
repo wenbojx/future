@@ -1,4 +1,6 @@
 <?php
+echo 111;
+exit();
 ini_set('memory_limit', '100M');
 class ThumbController extends FController{
     public $defaultAction = 'pic';
