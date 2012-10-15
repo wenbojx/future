@@ -10,13 +10,13 @@ class ImageContent {
         
         //
         print_r($pic_datas);
-        echo 111;
-        exit();
+        
         $cache_time = '31104000';
         header('Content-Type: '.$pic_datas['contentType']);
         header('Cache-Control: max-age='.$cache_time);
         header('Pragma: cache');
-        
+        echo 111;
+        exit();
         HttpCache::lastModified($pic_datas['created']);
         $pic_datas['md5value'] = isset($pic_datas['md5value']) ? $pic_datas['md5value'] : $pic_datas['path'];
         $pic_datas['size'] = isset($pic_datas['size']) ? $pic_datas['size'] : '';
