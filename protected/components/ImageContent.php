@@ -12,7 +12,7 @@ class ImageContent {
         print_r($pic_datas);
         
         $cache_time = '31104000';
-        header('Content-Type: '.$pic_datas['contentType']);
+        //header('Content-Type: '.$pic_datas['contentType']);
         header('Cache-Control: max-age='.$cache_time);
         header('Pragma: cache');
         echo 111;
