@@ -12,7 +12,9 @@ class ImageContent {
         header('Cache-Control: max-age='.$cache_time);
         header('Pragma: cache');
         HttpCache::lastModified($pic_datas['created']);
-        $etag = $pic_datas['md5value'].'-yiluhao';
+        $pic_datas['md5value'] = isset($pic_datas['md5value']) ? $pic_datas['md5value'] : $pic_datas['path'];
+        $pic_datas['size'] = isset($pic_datas['size']) ? $pic_datas['size'] : '';
+        $etag = md5($pic_datas['md5value'].'-yiluhao'.$pic_datas['size']);
         HttpCache::etag($etag);
         HttpCache::expires($cache_time); //默认缓存一年
         $pic_datas['draw']($img);
@@ -52,7 +54,7 @@ class ImageContent {
         }
         $datas = $this->get_file_info_by_md5file($no);
         if(!$datas || !$datas[0]){
-        	return false;
+            return false;
         }
         $pic_datas = $this->get_img_info($datas[0], $size, $suffix);
         $this->show_pics($pic_datas);
@@ -71,11 +73,11 @@ class ImageContent {
         $path = $this->get_file_path($datas);
         $path_original = $path;
         if($suffix){
-        	$path_original = $path.$suffix.'/';
+            $path_original = $path.$suffix.'/';
         }
         //$path .= $datas['name'];
         if($add_suffix){
-        	$path = $path_original;
+            $path = $path_original;
         }
         $path_new = $path.$size;
             if(!is_file($path_new)){
@@ -83,7 +85,7 @@ class ImageContent {
                 $explode_2 = explode('x', $explode_1[0]);
                 $path_original .= $datas['md5value'].'.'.$datas['type'];
                 if(!is_file($path_original)){
-                	return false;
+                    return false;
                 }
                 $this->resize($path_original, $path_new, (int)$explode_2[0], (int)$explode_2[1]);
             }
@@ -92,6 +94,7 @@ class ImageContent {
         $pic_datas['path'] = $path;
         $pic_datas['created'] = $datas['created'];
         $pic_datas['md5value'] = $datas['md5value'];
+        $pic_datas['size'] = $size;
         return $pic_datas;
     }
     /**
@@ -128,10 +131,10 @@ class ImageContent {
     }
 
     private function get_file_path($datas){
-    	$year_month = substr($datas->folder, 0, 6);
-    	$day = substr($datas['folder'], -2);
-    	$path = Yii::app()->params['file_pic_folder'].'/'.$year_month.'/'.$day.'/'.$datas['md5value'].'/';
-    	return $path;
+        $year_month = substr($datas->folder, 0, 6);
+        $day = substr($datas['folder'], -2);
+        $path = Yii::app()->params['file_pic_folder'].'/'.$year_month.'/'.$day.'/'.$datas['md5value'].'/';
+        return $path;
     }
     private function get_file_info_by_md5file($no){
         $memcache_obj = new Ymemcache();
