@@ -7,10 +7,11 @@ class ImageContent {
         }
         
         $img = $pic_datas['create']($pic_datas['path']);
-        echo 111;
-        exit();
+        
         //
         print_r($pic_datas);
+        echo 111;
+        exit();
         $cache_time = '31104000';
         header('Content-Type: '.$pic_datas['contentType']);
         header('Cache-Control: max-age='.$cache_time);
