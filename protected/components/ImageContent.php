@@ -17,6 +17,7 @@ class ImageContent {
         $etag = md5($pic_datas['md5value'].'-yiluhao'.$pic_datas['size']);
         HttpCache::etag($etag);
         HttpCache::expires($cache_time); //默认缓存一年
+        echo 111;
         $pic_datas['draw']($img);
         imagedestroy($img);
         exit();
@@ -35,14 +36,11 @@ class ImageContent {
      * 根据file_id获取文件信息
      */
     public function get_img_content_by_id($id, $size, $suffix='', $file = ''){
-   		echo 11;
         if(!$id){
             return false;
         }
         $datas = $this->get_file_info_by_id($id);
         $pic_datas = $this->get_img_info($datas, $size, $suffix, $file);
-        print_r($pic_datas);
-        exit();
         $this->show_pics($pic_datas);
     }
     /**
