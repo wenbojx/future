@@ -13,6 +13,7 @@ class ImageContent {
         header('Cache-Control: max-age='.$cache_time);
         header('Pragma: cache');
         echo 111;
+        exit();
         HttpCache::lastModified($pic_datas['created']);
         $pic_datas['md5value'] = isset($pic_datas['md5value']) ? $pic_datas['md5value'] : $pic_datas['path'];
         $pic_datas['size'] = isset($pic_datas['size']) ? $pic_datas['size'] : '';
