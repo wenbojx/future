@@ -38,6 +38,7 @@ class ImageContent {
         }
         $datas = $this->get_file_info_by_id($id);
         $pic_datas = $this->get_img_info($datas, $size, $suffix, $file);
+        print_r($pic_datas);
         $this->show_pics($pic_datas);
     }
     /**
