@@ -88,7 +88,7 @@ for ($i = $start; $i<=$end; $i++ ){
 
     //sleep(1);
 }
-if(!$u_id){
+if(!$u_id || $u_id=='0' || $u_id== '' || $u_id<10 ){
     $u_id = $end+5;
 }
 //file_put_contents('a.txt', $str);
