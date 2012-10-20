@@ -46,12 +46,12 @@ class DealPanosCommand extends CConsoleCommand {
     		if(!file_exists($new_fordle)){
     			mkdir($new_fordle);
     		}
-    		echo "----move file {$search_path}{$this->thumb_size} ----\n";
-    		//copy($search_path.$this->thumb_size, $new_fordle.$this->thumb_size);
+    		echo "----move {$search_path}{$this->thumb_size} ----\n";
+    		copy($search_path.$this->thumb_size, $new_fordle.$this->thumb_size);
     		$cube_path = $search_path.'cube/';
     		foreach($cubes as $v1){
-    			echo "----move file {$cube_path}{$v1} ----\n";
-    			//copy($cube_path.$v1, $new_fordle.$v1);
+    			echo "----move {$cube_path}{$v1} ----\n";
+    			copy($cube_path.$v1.'.jpg', $new_fordle.$v1.'.jpg');
     		}
     	}
     }
