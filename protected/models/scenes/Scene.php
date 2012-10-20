@@ -75,7 +75,10 @@ class Scene extends Ydao
         $this->project_id = $datas['project_id'];
         $this->member_id = $datas['member_id'];
         $this->created = $datas['created'];
-        return $this->save();
+        if(!$this->save()){
+    		return false;
+    	}
+    	return $this->attributes['id'];
     }
 
     public function get_by_admin_scene($member_id, $scene_id){
