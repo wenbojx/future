@@ -31,7 +31,7 @@ class Project extends Ydao
         if(!$member_id){
             return false;
         }
-        
+
         return $datas;
     }
     /**
@@ -85,11 +85,14 @@ class Project extends Ydao
     	$this->desc = $datas['desc'];
     	$this->member_id = $datas['member_id'];
     	$this->created = $datas['created'];
-    	return $this->save();
+    	if(!$this->save()){
+    		return false;
+    	}
+    	return $this->attributes['id'];
     }
     public function find_by_project_id($project_id){
     	return $this->findByPk($project_id);
     }
-    
-    
+
+
 }
