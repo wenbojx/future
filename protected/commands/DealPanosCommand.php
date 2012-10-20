@@ -49,7 +49,6 @@ class DealPanosCommand extends CConsoleCommand {
     		echo $fordle.'a|';
     		$new_fordle = $upload_path.$fordle.'/';
     		echo $new_fordle;
-    		return false;
     		if(!file_exists($new_fordle)){
     			mkdir($new_fordle);
     		}
