@@ -32,6 +32,7 @@ class DealPanosCommand extends CConsoleCommand {
     	$this->panos_path = array();
     	$this->default_pano_name = 'bottom.jpg';
     	$this->myscandir($this->cube_path);
+    	print_r($this->panos_path);
     	foreach($this->panos_path as $v){
     		$explode = explode('/', $v);
     		$num = count($explode)-3;
