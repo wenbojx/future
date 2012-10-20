@@ -36,6 +36,8 @@ class DealPanosCommand extends CConsoleCommand {
     		$explode = explode('/', $v);
     		$num = count($explode)-3;
     		$new_path = $path.'/'.$num;
+    		echo $new_path.'';
+    		return true;
     		if(!file_exists($new_path)){
     			mkdir($new_path);
     		}
