@@ -38,10 +38,7 @@ class DealPanosCommand extends CConsoleCommand {
     		$explode = explode('/', $v);
     		$num = count($explode)-3;
     		$new_path = $path.'/'.$explode[$num];
-    		if(!file_exists($new_path)){
-    			mkdir($new_path);
-    		}
-    		$new_file = $new_path.'/bottom.jpg';
+    		$new_file = $new_path.'-bottom.jpg';
     		echo "---- copying {$v} to {$new_file}----\n";
     		copy($v, $new_file);
     	}
