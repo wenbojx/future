@@ -6,6 +6,7 @@ class DealPanosCommand extends CConsoleCommand {
     public $panos_path = array();
     public $default_new_folder = 'panos';  //新的全景图目录
     public $default_pano_name = 'Panorama.jpg'; //默认的搜索的全景图名称
+    public $new_pano_name = 'Panorama-2.jpg';
     public $width = '1863';  //cube图的宽度
     public $swidth = '5852'; //sphere的宽度
     public $sheight = '2926'; //sphere的宽度
@@ -16,6 +17,7 @@ class DealPanosCommand extends CConsoleCommand {
     public function actionRun(){
     	$this->cube_path = $this->find_path.'/'.$this->default_new_folder;
     	$this->actionFind();
+    	$this->new_pano_name = $this->default_pano_name;
     	$this->actionCube();
     	$this->actionBottomOut();
     	$this->actionBottomIn();
@@ -36,7 +38,7 @@ class DealPanosCommand extends CConsoleCommand {
     }
     //全景图转为cube
     public function actionCube(){
-    	$this->default_pano_name = 'Panorama-2.jpg';
+    	$this->default_pano_name = $this->$new_pano_name;
     	$path = $this->cube_path;
     	$this->panos_path = array();
     	$this->myscandir($path);
@@ -99,7 +101,7 @@ class DealPanosCommand extends CConsoleCommand {
     }
     //生成缩略图
     public function actionThumb(){
-    	$this->default_pano_name = 'Panorama-2.jpg';
+    	$this->default_pano_name = $this->new_pano_name;
     	$path = $this->cube_path;
     	$this->panos_path = array();
     	$this->myscandir($path);
