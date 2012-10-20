@@ -16,6 +16,7 @@ class DealPanosCommand extends CConsoleCommand {
     public $upload_path = 'upload';
     public $thumb_size = 'thumbx200.jpg';
     public $thumb_name = 'thumb.jpg';
+    public $thumb_size800 = 'thumbx800.jpg';
     
     //一键执行
     public function actionRun(){
@@ -48,6 +49,10 @@ class DealPanosCommand extends CConsoleCommand {
     		}
     		echo "----move {$search_path}{$this->thumb_size} ----\n";
     		copy($search_path.$this->thumb_size, $new_fordle.$this->thumb_size);
+    		
+    		echo "----move {$search_path}{$this->thumb_size800} ----\n";
+    		copy($search_path.$this->thumb_size800, $new_fordle.$this->thumb_size800);
+    		
     		$cube_path = $search_path.'cube/';
     		foreach($cubes as $v1){
     			echo "----move {$cube_path}{$v1} ----\n";
@@ -146,11 +151,13 @@ class DealPanosCommand extends CConsoleCommand {
     		$new = $new_path.$this->thumb_name;
     		$myimage = new Imagick($old);
     		$myimage->cropimage(4000, 2000, 926, 300);
-    		//$myimage->setImageFormat("jpeg");
-    		//$myimage->setCompressionQuality( 100 );
     		$myimage->writeImage($new);
+    		
+    		$myimage->resizeimage(800, 400, Imagick::FILTER_LANCZOS, 1, true);
+    		$new = $new_path.$this->thumb_size800;
+    		$myimage->writeImage($new);
+    		
     		$myimage->resizeimage(200, 100, Imagick::FILTER_LANCZOS, 1, true);
-    		//$myimage->sharpenimage(2, 2);
     		$new = $new_path.$this->thumb_size;
     		$myimage->writeImage($new);
     		$myimage->clear();
