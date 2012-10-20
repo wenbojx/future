@@ -43,7 +43,7 @@ class DealPanosCommand extends CConsoleCommand {
     		echo "---- copying {$v} to {$new_file}----\n";
     		copy($v, $new_file);
     	}
-    	print_r($this->panos_path);
+    	//print_r($this->panos_path);
     }
     public function actionBottomIn(){
     	$path = $this->cube_path.'/bottom';
