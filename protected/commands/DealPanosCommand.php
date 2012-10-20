@@ -7,6 +7,7 @@ class DealPanosCommand extends CConsoleCommand {
     public $default_new_folder = 'panos';
     public $default_pano_name = 'Panorama.jpg';
     public $width = '1863';
+    public $error = array();
 
     public function actionFind() {
         $this->myscandir($this->path);
@@ -28,6 +29,7 @@ class DealPanosCommand extends CConsoleCommand {
     	$this->slip($this->panos_path[0]);
     	$this->exec_libpano();
     	//$this->slip('a.jpg');
+    	print_r($this->error);
     }
     public function exec_libpano(){
     	$str = "/usr/local/libpano13/bin/PTmender script.txt";
@@ -40,8 +42,23 @@ class DealPanosCommand extends CConsoleCommand {
     					'pano0002'=>'back',
     					'pano0003'=>'left',
     					'pano0004'=>'top', );
-
-    	
+		foreach($panos as $k=>$v){
+			$old = $k.'.tif';
+			$new = $v.'.jpg';
+			$this->tifToJpg($old, $new);
+		}
+    }
+    public function tifToJpg($old, $new){
+    	if(!file_exists($old)){
+    		$this->error[] = $old;
+    		return false;
+    	}
+    	$myimage = new Imagick($old);
+    	$myimage->setImageFormat("jpeg");
+    	$myimage->setCompressionQuality( 100 );
+    	$image->writeImage($new);
+    	$myimage->clear();
+    	$myimage->destroy();
     }
     public function slip($path){
     	$script = "p w{$this->width} h{$this->width} f0 v90 u20 n\"TIFF_m\"\n
