@@ -99,12 +99,12 @@ class DealPanosCommand extends CConsoleCommand {
     	$this->exec_sphere();
     }
     public function sphere($path){
-    	$front = $path.'/front.jpg';
-    	$left = $path.'/left.jpg';
-    	$back = $path.'/back.jpg';
-    	$right = $path.'/right.jpg';
-    	$top = $path.'/top.jpg';
-    	$bottom = $path.'/bottom.jpg';
+    	$front = $path.'/cube/front.jpg';
+    	$left = $path.'/cube/left.jpg';
+    	$back = $path.'/cube/back.jpg';
+    	$right = $path.'/cube/right.jpg';
+    	$top = $path.'/cube/top.jpg';
+    	$bottom = $path.'/cube/bottom.jpg';
     	$script = "p w{$this->swidth} h{$this->sheight} f2 v360 u0 n\"JPEG\"
 i n\"{$front}\"
 o f0 y0 r0 p0 v90
