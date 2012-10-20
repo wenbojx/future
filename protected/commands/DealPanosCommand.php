@@ -28,18 +28,18 @@ class DealPanosCommand extends CConsoleCommand {
     }
     
     public function slip($path){
-    	$script = "p w{$this->width} h{$this->width} f0 v90 u20 n'TIFF_m'\n
-i n'{$path}'\n
+    	$script = "p w{$this->width} h{$this->width} f0 v90 u20 n\"TIFF_m\"\n
+i n\"{$path}\"\n
 o f4 y0 r0 p0 v360\n
-i n'{$path}'\n
+i n\"{$path}\"\n
 o f4 y-90 r0 p0 v360\n
-i n'{$path}'\n
+i n\"{$path}\"\n
 o f4 y-180 r0 p0 v360\n
-i n'{$path}'\n
+i n\"{$path}\"\n
 o f4 y90 r0 p0 v360\n
-i n'{$path}'\n
+i n\"{$path}\"\n
 o f4 y0 r0 p-90 v360\n
-i n'{$path}'\n
+i n\"{$path}\"\n
 o f4 y0 r0 p90 v360";
     	return file_put_contents('script.txt', $script);
     }
