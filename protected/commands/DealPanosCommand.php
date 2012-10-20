@@ -62,7 +62,7 @@ class DealPanosCommand extends CConsoleCommand {
     	$myimage = new Imagick($old);
     	$myimage->setImageFormat("jpeg");
     	$myimage->setCompressionQuality( 100 );
-    	$image->writeImage($new);
+    	$myimage->writeImage($new);
     	$myimage->clear();
     	$myimage->destroy();
     	if(!file_exists($new)){
