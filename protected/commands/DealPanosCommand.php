@@ -14,6 +14,8 @@ class DealPanosCommand extends CConsoleCommand {
     public $split_file = '';
     public $cube_path = '/mnt/hgfs/pics/panos';
     public $upload_path = 'upload';
+    public $thumb_size = 'thumbx200.jpg';
+    public $thumb_name = 'thumb.jpg';
     
     //一键执行
     public function actionRun(){
@@ -29,13 +31,29 @@ class DealPanosCommand extends CConsoleCommand {
     }
     //归类需要上传的文件
     public function actionUpload(){
-    	$upload_path = $this->find_path.'/'.$this->upload_path;
-    	$search_path = $this->find_path.'/'.$this->default_new_folder;
+    	$upload_path = $this->find_path.'/'.$this->upload_path.'/';
+    	$search_path = $this->find_path.'/'.$this->default_new_folder.'/';
     	if(!file_exists($upload_path)){
     		mkdir($upload_path);
     	}
     	$this->myScanCubeDir($search_path);
-    	print_r($this->panos_path);
+    	$cubes = array('front', 'left', 'right', 'top', 'back', 'bottom');
+    	foreach($this->panos_path as $v){
+    		$fordle_explode = explode('/', $v);
+    		$num = count($fordle_explode)-1;
+    		$fordle = $fordle_explode[$num];
+    		$new_fordle = $upload_path.$fordle.'/';
+    		if(!file_exists($new_fordle)){
+    			mkdir($new_fordle);
+    		}
+    		echo "----move file {$search_path}{$this->thumb_size} ----\n";
+    		copy($search_path.$this->thumb_size, $new_fordle.$this->thumb_size);
+    		$cube_path = $search_path.'cube/';
+    		foreach($cubes as $v1){
+    			echo "----move file {$cube_path}{$v1} ----\n";
+    			copy($cube_path.$v1, $new_fordle.$v1);
+    		}
+    	}
     }
 	//查找全景图
     public function actionFind() {
@@ -125,7 +143,7 @@ class DealPanosCommand extends CConsoleCommand {
     		$old = $v;
     		$length = strlen($this->default_pano_name);
     		$new_path = substr($v, 0,strlen($v)-$length);
-    		$new = $new_path.'thumb.jpg';
+    		$new = $new_path.$this->thumb_name;
     		$myimage = new Imagick($old);
     		$myimage->cropimage(4000, 2000, 926, 300);
     		//$myimage->setImageFormat("jpeg");
@@ -133,7 +151,7 @@ class DealPanosCommand extends CConsoleCommand {
     		$myimage->writeImage($new);
     		$myimage->resizeimage(200, 100, Imagick::FILTER_LANCZOS, 1, true);
     		//$myimage->sharpenimage(2, 2);
-    		$new = $new_path.'thumbx200.jpg';
+    		$new = $new_path.$this->thumb_size;
     		$myimage->writeImage($new);
     		$myimage->clear();
     		$myimage->destroy();
