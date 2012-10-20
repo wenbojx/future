@@ -105,19 +105,23 @@ class DealPanosCommand extends CConsoleCommand {
     	$this->panos_path = array();
     	$this->myscandir($path);
     	print_r($this->panos_path);
+    	$i = 0;
     	foreach ($this->panos_path as $v){
+    		if($i>1){
+    			continue;
+    		}
     		echo "----thumb file {$v} ----\n";
     		$old = $v;
     		$length = strlen($this->default_pano_name);
     		$new = substr($v, 0,strlen($v)-$length);
-    		$new = $new.'.thumb.jpg';
+    		$new = $new.'thumb.jpg';
     		echo $new."\n";
-    		//$myimage = new Imagick($old);
-    		//$myimage->cropimage(4000, 2000, 926, 300);
+    		$myimage = new Imagick($old);
+    		$myimage->cropimage(4000, 2000, 926, 300);
     		//$myimage->setImageFormat("jpeg");
     		//$myimage->setCompressionQuality( 100 );
-    		//$myimage->writeImage($new);
-    		
+    		$myimage->writeImage($new);
+    		$i++;
     		echo "----end thumb file {$v} ----\n";
     	}
     	print_r($this->error);
