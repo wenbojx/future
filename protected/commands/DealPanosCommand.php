@@ -38,6 +38,7 @@ class DealPanosCommand extends CConsoleCommand {
     	echo "....slipting pano {$this->split_file}.....\n";
     	system($str);
     	echo "....slipting pano down {$this->split_file}.....\n";
+    	$this->covert();
     }
     public function covert(){
     	$panos = array( 'pano0005'=>'bottom',
