@@ -113,8 +113,8 @@ class DealPanosCommand extends CConsoleCommand {
     		echo "----thumb file {$v} ----\n";
     		$old = $v;
     		$length = strlen($this->default_pano_name);
-    		$new = substr($v, 0,strlen($v)-$length);
-    		$new = $new.'thumb.jpg';
+    		$new_path = substr($v, 0,strlen($v)-$length);
+    		$new = $new_path.'thumb.jpg';
     		echo $new."\n";
     		$myimage = new Imagick($old);
     		$myimage->cropimage(4000, 2000, 926, 300);
@@ -122,8 +122,8 @@ class DealPanosCommand extends CConsoleCommand {
     		//$myimage->setCompressionQuality( 100 );
     		$myimage->writeImage($new);
     		$myimage->resizeimage(200, 100, Imagick::FILTER_LANCZOS, 1, true);
-    		$myimage->sharpenimage(2, 2);
-    		$new = $new.'thumbxw200.jpg';
+    		//$myimage->sharpenimage(2, 2);
+    		$new = $new_path.'thumbx200.jpg';
     		$myimage->writeImage($new);
     		$myimage->clear();
     		$myimage->destroy();
