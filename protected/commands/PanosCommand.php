@@ -1,5 +1,5 @@
 <?php
-class DealPanosCommand extends CConsoleCommand {
+class PanosCommand extends CConsoleCommand {
     //public $defaultAction = 'index'; //默认动作
 
     public $find_path = '/mnt/hgfs/pics/0826'; //搜索全景图的目录
