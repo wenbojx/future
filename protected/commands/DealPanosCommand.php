@@ -61,12 +61,15 @@ class DealPanosCommand extends CConsoleCommand {
     	$explode = explode('/', $this->split_file);
     	$num = count($explode)-3;
     	$new_folder = $this->cube_path.$explode[$num].'/cube';
+    	$new_file = $new_folder.'/'.$file;
+    	echo $new_file."\n";
+    	return false;
     	if(!file_exists($new_folder)){
     		mkdir($new_folder);
     	}
-    	$new_file = $new_folder.'/'.$file;
+    	
     	copy($file, $new_file);
-    	echo "....moving to {$new_file}";
+    	echo "....moving to {$new_file}\n";
     }
     public function tifToJpg($old, $new){
     	if(!file_exists($old)){
