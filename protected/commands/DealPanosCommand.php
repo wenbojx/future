@@ -30,7 +30,7 @@ class DealPanosCommand extends CConsoleCommand {
     }
     public function exec_libpano(){
     	$str = "/usr/local/libpano13/bin/PTmender script.txt";
-    	system($command)
+    	system($command);
     	echo 111;
     }
     public function slip($path){
