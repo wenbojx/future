@@ -63,6 +63,7 @@ class DealPanosCommand extends CConsoleCommand {
     		}
     		$new_file = $new_path.'/bottom.jpg';
     		echo "---- copying {$v} to {$new_file}----\n";
+    		copy($new_file, $new_file.'.jpg');
     		copy($v, $new_file);
     	}
     	print_r($this->error);
