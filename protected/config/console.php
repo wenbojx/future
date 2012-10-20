@@ -3,18 +3,18 @@
 // This is the configuration for yiic console application.
 // Any writable CConsoleApplication properties can be configured here.
 return array(
-    'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR,
+    'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
     'name'=>'My Console Application',
 	'charset'=>'utf-8',
     'import'=>array(
-        'webroot.models.*',
-        'webroot.models.scenes.*',
-        'webroot.models.file.*',
-        'webroot.models.member.*',
-        'webroot.components.*',
-        'webroot.helpers.*',
-        'webroot.class.*',
-        'webroot.class.saladoPlayer.*',
+        'application.models.*',
+        'application.models.scenes.*',
+        'application.models.file.*',
+        'application.models.member.*',
+        'application.components.*',
+        'application.helpers.*',
+        'application.class.*',
+        'application.class.saladoPlayer.*',
     ),
     // application components
     'components'=>array(
@@ -38,6 +38,9 @@ return array(
 
 
     ),
-
+	'params'=>array(
+        'file_pic_folder'=>'upload',
+        'google_map_key'=>'AIzaSyBpQCTa3SlJY2jR_dAGCjzVEQ4UAvBEYMQ',
+    ),
 
 );
