@@ -121,6 +121,12 @@ class DealPanosCommand extends CConsoleCommand {
     		//$myimage->setImageFormat("jpeg");
     		//$myimage->setCompressionQuality( 100 );
     		$myimage->writeImage($new);
+    		$myimage->resizeimage(200, 100);
+    		$myimage->sharpenimage(20);
+    		$new = $new.'thumbxw200.jpg';
+    		$myimage->writeImage($new);
+    		$myimage->clear();
+    		$myimage->destroy();
     		$i++;
     		echo "----end thumb file {$v} ----\n";
     	}
