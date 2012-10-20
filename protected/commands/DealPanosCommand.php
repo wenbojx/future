@@ -18,8 +18,10 @@ class DealPanosCommand extends CConsoleCommand {
     	$this->cube_path = $this->find_path.'/'.$this->default_new_folder;
     	$this->actionFind();
     	$this->new_pano_name = $this->default_pano_name;
+    	//手工处理生成的全景图
     	$this->actionCube();
     	$this->actionBottomOut();
+    	//手工处理cube底部图
     	$this->actionBottomIn();
     	$this->actionThumb();
     }
