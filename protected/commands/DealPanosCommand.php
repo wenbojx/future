@@ -49,7 +49,9 @@ class DealPanosCommand extends CConsoleCommand {
 		foreach($panos as $k=>$v){
 			$old = $k.'.tif';
 			$new = $v.'.jpg';
+			echo "....covering tifToJpg {$old} .....\n";
 			$this->tifToJpg($old, $new);
+			echo "....covering tifToJpg success {$old} .....\n";
 		}
     }
     public function tifToJpg($old, $new){
@@ -57,14 +59,16 @@ class DealPanosCommand extends CConsoleCommand {
     		$this->error[] = $old;
     		return false;
     	}
-    	echo "....covering tifToJpg {$old} .....\n";
     	$myimage = new Imagick($old);
     	$myimage->setImageFormat("jpeg");
     	$myimage->setCompressionQuality( 100 );
     	$image->writeImage($new);
     	$myimage->clear();
     	$myimage->destroy();
-    	echo "....covering tifToJpg success {$old} .....\n";
+    	if(!file_exists($new)){
+    		$this->error[] = $old;
+    		return false;
+    	}
     }
     public function slip($path){
     	$script = "p w{$this->width} h{$this->width} f0 v90 u20 n\"TIFF_m\"\n
