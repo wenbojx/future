@@ -2,7 +2,7 @@
 class DealPanosCommand extends CConsoleCommand {
     //public $defaultAction = 'index'; //默认动作
 
-    public $find_path = '/mnt/hgfs/pics/0826城隍庙'; //搜索全景图的目录
+    public $find_path = '/mnt/hgfs/pics/0826'; //搜索全景图的目录
     public $panos_path = array();
     public $default_new_folder = 'panos';  //新的全景图目录
     public $default_pano_name = 'Panorama.jpg'; //默认的搜索的全景图名称
