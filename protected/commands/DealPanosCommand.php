@@ -26,8 +26,8 @@ class DealPanosCommand extends CConsoleCommand {
     	print_r($this->panos_path);
     	$this->slip($this->panos_path[0]);
     	$this->exec_libpano();
-    	$this->slip($this->panos_path[0]);
-    	$this->exec_libpano();
+    	//$this->slip($this->panos_path[0]);
+    	//$this->exec_libpano();
     	//$this->slip('a.jpg');
     	print_r($this->error);
     }
@@ -53,12 +53,14 @@ class DealPanosCommand extends CConsoleCommand {
     		$this->error[] = $old;
     		return false;
     	}
+    	echo "covering tifToJpg {$old} .....\n";
     	$myimage = new Imagick($old);
     	$myimage->setImageFormat("jpeg");
     	$myimage->setCompressionQuality( 100 );
     	$image->writeImage($new);
     	$myimage->clear();
     	$myimage->destroy();
+    	echo "covering tifToJpg success {$old} .....\n";
     }
     public function slip($path){
     	$script = "p w{$this->width} h{$this->width} f0 v90 u20 n\"TIFF_m\"\n
