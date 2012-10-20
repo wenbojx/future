@@ -94,10 +94,16 @@ class DealPanosCommand extends CConsoleCommand {
     	$this->panos_path = array();
     	$path = $this->cube_path;
     	$this->myScanCubeDir($path);
-    	$this->sphere($this->panos_path[0]);
     	print_r($this->panos_path);
+    	$this->sphere($this->panos_path[0]);
     }
     public function sphere($path){
+    	$front = $path.'/front.jpg';
+    	$left = $path.'/left.jpg';
+    	$back = $path.'/back.jpg';
+    	$right = $path.'/right.jpg';
+    	$top = $path.'/top.jpg';
+    	$bottom = $path.'/bottom.jpg';
     	$script = "p w{$this->swidth} h{$this->sheight} f2 v360 u0 n\"JPEG\"
 i n\"{$front}\"
 o f0 y0 r0 p0 v90
@@ -114,13 +120,17 @@ o f0 y0 r0 p-90 v90";
     	return file_put_contents('script-s.txt', $script);
     }
     public function exec_sphere(){
-    	
+    	$str = "/usr/local/libpano13/bin/PTmender script-s.txt";
+    	echo "----sphere pano {$this->split_file}----\n";
+    	system($str);
+    	echo "----sphere pano down {$this->split_file}----\n";
+    	$this->covert();
     }
     public function exec_libpano(){
     	$str = "/usr/local/libpano13/bin/PTmender script.txt";
-    	echo "----slipting pano {$this->split_file}----\n";
+    	echo "----cube pano {$this->split_file}----\n";
     	system($str);
-    	echo "----slipting pano down {$this->split_file}----\n";
+    	echo "----cube pano down {$this->split_file}----\n";
     	$this->covert();
     }
     public function covert(){
