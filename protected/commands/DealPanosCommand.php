@@ -13,7 +13,9 @@ class DealPanosCommand extends CConsoleCommand {
     public $error = array();
     public $split_file = '';
     public $cube_path = '/mnt/hgfs/pics/panos';
+    public $upload_path = 'upload';
     
+    //一键执行
     public function actionRun(){
     	$this->cube_path = $this->find_path.'/'.$this->default_new_folder;
     	$this->actionFind();
@@ -25,7 +27,16 @@ class DealPanosCommand extends CConsoleCommand {
     	$this->actionBottomIn();
     	$this->actionThumb();
     }
-    
+    //归类需要上传的文件
+    public function actionUpload(){
+    	$upload_path = $this->find_path.'/'.$this->upload_path;
+    	$search_path = $this->find_path.'/'.$this->default_new_folder;
+    	if(!file_exists($upload_path)){
+    		mkdir($upload_path);
+    	}
+    	$this->myScanCubeDir($search_path);
+    	print_r($this->panos_path);
+    }
 	//查找全景图
     public function actionFind() {
     	$this->panos_path = array();
