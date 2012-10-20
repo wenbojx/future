@@ -26,19 +26,21 @@ class DealPanosCommand extends CConsoleCommand {
     	$this->default_pano_name = 'Panorama-2.jpg';
     	$path = '/mnt/hgfs/pics/panos';
     	$this->myscandir($path);
-    	print_r($this->panos_path);
-    	
-    	$this->slip($this->panos_path[0]);
-    	$this->split_file = $this->panos_path[0];
-    	$this->exec_libpano();
-
+    	//print_r($this->panos_path);
+    	foreach ($this->panos_path as $v){
+    		echo "----deal file {$v} ----\n";
+	    	$this->slip($v);
+	    	$this->split_file = $v;
+	    	$this->exec_libpano();
+	    	echo "----end deal file {$v} ----\n";
+    	}
     	print_r($this->error);
     }
     public function exec_libpano(){
     	$str = "/usr/local/libpano13/bin/PTmender script.txt";
-    	echo "....slipting pano {$this->split_file}.....\n";
+    	echo "----slipting pano {$this->split_file}----\n";
     	system($str);
-    	echo "....slipting pano down {$this->split_file}.....\n";
+    	echo "----slipting pano down {$this->split_file}----\n";
     	$this->covert();
     }
     public function covert(){
@@ -51,9 +53,9 @@ class DealPanosCommand extends CConsoleCommand {
 		foreach($panos as $k=>$v){
 			$old = $k.'.tif';
 			$new = $v.'.jpg';
-			echo "....covering tifToJpg {$old} .....\n";
+			echo "----covering tifToJpg {$old}----\n";
 			$this->tifToJpg($old, $new);
-			echo "....covering tifToJpg success {$old} .....\n";
+			echo "----covering tifToJpg success {$old}----\n";
 			$this->move_cube_file($new);
 		}
     }
