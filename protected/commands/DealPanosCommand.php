@@ -13,6 +13,14 @@ class DealPanosCommand extends CConsoleCommand {
     public $split_file = '';
     public $cube_path = '/mnt/hgfs/pics/panos';
     
+    public function actionRun(){
+    	$this->cube_path = $this->find_path.'/'.$this->default_new_folder;
+    	$this->actionFind();
+    	$this->actionCube();
+    	$this->actionBottomOut();
+    	$this->actionBottomIn();
+    	$this->actionThumb();
+    }
     
 	//查找全景图
     public function actionFind() {
