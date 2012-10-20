@@ -1,6 +1,6 @@
 <?php
 class DealPanosCommand extends CConsoleCommand {
-    public $defaultAction = 'index'; //默认动作
+    //public $defaultAction = 'index'; //默认动作
 
     public $path = 'C:\Users\faashi\Desktop\pics\0826'; //搜索全景图的目录
     public $panos_path = array();
@@ -26,7 +26,7 @@ class DealPanosCommand extends CConsoleCommand {
     //归类cube中的bottom图
     public function actionBottomOut(){
     	$path = $this->cube_path.'/bottom';
-    	if(!file_exists($filename)){
+    	if(!file_exists($path)){
     		mkdir($path);
     	}
     	$this->panos_path = array();
