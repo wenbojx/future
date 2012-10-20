@@ -6,6 +6,7 @@ class DealPanosCommand extends CConsoleCommand {
     public $panos_path = array();
     public $default_new_folder = 'panos';
     public $default_pano_name = 'Panorama.jpg';
+    public $width = '1863';
 
     public function actionFind() {
         $this->myscandir($this->path);
@@ -19,9 +20,27 @@ class DealPanosCommand extends CConsoleCommand {
     }
     public function actionSlipt(){
     	$this->default_pano_name = 'Panorama-2.jpg';
-    	$path = '/mnt/hgfs/pics/panos/';
+    	$path = '/mnt/hgfs/pics/panos';
     	$this->myscandir($path);
     	print_r($this->panos_path);
+    	$this->slip($this->panos_path[0]);
+    }
+    
+    public function slip($path){
+    	$script = "p w{$this->width} h{$this->width} f0 v90 u20 n'TIFF_m'\n
+i n'{$path}'\n
+o f4 y0 r0 p0 v360\n
+i n'{$path}'\n
+o f4 y-90 r0 p0 v360\n
+i n'{$path}'\n
+o f4 y-180 r0 p0 v360\n
+i n'{$path}'\n
+o f4 y90 r0 p0 v360\n
+i n'{$path}'\n
+o f4 y0 r0 p-90 v360\n
+i n'{$path}'\n
+o f4 y0 r0 p90 v360";
+    	return file_put_contents('script.txt', $script);
     }
     public function moveFiles(){
         if(!$this->panos_path){
