@@ -41,9 +41,12 @@ class DealPanosCommand extends CConsoleCommand {
     	$cubes = array('front', 'left', 'right', 'top', 'back', 'bottom');
     	foreach($this->panos_path as $v){
     		$fordle_explode = explode('/', $v);
+    		print_r($fordle_explode);
     		$num = count($fordle_explode)-1;
     		$fordle = $fordle_explode[$num];
+    		echo $fordle.'a|';
     		$new_fordle = $upload_path.$fordle.'/';
+    		echo $new_fordle;
     		if(!file_exists($new_fordle)){
     			mkdir($new_fordle);
     		}
