@@ -30,15 +30,17 @@ class DealPanosCommand extends CConsoleCommand {
     		mkdir($path);
     	}
     	$this->panos_path = array();
+    	$this->default_new_folder = 'bottom';
     	$this->default_pano_name = 'bottom.jpg';
     	$this->myscandir($this->cube_path);
     	print_r($this->panos_path);
     	foreach($this->panos_path as $v){
     		$explode = explode('/', $v);
     		$num = count($explode)-3;
+    		echo 111;
     		$new_path = $path.'/'.$num;
-    		echo $new_path.'';
-    		return true;
+    		echo $new_path."\n";
+    		continue;
     		if(!file_exists($new_path)){
     			mkdir($new_path);
     		}
