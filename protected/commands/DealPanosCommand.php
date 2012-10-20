@@ -40,7 +40,7 @@ class DealPanosCommand extends CConsoleCommand {
     }
     //全景图转为cube
     public function actionCube(){
-    	$this->default_pano_name = $this->$new_pano_name;
+    	$this->default_pano_name = $this->new_pano_name;
     	$path = $this->cube_path;
     	$this->panos_path = array();
     	$this->myscandir($path);
