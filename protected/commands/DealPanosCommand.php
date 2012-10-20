@@ -2,7 +2,7 @@
 class DealPanosCommand extends CConsoleCommand {
     //public $defaultAction = 'index'; //默认动作
 
-    public $path = 'C:\Users\faashi\Desktop\pics\0826'; //搜索全景图的目录
+    public $path = '/mnt/hgfs/pics/panos'; //搜索全景图的目录
     public $panos_path = array();
     public $default_new_folder = 'panos';  //新的全景图目录
     public $default_pano_name = 'Panorama.jpg'; //默认的搜索的全景图名称
@@ -44,6 +44,7 @@ class DealPanosCommand extends CConsoleCommand {
     	}
     	//print_r($this->panos_path);
     }
+    //将处理过的bottom图归回
     public function actionBottomIn(){
     	$path = $this->cube_path.'/bottom';
     	if(!file_exists($path)){
@@ -70,7 +71,7 @@ class DealPanosCommand extends CConsoleCommand {
     	print_r($this->error);
     }
     //全景图转为cube
-    public function actionSlipt(){
+    public function actionCube(){
     	$this->default_pano_name = 'Panorama-2.jpg';
     	$path = $this->cube_path;
     	$this->panos_path = array();
@@ -78,12 +79,18 @@ class DealPanosCommand extends CConsoleCommand {
     	//print_r($this->panos_path);
     	foreach ($this->panos_path as $v){
     		echo "----deal file {$v} ----\n";
-	    	$this->slip($v);
+	    	$this->cube($v);
 	    	$this->split_file = $v;
 	    	$this->exec_libpano();
 	    	echo "----end deal file {$v} ----\n";
     	}
     	print_r($this->error);
+    }
+    //cube to sphere
+    public function actionSphere(){
+    	$this->panos_path = array();
+    	$path = $this->panos_path;
+    	print_r($this->panos_path);
     }
     public function exec_libpano(){
     	$str = "/usr/local/libpano13/bin/PTmender script.txt";
@@ -137,7 +144,7 @@ class DealPanosCommand extends CConsoleCommand {
     		return false;
     	}
     }
-    public function slip($path){
+    public function cube($path){
     	$script = "p w{$this->width} h{$this->width} f0 v90 u20 n\"TIFF_m\"\n
 i n\"{$path}\"\n
 o f4 y0 r0 p0 v360\n
@@ -199,6 +206,20 @@ o f4 y0 r0 p90 v360";
                 }
             }
         }
-
+    }
+    /**
+     * 扫描目录下的cube
+     */
+    public function myScanCubeDir($path){
+    	if(!is_dir($path))  return;
+    	foreach(scandir($path) as $file){
+    		if($file!='.'  && $file!='..'){
+    			$path2= $path.DIRECTORY_SEPARATOR.$file;
+    			if(is_dir($path2)){
+    				$this->panos_path[] = $path2;
+    			}
+    		}
+    	}
+    	
     }
 }
