@@ -30,6 +30,7 @@ class DealPanosCommand extends CConsoleCommand {
     		mkdir($path);
     	}
     	$this->panos_path = array();
+    	$this->default_pano_name = 'bottom.jpg';
     	$this->myscandir($this->cube_path);
     	print_r($this->panos_path);
     }
