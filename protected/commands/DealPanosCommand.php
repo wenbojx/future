@@ -32,7 +32,37 @@ class DealPanosCommand extends CConsoleCommand {
     	$this->panos_path = array();
     	$this->default_pano_name = 'bottom.jpg';
     	$this->myscandir($this->cube_path);
+    	foreach($this->panos_path as $v){
+    		$explode = explode('/', $v);
+    		$num = count($explode)-3;
+    		$new_path = $path.'/'.$num;
+    		if(!file_exists($new_path)){
+    			mkdir($new_path);
+    		}
+    		$new_file = $new_path.'/bottom.jpg';
+    		copy($v, $new_file);
+    	}
     	print_r($this->panos_path);
+    }
+    public function actionBottomIn(){
+    	$path = $this->cube_path.'/bottom';
+    	if(!file_exists($path)){
+    		return false;
+    	}
+    	$this->panos_path = array();
+    	$this->default_pano_name = 'bottom.jpg';
+    	$this->myscandir($path);
+    	foreach($this->panos_path as $v){
+    		$explode = explode('/', $v);
+    		$num = count($explode)-3;
+    		$new_path = $this->cube_path.'/'.$num;
+    		if(!file_exists($new_path)){
+    			$this->error[] = $new_path;
+    		}
+    		$new_file = $new_path.'/bottom.jpg';
+    		copy($v, $new_file);
+    	}
+    	print_r($this->error);
     }
     //全景图转为cube
     public function actionSlipt(){
