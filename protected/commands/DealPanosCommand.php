@@ -109,7 +109,7 @@ class DealPanosCommand extends CConsoleCommand {
     		echo "----thumb file {$v} ----\n";
     		$old = $v;
     		$length = strlen($this->default_pano_name);
-    		$new = substr($v, 0, $length);
+    		$new = substr($v, 0,strlen($v)-$length);
     		$new = $new.'.thumb.jpg';
     		echo $new."\n";
     		//$myimage = new Imagick($old);
