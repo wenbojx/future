@@ -92,7 +92,7 @@ class DealPanosCommand extends CConsoleCommand {
     //cube to sphere
     public function actionSphere(){
     	$this->panos_path = array();
-    	$path = $this->panos_path;
+    	$path = $this->cube_path;
     	$this->myScanCubeDir($path);
     	$this->sphere($this->panos_path[0]);
     	print_r($this->panos_path);
