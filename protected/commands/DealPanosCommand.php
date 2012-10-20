@@ -24,8 +24,9 @@ class DealPanosCommand extends CConsoleCommand {
     	$this->myscandir($path);
     	print_r($this->panos_path);
     	$this->slip($this->panos_path[0]);
-    	
+    	$this->exec_libpano();
     	$this->slip($this->panos_path[0]);
+    	$this->exec_libpano();
     	//$this->slip('a.jpg');
     }
     public function exec_libpano(){
