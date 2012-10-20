@@ -33,17 +33,18 @@ class DealPanosCommand extends CConsoleCommand {
     //归类需要上传的文件
     public function actionUpload(){
     	$upload_path = $this->find_path.'/'.$this->upload_path.'/';
-    	$search_path = $this->find_path.'/'.$this->default_new_folder.'/';
+    	$search_path = $this->find_path.'/'.$this->default_new_folder;
     	if(!file_exists($upload_path)){
     		mkdir($upload_path);
     	}
     	$this->myScanCubeDir($search_path);
+    	$search_path .= '/';
     	$cubes = array('front', 'left', 'right', 'top', 'back', 'bottom');
     	foreach($this->panos_path as $v){
     		echo $v;
     		$fordle_explode = explode('/', $v);
     		print_r($fordle_explode);
-    		$num = count($fordle_explode)-2;
+    		$num = count($fordle_explode)-1;
     		$fordle = $fordle_explode[$num];
     		echo $fordle.'a|';
     		$new_fordle = $upload_path.$fordle.'/';
