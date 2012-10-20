@@ -2,13 +2,15 @@
 class DealPanosCommand extends CConsoleCommand {
     public $defaultAction = 'index'; //默认动作
 
-    public $path = 'C:\Users\faashi\Desktop\pics\0826';
+    public $path = 'C:\Users\faashi\Desktop\pics\0826'; //搜索全景图的目录
     public $panos_path = array();
-    public $default_new_folder = 'panos';
-    public $default_pano_name = 'Panorama.jpg';
-    public $width = '1863';
+    public $default_new_folder = 'panos';  //新的全景图目录
+    public $default_pano_name = 'Panorama.jpg'; //默认的搜索的全景图名称
+    public $width = '1863';  //cube图的宽度
     public $error = array();
     public $split_file = '';
+    public $cube_path = '/mnt/hgfs/pics/panos/';
+    
 
     public function actionFind() {
         $this->myscandir($this->path);
@@ -25,12 +27,11 @@ class DealPanosCommand extends CConsoleCommand {
     	$path = '/mnt/hgfs/pics/panos';
     	$this->myscandir($path);
     	print_r($this->panos_path);
+    	
     	$this->slip($this->panos_path[0]);
     	$this->split_file = $this->panos_path[0];
     	$this->exec_libpano();
-    	//$this->slip($this->panos_path[0]);
-    	//$this->exec_libpano();
-    	//$this->slip('a.jpg');
+
     	print_r($this->error);
     }
     public function exec_libpano(){
@@ -53,7 +54,19 @@ class DealPanosCommand extends CConsoleCommand {
 			echo "....covering tifToJpg {$old} .....\n";
 			$this->tifToJpg($old, $new);
 			echo "....covering tifToJpg success {$old} .....\n";
+			$this->move_cube_file($new);
 		}
+    }
+    public function move_cube_file($file){
+    	$explode = explode('/', $this->split_file);
+    	$num = count($explode)-3;
+    	$new_folder = $this->cube_path.$explode[$num];
+    	if(!file_exists($new_folder)){
+    		mkdir($new_folder);
+    	}
+    	$new_file = $new_folder.'/'.$file;
+    	copy($file, $new_file);
+    	echo "....moving {$old} to {$new_file}";
     }
     public function tifToJpg($old, $new){
     	if(!file_exists($old)){
