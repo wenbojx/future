@@ -8,6 +8,7 @@ class DealPanosCommand extends CConsoleCommand {
     public $default_pano_name = 'Panorama.jpg';
     public $width = '1863';
     public $error = array();
+    public $split_file = '';
 
     public function actionFind() {
         $this->myscandir($this->path);
@@ -25,6 +26,7 @@ class DealPanosCommand extends CConsoleCommand {
     	$this->myscandir($path);
     	print_r($this->panos_path);
     	$this->slip($this->panos_path[0]);
+    	$this->split_file = $this->panos_path[0];
     	$this->exec_libpano();
     	//$this->slip($this->panos_path[0]);
     	//$this->exec_libpano();
@@ -33,7 +35,9 @@ class DealPanosCommand extends CConsoleCommand {
     }
     public function exec_libpano(){
     	$str = "/usr/local/libpano13/bin/PTmender script.txt";
+    	echo "....slipting pano {$this->split_file}.....\n";
     	system($str);
+    	echo "....slipting pano down {$this->split_file}.....\n";
     }
     public function covert(){
     	$panos = array( 'pano0005'=>'bottom',
@@ -53,14 +57,14 @@ class DealPanosCommand extends CConsoleCommand {
     		$this->error[] = $old;
     		return false;
     	}
-    	echo "covering tifToJpg {$old} .....\n";
+    	echo "....covering tifToJpg {$old} .....\n";
     	$myimage = new Imagick($old);
     	$myimage->setImageFormat("jpeg");
     	$myimage->setCompressionQuality( 100 );
     	$image->writeImage($new);
     	$myimage->clear();
     	$myimage->destroy();
-    	echo "covering tifToJpg success {$old} .....\n";
+    	echo "....covering tifToJpg success {$old} .....\n";
     }
     public function slip($path){
     	$script = "p w{$this->width} h{$this->width} f0 v90 u20 n\"TIFF_m\"\n
