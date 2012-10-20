@@ -7,9 +7,12 @@ class DealPanosCommand extends CConsoleCommand {
     public $default_new_folder = 'panos';  //新的全景图目录
     public $default_pano_name = 'Panorama.jpg'; //默认的搜索的全景图名称
     public $width = '1863';  //cube图的宽度
+    public $swidth = '5852'; //sphere的宽度
+    public $sheight = '2926'; //sphere的宽度
     public $error = array();
     public $split_file = '';
     public $cube_path = '/mnt/hgfs/pics/panos';
+    
     
 	//查找全景图
     public function actionFind() {
@@ -90,7 +93,28 @@ class DealPanosCommand extends CConsoleCommand {
     public function actionSphere(){
     	$this->panos_path = array();
     	$path = $this->panos_path;
+    	$this->myScanCubeDir($path);
+    	$this->sphere($this->panos_path[0]);
     	print_r($this->panos_path);
+    }
+    public function sphere($path){
+    	$script = "p w{$this->swidth} h{$this->sheight} f2 v360 u0 n\"JPEG\"
+i n\"{$front}\"
+o f0 y0 r0 p0 v90
+i n\"{$left}\"
+o f0 y90 r0 p0 v90
+i n\"{$back}\"
+o f0 y-180 r0 p0 v90
+i n\"{$right}\"
+o f0 y-90 r0 p0 v90
+i n\"{$top}\"
+o f0 y0 r0 p90 v90
+i n\"{$bottom}\"
+o f0 y0 r0 p-90 v90";
+    	return file_put_contents('script-s.txt', $script);
+    }
+    public function exec_sphere(){
+    	
     }
     public function exec_libpano(){
     	$str = "/usr/local/libpano13/bin/PTmender script.txt";
