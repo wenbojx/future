@@ -96,6 +96,7 @@ class DealPanosCommand extends CConsoleCommand {
     	$this->myScanCubeDir($path);
     	print_r($this->panos_path);
     	$this->sphere($this->panos_path[0]);
+    	$this->exec_sphere();
     }
     public function sphere($path){
     	$front = $path.'/front.jpg';
@@ -247,7 +248,7 @@ o f4 y0 r0 p90 v360";
     public function myScanCubeDir($path){
     	if(!is_dir($path))  return;
     	foreach(scandir($path) as $file){
-    		if($file!='.'  && $file!='..'){
+    		if($file!='.'  && $file!='..' && $file!='bottom'){
     			$path2= $path.DIRECTORY_SEPARATOR.$file;
     			if(is_dir($path2)){
     				$this->panos_path[] = $path2;
