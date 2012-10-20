@@ -2,7 +2,7 @@
 class DealPanosCommand extends CConsoleCommand {
     //public $defaultAction = 'index'; //默认动作
 
-    public $path = '/mnt/hgfs/pics/panos'; //搜索全景图的目录
+    public $find_path = '/mnt/hgfs/pics/panos'; //搜索全景图的目录
     public $panos_path = array();
     public $default_new_folder = 'panos';  //新的全景图目录
     public $default_pano_name = 'Panorama.jpg'; //默认的搜索的全景图名称
@@ -17,14 +17,30 @@ class DealPanosCommand extends CConsoleCommand {
 	//查找全景图
     public function actionFind() {
     	$this->panos_path = array();
-        $this->myscandir($this->path);
-        $new_folder = $this->path. DIRECTORY_SEPARATOR .$this->default_new_folder;
+        $this->myscandir($this->find_path);
+        $new_folder = $this->find_path. DIRECTORY_SEPARATOR .$this->default_new_folder;
         if(!file_exists($new_folder)){
             mkdir($new_folder);
         }
         $this->moveFiles();
 
         //print_r($this->panos_path);
+    }
+    //全景图转为cube
+    public function actionCube(){
+    	$this->default_pano_name = 'Panorama-2.jpg';
+    	$path = $this->cube_path;
+    	$this->panos_path = array();
+    	$this->myscandir($path);
+    	//print_r($this->panos_path);
+    	foreach ($this->panos_path as $v){
+    		echo "----deal file {$v} ----\n";
+    		$this->cube($v);
+    		$this->split_file = $v;
+    		$this->exec_libpano();
+    		echo "----end deal file {$v} ----\n";
+    	}
+    	print_r($this->error);
     }
     //归类cube中的bottom图
     public function actionBottomOut(){
@@ -73,31 +89,6 @@ class DealPanosCommand extends CConsoleCommand {
     	}
     	print_r($this->error);
     }
-    //全景图转为cube
-    public function actionCube(){
-    	$this->default_pano_name = 'Panorama-2.jpg';
-    	$path = $this->cube_path;
-    	$this->panos_path = array();
-    	$this->myscandir($path);
-    	//print_r($this->panos_path);
-    	foreach ($this->panos_path as $v){
-    		echo "----deal file {$v} ----\n";
-	    	$this->cube($v);
-	    	$this->split_file = $v;
-	    	$this->exec_libpano();
-	    	echo "----end deal file {$v} ----\n";
-    	}
-    	print_r($this->error);
-    }
-    //cube to sphere
-    public function actionSphere(){
-    	$this->panos_path = array();
-    	$path = $this->cube_path;
-    	$this->myScanCubeDir($path);
-    	print_r($this->panos_path);
-    	$this->sphere($this->panos_path[0]);
-    	$this->exec_sphere();
-    }
     //生成缩略图
     public function actionThumb(){
     	$this->default_pano_name = 'Panorama-2.jpg';
@@ -128,7 +119,15 @@ class DealPanosCommand extends CConsoleCommand {
     	}
     	print_r($this->error);
     }
-    
+    //cube to sphere
+    public function actionSphere(){
+    	$this->panos_path = array();
+    	$path = $this->cube_path;
+    	$this->myScanCubeDir($path);
+    	print_r($this->panos_path);
+    	$this->sphere($this->panos_path[0]);
+    	$this->exec_sphere();
+    }
     public function sphere($path){
     	$front = $path.'/cube/front.jpg';
     	$left = $path.'/cube/left.jpg';
@@ -234,7 +233,7 @@ o f4 y0 r0 p90 v360";
             $path_explode = explode(DIRECTORY_SEPARATOR, $v);
             $num = count($path_explode)-3;
             $folder = $path_explode[$num];
-            $path = $this->path. DIRECTORY_SEPARATOR . $this->default_new_folder. DIRECTORY_SEPARATOR. $folder;
+            $path = $this->find_path. DIRECTORY_SEPARATOR . $this->default_new_folder. DIRECTORY_SEPARATOR. $folder;
             $new_file = $path.DIRECTORY_SEPARATOR.$this->default_pano_name;
 
             if(!file_exists($path)){
