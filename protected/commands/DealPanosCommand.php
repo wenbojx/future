@@ -40,7 +40,7 @@ class DealPanosCommand extends CConsoleCommand {
     			mkdir($new_path);
     		}
     		$new_file = $new_path.'/bottom.jpg';
-    		echo "---- copying {$v} to {$new_file}----";
+    		echo "---- copying {$v} to {$new_file}----\n";
     		copy($v, $new_file);
     	}
     	print_r($this->panos_path);
@@ -61,7 +61,7 @@ class DealPanosCommand extends CConsoleCommand {
     			$this->error[] = $new_path;
     		}
     		$new_file = $new_path.'/bottom.jpg';
-    		echo "---- copying {$v} to {$new_file}----";
+    		echo "---- copying {$v} to {$new_file}----\n";
     		copy($v, $new_file);
     	}
     	print_r($this->error);
