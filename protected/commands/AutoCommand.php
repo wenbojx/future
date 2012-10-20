@@ -14,12 +14,8 @@ class AutoCommand extends CConsoleCommand {
 		$this->myScanCubeDir($this->search_path);
 		//print_r($this->panos_path);
 		$project_id = $this->add_project();
-		$i = 0;
 		//添加项目
 		foreach ($this->panos_path as $v){
-			if($i>0){
-				continue;
-			}
 			$fordle_explode = explode('/', $v);
     		$num = count($fordle_explode)-1;
     		$fordle = $fordle_explode[$num];
@@ -28,7 +24,6 @@ class AutoCommand extends CConsoleCommand {
 			foreach ($this->cubes as $v1){
 				$this->save_datas($scene_id, $v, $v1.'.jpg', false, $v1);
 			}
-			$i++;
 		}
 	}
 	private function save_datas($scene_id, $path, $file, $thumb_flag = false, $position){

@@ -1,6 +1,9 @@
 <?php
 Yii::import('application.extensions.image.Image');
 class ImageContent {
+	public $quality = 90;
+	public $sharpen = 5;
+	
     private function show_pics($pic_datas){
         if(!$pic_datas || !$pic_datas['path'] || !$pic_datas['draw']){
             return false;
@@ -126,7 +129,12 @@ class ImageContent {
      */
     private function resize($input, $output, $width, $height){
         $image = new Image($input);
-        $image->resize($width, $height)->quality(90)->sharpen(10);
+        if($this->sharpen){
+        	$image->resize($width, $height)->quality($this->quality)->sharpen($this->sharpen);
+        }
+        else{
+        	$image->resize($width, $height)->quality($this->quality);
+        }
         return $image->save($output);
     }
 

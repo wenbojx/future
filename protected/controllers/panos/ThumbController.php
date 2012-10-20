@@ -16,6 +16,8 @@ class ThumbController extends FController{
                 $pic_datas = $img_class->get_default_img($default_img, 'jpg');
             }
             else {
+            	$img_class->quality = 90;
+            	$img_class->sharpen = 0;
                 $pic_datas = $img_class->get_img_content_by_id($thumb_datas['file_id'], $size, 'original');
             }
         }
