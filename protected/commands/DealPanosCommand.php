@@ -59,11 +59,10 @@ class DealPanosCommand extends CConsoleCommand {
     }
     public function move_cube_file($file){
     	$explode = explode('/', $this->split_file);
-    	$num = count($explode)-3;
+    	$num = count($explode)-2;
     	$new_folder = $this->cube_path.$explode[$num].'/cube';
     	$new_file = $new_folder.'/'.$file;
-    	echo $new_file."\n";
-    	return false;
+
     	if(!file_exists($new_folder)){
     		mkdir($new_folder);
     	}
