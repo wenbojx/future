@@ -36,8 +36,7 @@ class DealPanosCommand extends CConsoleCommand {
     	print_r($this->panos_path);
     	foreach($this->panos_path as $v){
     		$explode = explode('/', $v);
-    		$num = count($explode)-3;
-    		echo 111;
+    		$num = count($explode)-2;
     		$new_path = $path.'/'.$num;
     		echo $new_path."\n";
     		continue;
