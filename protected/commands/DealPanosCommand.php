@@ -98,6 +98,30 @@ class DealPanosCommand extends CConsoleCommand {
     	$this->sphere($this->panos_path[0]);
     	$this->exec_sphere();
     }
+    //生成缩略图
+    public function actionThumb(){
+    	$this->default_pano_name = 'Panorama-2.jpg';
+    	$path = $this->cube_path;
+    	$this->panos_path = array();
+    	$this->myscandir($path);
+    	print_r($this->panos_path);
+    	foreach ($this->panos_path as $v){
+    		echo "----thumb file {$v} ----\n";
+    		$old = $v;
+    		$new = substr($v, 0,strlen($v)-4);
+    		$new = $new.'.thumb.jpg';
+    		echo $new."\n";
+    		//$myimage = new Imagick($old);
+    		//$myimage->cropimage(4000, 2000, 926, 300);
+    		//$myimage->setImageFormat("jpeg");
+    		//$myimage->setCompressionQuality( 100 );
+    		//$myimage->writeImage($new);
+    		
+    		echo "----end thumb file {$v} ----\n";
+    	}
+    	print_r($this->error);
+    }
+    
     public function sphere($path){
     	$front = $path.'/cube/front.jpg';
     	$left = $path.'/cube/left.jpg';

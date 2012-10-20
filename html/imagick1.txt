@@ -1,0 +1,671 @@
+前阵子在写到给上传图片加水印时，GD库对gif支持总有些问题，特别是多帧的时候。（据说最新GD库已经解决了对gif的支持问题？）
+
+于是，翻来找去，最后选择了imagick库，即php中新增加载扩展php_imagick.dll。
+
+对图片进行加水印、裁剪、拉伸、放大缩小、高度或者宽度自适应这几个功能已能够满足非图片处理类的各类网站需求，本文分享的代码实现的也是以上几个基本功能，这几个独立的功能百度一下或者谷歌一下都可以找到现成的代码，这些代码好不好用？仁者见仁，智者见智，有的还是问题代码，所以关键要适合你做的项目。
+
+先贴出源代码出来，下文再细讲每个用法。
+<?php
+
+/**
+ * @author wupinglong from http://www.lirengou.com, http://www.sinpe.com
+
+    ImageImagick is free software; you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation; 
+
+	开源共享代码，请保留原作者信息
+
+ **/
+
+class ImageImagick {
+
+	// 源
+	private $source = array(
+		// 图片路径
+		'file' => null,
+		// 图片原句柄
+		'resource' => null,
+		// 文件类型，如：jpg
+		'ext' => null,
+		// mime类型
+		'mime' => null,
+		'width' => null,
+		'height' => null
+	);
+	// 目标
+	private $target;
+
+	public function __construct($src=null){
+
+		if( !is_null($src) && file_exists($src) ){
+			$im = new Imagick($src);
+			$ext = strtolower( $im->getImageFormat() );
+			$whxy = $im->getImagePage();
+		}
+		else{
+			$im = new Imagick();
+			$ext = 'png';
+			$whxy = array( 'width'=>1, 'height'=>1 );
+		}
+
+		$this->source = array(
+			'resource' => $im,
+			'file' => $src,
+			'mime' => $this->_extensionToMime($ext),
+			'ext' => $ext,
+			'width' => $whxy['width'],
+			'height' => $whxy['height']
+		);
+
+		$this->target = $this->source;
+	}
+
+	/**
+	* 基于宽高比例的放大、缩小 
+	*
+	* @param String $direction 基准边
+	* @param String $base 基准值
+	*/
+	public function scale( $direction, $base ){
+
+		$source = &$this->target;
+
+		$direction = strtolower($direction);
+
+		// 基于宽度
+		if( $direction == 'x' ){
+			$w = is_numeric($base) && $base > 0 ? intval($base) : $source['width'];
+			//$scale = $base / $source['width'];
+			$h = 0;
+		}
+		// 基于高度
+		else{
+			$h = is_numeric($base) && $base > 0 ? intval($base) : $source['height'];
+			//$scale = $base / $source['height'];
+			$w = 0;
+		}
+
+		// 新尺寸
+		//$width  = (int)( $source['width'] * $scale );
+		//$height = (int)( $source['height'] * $scale );
+
+		if( 'gif' == $source['ext'] ) {
+
+			$im = $source['resource']->coalesceImages();
+
+			do {
+				//$im->thumbnailImage( $width, $height );
+				$im->scaleImage( $w, $h );
+			} while ($im->nextImage());
+
+			$source['resource'] = $im->deconstructImages();
+		} 
+		else {
+			//$source['resource']->thumbnailImage($width, $height);
+			$source['resource']->scaleImage($w, $h);
+		}
+
+		$whxy = $source['resource']->getImagePage();
+
+		$source['width'] = $whxy['width'];
+		$source['height'] = $whxy['height'];
+
+		return $this;
+	}
+
+	// 基于指定的宽度比例先裁剪，后再放大、缩小
+	public function adaptiveByCrop( $width, $height ){
+
+		$source = &$this->target;
+
+		if( 'gif' == $source['ext'] ) {
+			foreach ( $source['resource'] as $frame ) {
+				$p = $frame->getImagePage();
+				$frame->setImagePage( $source['width'], $source['height'], $p['x']/2, $p['y']/2 );
+				$frame->cropthumbnailImage( $width, $height );
+				$frame->setImagePage( 0, 0, 0, 0 );
+			}
+		} 
+		else{
+			$source['resource']->cropThumbnailImage($width, $height);
+		}
+
+		$source['width'] = $width;
+		$source['height'] = $height;
+
+		return $this;
+    }
+
+	// 整张图像拉伸
+	public function stretch( $width, $height ){
+
+		$source = &$this->target;
+
+		if( 'gif' == $source['ext'] ) {
+
+			$im = $source['resource']->coalesceImages();
+
+			do {
+				$im->resizeImage( $width, $height, Imagick::FILTER_POINT, 1 );
+			} while ($im->nextImage());
+
+			$source['resource'] = $im->deconstructImages();
+
+		} 
+		else{
+
+			$source['resource']->resizeImage( $width, $height, Imagick::FILTER_POINT, 1 );
+		}
+
+		$source['width'] = $width;
+		$source['height'] = $height;
+
+		return $this;
+	}
+
+	// 整张图像适应容器框
+	public function adaptiveByBox( $width, $height ){
+
+		// 以宽为基准
+		if( $this->target['width'] / $this->target['height'] >= $width / $height ){
+			$base = $width;
+			$direction = 'x'; 
+		}
+		// 以高为基准
+		else{
+			$base = $height;
+			$direction = 'y';
+		}
+
+		return $this->scale($direction, $base);
+
+	}
+
+	// 剪裁
+	public function crop( $width, $height, $x=0, $y=0 ){
+
+		$source = &$this->target;
+
+		// 避免超出范围，获取内容为空时的异常
+		if( $x >=$source['width'] || $y >= $source['height'] ){
+			$im = $source['resource'];
+			$im->clear();
+			$im->newImage( $width, $height, new ImagickPixel('transparent'), 'png' );
+			$im->setImageOpacity(0);
+
+			$draw = new ImagickDraw();
+
+			$draw->setFillColor( new ImagickPixel( '#eeeeee' ) );
+			$draw->setStrokeColor( new ImagickPixel( '#cccccc' ) );
+			$draw->setStrokeWidth(3);
+			$draw->rectangle( 1, 1, $width-2, $height-2 );
+			$draw->setStrokeWidth(1);
+			$draw->line( 3, 3, $width-3, $height-3 );
+
+			$im->drawImage( $draw );
+
+			$draw->clear();
+			$draw->destroy();
+
+			unset($draw);
+
+		}
+		else{
+
+			if( 'gif' == $source['ext'] ) {
+
+				$im = $source['resource']->coalesceImages();
+
+				do {
+					$im->cropImage( $width, $height, $x, $y );
+					// 去掉画布空白
+					$im->setImagePage(0, 0, 0, 0);
+				} while ($im->nextImage());
+
+				$source['resource'] = $im->deconstructImages();
+
+			} 
+			else{
+				$source['resource']->cropImage( $width, $height, $x, $y );
+			}
+
+		}
+
+		$source['width'] = $width;
+		$source['height'] = $height;
+
+		return $this;
+
+	}
+
+	// 文字水印
+	public function textWater( $word, $color='#ffffff', $font=null, $position='right-bottom', $opacity=0.6, $ox=5, $oy=5 ){
+
+		$tImage = new ImageImagick();
+
+		$this->_setMask( $tImage->text( $word, $color, 30, $font, true ), $position, $opacity, $ox, $oy );
+
+		unset($tImage);
+
+		return $this;
+    }
+
+	// 图片水印
+	public function imageWater( $mask, $position='right-bottom', $opacity=0.6, $ox=5, $oy=5 ){
+		return $this->_setMask( $mask, $position, $opacity, $ox, $oy );
+    }
+
+	// 文本转为图像
+	public function text( $text, $color='#ffffff', $size=12, $font=null, $shadow=false ){
+
+		$target = &$this->target;
+
+		$im = $target['resource'];
+
+		$draw = new ImagickDraw();
+
+		if(!is_null($font)){
+			$draw->setFont($font);
+		}
+
+		$draw->setFontSize($size);
+		$draw->setTextAntialias(true);
+
+		$metrics = $im->queryFontMetrics($draw, $text);
+
+		// 阴影
+		if($shadow){
+
+			$sc = new ImagickPixel($color);
+
+			$hsl = $sc->getHSL();
+
+			$sc->setHSL( $hsl['hue'], $hsl['saturation'], $hsl['luminosity'] / 5);
+
+			$draw->setFillColor($sc);
+
+			$draw->annotation( 4, $metrics['ascender'] + 1, $text);
+		}
+
+		$draw->setFillColor(new ImagickPixel($color));
+
+		$draw->annotation( 2, $metrics['ascender'], $text);
+
+		$w = $metrics['textWidth'] + 12;
+		$h = $metrics['textHeight'];
+
+		$im->newImage( $w, $h, new ImagickPixel('transparent'), 'png' );
+
+		$im->setImageOpacity(0);
+
+		$im->drawImage($draw);
+
+		$target['ext'] = 'png';
+		$target['mime'] = 'image/png';
+		$target['width'] = $w;
+		$target['height'] = $h;
+
+		$draw->clear();
+		$draw->destroy();
+
+		unset($draw);
+
+		return $this;
+	}
+
+	// 输出到浏览器
+    public function show($quality=null){
+
+		$target = $this->target;
+
+		$im = $target['resource'];
+
+		if(is_null($quality)){
+			$quality = 100;
+		}
+
+		$im->setImageFormat($target['ext']);
+
+		$im->setCompressionQuality($quality);
+
+		header( 'Content-Type: '.$this->_extensionToMime($target['ext']) );
+
+		echo $im->getImagesBLOB(); 
+
+		$this->destroy();
+
+		exit;
+    }
+
+	// 保存同名文件
+	public function save( $quality=null ){
+		return $this->_save($quality);
+    }
+
+	// 
+	public function getTargetData( $key=null ){
+
+		$d = $this->target;
+
+		if( array_key_exists( $key, $d ) ){
+			return $d[ $key ];
+		}
+		else{
+			return $d;
+		}
+    }
+
+	// 
+	public function getSourceData( $key=null ){
+
+		$d = $this->source;
+
+		if( array_key_exists( $key, $d ) ){
+			return $d[ $key ];
+		}
+		else{
+			return $d;
+		}
+    }
+
+	// 设置目标输出格式
+	public function setTargetFormat($format){
+
+		$target = &$this->target;
+
+		$target['file'] = str_replace( $target['ext'], $format, $target['file']);
+
+		$target['ext'] = $format;
+
+		return $this;
+	}
+
+	// 别名另存为
+	public function saveAs( $alias=null, $quality=null ){
+
+		$target = &$this->target;
+
+		if( is_null($alias) ){
+			$alias = $target['width'].'x'.$target['height'];
+		}
+
+		if( !is_file($target['file']) ){
+			$target['file'] = time().'.'.$target['ext'];
+		}
+
+		$path = pathinfo($target['file']);
+
+		$target['file'] = $path['dirname'].'/'.$path['filename'].'_'.$alias.'.'.$path['extension'];
+
+		return $this->_save($quality);
+	}
+
+	// 删除旧文件
+	public function deleteOriginal(){
+
+		@unlink($this->source['file']);
+
+		return $this;
+	}
+
+	// 释放资源
+	public function destroy(){
+
+		$sim = $this->source['resource'];
+
+		if( $sim && is_resource($sim) ) {
+			$sim->clear();
+			$sim->destroy();
+		}
+
+		$tim = $this->target['resource'];
+
+		if( $tim && is_resource($tim) ) {
+			$tim->clear();
+			$tim->destroy();
+		}
+
+	}
+
+	public function __destruct() {
+		$this->destroy();
+	}
+
+	//-------------------------------------------------------------------------
+
+	private function _extensionToMime($ext){
+
+		static $mime = array(
+			'png' => 'image/png',
+            'jpe' => 'image/jpeg',
+            'jpeg' => 'image/jpeg',
+            'jpg' => 'image/jpeg',
+            'gif' => 'image/gif',
+            'bmp' => 'image/bmp',
+            'ico' => 'image/vnd.microsoft.icon',
+            'tiff' => 'image/tiff',
+            'tif' => 'image/tiff',
+            'svg' => 'image/svg+xml',
+            'svgz' => 'image/svg+xml',
+		);
+
+		if( !array_key_exists( $ext, $mime ) ){
+			throw new ImageImagickException( "mime undefined. ($ext)", -300 );
+		}
+
+		return $mime[$ext];
+
+	}
+
+	private function _save($quality=null){
+
+		$target = &$this->target;
+
+		$im = $target['resource'];
+
+		if(is_null($quality)){
+			$quality = 100;
+		}
+
+		$im->setImageFormat($target['ext']);
+
+		$im->setCompressionQuality($quality);
+
+		// 创建白色的背景
+		if( !in_array($target['ext'], array('gif','png')) ){
+			$bg = new Imagick();
+			$bg->newImage( $target['width'], $target['height'], new ImagickPixel('#ffffff'), $target['ext'] );
+			$im->compositeImage( $bg, imagick::COMPOSITE_DSTOVER, 0, 0 );
+			$bg->clear();
+			$bg->destroy();
+		}
+
+		if( 'gif' == $target['ext'] ){
+			$im->writeImages($target['file'], true);
+		}
+		else{
+			$im->writeImage($target['file']);
+		}
+
+		return $this;
+	}
+
+	// 水印位置
+    private function _getPosition( $position, $iw, $ih, $mw, $mh, $ox=5, $oy=5 ){
+
+		switch($position){
+
+			case 'right-bottom':
+				// 右下
+				$x = $iw - $mw - $ox;
+				$y = $ih - $mh - $oy;
+				break;
+
+			case 'center':
+				// 左上
+				$x = ( $iw - $mw ) / 2;
+				$y = ( $ih - $mh ) / 2;
+				break;
+
+			case 'left-top':
+				// 左上
+				$x = $ox;
+				$y = $oy;
+				break;
+
+			case 'left-bottom':
+				// 左下
+				$x = $ox;
+				$y = $ih - $mh - $oy;
+				break;
+
+			case 'right-top':
+				// 右上
+				$x = $iw - $mw - $ox;
+				$y = $oy;
+				break;
+
+			default:
+				// 默认将水印放到右下,偏移指定像素
+				$x = $iw - $mw - $ox;
+				$y = $ih - $mh - $oy;
+				break;
+		}
+
+		return array('x'=>$x, 'y'=>$y);
+    }
+
+	// 生成水印图
+	// @param 本Image对象
+	private function _setMask( $mask, $position, $opacity=0.6, $ox=5, $oy=5 ){
+
+		$s = &$this->target;
+
+		$this->_reduceMask( $mask, $s['width'], $s['height'], $ox, $oy );
+
+		$m = $mask->getTargetData();
+
+        $xy = $this->_getPosition( $position, $s['width'], $s['height'], $m['width'], $m['height'], $ox, $oy );
+
+		$mim = $m['resource'];
+
+		if( 'png'==$m['ext'] ){
+			$mim->evaluateImage(Imagick::EVALUATE_MULTIPLY, $opacity, Imagick::CHANNEL_ALPHA);
+		}
+		else{
+			$mim->setImageOpacity($opacity);
+		}
+
+		if( 'gif' == $s['ext'] ) {
+
+			$im = $s['resource']->coalesceImages();
+
+			foreach ( $im as $frame ) {
+				$frame->compositeImage( $mim, Imagick::COMPOSITE_OVER, $xy['x'], $xy['y'] );
+			}
+
+			$s['resource'] = $im->optimizeImageLayers();
+
+		} 
+		else{
+			$s['resource']->compositeImage( $mim, Imagick::COMPOSITE_OVER, $xy['x'], $xy['y'] );
+		}
+
+		$mask->destroy();
+
+		return $this;
+    }
+
+	private function _reduceMask( $mask, $iw, $ih, $ox, $oy ){
+
+		$source = $mask->getTargetData();
+
+		$mw = $source['width'] + $ox;
+		$mh = $source['height'] + $oy;
+
+		// 重新计算水印的大小
+		if( $mw > $iw || $mh > $ih ){
+
+			if( ($iw/$ih) > ($mw/$mh) ){
+				// 缩小
+				$scaleh = ( $mh > $ih ? $ih : $mh ) / 3;
+				$scalew = intval( $scaleh * $mw / $mh);
+			}
+			else{
+				// 缩小
+				$scalew = ( $mw > $iw ? $iw : $mw ) / 3;
+				$scaleh = intval( $scalew * $mh / $mw);
+			}
+
+			// 拉伸
+			$mask->stretch( $scalew, $scaleh );
+		}
+
+		return $this;
+
+	}
+
+}
+
+// 异常
+class ImageImagickException extends Exception {
+
+	public function __construct( $message, $code, $previous=null ){
+
+		if( PHP_VERSION >= '5.3.0' ){
+			parent::__construct( $message, $code, $previous );
+		}
+		else{
+			parent::__construct( $message, $code );
+		}
+
+	}
+}
+
+?>
+
+ 
+ 具体用法
+
+每个图片对应一个ImageImagick实例，链式操作。项目中使用时，可以作为第三方类库来用，涵盖的几个功能介绍如下：
+
+     scale（$direction，$base）
+
+基于原图宽高比例的缩放，direction=x|y，适合于页面显示区域宽或者高一边固定，另一边需要自动延展的场合，比如现在比较流行的瀑布流页面。
+
+可以这样使用：
+<?php
+/**
+ * 示例
+ * 将原图宽度调整为200px并保持原宽高比例后，直接显示在浏览器
+ *
+ */
+
+vendor('ImageImagick')->ImageImagick('e.gif')->scale('x',200)->show(); // 注：vendor('ImageImagick')->ImageImagick('e.gif')为偶在项目中第三方类库的导入方法
+
+// 或
+
+include ....
+
+$iim = new ImageImagick('e.gif');
+
+$iim->scale('x',200)->show(); // 显示
+
+?>
+
+adaptiveByCrop($width, $height)
+
+基于指定的宽度先做裁剪，如果宽度或者高度有一个不足以按指定的值进行裁剪时，则按指定的宽高比例进行缩小裁剪，然后再将裁剪的内容放大到指定的尺寸，图像不会变形，但像素会变化，一般应用于大图的缩略图生成，代码示例参照上面（以下同）。
+
+    stretch( $width, $height )
+
+整图按指定尺寸进行拉伸、挤压，图像会发生变形！
+
+    adaptiveByBox( $width, $height )
+
+容器自适应，比如上传图片时，指定了一个div作为预览窗，并且固定了div的宽度和高度，这个时候图像需要完整显示在预览窗内且宽高比不变，该方法自动判别图像是用宽度还是高度去适应容器的大小。
+
+    crop( $width, $height, $x=0, $y=0 )
+
+裁剪，按指定起始坐标和宽高的裁剪，裁剪结果可能小于指定的宽度和高度。适合于交互式的裁剪功能实现，即由用户交互指定了裁剪的坐标和大小，比如头像的裁剪。
