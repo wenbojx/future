@@ -38,8 +38,6 @@ class DealPanosCommand extends CConsoleCommand {
     		$explode = explode('/', $v);
     		$num = count($explode)-3;
     		$new_path = $path.'/'.$explode[$num];
-    		echo $new_path."\n";
-    		continue;
     		if(!file_exists($new_path)){
     			mkdir($new_path);
     		}
@@ -60,7 +58,7 @@ class DealPanosCommand extends CConsoleCommand {
     	foreach($this->panos_path as $v){
     		$explode = explode('/', $v);
     		$num = count($explode)-3;
-    		$new_path = $this->cube_path.'/'.$num;
+    		$new_path = $this->cube_path.'/'.$explode[$num];
     		if(!file_exists($new_path)){
     			$this->error[] = $new_path;
     		}
