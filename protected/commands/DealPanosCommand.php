@@ -104,18 +104,14 @@ class DealPanosCommand extends CConsoleCommand {
     	$path = $this->cube_path;
     	$this->panos_path = array();
     	$this->myscandir($path);
-    	print_r($this->panos_path);
+    	//print_r($this->panos_path);
     	$i = 0;
     	foreach ($this->panos_path as $v){
-    		if($i>1){
-    			continue;
-    		}
     		echo "----thumb file {$v} ----\n";
     		$old = $v;
     		$length = strlen($this->default_pano_name);
     		$new_path = substr($v, 0,strlen($v)-$length);
     		$new = $new_path.'thumb.jpg';
-    		echo $new."\n";
     		$myimage = new Imagick($old);
     		$myimage->cropimage(4000, 2000, 926, 300);
     		//$myimage->setImageFormat("jpeg");
