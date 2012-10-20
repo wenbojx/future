@@ -23,10 +23,16 @@ class DealPanosCommand extends CConsoleCommand {
     	$path = '/mnt/hgfs/pics/panos';
     	$this->myscandir($path);
     	print_r($this->panos_path);
-    	//$this->slip($this->panos_path[0]);
-    	$this->slip('a.jpg');
+    	$this->slip($this->panos_path[0]);
+    	
+    	$this->slip($this->panos_path[0]);
+    	//$this->slip('a.jpg');
     }
-    
+    public function exec_libpano(){
+    	$str = "/usr/local/libpano13/bin/PTmender script.txt";
+    	system($command)
+    	echo 111;
+    }
     public function slip($path){
     	$script = "p w{$this->width} h{$this->width} f0 v90 u20 n\"TIFF_m\"\n
 i n\"{$path}\"\n
