@@ -9,10 +9,11 @@ class DealPanosCommand extends CConsoleCommand {
     public $width = '1863';  //cube图的宽度
     public $error = array();
     public $split_file = '';
-    public $cube_path = '/mnt/hgfs/pics/panos/';
+    public $cube_path = '/mnt/hgfs/pics/panos';
     
-
+	//查找全景图
     public function actionFind() {
+    	$this->panos_path = array();
         $this->myscandir($this->path);
         $new_folder = $this->path. DIRECTORY_SEPARATOR .$this->default_new_folder;
         if(!file_exists($new_folder)){
@@ -22,9 +23,21 @@ class DealPanosCommand extends CConsoleCommand {
 
         //print_r($this->panos_path);
     }
+    //归类cube中的bottom图
+    public function actionBottomOut(){
+    	$path = $this->cube_path.'/bottom';
+    	if(!file_exists($filename)){
+    		mkdir($path);
+    	}
+    	$this->panos_path = array();
+    	$this->myscandir($this->cube_path);
+    	print_r($this->panos_path);
+    }
+    //全景图转为cube
     public function actionSlipt(){
     	$this->default_pano_name = 'Panorama-2.jpg';
-    	$path = '/mnt/hgfs/pics/panos';
+    	$path = $this->cube_path;
+    	$this->panos_path = array();
     	$this->myscandir($path);
     	//print_r($this->panos_path);
     	foreach ($this->panos_path as $v){
@@ -62,7 +75,7 @@ class DealPanosCommand extends CConsoleCommand {
     public function move_cube_file($file){
     	$explode = explode('/', $this->split_file);
     	$num = count($explode)-2;
-    	$new_folder = $this->cube_path.$explode[$num].'/cube';
+    	$new_folder = $this->cube_path.'/'.$explode[$num].'/cube';
     	$new_file = $new_folder.'/'.$file;
 
     	if(!file_exists($new_folder)){
