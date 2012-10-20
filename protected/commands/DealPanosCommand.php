@@ -75,6 +75,7 @@ class DealPanosCommand extends CConsoleCommand {
     //全景图转为cube
     public function actionCube(){
     	$this->default_pano_name = $this->new_pano_name;
+    	$this->cube_path = $this->find_path.'/'.$this->default_new_folder;
     	$path = $this->cube_path;
     	$this->panos_path = array();
     	$this->myscandir($path);
@@ -90,6 +91,7 @@ class DealPanosCommand extends CConsoleCommand {
     }
     //归类cube中的bottom图
     public function actionBottomOut(){
+    	$this->cube_path = $this->find_path.'/'.$this->default_new_folder;
     	$path = $this->cube_path.'/bottom';
     	if(!file_exists($path)){
     		mkdir($path);
@@ -111,6 +113,7 @@ class DealPanosCommand extends CConsoleCommand {
     }
     //将处理过的bottom图归回
     public function actionBottomIn(){
+    	$this->cube_path = $this->find_path.'/'.$this->default_new_folder;
     	$path = $this->cube_path.'/bottom';
     	if(!file_exists($path)){
     		return false;
@@ -137,6 +140,7 @@ class DealPanosCommand extends CConsoleCommand {
     }
     //生成缩略图
     public function actionThumb(){
+    	$this->cube_path = $this->find_path.'/'.$this->default_new_folder;
     	$this->default_pano_name = $this->new_pano_name;
     	$path = $this->cube_path;
     	$this->panos_path = array();
@@ -169,6 +173,7 @@ class DealPanosCommand extends CConsoleCommand {
     }
     //cube to sphere
     public function actionSphere(){
+    	$this->cube_path = $this->find_path.'/'.$this->default_new_folder;
     	$this->panos_path = array();
     	$path = $this->cube_path;
     	$this->myScanCubeDir($path);
