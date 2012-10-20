@@ -57,13 +57,13 @@ class DealPanosCommand extends CConsoleCommand {
     		$num = count($explode)-1;
     		$file = $explode[$num];
     		$explode_file = explode('-', $file);
-    		$new_path = $this->cube_path.'/'.$explode_file[0];
+    		$new_path = $this->cube_path.'/'.$explode_file[0].'/cube';
     		if(!file_exists($new_path)){
     			$this->error[] = $new_path;
     		}
     		$new_file = $new_path.'/bottom.jpg';
     		echo "---- copying {$v} to {$new_file}----\n";
-    		$back_file = $new_path = $this->cube_path.'/'.$explode_file[0].'/cube/bottom_back.jpg';
+    		$back_file = $new_path .'/bottom_back.jpg';
     		copy($new_file, $back_file);
     		copy($v, $new_file);
     	}
