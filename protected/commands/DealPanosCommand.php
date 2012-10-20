@@ -42,7 +42,7 @@ class DealPanosCommand extends CConsoleCommand {
     	foreach($this->panos_path as $v){
     		$fordle_explode = explode('/', $v);
     		print_r($fordle_explode);
-    		$num = count($fordle_explode)-1;
+    		$num = count($fordle_explode)-2;
     		$fordle = $fordle_explode[$num];
     		echo $fordle.'a|';
     		$new_fordle = $upload_path.$fordle.'/';
