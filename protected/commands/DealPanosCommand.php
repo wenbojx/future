@@ -23,7 +23,8 @@ class DealPanosCommand extends CConsoleCommand {
     	$path = '/mnt/hgfs/pics/panos';
     	$this->myscandir($path);
     	print_r($this->panos_path);
-    	$this->slip($this->panos_path[0]);
+    	//$this->slip($this->panos_path[0]);
+    	$this->slip('a.jpg');
     }
     
     public function slip($path){
