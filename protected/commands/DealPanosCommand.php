@@ -50,12 +50,14 @@ class DealPanosCommand extends CConsoleCommand {
     		return false;
     	}
     	$this->panos_path = array();
-    	$this->default_pano_name = 'bottom.jpg';
-    	$this->myscandir($path);
+    	//$this->default_pano_name = 'bottom.jpg';
+    	$this->myscandir($path, true);
     	foreach($this->panos_path as $v){
     		$explode = explode('/', $v);
-    		$num = count($explode)-3;
-    		$new_path = $this->cube_path.'/'.$explode[$num];
+    		$num = count($explode)-1;
+    		$file = $explode[$num];
+    		$explode_file = explode('-', $file);
+    		$new_path = $this->cube_path.'/'.$explode_file[0];
     		if(!file_exists($new_path)){
     			$this->error[] = $new_path;
     		}
@@ -178,7 +180,7 @@ o f4 y0 r0 p90 v360";
     /**
      * 扫描目录
      */
-    public function myscandir($path){
+    public function myscandir($path, $scan_default=false){
         if(!is_dir($path))  return;
 
         foreach(scandir($path) as $file){
@@ -186,7 +188,11 @@ o f4 y0 r0 p90 v360";
                 $path2= $path.DIRECTORY_SEPARATOR.$file;
                 if(is_dir($path2)){
                     $this->myscandir($path2);
-                }else if($file == $this->default_pano_name){
+                }
+                else if($scan_default){
+                	$this->panos_path[] = $path.DIRECTORY_SEPARATOR.$file;
+                }
+                else if($file == $this->default_pano_name){
                     $this->panos_path[] = $path.DIRECTORY_SEPARATOR.$file;
                 }
             }
