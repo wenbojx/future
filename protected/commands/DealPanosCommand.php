@@ -32,7 +32,16 @@ class DealPanosCommand extends CConsoleCommand {
     public function exec_libpano(){
     	$str = "/usr/local/libpano13/bin/PTmender script.txt";
     	system($str);
-    	echo 111;
+    }
+    public function covert(){
+    	$panos = array( 'pano0005'=>'bottom',
+    					'pano0000'=>'front',
+    					'pano0001'=>'right',
+    					'pano0002'=>'back',
+    					'pano0003'=>'left',
+    					'pano0004'=>'top', );
+
+    	
     }
     public function slip($path){
     	$script = "p w{$this->width} h{$this->width} f0 v90 u20 n\"TIFF_m\"\n
