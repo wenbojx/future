@@ -121,7 +121,7 @@ class DealPanosCommand extends CConsoleCommand {
     		//$myimage->setImageFormat("jpeg");
     		//$myimage->setCompressionQuality( 100 );
     		$myimage->writeImage($new);
-    		$myimage->resizeimage(200, 100);
+    		$myimage->resizeimage(200, 100, Imagick::FILTER_LANCZOS, 1, true);
     		$myimage->sharpenimage(20);
     		$new = $new.'thumbxw200.jpg';
     		$myimage->writeImage($new);
