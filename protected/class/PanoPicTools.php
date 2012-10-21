@@ -15,7 +15,7 @@ class PanoPicTools{
         }
         $image = Yii::app()->image->load($file_path);
         $width = $this->tile_info[9];
-        $image->resize($width, $width)->quality(30);
+        $image->resize($width, $width)->quality(20);
         $file_path = $folder_pano.$width.'x'.$width.'.'.$file_type;
         $image->save($file_path);
         $width = $this->tile_info[10];
@@ -66,7 +66,7 @@ class PanoPicTools{
                 //imagejpeg($iOut,"images/".$i."_".$j.".jpg"); //输出成0_0.jpg,0_1.jpg这样的格式
                 $file_path = $folder.'10/'.$i.'x'.$j.'.'.$file_type;
                 //echo $file_path.'<br>';
-                $quality = 70;
+                $quality = 100;
                 switch($type) {
                     case IMAGETYPE_JPEG :
                         imagejpeg($iOut, $file_path,$quality); // 存储图像
