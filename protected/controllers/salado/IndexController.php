@@ -39,7 +39,7 @@ class IndexController extends FController{
         	if($suffix == '10'){
         		$file = $this->get_tilt_folder();
         	}
-            $this->actionImage($id, 'back', $suffix, $file);
+            $this->actionImage($id, 'back', $suffix, $file, true);
         }
         elseif($this->request->getParam('s_l')){
         	$suffix = $this->request->getParam('s_l');
