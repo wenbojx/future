@@ -11,7 +11,7 @@ class ImageContent {
         $img = @$pic_datas['create']($pic_datas['path']);
         //
         $cache_time = '31104000';
-        header('Content-Type: '.$pic_datas['contentType']);
+        //header('Content-Type: '.$pic_datas['contentType']);
         header('Cache-Control: max-age='.$cache_time);
         header('Pragma: cache');
         HttpCache::lastModified($pic_datas['created']);
@@ -43,6 +43,7 @@ class ImageContent {
         }
         $datas = $this->get_file_info_by_id($id);
         $pic_datas = $this->get_img_info($datas, $size, $suffix, $file);
+        print_r($pic_datas);
         $this->show_pics($pic_datas);
     }
     /**
