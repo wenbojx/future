@@ -6,8 +6,11 @@
     <div class="row-fluid">
         <div class="span11">
             <div class="thumbnail">
-                <div class="pano-detail">
+                <div class="pano-detail" id="pano-detail">
                 	<div id="scene_box"></div>
+                	<div id="pano_loading" class="pano_loading">
+                    	<img id="pano_loading_img" src="<?=Yii::app()->baseUrl . '/style/img/loading_4.gif'?>"/>
+                    </div>
                 	<div id="scroll_pano_opacity" class="scroll_pano_container scroll_pano_opacity"></div>
                 	<div class="scroll_close" id="scroll_close">
                 		<i class="icon-backward"></i>

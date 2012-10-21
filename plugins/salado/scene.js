@@ -6,7 +6,29 @@ $(document).ready(function() {
 	$('#scroll_close').bind('click',function(){
 		bind_scroller();
     });
+	pano_loading();
 })
+function pano_loading(){
+	var img_width = $("#pano_loading").css("width");
+    var img_height = $("#pano_loading").css("height");
+    var box_width = $("#pano-detail").css("width");
+    var box_height = $("#pano-detail").css("height");
+    var top = (parseInt(box_height)-parseInt(img_height) )/2;
+    var left = (parseInt(box_width)-parseInt(img_width) )/2;
+    $("#pano_loading").css("top",top+"px");
+    $("#pano_loading").css("left",left+"px");
+    $("#pano_loading").show();
+}
+function pano_loaded(){
+	$("#pano_loading").hide();
+}
+
+function onEnter(panoramaId){
+	pano_loaded();
+}
+function onTransitionEnd(panoramaId){
+	//pano_loaded();
+}
 
 jQuery.fn.extend({
   slideRightShow: function() {

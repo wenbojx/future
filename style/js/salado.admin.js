@@ -254,7 +254,7 @@ function publish_scene(scene_id, display){
 }
 function change_hotspot_select(){
     var id = $('#hotspot_info_d_link_scene_id').val();
-    var url = panos_thumb_url;
+    var url = panos_thumb_url+'/id/'+id+'/size/'+size;
     $('#hotspot_pano_thumb').attr('src', url);
 }
 function change_hotspot_angle(){

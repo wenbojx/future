@@ -188,3 +188,10 @@ hr.soften {
 	vertical-align:text-bottom;
 }
 
+.pano_loading {
+	display:none;
+    position:absolute; 
+    width:60px;
+    height:60px;
+}
+

@@ -113,6 +113,8 @@ class PanoramDatas{
             $pano_attribute = array();
             $datas[$v]['s_attribute']['id'] = $this->panoram_pre.$v;
             $datas[$v]['s_attribute']['path'] = $this->panoram_xml_path($v);
+            //$datas[$v]['s_attribute']['onEnter'] = 'onEnterPano';
+            //$datas[$v]['s_attribute']['onTransitionEnd'] = 'onTransitionEnd';
             if(isset($panoram_datas[$v])){
                 if (isset($panoram_datas[$v]['content']) && $panoram_datas[$v]['content']){
                     $pano_attribute = @json_decode($panoram_datas[$v]['content'],true);
