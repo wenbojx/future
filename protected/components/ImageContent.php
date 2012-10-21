@@ -33,7 +33,7 @@ class ImageContent {
 	        $ox = $time*$rand;
 	        $rand = rand(0, 5);
 	        $oy = $time*$rand;
-	        imagecopy($img, $watermark, $ox, $oy, 0, 0, 70, 13);
+	        imagecopy($img, $watermark, $ox, $oy, 0, 0, 70, 12);
         }
 
         $pic_datas['draw']($img);
