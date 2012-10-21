@@ -3,6 +3,7 @@ Yii::import('application.extensions.image.Image');
 class ImageContent {
 	public $quality = 90;
 	public $sharpen = 5;
+	public $water = false;
 
     private function show_pics($pic_datas){
         if(!$pic_datas || !$pic_datas['path'] || !$pic_datas['draw']){
@@ -22,6 +23,19 @@ class ImageContent {
         $etag = md5($pic_datas['md5value'].'-yiluhao'.$pic_datas['size']);
         HttpCache::etag($etag);
         HttpCache::expires($cache_time); //默认缓存一年
+        //添加水印
+        if($this->water){
+	        $water_pic_path = 'style/img/water.png';
+	        $watermark = imagecreatefrompng($water_pic_path);
+	        $rand = rand(0, 8);
+	        $time = substr(time(), $rand, 2);
+	        $rand = rand(0, 5);
+	        $ox = $time*$rand;
+	        $rand = rand(0, 5);
+	        $oy = $time*$rand;
+	        imagecopy($img, $watermark, $ox, $oy, 0, 0, 50, 9);
+        }
+
         $pic_datas['draw']($img);
         imagedestroy($img);
         exit();
@@ -166,4 +180,5 @@ class ImageContent {
         }
         return $datas;
     }
+
 }

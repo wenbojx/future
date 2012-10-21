@@ -32,7 +32,7 @@ class IndexController extends FController{
         	if($suffix == '10'){
         		$file = $this->get_tilt_folder();
         	}
-            $this->actionImage($id, 'right', $suffix, $file);
+            $this->actionImage($id, 'right', $suffix, $file, true);
         }
         elseif($this->request->getParam('s_b')){
         	$suffix = $this->request->getParam('s_b');
@@ -46,7 +46,7 @@ class IndexController extends FController{
         	if($suffix == '10'){
         		$file = $this->get_tilt_folder();
         	}
-            $this->actionImage($id, 'left', $suffix, $file);
+            $this->actionImage($id, 'left', $suffix, $file, true);
         }
         elseif($this->request->getParam('s_u')){
         	$suffix = $this->request->getParam('s_u');
@@ -98,7 +98,7 @@ class IndexController extends FController{
         $datas['tileSize'] = $this->tile_size;
         $this->render('/salado/xmlb', array('datas'=>$datas));
     }
-    private function actionImage($id, $position, $suffix='', $file = ''){
+    private function actionImage($id, $position, $suffix='', $file = '', $water= true){
         $flag = true;
         $pic_datas = array();
         if( $id && $position){
@@ -114,6 +114,7 @@ class IndexController extends FController{
         }
         $img_class = new ImageContent();
         if($flag){
+        	$img_class->water = $water;
         	$pic_datas = $img_class->get_img_content_by_id($file_id, $size, $suffix, true);
         }
         if(!$pic_datas){
