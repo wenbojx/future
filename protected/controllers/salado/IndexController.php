@@ -118,7 +118,7 @@ class IndexController extends FController{
         }
         if(!$pic_datas){
         	//获取默认图片
-        	$default_img = 'pages/salado/default.jpg';
+        	$default_img = 'plugins/salado/default.jpg';
         	$pic_datas = $img_class->get_default_img($default_img, 'jpg');
         }
     }

@@ -3,17 +3,19 @@ Yii::import('application.extensions.image.Image');
 class ImageContent {
 	public $quality = 90;
 	public $sharpen = 5;
-	
+
     private function show_pics($pic_datas){
         if(!$pic_datas || !$pic_datas['path'] || !$pic_datas['draw']){
             return false;
         }
         $img = @$pic_datas['create']($pic_datas['path']);
-        //
+
         $cache_time = '31104000';
         header('Content-Type: '.$pic_datas['contentType']);
         header('Cache-Control: max-age='.$cache_time);
         header('Pragma: cache');
+        $created = strtotime(date('Y-m-d',time()));
+        $pic_datas['created'] = isset($pic_datas['created']) ? $pic_datas['created'] : $created;
         HttpCache::lastModified($pic_datas['created']);
         $pic_datas['md5value'] = isset($pic_datas['md5value']) ? $pic_datas['md5value'] : $pic_datas['path'];
         $pic_datas['size'] = isset($pic_datas['size']) ? $pic_datas['size'] : '';
