@@ -102,7 +102,7 @@ class IndexController extends FController{
         $datas['tileSize'] = $this->tile_size;
         $this->render('/salado/xmlb', array('datas'=>$datas));
     }
-    private function actionImage($id, $position, $suffix='', $file = '', $water= true){
+    private function actionImage($id, $position, $suffix='', $file = '', $water= false){
         $flag = true;
         $pic_datas = array();
         if( $id && $position){
