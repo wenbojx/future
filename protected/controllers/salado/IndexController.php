@@ -63,14 +63,16 @@ class IndexController extends FController{
         		$water_flag = $rand%2==0 ? false:true;
         	}
 
-            $this->actionImage($id, 'up', $suffix, $file);
+            $this->actionImage($id, 'up', $suffix, $file, $water_flag);
         }
         elseif($this->request->getParam('s_d')){
         	$suffix = $this->request->getParam('s_d');
         	if($suffix == '10'){
         		$file = $this->get_tilt_folder();
         	}
-            $this->actionImage($id, 'down', $suffix, $file);
+        	$rand = rand(2, 3);
+        	$water_flag = $rand%2==0 ? false:true;
+            $this->actionImage($id, 'down', $suffix, $file, $water_flag);
         }
         else{
             $this->actionXmlb($id);
