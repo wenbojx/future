@@ -32,21 +32,25 @@ class IndexController extends FController{
         	if($suffix == '10'){
         		$file = $this->get_tilt_folder();
         	}
-            $this->actionImage($id, 'right', $suffix, $file, true);
+            $this->actionImage($id, 'right', $suffix, $file);
         }
         elseif($this->request->getParam('s_b')){
         	$suffix = $this->request->getParam('s_b');
         	if($suffix == '10'){
         		$file = $this->get_tilt_folder();
         	}
-            $this->actionImage($id, 'back', $suffix, $file, true);
+        	$rand = rand(0, 10);
+        	$water_flag = !$rand%2?true:false;
+            $this->actionImage($id, 'back', $suffix, $file, $water_flag);
         }
         elseif($this->request->getParam('s_l')){
         	$suffix = $this->request->getParam('s_l');
         	if($suffix == '10'){
         		$file = $this->get_tilt_folder();
         	}
-            $this->actionImage($id, 'left', $suffix, $file, true);
+        	$rand = rand(0, 10);
+        	$water_flag = !$rand%2?true:false;
+            $this->actionImage($id, 'left', $suffix, $file, $water_flag);
         }
         elseif($this->request->getParam('s_u')){
         	$suffix = $this->request->getParam('s_u');
