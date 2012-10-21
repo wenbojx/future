@@ -20,6 +20,7 @@ class IndexController extends FController{
         $this->request = Yii::app()->request;
         $id = $this->request->getParam('id');
         $file = '512x512.jpg';
+        $water_flag = false;
         if($this->request->getParam('s_f')){
         	$suffix = $this->request->getParam('s_f');
         	if($suffix == '10'){
@@ -38,27 +39,30 @@ class IndexController extends FController{
         	$suffix = $this->request->getParam('s_b');
         	if($suffix == '10'){
         		$file = $this->get_tilt_folder();
+        		$rand = rand(0, 10);
+        		$water_flag = $rand%2==0 ? true:false;
         	}
-        	$rand = rand(0, 10);
-        	$water_flag = $rand%2==0 ? true:false;
+
             $this->actionImage($id, 'back', $suffix, $file, $water_flag);
         }
         elseif($this->request->getParam('s_l')){
         	$suffix = $this->request->getParam('s_l');
         	if($suffix == '10'){
         		$file = $this->get_tilt_folder();
+        		$rand = rand(0, 10);
+        		$water_flag = $rand%2==0 ? true:false;
         	}
-        	$rand = rand(0, 10);
-        	$water_flag = $rand%2==0 ? true:false;
+
             $this->actionImage($id, 'left', $suffix, $file, $water_flag);
         }
         elseif($this->request->getParam('s_u')){
         	$suffix = $this->request->getParam('s_u');
         	if($suffix == '10'){
         		$file = $this->get_tilt_folder();
+        		$rand = rand(3, 5);
+        		$water_flag = $rand%2==0 ? false:true;
         	}
-        	$rand = rand(1, 3);
-        	$water_flag = $rand%2==0 ? true:false;
+
             $this->actionImage($id, 'up', $suffix, $file);
         }
         elseif($this->request->getParam('s_d')){
