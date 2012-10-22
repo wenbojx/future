@@ -155,7 +155,7 @@ class PanoramDatas{
             if (in_array($v['link_scene_id'], $this->scenes_info)){
                 $id = $this->load_pano_pre.$v['link_scene_id'];
                 //添加外部JS loading事件
-                $content = "SaladoPlayer.advancedMoveToHotspot({$this->hotspot_pre}$k,120,30,Expo.easeIn)";
+                $content = "SaladoPlayer.advancedMoveToHotspot({$this->hotspot_pre}$k,60,30,Expo.easeIn)";
                 $content .= ';JSGateway.run(jsf_hotspot_loading)';
                 $content .= ';SaladoPlayer.loadPano('.$this->panoram_pre.$v['link_scene_id'].')';
                 
