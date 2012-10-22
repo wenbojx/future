@@ -258,6 +258,9 @@ class PanoramDatas{
      * 全景图显示地址
      */
     public function get_pano_address($id){
+    	if($this->admin){
+    		return Yii::app()->createUrl('/pano/salado/edit/', array('id'=>$id));
+    	}
         return Yii::app()->createUrl('/web/detail/a/', array('id'=>$id));
     }
     /**
