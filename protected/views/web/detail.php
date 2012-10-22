@@ -76,7 +76,7 @@
 <script type="text/javascript" src="<?=Yii::app()->baseUrl . "/plugins/salado/scene.js"?>"></script>
 <script>
 var scene_box = 'scene_box';
-var player_url = '<?=Yii::app()->baseUrl?>/pages/salado/Player.swf';
+var player_url = '<?=Yii::app()->baseUrl?>/plugins/salado/Player.swf';
 var scene_xml_url = '<?=$this->createUrl('/salado/index/a/', array('id'=>$datas['scene_id']))?>';
 load_scene(scene_box, scene_xml_url, player_url, 'transparent');
 </script>
