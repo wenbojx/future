@@ -290,12 +290,16 @@ class SaladoModules extends SaladoPlayer{
                 $string .= $this->build_attribute($v['s_attribute']);
                 $string .= '</jsfunction>';
             }
+            $string .= '</jsfunctions>';
+        }
+        if (isset($jsGateway['asfunctions'])){
+        	$string .= '<asfunctions>';
             foreach ($jsGateway['asfunctions'] as $k=>$v){
                 $string .= '<asfunction';
                 $string .= $this->build_attribute($v['s_attribute']);
                 $string .= '</asfunction>';
             }
-            $string .= '</jsfunctions>';
+            $string .= '</asfunctions>';
         }
         $string .= "</JSGateway>\n";
         return $string;

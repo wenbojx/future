@@ -11,6 +11,9 @@
                 	<div id="pano_loading" class="pano_loading">
                     	<img id="pano_loading_img" src="<?=Yii::app()->baseUrl . '/style/img/loading_4.gif'?>"/>
                     </div>
+                    <div id="hotspot_loading" class="hotspot_loading">
+                    	<img id="hotspot_loading_img" src="<?=Yii::app()->baseUrl . '/style/img/loading_5.gif'?>"/>
+                    </div>
                 	<div id="scroll_pano_opacity" class="scroll_pano_container scroll_pano_opacity"></div>
                 	<div class="scroll_close" id="scroll_close">
                 		<i class="icon-backward"></i>

@@ -14,7 +14,10 @@ class PanoramDatas{
     public $module_type_button_bar = 10; //button_bar默认type值
     public $module_type_menu_scroller = 40; //MenuScroller默认type值
     public $module_type_img_button = 20; //MenuScroller默认type值
-    public $module_type_jsgateway = 60; //MenuScroller默认type值
+    public $module_type_jsgateway = 60; //jsgateway默认type值
+    public $prifix_js_id = 'js_'; //js模块ID前缀
+    public $js_hotspot_loading = 'js_action_loading';
+    public $js_hotspot_loaded = 'js_action_loaded';
 
     //public $actions_pre = 'act_';
     private $scene_id = 0;
@@ -51,7 +54,7 @@ class PanoramDatas{
             $this->global_datas = @json_decode($datas['content'], true);
         }
         if(!isset($this->global_datas['s_attribute']['debug'])){
-            $this->global_datas['s_attribute']['debug'] = 'false';
+            $this->global_datas['s_attribute']['debug'] = 'true';
             if($this->admin){
                 //$this->global_datas['s_attribute']['debug'] = 'true';
             }
@@ -113,6 +116,7 @@ class PanoramDatas{
             $pano_attribute = array();
             $datas[$v]['s_attribute']['id'] = $this->panoram_pre.$v;
             $datas[$v]['s_attribute']['path'] = $this->panoram_xml_path($v);
+            $datas[$v]['s_attribute']['onEnter'] = 'js_action_loaded';
             //$datas[$v]['s_attribute']['onEnter'] = 'onEnterPano';
             //$datas[$v]['s_attribute']['onTransitionEnd'] = 'onTransitionEnd';
             if(isset($panoram_datas[$v])){
@@ -150,7 +154,11 @@ class PanoramDatas{
         foreach($hotspots_info as $k=>$v){
             if (in_array($v['link_scene_id'], $this->scenes_info)){
                 $id = $this->load_pano_pre.$v['link_scene_id'];
-                $content = 'SaladoPlayer.loadPano('.$this->panoram_pre.$v['link_scene_id'].')';
+                //添加外部JS loading事件
+                $content = "SaladoPlayer.advancedMoveToHotspot({$this->hotspot_pre}$k,120,30,Expo.easeIn)";
+                $content .= ';JSGateway.run(jsf_hotspot_loading)';
+                $content .= ';SaladoPlayer.loadPano('.$this->panoram_pre.$v['link_scene_id'].')';
+                
             }
             else{
                 $id = $this->link_open_id_pre.$v['link_scene_id'];
@@ -313,6 +321,22 @@ class PanoramDatas{
         $this->modules_datas[$type]['settings']['s_attribute']['callOnTransitionEnd'] = 'true';
         $this->modules_datas[$type]['settings']['s_attribute']['callOnMoveEnd'] = 'true';
         $this->modules_datas[$type]['settings']['s_attribute']['callOnViewChange'] = 'true';
+        
+        $this->modules_datas[$type]['jsfunctions']['0s']['s_attribute']['id'] = 'jsf_hotspot_loading';
+        $this->modules_datas[$type]['jsfunctions']['0s']['s_attribute']['name'] = 'hotspot_loading';
+        $this->modules_datas[$type]['jsfunctions']['0s']['s_attribute']['text'] = '载入中';
+        $this->modules_datas[$type]['jsfunctions']['1s']['s_attribute']['id'] = 'jsf_hotspot_loaded';
+        $this->modules_datas[$type]['jsfunctions']['1s']['s_attribute']['name'] = 'hotspot_loaded';
+        $this->modules_datas[$type]['jsfunctions']['1s']['s_attribute']['text'] = '载入完成';
+        
+        //添加action 
+/*         $id = $this->js_hotspot_loading;
+        $content = "JSGateway.run(hotspot_loading)";
+        $this->add_single_action($id, $content); */
+        $id = $this->js_hotspot_loaded;
+        $content = "JSGateway.run(jsf_hotspot_loaded)";
+        $this->add_single_action($id, $content);
+        
         return $this->modules_datas[$type];
     }
     /**

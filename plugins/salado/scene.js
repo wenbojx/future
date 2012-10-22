@@ -30,6 +30,21 @@ function onTransitionEnd(panoramaId){
 	//pano_loaded();
 }
 
+function hotspot_loading(msg){
+	var img_width = $("#hotspot_loading").css("width");
+    var img_height = $("#hotspot_loading").css("height");
+    var box_width = $("#pano-detail").css("width");
+    var box_height = $("#pano-detail").css("height");
+    var top = (parseInt(box_height)-parseInt(img_height) )/2;
+    var left = (parseInt(box_width)-parseInt(img_width) )/2;
+    $("#hotspot_loading").css("top",top+"px");
+    $("#hotspot_loading").css("left",left+"px");
+    $("#hotspot_loading").show();
+}
+function hotspot_loaded(msg){
+	$("#hotspot_loading").hide();
+}
+
 jQuery.fn.extend({
   slideRightShow: function() {
     return this.each(function() {
