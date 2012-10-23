@@ -88,6 +88,7 @@ if($datas_mysql){
 
     mysql_select_db("members", $conn);
     mysql_query("set names 'utf8'");	//PHP 文件为 utf-8 格式时使用
+    mysql_query($sql,$conn);
 }
 
 
