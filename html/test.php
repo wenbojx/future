@@ -77,7 +77,7 @@ for ($i = $start; $i<=$end; $i++ ){
 if($datas_mysql){
     $sql = "INSERT INTO `member` (`id`, `uid` ,`content` ,`truename` ,`email` ,`mobile`) VALUES ";
     foreach($datas_mysql as $v){
-        $sql .= "(NULL ,'{$u_id}', '{$data}', '{$truename}', '{$email}', '{$mobile}'),";
+        $sql .= "(NULL ,'{$v['u_id']}', '{$v['data']}', '{$v['truename']}', '{$v['email']}', '{$v['mobile']}'),";
     }
     $sql = substr($sql, 0, strlen($sql)-1).';';
     echo $sql;
