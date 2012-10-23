@@ -5,6 +5,13 @@ $add_num = 100;
 $start = $start+1;
 $end = $start+$add_num;
 $str = '';
+$conn = @mysql_connect("localhost","root","wenbojx0513");
+if (!$conn){
+    die("连接数据库失败：" . mysql_error());
+}
+
+mysql_select_db("members", $conn);
+mysql_query("set names 'utf8'");	//PHP 文件为 utf-8 格式时使用
 //for ($i = 5127410; $i>0; $i-- ){
 for ($i = $start; $i<=$end; $i++ ){
 
@@ -65,14 +72,6 @@ for ($i = $start; $i<=$end; $i++ ){
     //print_r($result);
     //unset($data);
     //$data = json_encode($result);
-
-    $conn = @mysql_connect("localhost","root","wenbojx0513");
-    if (!$conn){
-        die("连接数据库失败：" . mysql_error());
-    }
-
-    mysql_select_db("members", $conn);
-    mysql_query("set names 'utf8'");	//PHP 文件为 utf-8 格式时使用
 
     //$sql = "INSERT INTO member(id, content, 'truename', 'email', 'mobile')VALUES(null, '{$data}', '{$truename}', '{$email}', '{$mobile}')";
     $sql = "INSERT INTO `member` (`id`, `uid` ,`content` ,`truename` ,`email` ,`mobile`)
