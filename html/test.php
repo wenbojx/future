@@ -1,7 +1,7 @@
 <?php
 $file = '/var/www/num.txt';
 $start = file_get_contents($file);
-$add_num = 10;
+$add_num = 100;
 $start = $start+1;
 $end = $start+$add_num;
 $str = '';
