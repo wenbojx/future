@@ -1,7 +1,7 @@
 <?php
 class PanoPicTools{
-	public $tile_info = array('11'=>2048, '10'=>1024, '9'=>512);
-	/**
+    public $tile_info = array('11'=>2048, '10'=>1024, '9'=>512);
+    /**
      * 将文件处理成1024大小
      */
     public function resize_pano($file_path, $folder, $file_type){
@@ -18,13 +18,13 @@ class PanoPicTools{
         $image->resize($width, $width)->quality(10);
         $file_path_9 = $folder_pano.$width.'x'.$width.'.'.$file_type;
         $image->save($file_path_9);
-        
+
         $image = Yii::app()->image->load($file_path);
         $width = $this->tile_info[10];
         $image->resize($width, $width);
         $file_path_10 = $folder_10.$width.'x'.$width.'.'.$file_type;
         $image->save($file_path_10);
-        
+
         //切割图片
         $this->split_img($file_path_10, $folder,$file_type);
     }
@@ -80,11 +80,11 @@ class PanoPicTools{
                     case IMAGETYPE_GIF :
                         imagegif($iOut,$file_path,$quality);
                     break;
-            	}
-            	//$image = Yii::app()->image->load($file_path);
-            	//$image->quality(85);
-            	//$image->save($file_path);
-        	}
+                }
+                //$image = Yii::app()->image->load($file_path);
+                //$image->quality(85);
+                //$image->save($file_path);
+            }
         }
         imagedestroy($iOut);
     }
