@@ -135,8 +135,8 @@ class PanosCommand extends CConsoleCommand {
             }
             $new_file = $new_path.'/bottom.jpg';
             echo "---- copying {$v} to {$new_file}----\n";
-            $back_file = $new_path .'/bottom_back.jpg';
-            copy($new_file, $back_file);
+            //$back_file = $new_path .'/bottom_back.jpg';
+            //copy($new_file, $back_file);
             copy($v, $new_file);
         }
         print_r($this->error);
@@ -144,7 +144,7 @@ class PanosCommand extends CConsoleCommand {
     //生成缩略图
     public function actionThumb(){
         $this->cube_path = $this->find_path.'/'.$this->default_new_folder;
-        $this->default_pano_name = $this->new_pano_name;
+        //$this->default_pano_name = $this->new_pano_name;
         $path = $this->cube_path;
         $this->panos_path = array();
         $this->myscandir($path);
