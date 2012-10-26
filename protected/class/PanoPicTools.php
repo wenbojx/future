@@ -19,7 +19,7 @@ class PanoPicTools{
         $file_path = $folder_pano.$width.'x'.$width.'.'.$file_type;
         $image->save($file_path);
         $width = $this->tile_info[10];
-        $image->resize($width, $width);
+        $image->resize($width, $width)->quality(85);
         $file_path = $folder_10.$width.'x'.$width.'.'.$file_type;
         $image->save($file_path);
         //切割图片

@@ -2,14 +2,14 @@
 class PanosCommand extends CConsoleCommand {
     //public $defaultAction = 'index'; //默认动作
 
-    public $find_path = '/mnt/hgfs/pics/0826'; //搜索全景图的目录
+    public $find_path = '/mnt/hgfs/pics/sjgy0729'; //搜索全景图的目录
     public $panos_path = array();
     public $default_new_folder = 'panos';  //新的全景图目录
     public $default_pano_name = 'Panorama.jpg'; //默认的搜索的全景图名称
     public $new_pano_name = 'Panorama-2.jpg';
-    public $width = '1863';  //cube图的宽度
-    public $swidth = '5852'; //sphere的宽度
-    public $sheight = '2926'; //sphere的宽度
+    public $width = '2000';  //cube图的宽度
+    public $swidth = '6284'; //sphere的宽度
+    public $sheight = '3142'; //sphere的宽度
     public $error = array();
     public $split_file = '';
     public $cube_path = '/mnt/hgfs/pics/panos';
@@ -17,7 +17,7 @@ class PanosCommand extends CConsoleCommand {
     public $thumb_size = 'thumbx200.jpg';
     public $thumb_name = 'thumb.jpg';
     public $thumb_size800 = 'thumbx800.jpg';
-    
+
     //一键执行
     public function actionRun(){
     	$this->cube_path = $this->find_path.'/'.$this->default_new_folder;
@@ -51,10 +51,10 @@ class PanosCommand extends CConsoleCommand {
     		$source_path = $search_path.$fordle.'/';
     		echo "----move {$source_path}{$this->thumb_size} ----\n";
     		copy($source_path.$this->thumb_size, $new_fordle.$this->thumb_size);
-    		
+
     		echo "----move {$source_path}{$this->thumb_size800} ----\n";
     		copy($source_path.$this->thumb_size800, $new_fordle.$this->thumb_size800);
-    		
+
     		$cube_path = $source_path.'cube/';
     		foreach($cubes as $v1){
     			echo "----move {$cube_path}{$v1} ----\n";
@@ -76,7 +76,7 @@ class PanosCommand extends CConsoleCommand {
     }
     //全景图转为cube
     public function actionCube(){
-    	$this->default_pano_name = $this->new_pano_name;
+    	//$this->default_pano_name = $this->new_pano_name;
     	$this->cube_path = $this->find_path.'/'.$this->default_new_folder;
     	$path = $this->cube_path;
     	$this->panos_path = array();
@@ -158,11 +158,11 @@ class PanosCommand extends CConsoleCommand {
     		$myimage = new Imagick($old);
     		$myimage->cropimage(4000, 2000, 926, 300);
     		$myimage->writeImage($new);
-    		
+
     		$myimage->resizeimage(800, 400, Imagick::FILTER_LANCZOS, 1, true);
     		$new = $new_path.$this->thumb_size800;
     		$myimage->writeImage($new);
-    		
+
     		$myimage->resizeimage(200, 100, Imagick::FILTER_LANCZOS, 1, true);
     		$new = $new_path.$this->thumb_size;
     		$myimage->writeImage($new);
@@ -244,7 +244,7 @@ o f0 y0 r0 p-90 v90";
     	if(!file_exists($new_folder)){
     		mkdir($new_folder);
     	}
-    	
+
     	copy($file, $new_file);
     	echo "....moving to {$new_file}\n";
     }
@@ -340,6 +340,6 @@ o f4 y0 r0 p90 v360";
     			}
     		}
     	}
-    	
+
     }
 }
