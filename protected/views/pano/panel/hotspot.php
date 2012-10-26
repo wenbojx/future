@@ -66,7 +66,8 @@
 </div>
 <script>
 var hotspot_img_pre = '<?=Yii::app()->baseUrl . '/style/img/hotspot/'?>';
-var panos_thumb_url = '<?php echo Yii::app()->createUrl('/panos/thumb/pic/', array('id'=>$datas['scene_id'], 'size'=>'200x100.jpg'));?>';
+var size = '200x100.jpg';
+var panos_thumb_url = '<?php echo Yii::app()->createUrl('/panos/thumb/pic/');?>';
 </script>
 
 

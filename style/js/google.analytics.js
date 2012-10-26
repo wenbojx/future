@@ -1,6 +1,7 @@
 
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-740154-1']);
+  _gaq.push(['_setDomainName', 'yiluhao.com']);
   _gaq.push(['_trackPageview']);
 
   (function() {

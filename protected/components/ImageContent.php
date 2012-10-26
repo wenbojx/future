@@ -1,18 +1,18 @@
 <?php
 Yii::import('application.extensions.image.Image');
 class ImageContent {
-	public $quality = 90;
-	public $sharpen = 5;
+	public $quality = 100;
+	public $sharpen = 0;
 	public $water = false;
+	public $myimage = null;
+	public $water_pic_path = 'style/img/water.png';
 
     private function show_pics($pic_datas){
-        if(!$pic_datas || !$pic_datas['path'] || !$pic_datas['draw']){
+        if(!$pic_datas || !$pic_datas['path'] ){
             return false;
         }
-        $img = @$pic_datas['create']($pic_datas['path']);
-
+        //header cache
         $cache_time = '31104000';
-        header('Content-Type: '.$pic_datas['contentType']);
         header('Cache-Control: max-age='.$cache_time);
         header('Pragma: cache');
         $created = strtotime(date('Y-m-d',time()));
@@ -23,23 +23,74 @@ class ImageContent {
         $etag = md5($pic_datas['md5value'].'-yiluhao'.$pic_datas['size']);
         HttpCache::etag($etag);
         HttpCache::expires($cache_time); //默认缓存一年
-        //添加水印
-        if($this->water){
-	        $water_pic_path = 'style/img/water.png';
-	        $watermark = imagecreatefrompng($water_pic_path);
-	        $rand = rand(0, 8);
-	        $time = substr(time(), $rand, 2);
-	        $rand = rand(0, 5);
-	        $ox = $time*$rand;
-	        $rand = rand(0, 5);
-	        $oy = $time*$rand;
-	        imagecopy($img, $watermark, $ox, $oy, 0, 0, 70, 12);
-        }
 
-        $pic_datas['draw']($img);
-        imagedestroy($img);
+        $this->show($pic_datas['path']);
         exit();
     }
+	// 输出到浏览器
+    public function show($resource,  $quality=100){
+
+    	$this->myimage = new Imagick($resource);
+		$ext = strtolower( $this->myimage->getImageFormat() );
+		$this->myimage->setImageFormat($ext);
+		$this->water_pic();
+
+		$this->myimage->setCompressionQuality($quality);
+
+		header( 'Content-Type: '.$this->_extensionToMime($ext) );
+
+		echo $this->myimage->getImagesBLOB();
+
+		$this->myimage->clear();
+    	$this->myimage->destroy();
+    	return true;
+    }
+    //添加水印
+    public function water_pic(){
+        if(!$this->water){
+	        return false;
+        }
+        $rand = rand(0, 8);
+	    $time = substr(time(), $rand, 2);
+	    $rand = rand(0, 5);
+	    $ox = $time*$rand;
+	    $rand = rand(0, 5);
+	    $oy = $time*$rand;
+	    $water = new Imagick($this->water_pic_path);
+	    $dw = new ImagickDraw();
+	    $dw -> composite($water->getImageCompose(),$ox,$oy,50,0,$water);
+    	$this->myimage -> drawImage($dw);
+
+    	$water->clear();
+    	$water->destroy();
+	    return true;
+    }
+
+	private function _extensionToMime($ext){
+
+		static $mime = array(
+			'png' => 'image/png',
+            'jpe' => 'image/jpeg',
+            'jpeg' => 'image/jpeg',
+            'jpg' => 'image/jpeg',
+            'gif' => 'image/gif',
+            'bmp' => 'image/bmp',
+            'ico' => 'image/vnd.microsoft.icon',
+            'tiff' => 'image/tiff',
+            'tif' => 'image/tiff',
+            'svg' => 'image/svg+xml',
+            'svgz' => 'image/svg+xml',
+		);
+
+		if( !array_key_exists( $ext, $mime ) ){
+			exit('error');
+		}
+
+		return $mime[$ext];
+
+	}
+
+
     public function get_default_img($path, $type='gif'){
         $pic_datas = array( 'type'=>$type, 'pic_content'=>'' );
         if(!is_file($path)){
@@ -109,49 +160,32 @@ class ImageContent {
                 $this->resize($path_original, $path_new, (int)$explode_2[0], (int)$explode_2[1]);
             }
             $path = $path_new;
-        $pic_datas = $this->get_image_type($pic_type);
+        //$pic_datas = $this->get_image_type($pic_type);
         $pic_datas['path'] = $path;
         $pic_datas['created'] = $datas['created'];
         $pic_datas['md5value'] = $datas['md5value'];
         $pic_datas['size'] = $size;
         return $pic_datas;
     }
-    /**
-     *
-     */
-    private function get_image_type($type){
-        $image_info = array();
-        switch ($type){
-            case 'jpg':
-                $image_info['create'] = 'imagecreatefromjpeg';
-                $image_info['contentType'] = 'image/jpeg';
-                $image_info['draw'] = 'imagejpeg';
-                break;
-            case 'jpg':
-                $image_info['create'] = 'imagecreatefromgif';
-                $image_info['contentType'] = 'image/gif';
-                $image_info['draw'] = 'imagegif';
-            case 'jpg':
-                $image_info['create'] = 'imagecreatefrompng';
-                $image_info['contentType'] = 'image/png';
-                $image_info['draw'] = 'imagepng';
-                break;
-        }
-        return $image_info;
-    }
 
     /**
      * 缩小图片大小
      */
     private function resize($input, $output, $width, $height){
-        $image = new Image($input);
-        if($this->sharpen){
+        //$image = new Image($input);
+/*        if($this->sharpen){
         	$image->resize($width, $height)->quality($this->quality)->sharpen($this->sharpen);
         }
         else{
         	$image->resize($width, $height)->quality($this->quality);
-        }
-        return $image->save($output);
+        }*/
+        //$image->resize($width, $height);
+        $myimage = new Imagick($input);
+        $myimage->resizeimage($width, $height, Imagick::FILTER_LANCZOS, 1, true);
+        $myimage->writeImage($output);
+        $myimage->clear();
+    	$myimage->destroy();
+    	return true;
     }
 
     private function get_file_path($datas){

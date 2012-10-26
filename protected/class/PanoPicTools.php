@@ -1,8 +1,8 @@
 <?php
 class PanoPicTools{
-	public $tile_info = array('11'=>2048, '10'=>1024, '9'=>512);
-	/**
-     * 将文件处理成1024大小
+    public $tile_info = array('11'=>2000, '10'=>1000, '9'=>500);
+    /**
+     * 将文件处理成1000大小
      */
     public function resize_pano($file_path, $folder, $file_type){
         $folder_pano = $folder.'9/';
@@ -15,15 +15,18 @@ class PanoPicTools{
         }
         $image = Yii::app()->image->load($file_path);
         $width = $this->tile_info[9];
-        $image->resize($width, $width)->quality(30);
-        $file_path = $folder_pano.$width.'x'.$width.'.'.$file_type;
-        $image->save($file_path);
+        $image->resize($width, $width)->quality(10);
+        $file_path_9 = $folder_pano.$width.'x'.$width.'.'.$file_type;
+        $image->save($file_path_9);
+
+        $image = Yii::app()->image->load($file_path);
         $width = $this->tile_info[10];
-        $image->resize($width, $width)->quality(85);
-        $file_path = $folder_10.$width.'x'.$width.'.'.$file_type;
-        $image->save($file_path);
+        $image->resize($width, $width)->quality(85)->sharpen(5);
+        //$image->resize($width, $width)->quality(85);
+        $file_path_10 = $folder_10.$width.'x'.$width.'.'.$file_type;
+        $image->save($file_path_10);
         //切割图片
-        $this->split_img($file_path, $folder,$file_type);
+        $this->split_img($file_path_10, $folder,$file_type);
     }
     public function get_exif_imagetype($file_path){
         if ( ( list($width, $height, $type, $attr) = getimagesize( $file_path ) ) !== false ) {
@@ -66,7 +69,7 @@ class PanoPicTools{
                 //imagejpeg($iOut,"images/".$i."_".$j.".jpg"); //输出成0_0.jpg,0_1.jpg这样的格式
                 $file_path = $folder.'10/'.$i.'x'.$j.'.'.$file_type;
                 //echo $file_path.'<br>';
-                $quality = 70;
+                $quality = 85;
                 switch($type) {
                     case IMAGETYPE_JPEG :
                         imagejpeg($iOut, $file_path,$quality); // 存储图像
@@ -77,11 +80,12 @@ class PanoPicTools{
                     case IMAGETYPE_GIF :
                         imagegif($iOut,$file_path,$quality);
                     break;
-            	}
-            	//$image = Yii::app()->image->load($file_path);
-            	//$image->quality(85);
-            	//$image->save($file_path);
-        	}
+                }
+                //$image = Yii::app()->image->load($file_path);
+                //$image->quality(85);
+                //$image->save($file_path);
+            }
         }
+        imagedestroy($iOut);
     }
 }

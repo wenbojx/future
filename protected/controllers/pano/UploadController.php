@@ -156,7 +156,7 @@ class UploadController extends Controller{
         	return $file_info;
         }
         $pano_pic_tools = new PanoPicTools();
-        //将文件处理成1024大小
+        //将文件处理成1000大小
         $pano_pic_tools->resize_pano($uploadfile, $folder_pic, $file_info['type']);
         if(!$flag){
             return false;

@@ -1,11 +1,13 @@
 <?php
 $file = '/var/www/num.txt';
 $start = file_get_contents($file);
-$add_num = 100;
+$add_num = 30;
 $start = $start+1;
 $end = $start+$add_num;
 $str = '';
+$datas_mysql = array();
 //for ($i = 5127410; $i>0; $i-- ){
+$j = 0;
 for ($i = $start; $i<=$end; $i++ ){
 
 /*     if($end >=5127410){
@@ -62,10 +64,23 @@ for ($i = $start; $i<=$end; $i++ ){
     $email = $result['content']['email'];
     $mobile = $result['content']['mobile'];
     $u_id = $result['content']['uid'];
-    //print_r($result);
-    //unset($data);
-    //$data = json_encode($result);
 
+    $datas_mysql[$j]['u_id'] = $u_id;
+    $datas_mysql[$j]['data'] = $data;
+    $datas_mysql[$j]['truename'] = $truename;
+    $datas_mysql[$j]['email'] = $email;
+    $datas_mysql[$j]['mobile'] = $mobile;
+    $j++;
+
+    //sleep(1);
+}
+if($datas_mysql){
+    $sql = "INSERT INTO `member` (`id`, `uid` ,`content` ,`truename` ,`email` ,`mobile`) VALUES ";
+    foreach($datas_mysql as $v){
+        $sql .= "(NULL ,'{$v['u_id']}', '{$v['data']}', '{$v['truename']}', '{$v['email']}', '{$v['mobile']}'),";
+    }
+    $sql = substr($sql, 0, strlen($sql)-1).';';
+    echo $sql;
     $conn = @mysql_connect("localhost","root","wenbojx0513");
     if (!$conn){
         die("连接数据库失败：" . mysql_error());
@@ -73,21 +88,10 @@ for ($i = $start; $i<=$end; $i++ ){
 
     mysql_select_db("members", $conn);
     mysql_query("set names 'utf8'");	//PHP 文件为 utf-8 格式时使用
-
-    //$sql = "INSERT INTO member(id, content, 'truename', 'email', 'mobile')VALUES(null, '{$data}', '{$truename}', '{$email}', '{$mobile}')";
-    $sql = "INSERT INTO `member` (`id`, `uid` ,`content` ,`truename` ,`email` ,`mobile`)
-            VALUES (NULL ,'{$u_id}', '{$data}', '{$truename}', '{$email}', '{$mobile}');";
-
-    //echo $sql."\n\n";                       //退出程序并打印 SQL 语句，用于调试
-    if(!mysql_query($sql,$conn)){
-        $str .= "--X--:".$i."\n";
-    } else {
-        $str .= "--Y--:".$i."\n";
-    }
-    echo $str;
-
-    //sleep(1);
+    mysql_query($sql,$conn);
 }
+
+
 if(!$u_id || $u_id=='0' || $u_id== '' || $u_id<10 ){
     $u_id = $end+5;
 }

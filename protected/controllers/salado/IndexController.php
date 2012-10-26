@@ -3,8 +3,8 @@ ini_set('memory_limit', '100M');
 class IndexController extends FController{
     public $defaultAction = 'a';
     //public $layout = 'scene';
-    public $img_size = 1024;
-    public $tile_size = 512;
+    public $img_size = 1000;
+    public $tile_size = 500;
     public $request = null;
 
     public function actionA(){
@@ -19,7 +19,7 @@ class IndexController extends FController{
     public function actionB(){
         $this->request = Yii::app()->request;
         $id = $this->request->getParam('id');
-        $file = '512x512.jpg';
+        $file = '500x500.jpg';
         $water_flag = false;
         if($this->request->getParam('s_f')){
         	$suffix = $this->request->getParam('s_f');

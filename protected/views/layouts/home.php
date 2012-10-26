@@ -62,8 +62,6 @@ var check_login_url = '<?=$this->createUrl('/member/login/check');?>';
     Copyright © 2012 www.yiluhao.com All Rights Reserved | yiluhao@gmail.com
     </div>
 </div>
-<!--
 <script type="text/javascript" src="<?=Yii::app()->baseUrl . "/style/js/google.analytics.js"?>"></script>
- -->
 </body>
 </html>
