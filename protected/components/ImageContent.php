@@ -19,7 +19,7 @@ class ImageContent {
         $pic_datas['created'] = isset($pic_datas['created']) ? $pic_datas['created'] : $created;
         HttpCache::lastModified($pic_datas['created']);
         $pic_datas['md5value'] = isset($pic_datas['md5value']) ? $pic_datas['md5value'] : $pic_datas['path'];
-        $pic_datas['size'] = isset($pic_datas['size']) ? $pic_datas['size'] : '';
+        $pic_datas['size'] = isset($pic_datas['size']) ? $pic_datas['size'] : $created;
         $etag = md5($pic_datas['md5value'].'-yiluhao'.$pic_datas['size']);
         HttpCache::etag($etag);
         HttpCache::expires($cache_time); //默认缓存一年
