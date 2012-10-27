@@ -3,7 +3,7 @@ ini_set('memory_limit', '100M');
 class AutoCommand extends CConsoleCommand {
 
     public $panos_path = array();
-    public $search_path = '/mnt/hgfs/pics/sjgy0729/upload';
+    public $search_path = '/mnt/hgfs/pics/upload/chm0824';
     public $thumb_size200 = 'thumbx200.jpg';
     public $cubes = array('front', 'left', 'right', 'top', 'back', 'bottom');
     public $default_m_id = 1;
