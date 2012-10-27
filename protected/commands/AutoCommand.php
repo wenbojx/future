@@ -3,11 +3,12 @@ ini_set('memory_limit', '100M');
 class AutoCommand extends CConsoleCommand {
 
     public $panos_path = array();
-    public $search_path = '/mnt/hgfs/pics/upload/chm0824';
+    //public $search_path = '/mnt/hgfs/pics/upload/chm0824';
+    public $search_path = '/mnt/hgfs/pics/upload/shijigongyuan';
     public $thumb_size200 = 'thumbx200.jpg';
     public $cubes = array('front', 'left', 'right', 'top', 'back', 'bottom');
     public $default_m_id = 1;
-    public $default_project_name = 'test3';
+    public $default_project_name = 'test4';
 
     public function actionRun(){
         $this->default_project_name = date('Y-m-dH', time());
