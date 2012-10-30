@@ -4,7 +4,7 @@ class AutoCommand extends CConsoleCommand {
 
     public $panos_path = array();
     //public $search_path = '/mnt/hgfs/pics/upload/chm0824';
-    public $search_path = '/mnt/hgfs/pics/upload/shijigongyuan';
+    public $search_path = '/mnt/hgfs/pics/upload/rmgc20120819';
     public $thumb_size200 = 'thumbx200.jpg';
     public $cubes = array('front', 'left', 'right', 'top', 'back', 'bottom');
     public $default_m_id = 1;
