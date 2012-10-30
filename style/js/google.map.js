@@ -65,7 +65,6 @@ jQuery.extend( {
                 zoom = parseInt(base_info.zoom);
                 zoom = zoom > 0 ? zoom : map.getZoom();
                 redraw_marker(point,zoom);
-                
             }
         }
 

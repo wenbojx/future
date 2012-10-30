@@ -35,7 +35,7 @@ class SaladoController extends Controller{
      * 获取场景地理位置
      */
     private function get_position($scene_id){
-    	$position = array('glng'=>'31.308822619004', 'glat'=>'121.09221046729', 'gzoom'=>12);
+    	$position = array('glng'=>'121.4759159', 'glat'=>'31.2243531', 'gzoom'=>12);
     	$position_db = new ScenesPosition();
     	$datas = $position_db->findByPk($scene_id);
     	if(!$datas){
