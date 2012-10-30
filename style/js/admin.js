@@ -1,10 +1,13 @@
-function save_project(){
+function save_project(id){
     var msg = {};
     msg.error = '操作失败';
     msg.success = '操作成功';
     var element_id = 'save_project_msg';
     var data = {};
     data.name = $("#project_name").val();
+    if(id){
+    	data.id = id;
+    }
     if(!data.name){
         done_error(element_id, '请输入项目名称')
         return false;
@@ -17,7 +20,7 @@ function save_project(){
         jump_to(project_url);
     }
 }
-function save_scene(url){
+function save_scene(id){
     var msg = {};
     msg.error = '操作失败';
     msg.success = '操作成功';
@@ -25,6 +28,9 @@ function save_scene(url){
     var data = {};
     data.name = $("#scene_name").val();
     data.project_id = $("#project_id").val();
+    if(id){
+    	data.id = id;
+    }
     if(!data.name){
         done_error(element_id, '请输入场景名称')
         return false;

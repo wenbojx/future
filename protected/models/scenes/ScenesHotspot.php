@@ -33,6 +33,9 @@ class ScenesHotspot extends Ydao
     public function find_by_scene_id($scene_id){
         return $this->findAllByAttributes(array('scene_id'=>$scene_id));
     }
+    public function get_by_hotspot_id($hotspot_id){
+    	return $this->findByPk($hotspot_id);
+    }
     public function find_by_scene_ids($scene_ids){
         if(!$scene_ids){
             return false;
@@ -40,6 +43,7 @@ class ScenesHotspot extends Ydao
         $scene_ids_str = implode(',', $scene_ids);
         $criteria=new CDbCriteria;
         $criteria->addCondition("scene_id in ({$scene_ids_str})");
+        $criteria->addCondition("status=1");
         return $this->findAll($criteria);
     }
     public function edit_hotspot($id, $datas){

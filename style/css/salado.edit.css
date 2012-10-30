@@ -123,5 +123,7 @@
 .hotspot_save_btn select{
 	width:80px;
 }
-
+form{
+	margin:0;
+}
 

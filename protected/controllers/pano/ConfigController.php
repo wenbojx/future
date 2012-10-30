@@ -2,11 +2,11 @@
 class ConfigController extends Controller{
     public $defaultAction = 'v';
     public $defaultType = array(
-            'face', 'position', 'basic', 'camera', 'view', 'hotspot',
+            'face', 'position', 'basic', 'camera', 'view', 'hotspot','hotspotEdit',
             'button', 'map', 'navigat', 'radar',
             'html', 'rightkey', 'link', 'flare','action','thumb'
             );
-    private $pano_thumb_size = '240x120';
+    private $pano_thumb_size = '200x100';
 
     public function actionV(){
         $request = Yii::app()->request;
@@ -30,6 +30,10 @@ class ConfigController extends Controller{
         elseif ($type == 'camera'){
         	$datas['camera'] = $this->get_camera_info($scene_id);
         	//print_r($datas['camera']);
+        }
+        elseif($type == 'hotspotEdit'){
+        	$datas['hotspot_id'] = $request->getParam('hotspot_id');
+        	$datas['thumb'] = $this->get_thumb_by_hotspot($datas['hotspot_id']);
         }
         if(!in_array($type, $this->defaultType)){
             exit();
@@ -74,13 +78,27 @@ class ConfigController extends Controller{
         return Yii::app()->baseUrl."/pages/images/box_{$position}.gif";
     }
     /**
+     * 获取热点链接的缩略图
+     */
+    private function get_thumb_by_hotspot($hotspot_id){
+    	if(!$hotspot_id){
+    		return false;
+    	}
+    	$hotspot_db = new ScenesHotspot();
+    	$hotspot_datas = $hotspot_db->get_by_hotspot_id($hotspot_id);
+    	if(!$hotspot_datas){
+    		return false;
+    	}
+    	return $this->get_thumb($hotspot_datas['link_scene_id']);
+    }
+    /**
      * 获取场景缩略图
      */
     private function get_thumb($scene_id){
-        $thumb_db = new ScenesThumb();
-        if($thumb_db->find_by_scene_id($scene_id)){
-            return $this->createUrl('/panos/thumb/pic/', array('id'=>$scene_id, 'size'=>$this->pano_thumb_size.'.jpg'));
-        }
+        //$thumb_db = new ScenesThumb();
+        //if($thumb_db->find_by_scene_id($scene_id)){
+        return $this->createUrl('/panos/thumb/pic/', array('id'=>$scene_id, 'size'=>$this->pano_thumb_size.'.jpg'));
+        //}
         return false;
     }
     /**

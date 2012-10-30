@@ -1,5 +1,5 @@
 <?php
-class PanoramDatas{
+class PanoramAdminDatas{
     public $hotspots_info = array(); //热点信息
     public $scenes_info = array(); //当前场景包含的所有全景
     public $self_hotspots = array(); // 当前场景的热点
@@ -9,12 +9,14 @@ class PanoramDatas{
     public $hotspot_pre = 'hotspot_';
     public $link_open_pre = 'link_open_';
     public $link_open_id_pre = 'link_pano_';
-    public $load_pano_pre = 'load_pano_';
+    public $edit_hotspot_pre = 'edit_hotspot_';
+    public $edit_hotspot_js_pre = 'edit_hotspot_js_';
     public $module_type_link_open = 70; //link_open默认type值
     public $module_type_button_bar = 10; //button_bar默认type值
     public $module_type_menu_scroller = 40; //MenuScroller默认type值
     public $module_type_img_button = 20; //MenuScroller默认type值
     public $module_type_jsgateway = 60; //jsgateway默认type值
+    public $module_type_infoBubble = 30; //infoBubble默认type值
     public $prifix_js_id = 'js_'; //js模块ID前缀
     public $js_hotspot_loading = 'js_action_loading';
     public $js_hotspot_loaded = 'js_action_loaded';
@@ -142,8 +144,8 @@ class PanoramDatas{
      */
     public function add_hotspot_action($hotspots_info, $scene_id){
         foreach($hotspots_info as $k=>$v){
-            if (in_array($v['link_scene_id'], $this->scenes_info)){
-                $id = $this->load_pano_pre.$v['link_scene_id'];
+            /* if (in_array($v['link_scene_id'], $this->scenes_info)){
+                $id = $this->edit_hotspot_pre.$v['link_scene_id'];
                 //添加外部JS loading事件
                 $content = "SaladoPlayer.advancedMoveToHotspot({$this->hotspot_pre}$k,50,40,Expo.easeIn)";
                 $content .= ';JSGateway.run(jsf_hotspot_loading)';
@@ -154,8 +156,15 @@ class PanoramDatas{
                 $id = $this->link_open_id_pre.$v['link_scene_id'];
                 $content = 'LinkOpener.open('.$this->link_open_pre.$v['link_scene_id'].')';
 
-            }
+            } */
+            $id = $this->edit_hotspot_pre.$k;
+            $content = "JSGateway.run({$this->edit_hotspot_js_pre}{$k})";
             $this->add_single_action($id, $content);
+            //添加js function
+            $id = $this->edit_hotspot_js_pre.$k;
+            $name = 'edit_hotspot';
+            $text = $k;
+            $this->add_single_js_fun($id, $id, $name, $text);
         }
         return $this->action_datas;
     }
@@ -175,12 +184,8 @@ class PanoramDatas{
             $hotspot_attribute = @json_decode($datas['content'],true);
         }
         //如果hotspot的链接在本场景内则load_pano
-        if (in_array($datas['link_scene_id'], $this->scenes_info)){
-            $mouse = 'onClick:'.$this->load_pano_pre.$datas['link_scene_id'];
-        }
-        else{
-            $mouse = 'onClick:'.$this->link_open_id_pre.$datas['link_scene_id'];
-        }
+        $mouse = 'onClick:'.$this->edit_hotspot_pre.$datas['id'];
+        
         //合并属性
         if(is_array($hotspot_attribute) && isset($hotspot_attribute['s_attribute']['mouse']) && $hotspot_attribute['s_attribute']['mouse']){
             $hotspot_attribute['s_attribute']['mouse'] .= ','.$mouse;
@@ -213,6 +218,7 @@ class PanoramDatas{
         $path['MenuScroller'] = Yii::app()->baseUrl.'/pages/salado/modules/MenuScroller.swf';
         $path['ImageButton'] = Yii::app()->baseUrl.'/pages/salado/modules/ImageButton.swf';
         $path['JSGateway'] = Yii::app()->baseUrl.'/pages/salado/modules/JSGateway.swf';
+        $path['InfoBubble'] = Yii::app()->baseUrl.'/pages/salado/modules/InfoBubble.swf';
         if(!isset($path[$name])){
             return '';
         }
@@ -248,7 +254,7 @@ class PanoramDatas{
      * 全景图显示地址
      */
     public function get_pano_address($id){
-        return Yii::app()->createUrl('/web/detail/a/', array('id'=>$id));
+    	return Yii::app()->createUrl('/pano/salado/edit/', array('id'=>$id));
     }
     /**
      * 获取modules信息
@@ -256,10 +262,6 @@ class PanoramDatas{
     public function get_modules_info(){
         $scene_id = $this->scene_id;
         $this->get_module_list($scene_id);
-        //自动添加hotspots的action
-        if($this->hotspots_info){
-            $this->get_default_link($scene_id);
-        }
         return $this->modules_datas;
     }
     /**
@@ -309,22 +311,16 @@ class PanoramDatas{
         $this->modules_datas[$type]['settings']['s_attribute']['callOnMoveEnd'] = 'true';
         $this->modules_datas[$type]['settings']['s_attribute']['callOnViewChange'] = 'true';
         
-        $this->modules_datas[$type]['jsfunctions']['0s']['s_attribute']['id'] = 'jsf_hotspot_loading';
-        $this->modules_datas[$type]['jsfunctions']['0s']['s_attribute']['name'] = 'hotspot_loading';
-        $this->modules_datas[$type]['jsfunctions']['0s']['s_attribute']['text'] = '载入中';
-        $this->modules_datas[$type]['jsfunctions']['1s']['s_attribute']['id'] = 'jsf_hotspot_loaded';
-        $this->modules_datas[$type]['jsfunctions']['1s']['s_attribute']['name'] = 'hotspot_loaded';
-        $this->modules_datas[$type]['jsfunctions']['1s']['s_attribute']['text'] = '载入完成';
-        
-        //添加action 
-/*         $id = $this->js_hotspot_loading;
-        $content = "JSGateway.run(hotspot_loading)";
-        $this->add_single_action($id, $content); */
-        $id = $this->js_hotspot_loaded;
-        $content = "JSGateway.run(jsf_hotspot_loaded)";
-        $this->add_single_action($id, $content);
-        
         return $this->modules_datas[$type];
+    }
+    /**
+     * 添加单个js function 
+     */
+    private function add_single_js_fun( $key, $id, $name, $text){
+    	$type = $this->module_type_jsgateway;
+    	$this->modules_datas[$type]['jsfunctions'][$key]['s_attribute']['id'] = $id;
+    	$this->modules_datas[$type]['jsfunctions'][$key]['s_attribute']['name'] = $name;
+    	$this->modules_datas[$type]['jsfunctions'][$key]['s_attribute']['text'] = $text;
     }
     /**
      * menu_scoller附加信息
@@ -374,30 +370,6 @@ class PanoramDatas{
         $this->modules_datas[$type]['buttons'][$num]['s_attribute']['action'] = $action;
         $this->modules_datas[$type]['buttons'][$num]['window']['s_attribute'] = $windows;
         $this->img_button_id_num++;
-        return $this->modules_datas[$type];
-    }
-    /**
-     * 获取默认的hotspot link_opener module
-     */
-    public function get_default_link($scene_id){
-
-        foreach($this->hotspots_info as $k=>$v){
-            if ($v['scene_id'] != $scene_id){
-                $this->add_signle_link_open($v['link_scene_id']);
-            }
-        }
-        return $this->modules_datas;
-    }
-    /**
-     * 添加单个link_open
-     */
-    public function add_signle_link_open($link_scene_id, $target='_SELF'){
-        $type = $this->module_type_link_open;
-        $this->modules_datas[$type]['s_attribute']['path'] = $this->module_path('LinkOpener');
-        $id = $this->link_open_pre.$link_scene_id;
-        $this->modules_datas[$type]['links'][$id]['s_attribute']['id'] = $id;
-        $this->modules_datas[$type]['links'][$id]['s_attribute']['content'] = $this->get_pano_address($link_scene_id);
-        $this->modules_datas[$type]['links'][$id]['s_attribute']['target']=$target;
         return $this->modules_datas[$type];
     }
     /**

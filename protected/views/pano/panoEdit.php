@@ -13,6 +13,9 @@
             <div class="thumbnail">
                     <div class="pano-detail" id="pano-detail">
                         <div id="scene_box"></div>
+                        <div id="pano_loading" class="pano_loading">
+	                    	<img id="pano_loading_img" src="<?=Yii::app()->baseUrl . '/style/img/loading_4.gif'?>"/>
+	                    </div>
                         <div id="hotspot_icon" class="hotspot_icon">
                         	<img id="hotspot_icon_img" src="<?=Yii::app()->baseUrl . '/style/img/hotspot/hotspot-10.png'?>"/>
                         </div>
@@ -65,14 +68,16 @@ var gzoom = '<?=$datas['position']['gzoom']?>';
 
 var scene_publish_url = '<?=$this->createUrl('/pano/scene/publish')?>';
 </script>
-
+<!-- 
 <script type="text/javascript" src="http://ditu.google.cn/maps?file=api&v=2.95&sensor=false&key=<?=Yii::app()->params['google_map_key']?>"></script>
 <script type="text/javascript" src="http://www.google.com/uds/api?file=uds.js&v=1.0&key=<?=Yii::app()->params['google_map_key']?>"></script>
 <script type="text/javascript" src="http://www.google.com/uds/solutions/localsearch/gmlocalsearch.js"></script>
-
+ -->
 <script type="text/javascript" src="<?=Yii::app()->baseUrl . "/style/js/common.js"?>"></script>
 <script type="text/javascript" src="<?=Yii::app()->baseUrl . "/plugins/salado/scene.js"?>"></script>
+<!--
 <script type="text/javascript" src="<?=Yii::app()->baseUrl . "/style/js/google.map.js"?>"></script>
+ -->
 <script>
 var player_url = '<?=Yii::app()->baseUrl?>/plugins/salado/Player.swf';
 var scene_xml_url = '<?=$this->createUrl('/salado/index/a/', array('id'=>$datas['pano']['id'],'from'=>'admin'))?>';
@@ -84,6 +89,6 @@ var position_url = '<?=$this->createUrl('/pano/config/v/', array('t'=>'position'
 var thumb_url = '<?=$this->createUrl('/pano/config/v/', array('t'=>'thumb', 'scene_id'=>$datas['pano']['id']))?>';
 var camera_url = '<?=$this->createUrl('/pano/config/v/', array('t'=>'camera', 'scene_id'=>$datas['pano']['id']))?>';
 var hotspot_url = '<?=$this->createUrl('/pano/config/v/', array('t'=>'hotspot', 'scene_id'=>$datas['pano']['id']))?>';
-
+var hotspot_edit_url = '<?=$this->createUrl('/pano/config/v/', array('t'=>'hotspotEdit', 'scene_id'=>$datas['pano']['id']))?>';
 </script>
 

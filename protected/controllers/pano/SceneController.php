@@ -55,6 +55,7 @@ class SceneController extends Controller{
     public function actionAdd(){
     	$request = Yii::app()->request;
     	$project_id = $request->getParam('id');
+    	$datas['done'] = 'doAdd';
     	$datas['page_title'] = '添加场景';
     	$this->render('pano/sceneEdit', array('datas'=>$datas, 'project_id'=>$project_id));
     }
@@ -81,13 +82,64 @@ class SceneController extends Controller{
     	}
     	$this->display_msg($msg);
     }
-    public function add_scene($datas){
+    private function add_scene($datas){
     	$scene_db = new Scene();
     	$datas['member_id'] = $this->member_id;
-    	$datas['created'] = $datas['photo_time'] ? strtotime($datas['photo_time']) : '0';
+    	$datas['photo_time'] = $datas['photo_time'] ? strtotime($datas['photo_time']) : '0';
+    	$datas['created'] = time();
     	return $scene_db->add_scene($datas);
     }
     
+    public function actionEdit(){
+    	$request = Yii::app()->request;
+    	$scene_id = $request->getParam("id");
+    	$project_id = $request->getParam('id');
+		$datas['done'] = 'doEdit';
+		if(!$scene_id){
+			$datas['msg'] = "参数错误";
+		}
+		else{
+			$datas['scene'] = $this->get_scene_info($scene_id);
+		}
+    	$datas['page_title'] = '编辑场景';
+    	$this->render('pano/sceneEdit', array('datas'=>$datas, 'project_id'=>$datas['scene']['project_id']));
+    }
+    private function get_scene_info($id){
+    	if(!$id){
+    		return false;
+    	}
+    	$scene_db = new Scene();
+    	return $scene_db->get_by_scene_id($id);
+    }
+    public function actionDoEdit(){
+    	$request = Yii::app()->request;
+    	$msg['flag'] = 1;
+    	$msg['msg'] = '操作成功';
+    
+    	$datas['id'] = $request->getParam('id');
+    	$datas['name'] = $request->getParam('name');
+    	$datas['desc'] = $request->getParam('desc');
+    	$datas['project_id'] = $request->getParam('project_id');
+    	$datas['photo_time'] = $request->getParam('photo_time');
+    	$this->check_scene_own($datas['id']);
+    	 
+    	if($datas['name'] == '' || !$datas['project_id'] || !$datas['id']){
+    		$msg['flag'] = 0;
+    		$msg['msg'] = '操作失败';
+    		$this->display_msg($msg);
+    	}
+    
+    	if(!$id = $this->edit_scene($datas)){
+    		$msg['flag'] = 0;
+    		$msg['msg'] = '操作失败';
+    	}
+    	$this->display_msg($msg);
+    }
+    private function edit_scene($datas){
+    	$scene_db = new Scene();
+    	$datas['photo_time'] = $datas['photo_time'] ? strtotime($datas['photo_time']) : '0';
+    	return $scene_db->edit_scene($datas);
+    }
 }
 
 

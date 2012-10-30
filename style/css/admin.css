@@ -8,6 +8,12 @@
 	padding: 0 0 0 5px;
 	border-bottom:1px solid #DDDDDD
 }
+.project_single .title{
+	width:400px;
+}
+.project_single .tools{
+	width:50px;
+}
 .scene_single{
 	text-align:left;
 	font-size:14px;

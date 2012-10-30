@@ -25,7 +25,42 @@ class HotspotController extends Controller{
         $this->display_msg($msg);
     }
     private function add_hotspot($datas){
-        $hotspot_db = new ScenesHotspot();
-        return $hotspot_db->add_hotsopt($datas);
+    	$hotspot_db = new ScenesHotspot();
+    	return $hotspot_db->add_hotsopt($datas);
     }
+    public function actionDel(){
+    	$request = Yii::app()->request;
+    	$hotspot_id = $request->getParam('hotspot_id');
+    	$msg['flag'] = 0;
+    	$msg['msg'] = '操作失败';
+    	//获取热点信息
+    	$hotspot_info = $this->get_hotspot_info($hotspot_id);
+    	if(!$hotspot_info){
+    		$this->display_msg($msg);
+    	}
+    	$this->check_scene_own($hotspot_info['scene_id']);
+    	//删除热点
+    	if(!$this->del_hotspot($hotspot_id)){
+    		$this->display_msg($msg);
+    	}
+    	$msg['flag'] = 1;
+    	$msg['msg'] = '操作成功';
+    	$this->display_msg($msg);
+    }
+    private function del_hotspot($hotspot_id){
+    	if(!$hotspot_id){
+    		return false;
+    	}
+    	$hotspot_db = new ScenesHotspot();
+    	$datas['status'] = 2;
+    	return $hotspot_db->edit_hotspot($hotspot_id, $datas);
+    }
+    private function get_hotspot_info($hotspot_id){
+    	if(!$hotspot_id){
+    		return false;
+    	}
+    	$hotspot_db = new ScenesHotspot();
+    	return $hotspot_db->get_by_hotspot_id($hotspot_id);
+    }
+    
 }

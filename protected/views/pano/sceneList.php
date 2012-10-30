@@ -24,6 +24,8 @@
             				</div>
             				<div class="scene_desc">
             					<?=$v['desc']?>
+            					<br>
+            					<?php echo CHtml::link('编辑',array('pano/scene/edit','id'=>$v['id']));?>
                     		</div>
                     	</div>
                     </div>

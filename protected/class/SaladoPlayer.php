@@ -51,25 +51,48 @@ class SaladoPlayer{
     }
 
     public function get_config_content($id, $admin=false){
-        $memcache_obj = new Ymemcache();
-        $key = $memcache_obj->get_pano_xml_key($id, $admin);
-        //$memcache_obj->rm_mem_datas($key);
-        if($content = $memcache_obj->get_mem_data($key)){
-            return $content;
-        }
-        else{
-            $panodatas_obj = new PanoramDatas();
-            $panodatas = $panodatas_obj->get_panoram_datas($id, $admin);
-            $this->admin = $admin;
-            $content = $this->config_start();
-            $content .= $this->config_global($panodatas['global']);
-            $content .= $this->config_panoramas($panodatas['panorams']);
-            $content .= $this->config_modules($panodatas['modules']);
-            $content .= $this->config_actions($panodatas['actions']);
-            $content .= $this->config_end();
-            $memcache_obj->set_mem_data($key, $content, 0);
-        }
+    	$content = $admin ? $this->get_admin_content($id) : $this->get_user_content($id);
         return $content;
+    }
+    private function get_user_content($id){
+    	$memcache_obj = new Ymemcache();
+    	$key = $memcache_obj->get_pano_xml_key($id, false);
+    	if($content = $memcache_obj->get_mem_data($key)){
+    		return $content;
+    	}
+    	else{
+    		$panodatas_obj = new PanoramDatas();
+    		$panodatas = $panodatas_obj->get_panoram_datas($id, $admin);
+    		$this->admin = $admin;
+    		$content = $this->config_start();
+    		$content .= $this->config_global($panodatas['global']);
+    		$content .= $this->config_panoramas($panodatas['panorams']);
+    		$content .= $this->config_modules($panodatas['modules']);
+    		$content .= $this->config_actions($panodatas['actions']);
+    		$content .= $this->config_end();
+    		$memcache_obj->set_mem_data($key, $content, 0);
+    	}
+    	return $content;
+    }
+    private function get_admin_content($id){
+    	$memcache_obj = new Ymemcache();
+    	$key = $memcache_obj->get_pano_xml_key($id, true);
+    	if($content = $memcache_obj->get_mem_data($key)){
+    		return $content;
+    	}
+    	else{
+    		$panodatas_obj = new PanoramAdminDatas();
+    		$panodatas = $panodatas_obj->get_panoram_datas($id, $admin);
+    		$this->admin = $admin;
+    		$content = $this->config_start();
+    		$content .= $this->config_global($panodatas['global']);
+    		$content .= $this->config_panoramas($panodatas['panorams']);
+    		$content .= $this->config_modules($panodatas['modules']);
+    		$content .= $this->config_actions($panodatas['actions']);
+    		$content .= $this->config_end();
+    		$memcache_obj->set_mem_data($key, $content, 0);
+    	}
+    	return $content;
     }
     private function config_global($global){
         $global_str = '';

@@ -263,5 +263,25 @@ function change_hotspot_angle(){
 	$("#hotspot_angle").attr("src", src);
 	$("#hotspot_icon_img").attr("src", src);
 }
-
+function edit_hotspot(id){
+	var edit_url = hotspot_edit_url+'/hotspot_id/'+id;
+	load_page(edit_url);
+}
+function hotspot_del(hotspot_id){
+	var msg = {};
+    msg.error = '操作失败';
+    msg.success = '操作成功';
+    var element_id = 'hotspot_del_msg';
+    var data = {};
+    data.hotspot_id = hotspot_id;
+    if(!data.hotspot_id){
+    	alert('参数错误');
+    	return false;
+    }
+    var url = $("#del_hotspot").attr('action');
+    save_datas(url, data, '', '', call_back);
+    function call_back(datas){
+        alert(datas.msg);
+    }
+}
 

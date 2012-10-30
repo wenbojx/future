@@ -90,6 +90,9 @@ class Project extends Ydao
     	}
     	return $this->attributes['id'];
     }
+    public function edit_project($datas){
+    	return $this->updateByPk($datas['id'], $datas);
+    }
     public function find_by_project_id($project_id){
     	return $this->findByPk($project_id);
     }

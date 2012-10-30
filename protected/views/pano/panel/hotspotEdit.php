@@ -7,12 +7,13 @@
 }
 </style>
 <div class="panel_box_content" >
+<form method="post" class="form-horizontal" id="del_hotspot" action="<?=$this->createUrl('/salado/modules/hotspot/del/')?>">
     <div class="panel_title">
         <div class="title-bar">
-            <span>缩略图</span>
+            <span>删除热点</span>
             <div class="title_tip">
-                <span class="label label-warning" id="thumb_box_upload"></span>
-                200x100
+            	<span id="hotspot_del_msg"></span>
+                <span onclick="hotspot_del(<?=$datas['hotspot_id']?>)" class="label label-warning">删除</span>
             </div>
         </div>
         <div class="panel_close" onclick="hide_edit_panel()">X</div>
@@ -24,11 +25,9 @@
             <?php }?>
         </div>
     </div>
+</form>
 </div>
 
 <script type="text/javascript">
-var thumb_upload_url='<?=$this->createUrl('/pano/upload/')?>';
-var scene_id = '<?=$datas['scene_id']?>';
-var thumb_button_img = "<?=Yii::app()->baseUrl?>/style/img/upload_thumb.gif";
-thumb_box_upload();
+
 </script>

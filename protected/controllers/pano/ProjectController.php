@@ -37,6 +37,7 @@ class ProjectController extends Controller{
 	public function actionAdd(){
 		$request = Yii::app()->request;
 		$datas = array();
+		$datas['done'] = 'doAdd';
 		$datas['page_title'] = '新增项目';
 		$this->render('pano/projectEdit', array('datas'=>$datas));
 	}
@@ -57,10 +58,60 @@ class ProjectController extends Controller{
 		}
 		$this->display_msg($msg);
 	}
-	public function add_project($datas){
+	private function add_project($datas){
 		$project_db = new Project();
 		$datas['member_id'] = $this->member_id;
 		$datas['created'] = time();
 		return $project_db->add_project($datas);
+	}
+	
+	public function actionEdit(){
+		$request = Yii::app()->request;
+		$datas = array();
+		$project_id = $request->getParam("id");
+		$datas['done'] = 'doEdit';
+		if(!$project_id){
+			$datas['msg'] = "参数错误";
+		}
+		else{
+			$datas['project'] = $this->get_project_info($project_id);
+		}
+		$datas['page_title'] = '编辑项目';
+		$this->render('pano/projectEdit', array('datas'=>$datas));
+	}
+	private function get_project_info($id){
+		if(!$id){
+			return false;
+		}
+		$project_db = new Project();
+		return $project_db->find_by_project_id($id);
+	}
+	public function actionDoEdit(){
+		$request = Yii::app()->request;
+		$datas['id'] = $request->getParam('id');
+		$datas['name'] = $request->getParam('name');
+		$datas['desc'] = $request->getParam('desc');
+		$msg['flag'] = 1;
+		$msg['msg'] = '操作成功';
+		if($datas['id'] == ''){
+			$msg['flag'] = 0;
+			$msg['msg'] = '操作失败';
+			$this->display_msg($msg);
+		}
+		if($datas['name'] == ''){
+			$msg['flag'] = 0;
+			$msg['msg'] = '操作失败';
+			$this->display_msg($msg);
+		}
+		$this->check_project_owner($datas['id']);
+		if(!$id = $this->edit_project($datas)){
+			$msg['flag'] = 0;
+			$msg['msg'] = '操作失败';
+		}
+		$this->display_msg($msg);
+	}
+	private function edit_project($datas){
+		$project_db = new Project();
+		return $project_db->edit_project($datas);
 	}
 }
