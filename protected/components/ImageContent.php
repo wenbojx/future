@@ -153,7 +153,7 @@ class ImageContent {
             if(!is_file($path_new)){
                 $explode_1 = explode('.', $size);
                 $explode_2 = explode('x', $explode_1[0]);
-                $path_original .= $datas['md5value'].'.'.$datas['type'];
+                $path_original .= 'original/'.$datas['md5value'].'.'.$datas['type'];
                 if(!is_file($path_original)){
                     return false;
                 }
