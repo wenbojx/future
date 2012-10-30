@@ -62,10 +62,6 @@ var google_map_tip_url = baseUrl+'/style/img/dot-s-nomarl_16x24.png';
 var save_module_datas_url = '<?=$this->createUrl('/salado/modules/')?>';
 var preview_url = '<?=$this->createUrl('/web/detail/a/', array('id'=>$datas['pano']['id']))?>';
 
-var glng = '<?=$datas['position']['glng']?>';
-var glat = '<?=$datas['position']['glat']?>';
-var gzoom = '<?=$datas['position']['gzoom']?>';
-
 var scene_publish_url = '<?=$this->createUrl('/pano/scene/publish')?>';
 </script>
 
@@ -85,7 +81,15 @@ var camera_url = '<?=$this->createUrl('/pano/config/v/', array('t'=>'camera', 's
 var hotspot_url = '<?=$this->createUrl('/pano/config/v/', array('t'=>'hotspot', 'scene_id'=>$datas['pano']['id']))?>';
 var hotspot_edit_url = '<?=$this->createUrl('/pano/config/v/', array('t'=>'hotspotEdit', 'scene_id'=>$datas['pano']['id']))?>';
 </script>
+
+<script>
+var glng = '<?=$datas['position']['glng']?>';
+var glat = '<?=$datas['position']['glat']?>';
+var gzoom = '<?=$datas['position']['gzoom']?>';
+</script>
 <script type="text/javascript" src="http://ditu.google.cn/maps?file=api&v=2.95&sensor=false&key=<?=Yii::app()->params['google_map_key']?>"></script>
 <script type="text/javascript" src="http://www.google.com/uds/api?file=uds.js&v=1.0&key=<?=Yii::app()->params['google_map_key']?>"></script>
 <script type="text/javascript" src="http://www.google.com/uds/solutions/localsearch/gmlocalsearch.js"></script>
+
 <script type="text/javascript" src="<?=Yii::app()->baseUrl . "/style/js/google.map.js"?>"></script>
+
