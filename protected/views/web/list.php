@@ -6,10 +6,21 @@
 	
 	<div class="row project">
 	<?php if($datas['projects']){ foreach($datas['projects'] as $v){?>
-		<div class="span6">
-			<h3><a href="<?=$this->createUrl('/web/view/a/', array('id'=>$v['project']['id']));?>">
-				<?=$v['project']['name']?>
-			</a></h3>
+		<div class="span12">
+			<div class="list_title">
+				<h3 class="float_left title">
+					<a href="<?=$this->createUrl('/web/view/a/', array('id'=>$v['project']['id']));?>">
+					<?=$v['project']['name']?>
+					</a>
+					<span> (共 <?=$v['total_num']?> 个景点)</span>
+				</h3>
+				<span class="float_right info">
+					<a href="<?=$this->createUrl('/web/view/a/', array('id'=>$v['project']['id']));?>">
+					浏览更多...
+					</a>
+				</span>
+				<div class="clear"></div>
+			</div>
 			<div class="row">
 			<?php if ($v['scene']){ foreach($v['scene'] as $v1){?>
 				<div class="span3">

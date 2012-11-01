@@ -1,7 +1,23 @@
 <?php $this->pageTitle='足不出户，畅游中国';?>
-<div class="hero-unit padding40">
-	<h1>足不出户 畅游中国</h1>
-	<p><a target="_blank" href="http://weibo.com/yiluhao">关注微博</a></p>
+<div class="hero-unit padding5" id="static_banner">
+	<div class="banner_box">
+		<div class="index_banner" style="background:url(<?=Yii::app()->baseUrl . '/style/banner/'.$datas['baner_scene_id'].'.jpg'?>)">
+			<div class="click" onclick="show_banner_pano()">点击，开始奇妙之旅！</div>
+		</div>
+		<p class="r_top"><a target="_blank" href="http://weibo.com/yiluhao">关注微博</a></p>
+	</div>
+</div>
+<div class="hero-unit banner_box padding5 display_none" id="pano_banner">
+	<div class="banner_box">
+		<div>
+			<iframe src="<?=$this->createUrl('/web/single/a/', array('id'=>$datas['baner_scene_id'],'w'=>'932','h'=>'400','auto'=>'1'));?>" frameborder=0 width="930" height="400" scrolling="no">
+			</iframe>
+		</div>
+		<p class="r_top">
+			<a href="javascript::" onclick="show_banner_pic()">收起 | </a>
+			<a target="_blank" href="http://weibo.com/yiluhao">关注微博</a>
+		</p>
+	</div>
 </div>
 
 <div class="row about">
@@ -11,13 +27,13 @@
  	</div>
 	<div class="span6">
 		<h3><a href="<?=$this->createUrl('/web/list/a');?>">全部景点</a></h3>
-		<p>更多景点图片正在制作中，敬请期待！
-			 <a href="<?=$this->createUrl('/web/list/a');?>">更多...</a>
+		<p>当前共有 (<a class="color_red" href="<?=$this->createUrl('/web/list/a');?>"><?=$datas['total_num']?></a>) 个景点，更多景点图片正在制作中..
+			 <a href="<?=$this->createUrl('/web/list/a');?>">查看全部</a>
 		</p>
 	</div>
 </div>
 <div class="row case">
-<?php if($datas){ foreach ($datas as $v){?>
+<?php if($datas['scenes']){ foreach ($datas['scenes'] as $v){?>
 	<div class="span3">
 		<div class="thumbnail">
 			<a href="<?=$this->createUrl('/web/detail/a/', array('id'=>$v['id']));?>">
