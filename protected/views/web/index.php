@@ -27,7 +27,7 @@
  	</div>
 	<div class="span6">
 		<h3><a href="<?=$this->createUrl('/web/list/a');?>">全部景点</a></h3>
-		<p>当前共有 (<a class="color_red" href="<?=$this->createUrl('/web/list/a');?>"><?=$datas['total_num']?></a>) 个景点，更多景点图片正在制作中..
+		<p>当前共有 (<a class="color_red" href="<?=$this->createUrl('/web/list/a');?>"><?=$datas['total_num']?></a>) 个场景，更多景点图片正在制作中..
 			 <a href="<?=$this->createUrl('/web/list/a');?>">查看全部</a>
 		</p>
 	</div>
