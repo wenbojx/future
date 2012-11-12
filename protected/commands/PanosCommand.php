@@ -16,7 +16,7 @@ class PanosCommand extends CConsoleCommand {
     public $thumb_size = 'thumbx200.jpg';
     public $thumb_name = 'thumb.jpg';
     public $thumb_size800 = 'thumbx800.jpg';
-    public $reduce_path = 'upload';
+    public $reduce_path = 'upload/201211/11';
     public $reduce_files = array();
 
     //一键执行
