@@ -16,7 +16,8 @@ class PanosCommand extends CConsoleCommand {
     public $thumb_size = 'thumbx200.jpg';
     public $thumb_name = 'thumb.jpg';
     public $thumb_size800 = 'thumbx800.jpg';
-    public $reduce_path = './upload';
+    public $reduce_path = 'upload';
+    public $reduce_files = array();
 
     //一键执行
     public function actionRun(){
@@ -31,7 +32,7 @@ class PanosCommand extends CConsoleCommand {
         $this->actionThumb();
         $this->actionUpload();
     }
-    
+
     //归类需要上传的文件
     public function actionUpload(){
     	$upload_path = $this->find_path.'/'.$this->upload_path.'/';
@@ -327,6 +328,7 @@ o f4 y0 r0 p90 v360";
             }
         }
     }
+
     /**
      * 扫描目录下的cube
      */
@@ -341,32 +343,77 @@ o f4 y0 r0 p90 v360";
     		}
     	}
     }
+    public function get_reduce_file($path){
+    	if(!is_dir($path))  return;
+        foreach(scandir($path) as $file){
+            if($file!='.'  && $file!='..'){
+                $path2= $path.DIRECTORY_SEPARATOR.$file;
+
+                if(is_dir($path2)){
+                    $this->get_reduce_file($path2);
+                }
+                else if($file == '1000x1000.jpg'){
+                    $this->reduce_files[] = $path2;
+                }
+            }
+        }
+        return $this->reduce_files;
+    }
     /**
      * 获取要减小的文件
      */
     public function actionReduce(){
     	$path = $this->reduce_path;
-    	if(!is_dir($path))  return;
-    	$reduce_path = array();
-    	foreach(scandir($path) as $file){
-    		if($file!='.'  && $file!='..'){
-    			$path2= $path.DIRECTORY_SEPARATOR.$file;
-    			if($file == '1000x1000.jpg'){
-    				$reduce_path[] = $path2;
-    			}
-    		}
-    	}
+    	$this->get_reduce_file($path);
+    	//print_r($this->reduce_files);
     	//print_r($reduce_path);
-    	foreach($reduce_path as $v){
-    		echo $v."---";
-    		echo filesize($v)."\n";
-    		continue;
-    		$myimage = new Imagick($v);
-    		$myimage->setImageFormat("jpeg");
-    		$myimage->setCompressionQuality( 80 );
-    		$myimage->writeImage($v);
-    		$myimage->clear();
-    		$myimage->destroy();
+    	$i = 0;
+    	foreach($this->reduce_files as $v){
+    		if ($i>10){
+    			//continue;
+    		}
+
+    		$file_size = filesize($v);
+    		$quality = 80;
+    		if($file_size <350000){
+    			continue;
+    		}
+    		if($file_size >800000){
+    			echo $v."---{$file_size}\n";
+    			$quality = 45;
+    		}
+    		else if($file_size >700000){
+    			echo $v."---{$file_size}\n";
+    			$quality = 50;
+    		}
+    		else if($file_size >600000){
+    			echo $v."---{$file_size}\n";
+    			$quality = 55;
+    		}
+    		else if($file_size >500000){
+    			echo $v."---{$file_size}\n";
+    			$quality = 65;
+    		}
+    		else if($file_size >400000){
+    			echo $v."---{$file_size}\n";
+    			$quality = 75;
+    		}
+    		else if($file_size >350000){
+    			echo $v."---{$file_size}\n";
+    			$quality = 85;
+    		}
+
+    		$img = new Imagick();
+			$img->readImage($v);
+			$img->setImageCompression(imagick::COMPRESSION_JPEG);
+			$img->setImageCompressionQuality($quality);
+			$img->stripImage();
+			$img->writeImage($v);
+	    	$img->clear();
+	    	$img->destroy();
+	    	$i++;
+    		//continue;
+
     	}
     }
 }
