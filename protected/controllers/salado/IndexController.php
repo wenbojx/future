@@ -91,6 +91,7 @@ class IndexController extends FController{
         }
     }
     private function get_tilt_folder(){
+    	return '1000x1000.jpg';
     	$file = array('0x0.jpg', '0x1.jpg', '1x0.jpg', '1x1.jpg');
     	if($this->request->getParam('0_0.jpg') !== NULL){
     		return $file[0];
