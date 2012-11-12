@@ -24,11 +24,11 @@ class ImageContent {
         HttpCache::etag($etag);
         HttpCache::expires($cache_time); //默认缓存一年
 
-        $this->show($pic_datas['path']);
+        $this->show($pic_datas['path'], 80);
         exit();
     }
 	// 输出到浏览器
-    public function show($resource,  $quality=50){
+    public function show($resource,  $quality=100){
 
     	$this->myimage = new Imagick($resource);
 		$ext = strtolower( $this->myimage->getImageFormat() );
