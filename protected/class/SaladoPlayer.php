@@ -56,6 +56,7 @@ class SaladoPlayer{
         return $content;
     }
     private function get_user_content($id){
+    	$admin = 0;
     	$memcache_obj = new Ymemcache();
     	$key = $memcache_obj->get_pano_xml_key($id, false);
     	if($content = $memcache_obj->get_mem_data($key)){
@@ -64,7 +65,7 @@ class SaladoPlayer{
     	else{
     		$panodatas_obj = new PanoramDatas();
     		$panodatas_obj->display_config = $this->display_config;
-    		$panodatas = $panodatas_obj->get_panoram_datas($id, $admin);
+    		$panodatas = $panodatas_obj->get_panoram_datas($id);
     		$content = $this->config_start();
     		$content .= $this->config_global($panodatas['global']);
     		$content .= $this->config_panoramas($panodatas['panorams']);
@@ -83,7 +84,7 @@ class SaladoPlayer{
     	}
     	else{
     		$panodatas_obj = new PanoramAdminDatas();
-    		$panodatas = $panodatas_obj->get_panoram_datas($id, $admin);
+    		$panodatas = $panodatas_obj->get_panoram_datas($id);
     		$this->admin = $admin;
     		$content = $this->config_start();
     		$content .= $this->config_global($panodatas['global']);

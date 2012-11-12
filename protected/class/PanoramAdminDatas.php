@@ -27,7 +27,7 @@ class PanoramAdminDatas{
     public $action_datas = array(); //动作数据
     public $global_datas = array(); //全局数据
     public $panoram_datas = array(); //图片数据
-    public function get_panoram_datas($id = 0, $admin=0){
+    public function get_panoram_datas($id = 0){
         $datas = array();
         if(!(int)$id){
             return $datas;
@@ -150,7 +150,7 @@ class PanoramAdminDatas{
                 $content = "SaladoPlayer.advancedMoveToHotspot({$this->hotspot_pre}$k,50,40,Expo.easeIn)";
                 $content .= ';JSGateway.run(jsf_hotspot_loading)';
                 $content .= ';SaladoPlayer.loadPano('.$this->panoram_pre.$v['link_scene_id'].')';
-                
+
             }
             else{
                 $id = $this->link_open_id_pre.$v['link_scene_id'];
@@ -185,7 +185,7 @@ class PanoramAdminDatas{
         }
         //如果hotspot的链接在本场景内则load_pano
         $mouse = 'onClick:'.$this->edit_hotspot_pre.$datas['id'];
-        
+
         //合并属性
         if(is_array($hotspot_attribute) && isset($hotspot_attribute['s_attribute']['mouse']) && $hotspot_attribute['s_attribute']['mouse']){
             $hotspot_attribute['s_attribute']['mouse'] .= ','.$mouse;
@@ -310,11 +310,11 @@ class PanoramAdminDatas{
         $this->modules_datas[$type]['settings']['s_attribute']['callOnTransitionEnd'] = 'true';
         $this->modules_datas[$type]['settings']['s_attribute']['callOnMoveEnd'] = 'true';
         $this->modules_datas[$type]['settings']['s_attribute']['callOnViewChange'] = 'true';
-        
+
         return $this->modules_datas[$type];
     }
     /**
-     * 添加单个js function 
+     * 添加单个js function
      */
     private function add_single_js_fun( $key, $id, $name, $text){
     	$type = $this->module_type_jsgateway;

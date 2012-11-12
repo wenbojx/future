@@ -25,10 +25,10 @@ class PanoramDatas{
     public $action_datas = array(); //动作数据
     public $global_datas = array(); //全局数据
     public $panoram_datas = array(); //图片数据
-    
+
     public $display_config = array(); //是否载入button_bar
-    
-    public function get_panoram_datas($id = 0, $admin=0){
+
+    public function get_panoram_datas($id = 0){
         $datas = array();
         if(!(int)$id){
             return $datas;
@@ -154,7 +154,7 @@ class PanoramDatas{
                 $content = "SaladoPlayer.advancedMoveToHotspot({$this->hotspot_pre}$k,50,40,Expo.easeIn)";
                 $content .= ';JSGateway.run(jsf_hotspot_loading)';
                 $content .= ';SaladoPlayer.loadPano('.$this->panoram_pre.$v['link_scene_id'].')';
-                
+
             }
             else{
                 $id = $this->link_open_id_pre.$v['link_scene_id'];
@@ -321,22 +321,22 @@ class PanoramDatas{
         $this->modules_datas[$type]['settings']['s_attribute']['callOnTransitionEnd'] = 'true';
         $this->modules_datas[$type]['settings']['s_attribute']['callOnMoveEnd'] = 'true';
         $this->modules_datas[$type]['settings']['s_attribute']['callOnViewChange'] = 'true';
-        
+
         $this->modules_datas[$type]['jsfunctions']['0s']['s_attribute']['id'] = 'jsf_hotspot_loading';
         $this->modules_datas[$type]['jsfunctions']['0s']['s_attribute']['name'] = 'hotspot_loading';
         $this->modules_datas[$type]['jsfunctions']['0s']['s_attribute']['text'] = '载入中';
         $this->modules_datas[$type]['jsfunctions']['1s']['s_attribute']['id'] = 'jsf_hotspot_loaded';
         $this->modules_datas[$type]['jsfunctions']['1s']['s_attribute']['name'] = 'hotspot_loaded';
         $this->modules_datas[$type]['jsfunctions']['1s']['s_attribute']['text'] = '载入完成';
-        
-        //添加action 
+
+        //添加action
 /*         $id = $this->js_hotspot_loading;
         $content = "JSGateway.run(hotspot_loading)";
         $this->add_single_action($id, $content); */
         $id = $this->js_hotspot_loaded;
         $content = "JSGateway.run(jsf_hotspot_loaded)";
         $this->add_single_action($id, $content);
-        
+
         return $this->modules_datas[$type];
     }
     /**
