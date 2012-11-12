@@ -28,7 +28,7 @@ class ImageContent {
         exit();
     }
 	// 输出到浏览器
-    public function show($resource,  $quality=100){
+    public function show($resource,  $quality=50){
 
     	$this->myimage = new Imagick($resource);
 		$ext = strtolower( $this->myimage->getImageFormat() );
