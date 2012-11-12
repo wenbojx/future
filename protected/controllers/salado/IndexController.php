@@ -4,7 +4,7 @@ class IndexController extends FController{
     public $defaultAction = 'a';
     //public $layout = 'scene';
     public $img_size = 1000;
-    public $tile_size = 1000;
+    public $tile_size = 500;
     public $request = null;
 
     public function actionA(){
