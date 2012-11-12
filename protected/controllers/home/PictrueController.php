@@ -12,7 +12,7 @@ class PictrueController extends FController{
         if($no){
             $img_class = new ImageContent();
             $size = $request->getParam('size') ? $request->getParam('size') : '';
-            $pic_datas = $img_class->get_img_content_by_md5file($no, $size);
+            $pic_datas = $img_class->get_img_content_by_md5file($no, $size, 'original');
         }
     }
 }

@@ -25,6 +25,9 @@ class PanoramDatas{
     public $action_datas = array(); //动作数据
     public $global_datas = array(); //全局数据
     public $panoram_datas = array(); //图片数据
+    
+    public $display_config = array(); //是否载入button_bar
+    
     public function get_panoram_datas($id = 0, $admin=0){
         $datas = array();
         if(!(int)$id){
@@ -55,6 +58,9 @@ class PanoramDatas{
             $this->global_datas['s_attribute']['debug'] = 'false';
         }
         // $this->global_datas['control']['s_attribute']['autorotation'] = 'enabled:false';
+        if($this->display_config['auto']){
+        	$this->global_datas['control']['s_attribute']['autorotation'] = 'enabled:true';
+        }
         $this->global_datas['branding']['s_attribute']['visible'] = 'false';
         $this->global_datas['panoramas']['s_attribute']['firstPanorama'] = $this->panoram_pre.$this->scene_id;
         return $this->global_datas;
@@ -248,6 +254,13 @@ class PanoramDatas{
      * 全景图显示地址
      */
     public function get_pano_address($id){
+    	if($this->display_config['single']){
+    		$auto = $this->display_config['auto'] ? '1' : '0';
+    		$nobtb = $this->display_config['nobtb'] ? '1' : '0';
+    		$w = $this->display_config['player_width'];
+    		$h = $this->display_config['player_height'];
+    		return Yii::app()->createUrl('/web/single/a/', array('id'=>$id,'w'=>$w,'h'=>$h,'auto'=>$auto,'nobtb'=>$nobtb));
+    	}
         return Yii::app()->createUrl('/web/detail/a/', array('id'=>$id));
     }
     /**
@@ -292,7 +305,7 @@ class PanoramDatas{
         }
         //添加js模块
         $this->get_js_gateway_module();
-        if($no_button_bar){
+        if($no_button_bar && $this->display_config['btb']){
             //获取默认button_bar
             $this->get_default_button_bar();
         }

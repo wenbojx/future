@@ -1,21 +1,3 @@
-$(document).ready(function(){
-    check_login();
-})
-function login_state(datas){
-    if(datas.flag == '0'){
-        $("#m_register").show();
-        $("#m_login").show();
-    }
-    else{
-        var str = "" + datas.nick_name + " 您好!";
-        $("#m_nickname").html(str);
-        $("#m_welcome").show();
-        $("#m_loginout").show();
-    }
-}
-function check_login(){
-    $.post(check_login_url, {}, login_state, 'json');
-}
 var jump_url = '';
 function jump_to(jump_url, target){
     if(!jump_url){
@@ -68,3 +50,13 @@ function done_success(element_id, msg, datas){
 function clean_msg_box(element_id){
     $("#"+element_id).html('');
 }
+function show_banner_pano(){
+	$("#pano_banner").show();
+	$("#static_banner").hide();
+}
+function show_banner_pic(){
+	$("#pano_banner").hide();
+	$("#static_banner").show();
+}
+
+

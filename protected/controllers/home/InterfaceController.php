@@ -206,7 +206,6 @@ class InterfaceController extends Controller{
         $where['year'] = $this->year;
         $where['month'] = $this->month;
         $where['type'] = $type;
-        //print_r($where);
         $datas = Datas::model()->findByAttributes($where);
         $datas = json_decode($datas['content'], true);
         if(!$datas){

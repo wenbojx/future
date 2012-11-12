@@ -16,6 +16,7 @@ class PanosCommand extends CConsoleCommand {
     public $thumb_size = 'thumbx200.jpg';
     public $thumb_name = 'thumb.jpg';
     public $thumb_size800 = 'thumbx800.jpg';
+    public $reduce_path = './upload';
 
     //一键执行
     public function actionRun(){
@@ -30,6 +31,7 @@ class PanosCommand extends CConsoleCommand {
         $this->actionThumb();
         $this->actionUpload();
     }
+    
     //归类需要上传的文件
     public function actionUpload(){
     	$upload_path = $this->find_path.'/'.$this->upload_path.'/';
@@ -338,6 +340,33 @@ o f4 y0 r0 p90 v360";
     			}
     		}
     	}
-
+    }
+    /**
+     * 获取要减小的文件
+     */
+    public function actionReduce(){
+    	$path = $this->reduce_path;
+    	if(!is_dir($path))  return;
+    	$reduce_path = array();
+    	foreach(scandir($path) as $file){
+    		if($file!='.'  && $file!='..'){
+    			$path2= $path.DIRECTORY_SEPARATOR.$file;
+    			if($file == '1000x1000.jpg'){
+    				$reduce_path[] = $path2;
+    			}
+    		}
+    	}
+    	//print_r($reduce_path);
+    	foreach($reduce_path as $v){
+    		echo $v."---";
+    		echo filesize($v)."\n";
+    		continue;
+    		$myimage = new Imagick($v);
+    		$myimage->setImageFormat("jpeg");
+    		$myimage->setCompressionQuality( 80 );
+    		$myimage->writeImage($v);
+    		$myimage->clear();
+    		$myimage->destroy();
+    	}
     }
 }

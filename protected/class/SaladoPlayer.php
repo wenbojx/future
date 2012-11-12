@@ -4,6 +4,7 @@ class SaladoPlayer{
     private $modules_path = '';
     private $modules_media_path = '';
     private $admin = false;
+    public $display_config = array();
 
     public function __construct(){
         $this->modules_path = Yii::app()->baseUrl.'/pages/salado/modules/';
@@ -62,8 +63,8 @@ class SaladoPlayer{
     	}
     	else{
     		$panodatas_obj = new PanoramDatas();
+    		$panodatas_obj->display_config = $this->display_config;
     		$panodatas = $panodatas_obj->get_panoram_datas($id, $admin);
-    		$this->admin = $admin;
     		$content = $this->config_start();
     		$content .= $this->config_global($panodatas['global']);
     		$content .= $this->config_panoramas($panodatas['panorams']);

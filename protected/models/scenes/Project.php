@@ -96,6 +96,22 @@ class Project extends Ydao
     public function find_by_project_id($project_id){
     	return $this->findByPk($project_id);
     }
-
-
+    /*
+     * 获取最新的3个项目
+    */
+    public function get_last_project($num=3){
+    	$criteria=new CDbCriteria;
+    	$criteria->order = 'id DESC';
+    	$criteria->addCondition('status=1');
+    	$criteria->limit = $num;
+    	return $this->findAll($criteria);
+    }
+    
 }
+
+
+
+
+
+
+
