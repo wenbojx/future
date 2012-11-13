@@ -3,7 +3,7 @@ class SaladoModules extends SaladoPlayer{
     private $map_type = array(
             '10'=>'ButtonBar','20'=>'ImageButton','30'=>'InfoBubble',
             '40'=>'MenuScroller','50'=>'JSGateway','60'=>'JSGateway',
-            '70'=>'LinkOpener'
+            '70'=>'LinkOpener','80'=>'MouseCursor'
     );
     private $modules_datas = array(
             //'attribute'=>array('debug'=>false),
@@ -106,6 +106,14 @@ class SaladoModules extends SaladoPlayer{
                             '1'=>array('s_attribute'=>array('id'=>'','content'=>'')),
                     ),
             ),
+    		'MouseCursor'=>array(
+    				's_attribute'=>array('path'=>''),
+    				'settings'=>array(
+                            's_attribute'=>array(
+                                    'path'=>'true'
+                            )
+                    ),
+    		),
     );
     public function get_modules_info($modules){
         $modules_str = '<modules>';
@@ -333,6 +341,19 @@ class SaladoModules extends SaladoPlayer{
         }
         $string .= "</LinkOpener>\n";
         return $string;
+    }
+    private function get_MouseCursor($mouseCursor){
+    	$string = '<MouseCursor';
+    	if (isset($mouseCursor['s_attribute'])){
+    		$string .= $this->build_attribute($mouseCursor['s_attribute']);
+    	}
+    	if (isset($mouseCursor['settings'])){
+    		$string .= '<settings';
+    		$string .= $this->build_attribute($mouseCursor['settings']['s_attribute']);
+    		$string .= '</settings>';
+    	}
+    	$string .= "</MouseCursor>\n";
+    	return $string;
     }
 }
 

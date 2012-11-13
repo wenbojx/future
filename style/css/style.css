@@ -243,6 +243,13 @@ hr.soften {
 	padding:20px 0 0 0;
 	cursor:pointer;
 }
+.index_banner .tips{
+	font-size:16px;
+	font-weight:bold;
+	color:#FFFFFF;
+	text-align:center;
+	padding:10px 0 0 0;
+}
 .list_title .title{
 	width:400px;
 }

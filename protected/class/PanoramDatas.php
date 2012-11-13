@@ -10,11 +10,14 @@ class PanoramDatas{
     public $link_open_pre = 'link_open_';
     public $link_open_id_pre = 'link_pano_';
     public $load_pano_pre = 'load_pano_';
+    
     public $module_type_link_open = 70; //link_open默认type值
     public $module_type_button_bar = 10; //button_bar默认type值
     public $module_type_menu_scroller = 40; //MenuScroller默认type值
     public $module_type_img_button = 20; //MenuScroller默认type值
     public $module_type_jsgateway = 60; //jsgateway默认type值
+    public $module_type_mouse_cursor = 80; //jsgateway默认type值
+    
     public $prifix_js_id = 'js_'; //js模块ID前缀
     public $js_hotspot_loading = 'js_action_loading';
     public $js_hotspot_loaded = 'js_action_loaded';
@@ -213,12 +216,13 @@ class PanoramDatas{
      * 模块地址
      */
     public function module_path($name){
-        $path['LinkOpener'] = Yii::app()->baseUrl.'/pages/salado/modules/LinkOpener.swf';
-        $path['Hotspot'] = Yii::app()->baseUrl.'/pages/salado/modules/AdvancedHotspot.swf';
-        $path['ButtonBar'] = Yii::app()->baseUrl.'/pages/salado/modules/ButtonBar.swf';
-        $path['MenuScroller'] = Yii::app()->baseUrl.'/pages/salado/modules/MenuScroller.swf';
-        $path['ImageButton'] = Yii::app()->baseUrl.'/pages/salado/modules/ImageButton.swf';
-        $path['JSGateway'] = Yii::app()->baseUrl.'/pages/salado/modules/JSGateway.swf';
+        $path['LinkOpener'] = Yii::app()->baseUrl.'/plugins/salado/modules/LinkOpener.swf';
+        $path['Hotspot'] = Yii::app()->baseUrl.'/plugins/salado/modules/AdvancedHotspot.swf';
+        $path['ButtonBar'] = Yii::app()->baseUrl.'/plugins/salado/modules/ButtonBar.swf';
+        $path['MenuScroller'] = Yii::app()->baseUrl.'/plugins/salado/modules/MenuScroller.swf';
+        $path['ImageButton'] = Yii::app()->baseUrl.'/plugins/salado/modules/ImageButton.swf';
+        $path['JSGateway'] = Yii::app()->baseUrl.'/plugins/salado/modules/JSGateway.swf';
+        $path['MouseCursor'] = Yii::app()->baseUrl.'/plugins/salado/modules/MouseCursor.swf';
         if(!isset($path[$name])){
             return '';
         }
@@ -228,9 +232,10 @@ class PanoramDatas{
      * 模块默认素材地址
      */
     public function module_media_path($name){
-        $path['button_bar'] = Yii::app()->baseUrl.'/pages/salado/media/buttons_dark_30x30.png';
-        $path['menu_scroller_show_btn'] = Yii::app()->baseUrl.'/pages/salado/media/MenuScroller_show.png';
-        $path['menu_scroller_hide_btn'] = Yii::app()->baseUrl.'/pages/salado/media/MenuScroller_hide.png';
+        $path['button_bar'] = Yii::app()->baseUrl.'/plugins/salado/media/buttons_dark_30x30.png';
+        $path['menu_scroller_show_btn'] = Yii::app()->baseUrl.'/plugins/salado/media/MenuScroller_show.png';
+        $path['menu_scroller_hide_btn'] = Yii::app()->baseUrl.'/plugins/salado/media/MenuScroller_hide.png';
+        $path['mousecursor'] = Yii::app()->baseUrl.'/plugins/salado/media/cursors_21x21.png';
         if(!isset($path[$name])){
             return '';
         }
@@ -309,7 +314,18 @@ class PanoramDatas{
             //获取默认button_bar
             $this->get_default_button_bar();
         }
+        //添加MouseCursor
+        $this->get_mousecursor_module();
         return $this->modules_datas;
+    }
+    /**
+     * 添加mouseCursor模块
+     */
+    public function get_mousecursor_module(){
+    	$type = $this->module_type_mouse_cursor;
+    	$this->modules_datas[$type]['s_attribute']['path'] = $this->module_path('MouseCursor');
+    	$this->modules_datas[$type]['settings']['s_attribute']['path'] = $this->module_media_path('mousecursor');
+    	return $this->modules_datas;
     }
     /**
      * js gateway模块

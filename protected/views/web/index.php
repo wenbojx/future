@@ -3,6 +3,7 @@
 	<div class="banner_box">
 		<div class="index_banner" style="background:url(<?=Yii::app()->baseUrl . '/style/banner/'.$datas['baner_scene_id'].'.jpg'?>)">
 			<div class="click" onclick="show_banner_pano()">点击，开始奇妙之旅！</div>
+			<div class="tips">图片加载完，拖动鼠标，有惊喜！</div>
 		</div>
 		<p class="r_top"><a target="_blank" href="http://weibo.com/yiluhao">关注微博</a></p>
 	</div>
