@@ -24,7 +24,7 @@ class ImageContent {
         HttpCache::etag($etag);
         HttpCache::expires($cache_time); //默认缓存一年
 
-        $this->show($pic_datas['path'], 75);
+        $this->show($pic_datas['path'], 70);
         exit();
     }
 	// 输出到浏览器
