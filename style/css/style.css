@@ -227,10 +227,21 @@ hr.soften {
 	top:5px;
 	right:5px;
 }
+.banner_box .r_index{
+	position:absolute;
+	top:5px;
+	right:5px;
+	
+}
+.color_blue{
+	
+}
 .banner_box a{
 	color:#FFFFFF;
 	font-weight:bold;
 }
+
+
 .index_banner{
 	width:930px;
 	height:200px;

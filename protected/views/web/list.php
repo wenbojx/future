@@ -1,7 +1,12 @@
 <?php $this->pageTitle='足不出户，畅游中国';?>
 <div class="list">
 	<div class="hero-unit margin-top55">
-		<h2>足不出户 畅游中国</h2>
+		<div class="banner_box">
+			<h2>足不出户 畅游中国</h2>
+			<div class="r_index">
+			<a style="color:#0088CC;" href="/">返回首页</a>
+			</div>
+		</div>
 	</div>
 	
 	<div class="row project">
