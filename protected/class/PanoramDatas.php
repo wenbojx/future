@@ -61,9 +61,9 @@ class PanoramDatas{
             $this->global_datas['s_attribute']['debug'] = 'false';
         }
         // $this->global_datas['control']['s_attribute']['autorotation'] = 'enabled:false';
-        $this->global_datas['control']['s_attribute']['autorotation'] = 'enabled:true,delay:3';
+        $this->global_datas['control']['s_attribute']['autorotation'] = 'enabled:true,delay:5';
         if($this->display_config['auto']){
-        	$this->global_datas['control']['s_attribute']['autorotation'] = 'enabled:true,delay:3';
+        	$this->global_datas['control']['s_attribute']['autorotation'] = 'enabled:true,delay:5';
         }
         $this->global_datas['branding']['s_attribute']['visible'] = 'false';
         $this->global_datas['panoramas']['s_attribute']['firstPanorama'] = $this->panoram_pre.$this->scene_id;
