@@ -100,7 +100,7 @@ class Scene extends Ydao
     	}
     	$scene_db = new Scene();
     	$criteria=new CDbCriteria;
-    	$criteria->order = 'id DESC';
+    	$criteria->order = 'id ASC';
     	if($order){
     		$criteria->order = $order;
     	}
