@@ -4,7 +4,7 @@ class IndexController extends FController{
     public $layout = 'home';
     private $project_num = 3;
     private $scene_num = 4;
-    private $baner_scene_id = '144';
+    private $baner_scene_id = '377';
     //private $baner_scene_id = '10';
 
     public function actionA(){

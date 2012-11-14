@@ -12,7 +12,7 @@
 					<a href="<?=$this->createUrl('/web/view/a/', array('id'=>$v['project']['id']));?>">
 					<?=$v['project']['name']?>
 					</a>
-					<span> (共 <?=$v['total_num']?> 个景点)</span>
+					<span> (共 <?=$v['total_num']?> 个场景)</span>
 				</h3>
 				<span class="float_right info">
 					<a href="<?=$this->createUrl('/web/view/a/', array('id'=>$v['project']['id']));?>">
