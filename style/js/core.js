@@ -14,7 +14,6 @@ function jump_to(jump_url, target){
     }
 }
 
-
 function save_datas(url, data, type, dataType, done){
     if (!url){
         done_error(element_id, msg.error);
@@ -58,5 +57,20 @@ function show_banner_pic(){
 	$("#pano_banner").hide();
 	$("#static_banner").show();
 }
-
+function init_ueditor(id, text, height, textarea){
+	window.UEDITOR_CONFIG.initialContent = '';
+	window.UEDITOR_CONFIG.minFrameHeight = 250;
+	window.UEDITOR_CONFIG.textarea = textarea;
+    var editor = new UE.ui.Editor();
+    editor.render(id);
+}
+//加载更多全景图
+function load_pano_list(){
+	var data = {};
+	data.page = view_page+1;
+	save_datas(view_load_url, data, 'post', 'json', load_pano_finish);
+	if(view_page >= total_page){
+		$("#page_more").hide();
+	}
+}
 

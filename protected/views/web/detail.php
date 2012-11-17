@@ -76,9 +76,20 @@
             
         </div>
     </div>
+    <div class="row-fluid margin-top10">
+        <div class="span10">
+        <h3><!-- 足迹： --></h3>
+        <div id="editor">
+        </div>
+        </div>
+        <div class="span2">
+        </div>
+    </div>
 </div>
+
 <script type="text/javascript" src="<?=Yii::app()->baseUrl . "/style/js/common.js"?>"></script>
 <script type="text/javascript" src="<?=Yii::app()->baseUrl . "/plugins/salado/scene.js"?>"></script>
+
 <script>
 var scene_box = 'scene_box';
 var player_url = '<?=Yii::app()->baseUrl?>/plugins/salado/Player.swf';

@@ -2,15 +2,29 @@
 class ListController extends FController{
     public $defaultAction = 'a';
     public $layout = 'home';
+    public $project_db = null;
+    public $page_size = 5; //每页显示的数
+    public $page_obj = null;
 
     public function actionA(){
         $datas['projects'] = $this->get_project_list();
+        $datas['pages'] = $this->page_obj;
         $this->render('/web/list', array('datas'=>$datas));
     }
     private function get_project_list(){
     	$datas = array();
-    	$project_db = new Project();
-    	$project_datas = $project_db->get_last_project(20);
+    	$this->project_db = new Project();
+    	
+    	$total = $this->project_db->get_project_num();
+    	if($total>0){
+    		$route = '/web/list/a';
+    		$this->page_obj = $this->page($page, $this->page_size, $total, $route);
+    		$offset = ($page-1)*$this->page_size;
+    		$order = 'id DESC';
+    		//获取场景信息
+    		$project_datas = $this->project_db->get_project_list($this->page_size, $order, $offset);
+    	}
+    	
     	if(!$project_datas){
     		return $datas;
     	}

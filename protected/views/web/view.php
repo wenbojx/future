@@ -19,7 +19,7 @@
 		<?php }?>
 	 	</div>
 	 	<div class="span6">
-			<h3>攻略</h3>
+			<h3></h3>
 			<ol>
 				
 			</ol>
@@ -35,6 +35,23 @@
 				</a>
 			</div>
 		</div>
+		
 	<?php }}?>
 	</div>
+	
+	<div class="page-footer">
+					<div class="pagination">
+                    <?php if(isset($datas['pages'])){  $this->widget('CLinkPager',array(
+                        'header'=>'',
+                        //'firstPageLabel' => '首页',
+                        //'lastPageLabel' => '末页',
+                        'prevPageLabel' => '上一页',
+                        'nextPageLabel' => '下一页',
+                        'pages' => $datas['pages'],
+                        'maxButtonCount'=>10
+                        )
+                    );}?>
+	</div>
+	<br>
+            	</div>
 </div>

@@ -3,7 +3,6 @@ class DetailController extends FController{
     public $defaultAction = 'a';
     public $layout = 'home';
     public $default_scroller_num = 6;
-
     public function actionA(){
 
         $request = Yii::app()->request;

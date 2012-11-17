@@ -27,7 +27,7 @@ class Project extends Ydao
     /**
      * 获取某用户所有项目
      */
-    public function get_project_list($member_id, $page_size=2, $limit=0, $page_break=true){
+    public function get_project_list_member($member_id, $page_size=2, $limit=0, $page_break=true){
         if(!$member_id){
             return false;
         }
@@ -96,6 +96,26 @@ class Project extends Ydao
     public function find_by_project_id($project_id){
     	return $this->findByPk($project_id);
     }
+    /**
+     * 获取项目列表
+     */
+    public function get_project_list($limit=5, $order='', $offset=0){
+    	
+    	$criteria=new CDbCriteria;
+    	$criteria->order = 'id ASC';
+    	if($order){
+    		$criteria->order = $order;
+    	}
+    	if($limit){
+    		$criteria->limit = $limit;
+    	}
+    	if($offset){
+    		$criteria->offset = $offset;
+    	}
+    	$criteria->addCondition('status=1');
+    	$project_datas = $this->findAll($criteria);
+    	return $project_datas;
+    }
     /*
      * 获取最新的3个项目
     */
@@ -105,6 +125,15 @@ class Project extends Ydao
     	$criteria->addCondition('status=1');
     	$criteria->limit = $num;
     	return $this->findAll($criteria);
+    }
+    /*
+     * 获取景点数
+    */
+    public function get_project_num(){
+
+    	$criteria=new CDbCriteria;
+    	$criteria->addCondition('status=1');
+    	return $this->count($criteria);
     }
     
 }

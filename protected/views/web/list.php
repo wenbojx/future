@@ -41,4 +41,18 @@
 	<?php }}?>
 		
 	</div>
+		<div class="page-footer">
+					<div class="pagination">
+                    <?php if(isset($datas['pages'])){  $this->widget('CLinkPager',array(
+                        'header'=>'',
+                        //'firstPageLabel' => '首页',
+                        //'lastPageLabel' => '末页',
+                        'prevPageLabel' => '上一页',
+                        'nextPageLabel' => '下一页',
+                        'pages' => $datas['pages'],
+                        'maxButtonCount'=>10
+                        )
+                    );}?>
+	</div>
+	<br>
 </div>

@@ -7,6 +7,7 @@
  */
 class Scene extends Ydao
 {
+	public $count = 0;
     /**
      * Returns the static model of the specified AR class.
      * @param string $className active record class name.
@@ -93,12 +94,12 @@ class Scene extends Ydao
     public function update_scene_dispaly($scene_id, $display){
         return $this->updateByPk($scene_id, array('display'=>$display));
     }
-    public function find_scene_by_project_id($project_id, $limit=12, $order=''){
+    public function find_scene_by_project_id($project_id, $limit=12, $order='', $offset=0){
     	$datas = array();
     	if(!$project_id){
     		return $datas;
     	}
-    	$scene_db = new Scene();
+    	//$scene_db = new Scene();
     	$criteria=new CDbCriteria;
     	$criteria->order = 'id ASC';
     	if($order){
@@ -107,10 +108,13 @@ class Scene extends Ydao
     	if($limit){
     		$criteria->limit = $limit;
     	}
+    	if($offset){
+    		$criteria->offset = $offset;
+    	}
     	$criteria->addCondition('status=1');
     	$criteria->addCondition('display=2');
     	$criteria->addCondition("project_id={$project_id}");
-    	$scene_datas = $scene_db->findAll($criteria);
+    	$scene_datas = $this->findAll($criteria);
     	return $scene_datas;
     }
     /**

@@ -272,5 +272,12 @@ hr.soften {
 	font-size:12px;
 	line-height:27px;
 }
-
-
+ul.yiiPager .page a{
+	padding:1px 12px;
+}
+ul.yiiPager{
+	font-size:12px;
+}
+.pagination{
+	text-align:right;
+}

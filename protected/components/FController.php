@@ -38,4 +38,11 @@ class FController extends CController
         $str = json_encode($msg);
         exit($str);
     }
+    //分页
+    public function page($page, $page_size, $total, $route){
+    	$pages=new CPagination($total);
+    	$pages->pageSize = $page_size;
+    	$pages->route = $route;
+    	return $pages;
+    }
 }
