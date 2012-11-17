@@ -60,7 +60,9 @@ var check_login_url = '<?=$this->createUrl('/member/login/check');?>';
     <?php echo $content;?>
     <hr class="soften">
     <div id="footer">
-    Copyright © 2012 www.yiluhao.com All Rights Reserved | yiluhao@gmail.com
+    	Copyright © 2012 www.yiluhao.com All Rights Reserved <br>
+    	QQ群：280573438 Email:yiluhao@gmail.com 微博：<a href="http://weibo.com/yiluhao" target="_blank">http://weibo.com/yiluhao</a>
+    	<br><br><br>
     </div>
 </div>
 <script type="text/javascript" src="<?=Yii::app()->baseUrl . "/style/js/google.analytics.js"?>"></script>
