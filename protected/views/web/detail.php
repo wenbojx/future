@@ -66,11 +66,11 @@
             <div class="thumbnail">
                 <button class="btn btn-success" onclick="jump_to('<?=$this->createUrl('/web/view/a/', array('id'=>$datas['scene']['project_id']))?>')">返回</button>
                 <button class="btn" id="menu_scroller">相关</button>
-                <button class="btn">地图</button>
+                <!-- <button class="btn">地图</button>
                 <button class="btn">足迹</button>
-                <button class="btn">游记</button>
+                <button class="btn">游记</button> -->
                 <!-- <button class="btn">攻略</button> -->
-                <button class="btn">评论</button>
+                <!-- <button class="btn">评论</button> -->
                 
             </div>
             
